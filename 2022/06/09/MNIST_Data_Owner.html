@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Federated Learning (Data Owner) | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Federated Learning (Data Owner)" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Owner.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Owner.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-09T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Federated Learning (Data Owner)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-09T00:00:00-05:00","datePublished":"2022-06-09T00:00:00-05:00","headline":"Federated Learning (Data Owner)","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Owner.html"},"url":"https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Owner.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Federated Learning (Data Owner)</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-09T00:00:00-05:00" itemprop="datePublished">
+        Jun 9, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2022-06-09-MNIST_Data_Owner.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2022-06-09-MNIST_Data_Owner.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2022-06-09-MNIST_Data_Owner.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2022-06-09-MNIST_Data_Owner.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-06-09-MNIST_Data_Owner.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Pysyft-Duet-(Data-Owner)">Pysyft Duet (Data Owner)<a class="anchor-link" href="#Pysyft-Duet-(Data-Owner)"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a data owner, you want someone lese to perform data science on data that you own that want to protect. <br />
+To do this, we can load our data into our local <code>duet</code> server. <br />
+To begin the process, you must launch a Duet session and help your Duet partner (data scientist) connect to this server.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Duet-Basics">Duet Basics<a class="anchor-link" href="#Duet-Basics"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Make sure that the network_url you use is chosen from <a href="https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address">https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">syft</span> <span class="k">as</span> <span class="nn">sy</span>
+<span class="n">duet</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">launch_duet</span><span class="p">(</span><span class="n">network_url</span><span class="o">=</span><span class="s2">&quot;http://ec2-18-218-7-180.us-east-2.compute.amazonaws.com:5000&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>🎤  🎸  ♪♪♪ Starting Duet ♫♫♫  🎻  🎹
+
+♫♫♫ &gt;<span class="ansi-yellow-intense-fg"> DISCLAIMER</span>: <span class="ansi-bold">Duet is an experimental feature currently in beta.
+♫♫♫ &gt; Use at your own risk.
+</span>
+<span class="ansi-bold">
+    &gt; ❤️ </span><span class="ansi-red-intense-fg ansi-bold">Love</span> <span class="ansi-green-intense-fg">Duet</span>? <span class="ansi-yellow-intense-fg">Please</span> <span class="ansi-blue-intense-fg">consider</span> <span class="ansi-magenta-intense-fg">supporting</span> <span class="ansi-red-intense-fg">our</span> <span class="ansi-yellow-intense-fg">community!</span>
+    &gt; https://github.com/sponsors/OpenMined<span class="ansi-bold">
+
+♫♫♫ &gt; Punching through firewall to OpenGrid Network Node at:
+♫♫♫ &gt; http://ec2-18-218-7-180.us-east-2.compute.amazonaws.com:5000
+♫♫♫ &gt;
+♫♫♫ &gt; ...waiting for response from OpenGrid Network... 
+♫♫♫ &gt; </span><span class="ansi-green-intense-fg ansi-bold">DONE!</span>
+♫♫♫ &gt; Duet Server ID: <span class="ansi-bold">00eec93acc58f144d78a365705d42223</span>
+
+♫♫♫ &gt; <span class="ansi-magenta-intense-fg">STEP 1:</span> Send the following code to your Duet Partner!
+
+import syft as sy
+duet = sy.duet(&#34;<span class="ansi-bold">00eec93acc58f144d78a365705d42223</span>&#34;)
+
+♫♫♫ &gt; <span class="ansi-magenta-intense-fg">STEP 2:</span> Ask your partner for their Client ID and enter it below!
+♫♫♫ &gt; Duet Partner&#39;s Client ID: 3406364123dfde0c6e7394b2167a9ef9
+
+♫♫♫ &gt; Connecting...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/anaconda3/envs/duet/lib/python3.9/site-packages/aiortc/rtcdtlstransport.py:211: CryptographyDeprecationWarning: This version of cryptography contains a temporary pyOpenSSL fallback path. Upgrade pyOpenSSL now.
+  _openssl_assert(lib.SSL_CTX_use_certificate(ctx, self._cert._x509) == 1)  # type: ignore
+/opt/anaconda3/envs/duet/lib/python3.9/site-packages/aiortc/rtcdtlstransport.py:186: CryptographyDeprecationWarning: This version of cryptography contains a temporary pyOpenSSL fallback path. Upgrade pyOpenSSL now.
+  value=certificate_digest(self._cert._x509),  # type: ignore
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+♫♫♫ &gt; <span class="ansi-green-intense-fg">CONNECTED!</span>
+
+♫♫♫ &gt; DUET LIVE STATUS  *  Objects: 18  Requests: 0   Messages: 159124  Request Handlers: 1                                                         
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's upload some data to the Duet server</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span> <span class="k">as</span> <span class="nn">th</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">grade_data</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">98</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">73</span><span class="p">])</span>
+<span class="n">grade_data</span> <span class="o">=</span> <span class="n">grade_data</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="s2">&quot;grades&quot;</span><span class="p">)</span>
+<span class="n">grade_data</span> <span class="o">=</span> <span class="n">grade_data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="s2">&quot;This is a list of the grades of 6 people&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># server, note that the data is still on the owner&#39;s machine and cannot be viewed or access </span>
+<span class="c1"># without the permission from the data owner</span>
+<span class="n">grade_data_pointer</span> <span class="o">=</span> <span class="n">grade_data</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">duet</span><span class="p">,</span> <span class="n">pointable</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[2022-06-19T16:37:24.257117-0600][CRITICAL][logger]][15016] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+[2022-06-19T16:37:24.258016-0600][CRITICAL][logger]][15016] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">pandas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Requested Object's tags</th>
+      <th>Reason</th>
+      <th>Request ID</th>
+      <th>Requested Object's ID</th>
+      <th>Requested Object's type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[grades, float, mean]</td>
+      <td>please, I need it</td>
+      <td>&lt;UID: 16cb1d6c39024a87acf1a29dd1f3d9d7&gt;</td>
+      <td>&lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">deny</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[2022-06-19T16:37:35.873523-0600][CRITICAL][logger]][15016] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+[2022-06-19T16:37:35.874204-0600][CRITICAL][logger]][15016] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">pandas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Requested Object's tags</th>
+      <th>Reason</th>
+      <th>Request ID</th>
+      <th>Requested Object's ID</th>
+      <th>Requested Object's type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[grades, float, mean]</td>
+      <td>I am a data scientist and I need to know the a...</td>
+      <td>&lt;UID: 1faa4d8b428748f3840271919a750a5b&gt;</td>
+      <td>&lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">request_description</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#34;I am a data scientist and I need to know the average of the students&#39; grades for my analysis&#34;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="MNIST-with-Duet">MNIST with Duet<a class="anchor-link" href="#MNIST-with-Duet"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-1:-Launch-a-Duet-Server-and-Connect-(Done-above)">Part 1: Launch a Duet Server and Connect (Done above)<a class="anchor-link" href="#Part-1:-Launch-a-Duet-Server-and-Connect-(Done-above)"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-2:-Get-data">Part 2: Get data<a class="anchor-link" href="#Part-2:-Get-data"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">syft.util</span> <span class="kn">import</span> <span class="n">get_root_data_path</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">get_root_data_path</span><span class="p">(),</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">transform</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> 
+                                                                       <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))]))</span>
+<span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">get_root_data_path</span><span class="p">(),</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                           <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">transform</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> 
+                                                                       <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Dataset MNIST
+    Number of datapoints: 10000
+    Root location: /Users/leowei/.syft/data
+    Split: Test
+    StandardTransform
+Transform: Compose(
+               ToTensor()
+               Normalize(mean=(0.1307,), std=(0.3081,))
+           )</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-2:-Add-Request-Handlers">Part 2: Add Request Handlers<a class="anchor-link" href="#Part-2:-Add-Request-Handlers"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">pandas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">pandas</span>
+<span class="c1"># duet.requests.add_handler(action = &quot;deny&quot;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Tags</th>
+      <th>Description</th>
+      <th>object_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>&lt;UID: 2550b41ead684a24ac87a5dced4c5c6d&gt;</td>
+      <td>[grades]</td>
+      <td>This is a list of the grades of 6 people</td>
+      <td>&lt;class 'torch.Tensor'&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">add_handler</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;accept&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/anaconda3/envs/duet/lib/python3.9/site-packages/syft/lib/torch/uppercase_tensor.py:30: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won&#39;t be populated during autograd.backward(). If you indeed want the gradient for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more informations.
+  grad = getattr(obj, &#34;grad&#34;, None)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/RexCoding/2022/06/09/MNIST_Data_Owner.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

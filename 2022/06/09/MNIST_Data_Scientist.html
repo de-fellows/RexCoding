@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Federated Learning (Data Scientist) | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Federated Learning (Data Scientist)" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-09T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Federated Learning (Data Scientist)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-09T00:00:00-05:00","datePublished":"2022-06-09T00:00:00-05:00","headline":"Federated Learning (Data Scientist)","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html"},"url":"https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Federated Learning (Data Scientist)</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-09T00:00:00-05:00" itemprop="datePublished">
+        Jun 9, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      17 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2022-06-09-MNIST_Data_Scientist.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2022-06-09-MNIST_Data_Scientist.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2022-06-09-MNIST_Data_Scientist.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2022-06-09-MNIST_Data_Scientist.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-06-09-MNIST_Data_Scientist.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Table-of-Contents:">Table of Contents:<a class="anchor-link" href="#Table-of-Contents:"> </a></h2><ul>
+<li><a href="#intro">What is federated learning?</a><ul>
+<li><a href="#tools">Tools that made federated learning possible</a></li>
+</ul>
+</li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#duet">Pysyft Duet (Data scientist)</a><ul>
+<li><a href="#basics">Duet Basics</a></li>
+<li><a href="#mnist">MNIST with Duet</a><ul>
+<li><a href="#part1">Part 1: Connect to Remote Duet Server</a></li>
+<li><a href="#part2">Part 2: Setting up Model and Data</a></li>
+<li><a href="#part3">Part 3: Training</a></li>
+<li><a href="#part4">Part 4: Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#next">Where to next</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-federated-learning?-">What is federated learning? <a class="anchor" id="intro" /><a class="anchor-link" href="#What-is-federated-learning?-"> </a></h2><p>In the world of evergrowing data in every industry, data is becoming more scarce due to security and privacy reasons. This makes our jobs as data scientists harder as companies and institutions are holding on to their data for security and competitive reasons. Furthermore, a lot of important data these days are sensitive personal information, things like health, and happiness, etc. Our ability to solve problems is limited because we can't access the existing data.</p>
+<p><br />
+Federated learning is a machine learning setting where multiple clients(data owners) can come together and solve a machine learning problem, under the coordination of a central server(data scientist). Each data owner's data is stored  locally, and will not be access without direct permission. Instead of traditionally training on one machine locally, the network is sent to all clients and trained on multiple clients simultaneously. After training, the machine learning model would aggregate the model updates from the trained model from the clients.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are many situations in which this is the case. One use case of this is in the case with federated learning in the healthcare industry: Breast cancer is a something that is faced by 1 in 8 woman. It is actually a very treatable if it is detected early enough in a mamography. However, this is where the problem lies. In detection, there is a 1 in 4 chance that the radiologist saying that it is false positive or false negative, and with AI, the detection accuracy is even worse with the accuracy being 1 in 3 false positive or false negative. This is most likely due to our models not having enough training data, the amount of training data we have is less than &lt;0.1% of the world's mamography images. These data that we need are stored across thousands of organizations, and acquiring data from each organization is extremely difficult as some organizations will protect patient's privacy not mentioning the bureaucracy involved in signing contracts and risk management with thousands of different companies and organizations. <br /></p>
+<p>Federated learning could tackle this problem by having a massive federated data network, each data center(hospital, research center, etc) would act as a client. We, as the data scientist is able to send our machine learning model to each client, and have the client train the model locally, and finally update the global model by exchanging the weighted average of the weights. (FedAvg Algorithm)</p>
+<p><img src="https://blogs.nvidia.com/wp-content/uploads/2019/10/federated_learning_animation_still_white.png" alt="source: Nividia" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Advantage-of-federated-learning">Advantage of federated learning<a class="anchor-link" href="#Advantage-of-federated-learning"> </a></h3><ul>
+<li>Data never leaves the owner's device, privacy of sentitive data is stored. </li>
+<li>Federated learning allows devices like cell phones to train collectively, thus saving computation and memory on the server, data scientist's side.</li>
+<li>Data owners are more comfortable with sharing their data, and leading to better machine learning models.</li>
+</ul>
+<h3 id="Limitations-of-federated-learning">Limitations of federated learning<a class="anchor-link" href="#Limitations-of-federated-learning"> </a></h3><ul>
+<li>Communication, latency is often the bottleneck for federated learning. </li>
+<li>Variability in client hardware, it is often the case that after each round of training, the server will have to wait for the slower devices to report back with their trained weights. These stragglers often slows down the network, often times, the network just drop the stragglers, but is that a good approach? Does that mean the model will cater more towards people with faster phones?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tools-that-made-federated-learning-possible-">Tools that made federated learning possible <a class="anchor" id="tools" /><a class="anchor-link" href="#Tools-that-made-federated-learning-possible-"> </a></h2><h3 id="1.-Remote-execution">1. Remote execution<a class="anchor-link" href="#1.-Remote-execution"> </a></h3><p>Remote execution is a core tool used in federated learning. Instead of downloading the data from the clients and then perform machine learning on it, remote execution allows you to use the client's data without their data leaving their devices.</p>
+<h3 id="2.-Search-and-example-data">2. Search and example data<a class="anchor-link" href="#2.-Search-and-example-data"> </a></h3><p>If we are executing functions remotely, how can we do data science without seeing the data? <br />
+With tools such as sample data, we can feature engineer the data without actually seeing the full data. We can request from the data owners to allow us to see a small sub sample of the data in order for us to get a better understanding of the data.</p>
+<h3 id="3.-Differential-privacy">3. Differential privacy<a class="anchor-link" href="#3.-Differential-privacy"> </a></h3><p>How do we query again a database without revealing too much information about its privacy data? <br />
+Our goal is to achieve perfect privacy, meaning that the output of our query is the same between this database and any identical database with one row removed or replaced. However, achieving this is incredibly difficult and the way in which we attempt to achieve this is by adding a certain level of noise to the data.</p>
+<h3 id="4.-Secure-multi-party-computation">4. Secure multi-party computation<a class="anchor-link" href="#4.-Secure-multi-party-computation"> </a></h3><p>The idea of secure multi-party computation is that multiple people can combine their private inputs to compute a function, without revealing their inputs to each other.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the following example, we will look at one of the most popular library for federated learning Pysyft. Developed by openmined, pysyft was developed with the goal of secure and private machine learning. The Pysyft library is meant for you to write code that is capable of computing on data not owned on your local machine. In the following demo, we will be exploring the tool of remote execution.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Installation-">Installation <a class="anchor" id="installation" /><a class="anchor-link" href="#Installation-"> </a></h2><p>Before we dive into federated learning, let's install the necessary packages.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="1.-Install-Conda-environment">1. Install Conda environment<a class="anchor-link" href="#1.-Install-Conda-environment"> </a></h4><p><code>conda create --name duet python=3.8</code>
+Don't forget to activate your environment
+<code>conda activate duet</code></p>
+<h4 id="2.-Install-necessary-packages">2. Install necessary packages<a class="anchor-link" href="#2.-Install-necessary-packages"> </a></h4><p>Inside your folder, create a txt file named 'requirements.txt' <br />
+Then copy and past the following inside the txt file
+<code>numpy
+aiortc
+cryptography
+dataclasses
+dpcontracts
+flask
+forbiddenfruit&gt;=0.1.3
+loguru
+matplotlib
+nest_asyncio
+packaging
+pandas
+protobuf
+pydagogy
+PyNaCl
+requests
+scikit-learn
+seaborn
+sqlitedict
+statsmodels
+typeguard
+typing-extensions # backport to older python 3
+websockets
+jupyter
+Jinja2&lt;3.0</code>
+<br />
+Afterwards, we can install the requirements by running the following command</p>
+<p><code>pip install -r requirements.txt</code></p>
+<h4 id="3.-Install-Pysyft">3. Install Pysyft<a class="anchor-link" href="#3.-Install-Pysyft"> </a></h4><p><code>pip install syft==0.5.0</code></p>
+<h4 id="If-you-have-errors">If you have errors<a class="anchor-link" href="#If-you-have-errors"> </a></h4><ul>
+<li><code>ImportError: cannot import name 'soft_unicode' from 'markupsafe'</code>
+Resolve this by
+<code>python -m pip install markupsafe==2.0.1</code></li>
+<li>If you have the warning of CrytographyDeprecationWarning, you can ignore it for now.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Pysyft-Duet-(Data-Scientist)-">Pysyft Duet (Data Scientist) <a class="anchor" id="duet" /><a class="anchor-link" href="#Pysyft-Duet-(Data-Scientist)-"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A peer-to-peer tool developed on top of the PySyft. It allows the data owner to expose their data to the data scientist, and the data scientist can manipulate the data through a zero-knowledge access mechanism. As data owners, you have the right to decide whether to allow the manipulation of data, you can deny or approve requests from the data scientists. As data scientists, you can develop new insights and train your model using the data owned by the data owners.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Duet was used to demonstrate federated learning with PySyft without being deployed in the PyGrid ecosystem.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><p>To start, both the data owner and the data scientist will have to talk to one of the open grid network nodes hosted on AWS by OpenMined. The node will introduce the service to each other behind a firewall and help them connect peer to peer.</p>
+</li>
+<li><p>The data owner need to first connect initiate and launch the duet server.</p>
+</li>
+<li><p>With the server ID, the data scientist can join the duet session. This will give the data scientist a duet client id.</p>
+</li>
+<li><p>The data owner will then need to enter the client id to complete the setup process.</p>
+</li>
+<li><p>If all goes well, the data scientist and the data owner should be connected now.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Duet-Basics-">Duet Basics <a class="anchor" id="basics" /><a class="anchor-link" href="#Duet-Basics-"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As the Data Scientist, you want to perform data science on data that is sitting in the Data Owner's Duet server in their Notebook.</p>
+<p>In order to do this, we must run the code that the Data Owner sends us, which importantly includes their Duet Session ID. The code will look like this, importantly with their real Server ID.</p>
+<p>import syft as sy
+duet = sy.duet('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+This will create a direct connection from my notebook to the remote Duet server. Once the connection is established all traffic is sent directly between the two nodes.</p>
+<p>Paste the code or Server ID that the Data Owner gives you and run it in the cell below. It will return your Client ID which you must send to the Data Owner to enter into Duet so it can pair your notebooks.</p>
+<p>Make sure that the network_url you use is chosen from
+<a href="https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address">https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">syft</span> <span class="k">as</span> <span class="nn">sy</span>
+<span class="n">duet</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">join_duet</span><span class="p">(</span><span class="s2">&quot;00eec93acc58f144d78a365705d42223&quot;</span><span class="p">,</span> <span class="n">network_url</span><span class="o">=</span><span class="s2">&quot;http://ec2-18-218-7-180.us-east-2.compute.amazonaws.com:5000/&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>🎤  🎸  ♪♪♪ Joining Duet ♫♫♫  🎻  🎹
+
+♫♫♫ &gt;<span class="ansi-yellow-intense-fg"> DISCLAIMER</span>: <span class="ansi-bold">Duet is an experimental feature currently in beta.
+♫♫♫ &gt; Use at your own risk.
+</span>
+<span class="ansi-bold">
+    &gt; ❤️ </span><span class="ansi-red-intense-fg ansi-bold">Love</span> <span class="ansi-green-intense-fg">Duet</span>? <span class="ansi-yellow-intense-fg">Please</span> <span class="ansi-blue-intense-fg">consider</span> <span class="ansi-magenta-intense-fg">supporting</span> <span class="ansi-red-intense-fg">our</span> <span class="ansi-yellow-intense-fg">community!</span>
+    &gt; https://github.com/sponsors/OpenMined<span class="ansi-bold">
+
+♫♫♫ &gt; Punching through firewall to OpenGrid Network Node at:
+♫♫♫ &gt; http://ec2-18-218-7-180.us-east-2.compute.amazonaws.com:5000/
+♫♫♫ &gt;
+♫♫♫ &gt; ...waiting for response from OpenGrid Network... 
+♫♫♫ &gt; </span><span class="ansi-green-intense-fg ansi-bold">DONE!</span>
+
+♫♫♫ &gt; <span class="ansi-magenta-intense-fg">STEP 1:</span> Send the following Duet Client ID to your duet partner!
+♫♫♫ &gt; Duet Client ID: <span class="ansi-bold">3406364123dfde0c6e7394b2167a9ef9</span>
+
+♫♫♫ &gt; ...waiting for partner to connect...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/anaconda3/envs/duet/lib/python3.9/site-packages/aiortc/rtcdtlstransport.py:211: CryptographyDeprecationWarning: This version of cryptography contains a temporary pyOpenSSL fallback path. Upgrade pyOpenSSL now.
+  _openssl_assert(lib.SSL_CTX_use_certificate(ctx, self._cert._x509) == 1)  # type: ignore
+/opt/anaconda3/envs/duet/lib/python3.9/site-packages/aiortc/rtcdtlstransport.py:186: CryptographyDeprecationWarning: This version of cryptography contains a temporary pyOpenSSL fallback path. Upgrade pyOpenSSL now.
+  value=certificate_digest(self._cert._x509),  # type: ignore
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+♫♫♫ &gt; <span class="ansi-green-intense-fg">CONNECTED!</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>duet</code> variable is your reference to remote operations including supported libraries like torch.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can search for available data with their meta data(tags, decription and object type) with the following:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">pandas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Tags</th>
+      <th>Description</th>
+      <th>object_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>&lt;UID: 2550b41ead684a24ac87a5dced4c5c6d&gt;</td>
+      <td>[grades]</td>
+      <td>This is a list of the grades of 6 people</td>
+      <td>&lt;class 'torch.Tensor'&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can create a pointer to the data in the duet store. Note that this is the reference to the data, not the actual data.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_ptr</span> <span class="o">=</span> <span class="n">duet</span><span class="o">.</span><span class="n">store</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's do some computation remotely</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">average_grade</span> <span class="o">=</span> <span class="n">data_ptr</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After we have done the computation, let's try and get the result from the data owner's server.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">average_grade</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[2022-06-19T16:37:24.260967-0600][CRITICAL][logger]][15013] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;Exception&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Oh no, looks like we need to request for permission from the data owner. We can do this by using the .request with your reasoning inside.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">average_grade</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">reason</span> <span class="o">=</span> <span class="s2">&quot;please, I need it&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">average_grade</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[2022-06-19T16:37:35.877293-0600][CRITICAL][logger]][15013] You do not have permission to .get() Object with ID: &lt;UID: 0e6d0efcb06441db9d958e2006f5cbc8&gt;Please submit a request.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;Exception&#39;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looks like our request didn't go through, let's create a new request with a better reasoning.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">average_grade</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
+    <span class="n">reason</span> <span class="o">=</span> <span class="s2">&quot;I am a data scientist and I need to know the average of the students&#39; grades for my analysis&quot;</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can check if there are still outstanding requests by running the following block</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">duet</span><span class="o">.</span><span class="n">requests</span><span class="o">.</span><span class="n">pandas</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looks like our request went through, now let's get the data</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">average_grade</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>tensor(81.1667)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="MNIST-with-Duet-">MNIST with Duet <a class="anchor" id="mnist" /><a class="anchor-link" href="#MNIST-with-Duet-"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-1:-Connect-to-Remote-Duet-Server-(Done-above)-">Part 1: Connect to Remote Duet Server (Done above) <a class="anchor" id="part1" /><a class="anchor-link" href="#Part-1:-Connect-to-Remote-Duet-Server-(Done-above)-"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-2:-Setting-up-Model-and-Data-">Part 2: Setting up Model and Data <a class="anchor" id="part2" /><a class="anchor-link" href="#Part-2:-Setting-up-Model-and-Data-"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that here, instead of traditionally inheriting from the nn.Module, we inherit from sy.Module, and we also need to pass in a variable called torch_ref when we constuct this network, the torch_ref will be used internally for any calls that would normally be to torch.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SyNet</span><span class="p">(</span><span class="n">sy</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">torch_ref</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SyNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">torch_ref</span><span class="o">=</span><span class="n">torch_ref</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout2d</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout2d</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">9216</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">local_model</span> <span class="o">=</span> <span class="n">SyNet</span><span class="p">(</span><span class="n">torch</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s2">&quot;test_batch_size&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="s2">&quot;no_cuda&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;dry_run&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> 
+    <span class="s2">&quot;log_interval&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;save_model&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can send our local model to our partner's Duet server</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">local_model</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">duet</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can create an alias for our partner's torch called <code>remote_torch</code>, we do this so we can refer to the local torch as <code>torch</code> and any operations we want to do remotely as <code>remote_torch</code>. Remeber that the return values from <code>remote_torch</code> are Pointers, not the actual objects themselves. Keep in mind that you cannot mix the pointers with local torch objects.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">remote_torch</span> <span class="o">=</span> <span class="n">duet</span><span class="o">.</span><span class="n">torch</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">has_cuda</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">has_cuda_ptr</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">has_cuda</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">has_cuda_ptr</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;To run test and inference locally&quot;</span><span class="p">,</span>
+    <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>  <span class="c1"># change to something slower</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">has_cuda</span><span class="p">)</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;no_cuda&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">has_cuda</span>
+<span class="c1"># now we can set the seed</span>
+<span class="n">remote_torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">])</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data Owner device is </span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>False
+Data Owner device is cpu
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">has_cuda</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Get parameters, setup an optimizer and scheduler just like you would do in Pytorch</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adadelta</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we need a training loop so we can improve our remote model. Since we want to train on remote data we should first check if the model is remote since we will be using remote_torch in this function. To check if a model is local or remote simply use the <code>.is_local</code> attribute.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch_ref</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">train_data_length</span><span class="p">):</span>
+    <span class="c1"># + 0.5 lets us math.ceil without the import</span>
+    <span class="n">train_batches</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">train_data_length</span> <span class="o">/</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt; Running train in </span><span class="si">{</span><span class="n">train_batches</span><span class="si">}</span><span class="s2"> batches&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">is_local</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training requires remote model&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">):</span>
+        <span class="n">data_ptr</span><span class="p">,</span> <span class="n">target_ptr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data_ptr</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target_ptr</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">loss_item</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">train_loss</span> <span class="o">=</span> <span class="n">duet</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># create a remote Float we can use for summation</span>
+        <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss_item</span>
+        <span class="k">if</span> <span class="n">batch_idx</span> <span class="o">%</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;log_interval&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">local_loss</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">local_loss</span> <span class="o">=</span> <span class="n">loss_item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;To evaluate training progress&quot;</span><span class="p">,</span>
+                <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">5</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">local_loss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Epoch: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> Loss: </span><span class="si">{:.4}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">local_loss</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Epoch: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2"> ?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">batch_idx</span> <span class="o">&gt;=</span> <span class="n">train_batches</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;batch_idx &gt;= train_batches, breaking&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;dry_run&quot;</span><span class="p">]:</span>
+            <span class="k">break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_local</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch_ref</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">test_data_length</span><span class="p">):</span>
+    <span class="c1"># download remote model</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">is_local</span><span class="p">:</span>
+        <span class="n">local_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;test evaluation&quot;</span><span class="p">,</span>
+            <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">5</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">local_model</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="c1"># + 0.5 lets us math.ceil without the import</span>
+    <span class="n">test_batches</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">test_data_length</span> <span class="o">/</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;test_batch_size&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt; Running test_local in </span><span class="si">{</span><span class="n">test_batches</span><span class="si">}</span><span class="s2"> batches&quot;</span><span class="p">)</span>
+    <span class="n">local_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">with</span> <span class="n">torch_ref</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_loader</span><span class="p">):</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">local_model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">iter_loss</span> <span class="o">=</span> <span class="n">torch_ref</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">test_loss</span> <span class="o">=</span> <span class="n">test_loss</span> <span class="o">+</span> <span class="n">iter_loss</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="n">total</span>
+            <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;dry_run&quot;</span><span class="p">]:</span>
+                <span class="k">break</span>
+                
+            <span class="k">if</span> <span class="n">batch_idx</span> <span class="o">&gt;=</span> <span class="n">test_batches</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;batch_idx &gt;= test_batches, breaking&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">test_data_length</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test Set Accuracy: </span><span class="si">{</span><span class="mi">100</span> <span class="o">*</span> <span class="n">accuracy</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">local_transform_1</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>  <span class="c1"># this converts PIL images to Tensors</span>
+<span class="n">local_transform_2</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.1307</span><span class="p">,</span> <span class="mf">0.3081</span><span class="p">)</span>  <span class="c1"># this normalizes the dataset</span>
+
+<span class="c1"># compose our transforms</span>
+<span class="n">local_transforms</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">local_transform_1</span><span class="p">,</span> <span class="n">local_transform_2</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">syft.util</span> <span class="kn">import</span> <span class="n">get_root_data_path</span>
+<span class="c1"># we will configure the test set here locally since we want to know if our Data Owner&#39;s</span>
+<span class="c1"># private training dataset will help us reach new SOTA results for our benchmark test set</span>
+<span class="n">test_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;test_batch_size&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_root_data_path</span><span class="p">()),</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">local_transforms</span><span class="p">)</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span><span class="o">**</span><span class="n">test_kwargs</span><span class="p">)</span>
+<span class="n">test_data_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_data_length</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">remote_torchvision</span> <span class="o">=</span> <span class="n">duet</span><span class="o">.</span><span class="n">torchvision</span>
+
+<span class="n">transform_1</span> <span class="o">=</span> <span class="n">remote_torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>  <span class="c1"># this converts PIL images to Tensors</span>
+<span class="n">transform_2</span> <span class="o">=</span> <span class="n">remote_torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.1307</span><span class="p">,</span> <span class="mf">0.3081</span><span class="p">)</span>  <span class="c1"># this normalizes the dataset</span>
+
+<span class="n">remote_list</span> <span class="o">=</span> <span class="n">duet</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">List</span><span class="p">()</span>  <span class="c1"># create a remote list to add the transforms to</span>
+<span class="n">remote_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform_1</span><span class="p">)</span>
+<span class="n">remote_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform_2</span><span class="p">)</span>
+
+<span class="c1"># compose our transforms</span>
+<span class="n">transforms</span> <span class="o">=</span> <span class="n">remote_torchvision</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span><span class="n">remote_list</span><span class="p">)</span>
+
+<span class="c1"># The DO has kindly let us initialise a DataLoader for their training set</span>
+<span class="n">train_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">train_data_ptr</span> <span class="o">=</span> <span class="n">remote_torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_root_data_path</span><span class="p">()),</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="p">)</span>
+<span class="n">train_loader_ptr</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data_ptr</span><span class="p">,</span><span class="o">**</span><span class="n">train_kwargs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># so we can pass that to our training loop and know when to stop</span>
+<span class="k">def</span> <span class="nf">get_train_length</span><span class="p">(</span><span class="n">train_data_ptr</span><span class="p">):</span>
+    <span class="n">train_data_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data_ptr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_data_length</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">train_data_length</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">train_data_length</span> <span class="o">=</span> <span class="n">get_train_length</span><span class="p">(</span><span class="n">train_data_ptr</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+        <span class="n">train_data_length</span> <span class="o">=</span> <span class="n">get_train_length</span><span class="p">(</span><span class="n">train_data_ptr</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training Dataset size is: </span><span class="si">{</span><span class="n">train_data_length</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Dataset size is: 60000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-3:-Training">Part 3: Training<a class="anchor-link" href="#Part-3:-Training"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#args[&quot;dry_run&quot;] = True  # comment to do a full train</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting Training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">epoch_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># remote training on model with remote_torch</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">remote_torch</span><span class="p">,</span> <span class="n">train_loader_ptr</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">train_data_length</span><span class="p">)</span>
+    <span class="c1"># local testing on model with local torch</span>
+    <span class="n">test_local</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">,</span> <span class="n">test_data_length</span><span class="p">)</span>
+    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">epoch_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch time: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">epoch_end</span> <span class="o">-</span> <span class="n">epoch_start</span><span class="p">)</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;dry_run&quot;</span><span class="p">]:</span>
+        <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished Training&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;save_model&quot;</span><span class="p">]:</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;test evaluation&quot;</span><span class="p">,</span>
+        <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">5</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;./duet_mnist.pt&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-4:-Inference">Part 4: Inference<a class="anchor-link" href="#Part-4:-Inference"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can use our model to do inference either remotely or locally.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="k">def</span> <span class="nf">draw_image_and_label</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ground Truth: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">))</span>
+    
+<span class="k">def</span> <span class="nf">prep_for_inference</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">image_batch</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">image_batch</span> <span class="o">=</span> <span class="n">image_batch</span> <span class="o">*</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">image_batch</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">classify_local</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">is_local</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model is remote try .get()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">image_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">prep_for_inference</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image_tensor</span><span class="p">)</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">local_y</span> <span class="o">=</span> <span class="n">preds</span>
+    <span class="n">local_y</span> <span class="o">=</span> <span class="n">local_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">local_y</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">local_y</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">as_tuple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">class_num</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">class_num</span><span class="p">,</span> <span class="n">local_y</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">classify_remote</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">is_local</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model is local try .send()&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">image_tensor_ptr</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">prep_for_inference</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image_tensor_ptr</span><span class="p">)</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">remote_torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">preds_result</span> <span class="o">=</span> <span class="n">preds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;To see a real world example of inference&quot;</span><span class="p">,</span>
+        <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">10</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">preds_result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No permission to do inference, request again&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># now we have the local tensor we can use local torch</span>
+        <span class="n">local_y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">preds_result</span><span class="p">)</span>
+        <span class="n">local_y</span> <span class="o">=</span> <span class="n">local_y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">local_y</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">local_y</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">as_tuple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">class_num</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">class_num</span><span class="p">,</span> <span class="n">local_y</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">total_images</span> <span class="o">=</span> <span class="n">test_data_length</span> <span class="c1"># 10000</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total_images</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Test Image:&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">batch</span> <span class="o">=</span> <span class="n">index</span> <span class="o">//</span> <span class="n">test_kwargs</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">]</span>
+<span class="n">batch_index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_images</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tensor_ptr</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">tensor_ptr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tensor_ptr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">batch</span> <span class="o">==</span> <span class="n">count</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Displaying </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2"> == </span><span class="si">{</span><span class="n">batch_index</span><span class="si">}</span><span class="s2"> in Batch: </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">batch_index</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">batch_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">image_1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+<span class="n">label_1</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
+<span class="n">draw_image_and_label</span><span class="p">(</span><span class="n">image_1</span><span class="p">,</span> <span class="n">label_1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Random Test Image: 1192
+Displaying 1192 == 192 in Batch: 1/10
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">class_num</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">classify_remote</span><span class="p">(</span><span class="n">image_1</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediction: </span><span class="si">{</span><span class="n">class_num</span><span class="si">}</span><span class="s2"> Ground Truth: </span><span class="si">{</span><span class="n">label_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Prediction: 4 Ground Truth: 9
+tensor([1.3907e-04, 5.6652e-04, 2.7458e-04, 4.1249e-03, 7.1542e-01, 3.2733e-03,
+        2.5919e-03, 2.5418e-02, 2.2922e-02, 2.2527e-01],
+       grad_fn=&lt;SqueezeBackward0&gt;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">local_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">request_block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;To run test and inference locally&quot;</span><span class="p">,</span>
+    <span class="n">timeout_secs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">class_num</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">classify_local</span><span class="p">(</span><span class="n">image_1</span><span class="p">,</span> <span class="n">local_model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediction: </span><span class="si">{</span><span class="n">class_num</span><span class="si">}</span><span class="s2"> Ground Truth: </span><span class="si">{</span><span class="n">label_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># here we can see the actual output</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Prediction: 4 Ground Truth: 9
+tensor([0.0020, 0.0041, 0.0078, 0.0385, 0.2883, 0.1381, 0.0244, 0.0568, 0.2300,
+        0.2100], grad_fn=&lt;SqueezeBackward0&gt;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageEnhance</span>
+<span class="kn">import</span> <span class="nn">PIL.ImageOps</span>    
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">def</span> <span class="nf">classify_url_image</span><span class="p">(</span><span class="n">image_url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">image_url</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;curl -O </span><span class="si">{</span><span class="n">image_url</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">ImageOps</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="c1">#     im = im.resize((28,28), Image.ANTIALIAS)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;LA&#39;</span><span class="p">)</span>
+    <span class="n">enhancer</span> <span class="o">=</span> <span class="n">ImageEnhance</span><span class="o">.</span><span class="n">Brightness</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">enhancer</span><span class="o">.</span><span class="n">enhance</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># classify local</span>
+    <span class="n">class_num</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">classify_local</span><span class="p">(</span><span class="n">image_1</span><span class="p">,</span> <span class="n">local_model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediction: </span><span class="si">{</span><span class="n">class_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">image_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kensanata/numbers/master/0018_CHXX/0/number-100.png&quot;</span>
+<span class="n">classify_url_image</span><span class="p">(</span><span class="n">image_url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(89, 93)
+Prediction: 4
+tensor([0.0007, 0.0016, 0.0049, 0.0291, 0.4118, 0.0332, 0.0071, 0.0289, 0.0928,
+        0.3899], grad_fn=&lt;SqueezeBackward0&gt;)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100  4655  100  4655    0     0   3819      0  0:00:01  0:00:01 --:--:--  3840
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Where-to-go-next?-">Where to go next? <a class="anchor" id="next" /><a class="anchor-link" href="#Where-to-go-next?-"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><a href="https://courses.openmined.org/">https://courses.openmined.org/</a>
+  Openmined(PySyft).
+  This is where I learned most of the federated learning material, and they have a great series on private AI technologies. Highly recommend.<hr /></li>
+<li><a href="https://flower.dev/">https://flower.dev/</a>
+  Flower
+  Another federated learning framework.<hr /></li>
+<li><a href="https://www.tensorflow.org/federated">https://www.tensorflow.org/federated</a>
+  Tensorflow Federated. Integrates very nicely with Tensorflow.
+<br /> <br /></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Acknowledgement">Acknowledgement<a class="anchor-link" href="#Acknowledgement"> </a></h2><p>I would like this last section by thanking the support of my professor Yves Pauchard, and the DE Followship group. As well as the openmined for innovating and building technology for the future, their work has inspired me to pursue more research and learning in the field of federated learning and I am extremely thankful. 
+<br /> <br />
+<img src="https://media.giphy.com/media/GVMhZwYv8U5NK/giphy.gif" alt="MVPUrl" title="MVP" /></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/RexCoding/2022/06/09/MNIST_Data_Scientist.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
