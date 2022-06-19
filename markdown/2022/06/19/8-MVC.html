@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MVC in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="MVC in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/8-MVC.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/8-MVC.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MVC in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"MVC in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/8-MVC.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/8-MVC.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">MVC in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#mvc-model-view-controller-code-translation-in-java">MVC (Model-View-Controller) code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#general-introduction">General Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#implementational-instruction">Implementational Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#model">Model</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#controller">Controller</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#view">View</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#swingview-as-tkview-in-the-python-version">SwingView (as TkView in the Python version)</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#generateuuid-plus-all-three-children-who-are-inheriting-this-interface">GenerateUuid (plus all three children who are inheriting this interface)</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-4">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-4">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="mvc-model-view-controller-code-translation-in-java">
+<a class="anchor" href="#mvc-model-view-controller-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.youtube.com/watch?v=ihtIcGkTFBU">MVC (Model-View-Controller)</a> <strong>code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="general-introduction">
+<a class="anchor" href="#general-introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>General Introduction</strong>
+</h2>
+
+<ul>
+  <li>
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">MVC (Model-View-Controller)</a> is a pattern in software design commonly used to implement user interfaces, data, and controlling logic. It emphasizes the separation between the software’s business logic and display. For more, click <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">here</a>.</li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=ihtIcGkTFBU">video</a> first, understand all principles, and then look at the translation codes in <strong>Java</strong>. This documentation will help you to understand the translation better</li>
+  <li>This translation is based on the final code source of the <strong>MVC</strong> lessons in python programming languages (<strong><em>mvc-after-strategy.py</em></strong>).</li>
+  <li>
+<strong>Point</strong>: This translation is <strong>much more different</strong> from the original <strong>Python</strong> version’s structure, libraries, and functionalities in this Java version. It’s caused as we have two different libraries for <strong>UI</strong> (user interface) in <strong>Python</strong> and <strong>Java,</strong> which follow different structures.</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite <strong>Python</strong>, in which you can run each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on <strong>Java</strong> is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project with the same directory with all dependencies can be good practice for OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.mvc</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files. 
+In addition, we have a sub package <strong><em>edu.def.mvc.uuid</em></strong> for the <strong>UUID</strong> interface and its children, as far as the <strong>strategy</strong> is concerned. (Have different strategies for generating different UUIDs)</li>
+  <li>However, packages are unnecessary; you could use a default package or even have all classes in the same file; this is more <strong>Java</strong> best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="implementational-instruction">
+<a class="anchor" href="#implementational-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Implementational Instruction</strong>
+</h2>
+
+<ol>
+  <li>We will create one <strong><em>.java</em></strong> file per class under <strong><em>edu.def.mvc</em></strong> package.
+They can be interfaces and child classes or simple classes.
+In addition, in this lesson, we have a sub-package <strong><em>“edu.def.mvc.uuid”</em></strong> in a separate folder on the main package directory to hold a class category that behaves similarly. Learn more about sub-packages <a href="https://www.refreshjava.com/java/sub-packages-in-java">here</a>.</li>
+  <li>In this project, we use <strong>Java</strong> <strong>GUI</strong> libraries <a href="https://docs.oracle.com/javase/7/docs/api/java/awt/package-summary.html"><strong><em>AWT</em></strong></a>  and <a href="https://docs.oracle.com/javase/tutorial/uiswing/index.html"><strong><em>Swing</em></strong></a>, which have a different structure and functionality than <strong>Python</strong>’s <a href="https://docs.python.org/3/library/tkinter.html"><strong><em>Tkinter</em></strong></a> library for the same purpose. E.g., we don’t need a loop in the <strong>Java</strong> version to run the UI, although we need it in the <strong>Python</strong> version. Complete tutorial about <strong>Java GUI</strong> with <strong><em>Swing</em></strong> <a href="https://docs.oracle.com/javase/tutorial/uiswing/index.html">here</a>.</li>
+  <li>We have three MVC classes: <strong><em>Model.java</em></strong>, <strong><em>Controller.java</em></strong> and <strong><em>View.java**.</em> In addition, we have a class called **<em>SwingView.java</em></strong>, which implements <strong><em>View.java</em></strong> and handle all user interface codes. From that class, we combine all <strong>MVC</strong> principles to run an application. Finally, the <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> <strong><em>GenerateUuid.java</em></strong> and its children <strong><em>Uuid.java</em></strong>, <strong><em>Uuid4.java</em></strong> and <strong><em>UuidString.java</em></strong> are classes to generate different <strong>UUIDs</strong>, depending on which one we choose on the <strong><em>main ()</em></strong> method.</li>
+  <li>
+<strong><em>Main.java</em></strong> contains our <strong><em>main ()</em></strong> method to run the program.</li>
+  <li>Note that all steps here are entirely for the best <strong>OOP</strong> practice in <strong>Java</strong> programming; They can be done more straightforwardly, but not the best <strong>OOP</strong> ways.</li>
+</ol>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all <strong><em>.java</em></strong> files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/mvc/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the <strong><em>Main.java</em></strong> file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.mvc.Main
+</code></pre></div>    </div>
+  </li>
+  <li>If your main function is in a different class, but the name of that class instead of <strong><em>Main</em></strong> at the end of the command</li>
+  <li>You can find more about compiling instructions <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>.</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="model">
+<a class="anchor" href="#model" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Model</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.mvc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+<span class="cm">/**
+ @author Saman Pordanesh &lt;a href="mailto:sina.pordanesh@yahoo.com"&gt;
+ sina.pordanesh@yahoo.com&lt;/a&gt;
+ @version 1.0
+ @since 1.0
+ */</span>
+
+
+<span class="cm">/**
+ * This is the Model class which should act as a database in this program.
+ * This model is pretty simple, and we can hold the whole data on a simple ArrayList.
+ * In complicated versions, Model class should connect with an external database.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Model</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">UUID</span><span class="o">&gt;</span> <span class="n">uuids</span><span class="o">;</span>
+
+    <span class="nc">Model</span><span class="o">(){</span>
+        <span class="n">uuids</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUuids</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">UUID</span><span class="o">&gt;</span> <span class="n">uuids</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">uuids</span> <span class="o">=</span> <span class="n">uuids</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">UUID</span><span class="o">&gt;</span> <span class="nf">getUuids</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">uuids</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addUuid</span><span class="o">(</span><span class="no">UUID</span> <span class="n">uuid</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">uuids</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">uuid</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clearModel</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">uuids</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class required an <strong>ArrayList</strong> to act as a data holder. We will keep all generated <strong>UUIDs</strong> in this <strong>ArrayList</strong> and use them through the program.</li>
+  <li>As the <strong>ArrayList</strong> is a private parameter and we need access to it in other classes, we have <strong><em>getter</em></strong> and <strong><em>setter</em></strong> methods for this purpose. In addition, <strong><em>addUuid ()</em></strong> is used to add a generated <strong>UUID</strong> to the model and <strong><em>clearModel ()</em></strong> is used to clear the whole model when needed.  However, by making the <strong>ArrayList</strong> a <strong>public</strong> parameter, we won’t need <strong><em>getter</em></strong>, <strong><em>setter</em></strong>, <strong><em>add</em></strong> and <strong><em>clean</em></strong> functions, but all of them are for best <strong>OOP</strong> practices.</li>
+</ol>
+
+<h3 id="controller">
+<a class="anchor" href="#controller" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Controller</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Controller</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">generate_uuid</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">view</span> <span class="o">=</span> <span class="n">view</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">generate_uuid</span> <span class="o">=</span> <span class="n">generate_uuid</span>
+    
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">start_main_loop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">handle_click_generate_uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># generate a uuid and add it to the list
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">uuid</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">generate_uuid</span><span class="p">())</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">append_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">uuid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">handle_click_clear_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># clear the uuid list in the model and the view
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">clear_list</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ @author Saman Pordanesh &lt;a href="mailto:sina.pordanesh@yahoo.com"&gt;
+ sina.pordanesh@yahoo.com&lt;/a&gt;
+ @version 1.0
+ @since 1.0
+ */</span>
+
+<span class="kn">package</span> <span class="nn">edu.def.mvc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">edu.def.mvc.uuid.GenerateUuid</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Controller class
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Controller</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">View</span> <span class="n">view</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">GenerateUuid</span> <span class="n">generateUuid</span><span class="o">;</span>
+
+    <span class="nc">Controller</span><span class="o">(</span><span class="nc">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nc">View</span> <span class="n">view</span><span class="o">,</span> <span class="nc">GenerateUuid</span> <span class="n">uuid</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">view</span> <span class="o">=</span> <span class="n">view</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">generateUuid</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">//start the initial UI</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">view</span><span class="o">.</span><span class="na">setup</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">//handle "Generate UUID" button and</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleClickGenerateUuid</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">addUuid</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">generateUuid</span><span class="o">.</span><span class="na">generateUuid</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="c1">//handle "Clear list" button and</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleClickClearList</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">clearModel</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">view</span><span class="o">.</span><span class="na">clearList</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">//getting the Model object to use its data</span>
+    <span class="kd">public</span> <span class="nc">Model</span> <span class="nf">getModel</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>This class controls all actions in the program and acts as a connector between <strong><em>View</em></strong> and <strong><em>Model</em></strong> as well (as you can see, we have both <strong><em>View</em></strong> and <strong><em>Model</em></strong> objects as parameters of this class).</li>
+  <li>We have a parameter of the <strong><em>GeneratedUuid</em></strong> interface. We pass the <strong><em>GeneratedUuid</em></strong> children to the <strong><em>Controller</em></strong> class by its constructor to define which kind of <strong>UUID</strong> we want to generate in the application.</li>
+  <li>In the <strong><em>start ()</em></strong> method, we call the <strong><em>setup ()</em></strong> method of the <strong><em>View</em></strong> object to start <strong>GUI’s</strong> engine.</li>
+  <li>The following method is <strong><em>handleClickGenerateUuid ()</em></strong> when the user clicks on the <strong><em>“Generate UUID”</em></strong> button. This method should generate a <strong>UUID</strong> by <strong><em>generateUuid</em></strong> object and adding it to the model.</li>
+  <li>The method <strong><em>handleClickClearList ()</em></strong> handles the functionality of the <strong><em>“Clear List”</em></strong> button and clears the model entirely.</li>
+</ol>
+
+<h3 id="view">
+<a class="anchor" href="#view" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>View</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">View</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">append_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">clear_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">start_main_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ @author Saman Pordanesh &lt;a href="mailto:sina.pordanesh@yahoo.com"&gt;
+ sina.pordanesh@yahoo.com&lt;/a&gt;
+ @version 1.0
+ @since 1.0
+ */</span>
+
+<span class="kn">package</span> <span class="nn">edu.def.mvc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">View</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">setup</span><span class="o">(</span><span class="nc">Controller</span> <span class="n">controller</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">appendToList</span><span class="o">(</span><span class="no">UUID</span> <span class="n">item</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">clearList</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span>  <span class="nf">startMainLoop</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>This class is an <a href="https://www.w3schools.com/java/java_abstract.asp">abstract</a> with four methods to handle the view of the application.</li>
+  <li>The <strong><em>setup ()</em></strong> method will use to contain and start a GUI engine.</li>
+  <li>The method <strong><em>appendToList ()</em></strong> is a method to run and handle the <strong><em>“Generate UUID”</em></strong> button view on the application.</li>
+  <li>Also, the method <strong><em>clearList ()</em></strong> is a method to run and handle the <strong><em>“Clear List”</em></strong> button view on the application.</li>
+  <li>Finally, <strong><em>startMainLoop()</em></strong> contains a method to make the frame visible. Unlike <strong>Python</strong>, in the <strong>Java</strong> version of <strong>GUI,</strong> we don’t need a loop to run the application.</li>
+</ol>
+
+<h3 id="swingview-as-tkview-in-the-python-version">
+<a class="anchor" href="#swingview-as-tkview-in-the-python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>SwingView (as TkView in the Python version)</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TkView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">):</span>
+
+        <span class="c1"># setup tkinter
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">geometry</span><span class="p">(</span><span class="s">"400x400"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"UUIDGen"</span><span class="p">)</span>
+
+        <span class="c1"># create the gui
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Result:"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">label</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">list</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Listbox</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">list</span><span class="p">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">BOTH</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">generate_uuid_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Generate UUID"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">controller</span><span class="p">.</span><span class="n">handle_click_generate_uuid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">generate_uuid_button</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">clear_button</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Clear list"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">controller</span><span class="p">.</span><span class="n">handle_click_clear_list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">clear_button</span><span class="p">.</span><span class="n">pack</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">append_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">list</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="p">.</span><span class="n">END</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clear_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">list</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">END</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">start_main_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># start the loop
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ @author Saman Pordanesh &lt;a href="mailto:sina.pordanesh@yahoo.com"&gt;
+ sina.pordanesh@yahoo.com&lt;/a&gt;
+ @version 1.0
+ @since 1.0
+ */</span>
+
+<span class="kn">package</span> <span class="nn">edu.def.mvc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="cm">/**
+ * this class handles all three MVC classes to generate a UI application.
+ * It uses Swing &amp; AWT libraries for generating GUI.
+ */</span>
+
+<span class="kd">class</span> <span class="nc">SwingView</span> <span class="kd">extends</span> <span class="nc">View</span> <span class="kd">implements</span> <span class="nc">ActionListener</span> <span class="o">{</span>
+
+    <span class="nc">JFrame</span> <span class="n">frame</span><span class="o">;</span>
+    <span class="nc">TextArea</span> <span class="n">display</span><span class="o">;</span>
+    <span class="nc">JButton</span> <span class="n">createButton</span><span class="o">;</span>
+    <span class="nc">JButton</span> <span class="n">clearButton</span><span class="o">;</span>
+    <span class="nc">Controller</span> <span class="n">controller</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setup</span><span class="o">(</span><span class="nc">Controller</span> <span class="n">controller</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// A controller object to control all principles in the program</span>
+        <span class="c1">// from a unique class.</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">controller</span> <span class="o">=</span> <span class="n">controller</span><span class="o">;</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">frame</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JFrame</span><span class="o">();</span>
+
+        <span class="c1">// Create a list for holding all generated uuids</span>
+        <span class="c1">// responsive to add and clear by two "generateButton" and</span>
+        <span class="c1">// "clearButton" buttons.</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">display</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TextArea</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">80</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">display</span><span class="o">.</span><span class="na">setEditable</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">startMainLoop</span><span class="o">();</span>
+
+        <span class="c1">// Create two button for generating uuid and append to the list (generateButton)</span>
+        <span class="c1">// and clear the least (clearButton)</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">createButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"Generate UUID"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">createButton</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">clearButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JButton</span><span class="o">(</span><span class="s">"Clear List"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">clearButton</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="nc">JPanel</span> <span class="n">buttonPanel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPanel</span><span class="o">();</span>
+        <span class="n">buttonPanel</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">GridLayout</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">2</span><span class="o">));</span>
+        <span class="n">buttonPanel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">createButton</span><span class="o">);</span>
+        <span class="n">buttonPanel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">clearButton</span><span class="o">);</span>
+
+        <span class="nc">Container</span> <span class="n">content</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">frame</span><span class="o">.</span><span class="na">getContentPane</span><span class="o">();</span>
+        <span class="n">content</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="nc">BorderLayout</span><span class="o">());</span>
+        <span class="n">content</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Center"</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">display</span><span class="o">);</span>
+        <span class="n">content</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"South"</span><span class="o">,</span> <span class="n">buttonPanel</span><span class="o">);</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">frame</span><span class="o">.</span><span class="na">setPreferredSize</span><span class="o">(</span><span class="k">new</span> <span class="nc">Dimension</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">200</span><span class="o">));</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">frame</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"UUID generator"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">frame</span><span class="o">.</span><span class="na">pack</span><span class="o">();</span>
+
+
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">appendToList</span><span class="o">(</span><span class="no">UUID</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">display</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clearList</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">display</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startMainLoop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">frame</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="nc">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">()</span> <span class="o">==</span> <span class="k">this</span><span class="o">.</span><span class="na">createButton</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">controller</span><span class="o">.</span><span class="na">handleClickGenerateUuid</span><span class="o">();</span>
+            <span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="na">getModel</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">appendToList</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getUuids</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">getUuids</span><span class="o">().</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">));</span>
+
+        <span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">()</span> <span class="o">==</span> <span class="k">this</span><span class="o">.</span><span class="na">clearButton</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">controller</span><span class="o">.</span><span class="na">handleClickClearList</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">clearList</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>Java’s GUI and Swing library <strong>principles are out of this course’s scope</strong>. We recommend reading more about <a href="https://docs.oracle.com/javase/tutorial/uiswing/index.html">Swing</a> library. Also, <a href="https://www.youtube.com/watch?v=5o3fMLPY7qY">this</a> and <a href="https://www.youtube.com/watch?v=iE8tZ0hn2Ws">this</a> video may help you to understand better.</li>
+  <li>As we said, this class inherits the <strong><em>View <a href="https://www.w3schools.com/java/java_abstract.asp">abstract</a></em></strong>. As a result, we need to override all methods of that abstract in this child class.</li>
+</ol>
+
+<h3 id="generateuuid-plus-all-three-children-who-are-inheriting-this-interface">
+<a class="anchor" href="#generateuuid-plus-all-three-children-who-are-inheriting-this-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>GenerateUuid (plus all three children who are inheriting this interface)</em></strong>
+</h3>
+
+<h5 id="python-version-4">
+<a class="anchor" href="#python-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># functional strategy 
+</span><span class="k">def</span> <span class="nf">generate_uuid1</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">.</span><span class="n">uuid1</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">generate_uuid4</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">.</span><span class="n">uuid4</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">generate_simple_id</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">ascii_lowercase</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<h5 id="java-version-4">
+<a class="anchor" href="#java-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ @author Saman Pordanesh &lt;a href="mailto:sina.pordanesh@yahoo.com"&gt;
+ sina.pordanesh@yahoo.com&lt;/a&gt;
+ @version 1.0
+ @since 1.0
+ */</span>
+
+<span class="kn">package</span> <span class="nn">edu.def.mvc.uuid</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Interface for all UUIDs generators classes.
+ * Only contains one method for generating a kind of UUIDs.
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GenerateUuid</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">generateUuid</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//For UUID1</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Uuid1</span> <span class="kd">implements</span> <span class="nc">GenerateUuid</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">generateUuid</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">byteName</span>
+                <span class="o">=</span> <span class="o">{</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">10</span> <span class="o">};</span>
+        <span class="k">return</span> <span class="no">UUID</span><span class="o">.</span><span class="na">nameUUIDFromBytes</span><span class="o">(</span><span class="n">byteName</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//For UUID4</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Uuid4</span> <span class="kd">implements</span> <span class="nc">GenerateUuid</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">generateUuid</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//For UUIDString</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UuidString</span> <span class="kd">implements</span> <span class="nc">GenerateUuid</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="no">UUID</span> <span class="nf">generateUuid</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="no">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"38400000-8cf0-11bd-b23e-10b96e4ef00d"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ol>
+  <li>This <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> and its children under a sub package were substituted for three functions in Python language, which are responsible for generating different UUIDs. While this structure could be much simpler without any <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>, inheritance, or sub-package, we are following OOP principles for the best practice.</li>
+  <li>This <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> has one method that will be overridden through different child classes.</li>
+  <li>The <strong><em>generateUuid ()</em></strong> method generates different kinds of <strong>UUID,</strong> which the <strong>Java</strong> programming language allows us to generate.</li>
+  <li>We created three other classes based on this <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> which are <strong><em>Uuid1.java</em></strong>, <strong><em>Uuid4.java</em></strong> and <strong><em>UuidString.java**,</em> and each of them will generate a different **UUID</strong> string.</li>
+  <li>To generate those <strong>UUIDs,</strong> we used a native <strong>Java</strong> library called  “<strong><em>java.util.UUID”</em></strong>. We highly recommend reading about it <a href="https://docs.oracle.com/javase/7/docs/api/java/util/UUID.html">here</a>.</li>
+</ol>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/8-MVC.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

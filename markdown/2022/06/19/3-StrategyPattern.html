@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Strategy Pattern in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="The Strategy Pattern in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/3-StrategyPattern.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/3-StrategyPattern.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Strategy Pattern in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"The Strategy Pattern in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/3-StrategyPattern.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/3-StrategyPattern.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Strategy Pattern in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#the-strategy-pattern-code-translation-in-java">The Strategy Pattern code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#general-introduction">General Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#implementational-instruction">Implementational Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#supportticket">SupportTicket</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#ticketorderingstrategy">TicketOrderingStrategy</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#fifoorderingstrategy">FIFOOrderingStrategy</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#filoorderingstrategy">FILOOrderingStrategy</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#randomorderingstrategy">RandomOrderingStrategy</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-4">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-4">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#blackholestrategy">BlackHoleStrategy</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-5">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-5">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#customersupport">CustomerSupport</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-6">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-6">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="the-strategy-pattern-code-translation-in-java">
+<a class="anchor" href="#the-strategy-pattern-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.youtube.com/watch?v=WQ8bNdxREHU">The Strategy Pattern</a> <strong>code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="general-introduction">
+<a class="anchor" href="#general-introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>General Introduction</strong>
+</h2>
+
+<ul>
+  <li>
+<a href="https://refactoring.guru/design-patterns/strategy"><strong>Strategy</strong></a> is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.</li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=WQ8bNdxREHU">video</a> first, understand all principles, and then look at the translation codes in Java. This documentation will help you to understand the translation better</li>
+  <li>This translation is based on the final code source of <strong>Strategy Pattern</strong> lessons in python programming languages (<strong><em>strategy-after.py</em></strong>) 
+<strong>Point</strong>: This part was done in two different (<strong><em>oop</em></strong> &amp; <strong><em>functional</em></strong>) methods. This translation is based on the <strong><em>oop</em></strong> method, and we didn’t translate the <strong><em>functional</em></strong> one, as that method doesn’t work in <strong><em>Java</em></strong> very well, although in <strong><em>Python</em></strong> may work well.</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite <strong>Python</strong>, in which you can run each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on java is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project by an exact directory with all dependencies can be a good practce OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.sp</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files.</li>
+  <li>However, packages are not necessary, you could use a default package, or even have all classes in the same file; this is more Java best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="implementational-instruction">
+<a class="anchor" href="#implementational-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Implementational Instruction</strong>
+</h2>
+
+<ol>
+  <li>We will create one .java file per class under <strong><em>edu.def.sp</em></strong> package.</li>
+  <li>As we have different ordering methods, we’ll define one class per each ordering way. They all inherit an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> (<strong><em>TicketOrderingStrategy.java</em></strong>) that contains only one ordering method (<strong><em>createOrdering.java</em></strong>).</li>
+  <li>
+    <p>As mentioned, one class for each ordering method is needed, which will be: 
+<strong><em>FIFOOrderingStrategy.java – FILOOrderingStrategy.java - RandomOrderingStrategy.java – BlackHoleStrategy.java</em></strong></p>
+  </li>
+  <li>When creating other classes (<strong><em>SuportTicket.java</em></strong> &amp; <strong><em>CustomSupport.java</em></strong>), we need <strong><em>Main.java</em></strong> to contain our main function to run the program.</li>
+  <li>After that, we will translate all classes to their belonging files based on the <strong>Python</strong> source. We will compare them with the original version in the following section.</li>
+</ol>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all <strong><em>.java</em></strong> files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/sp/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the <strong><em>Main.java</em></strong> file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.sp.Main
+</code></pre></div>    </div>
+    <p>If your <strong><em>main</em></strong> function is in a different class, put the name of that class instead of <strong><em>Main</em></strong> at the end of the command</p>
+  </li>
+  <li>You can find more about compiling instruction <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>
+</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="supportticket">
+<a class="anchor" href="#supportticket" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>SupportTicket</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SupportTicket</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer</span><span class="p">,</span> <span class="n">issue</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">id</span> <span class="o">=</span> <span class="n">generate_id</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">customer</span> <span class="o">=</span> <span class="n">customer</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">issue</span> <span class="o">=</span> <span class="n">issue</span>
+
+<span class="k">def</span> <span class="nf">generate_id</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+    <span class="c1"># helper function for generating an id
+</span>    <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">ascii_uppercase</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">length</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SupportTicket</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">customer</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">issue</span><span class="o">;</span>
+
+    <span class="nc">SupportTicket</span><span class="o">(</span><span class="nc">String</span> <span class="n">customer</span><span class="o">,</span> <span class="nc">String</span> <span class="n">issue</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">getSaltString</span><span class="o">(</span><span class="s">"uppercase"</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">customer</span> <span class="o">=</span> <span class="n">customer</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">issue</span> <span class="o">=</span> <span class="n">issue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getCustomer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">customer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getIssue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">issue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * As we dont have a simple function to arrange a random string on Java, we are implementing
+     * this helper method to help us create one.
+     * It acts like "random.choices" in Python
+     * @param ascii
+     * @return
+     */</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">getSaltString</span><span class="o">(</span><span class="nc">String</span> <span class="n">ascii</span><span class="o">,</span> <span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">//char sets based on the incoming argument</span>
+        <span class="nc">String</span> <span class="no">SALTCHARS</span><span class="o">;</span>
+
+        <span class="k">switch</span> <span class="o">(</span><span class="n">ascii</span><span class="o">){</span>
+            <span class="k">case</span> <span class="s">"uppercase"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="s">"lowercase"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"abcdefghijklmnopqrstuvwxyz"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="s">"digits"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"1234567890"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nc">StringBuilder</span> <span class="n">salt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="nc">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">salt</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// length of the random string.</span>
+            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextFloat</span><span class="o">()</span> <span class="o">*</span> <span class="no">SALTCHARS</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+            <span class="n">salt</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="no">SALTCHARS</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">salt</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This is a class for creating tickets with three parameters <strong><em>id</em></strong>, <strong><em>customer</em></strong>, <strong><em>issue</em></strong>, and three <strong><em>getters</em></strong> for each parameter. As we are defining the parameter values on the constructor and won’t need to change them separately later, we don’t have a <strong><em>setter</em></strong> method for any parameter. Aslo, we can access parameters directly by making them <strong>public</strong>, but we use <strong>private</strong> parameters as an OOP designing principle.</li>
+  <li>The constructor received two arguments for <strong><em>customer</em></strong> and <strong><em>issue</em></strong>, but <strong><em>Id</em></strong> will be valued by generating a random string generator.</li>
+  <li>The only private method used to generate a random string with a specified size (we need to define this function as we don’t have any predefined method to do that in <strong>Java</strong>, although <strong>Python</strong> has).</li>
+</ol>
+
+<h3 id="ticketorderingstrategy">
+<a class="anchor" href="#ticketorderingstrategy" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>TicketOrderingStrategy</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TicketOrderingStrategy</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">]:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TicketOrderingStrategy</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * A function which receives a list and return another list based on the ordering type.
+     * @param list: an argument of ArrayList data type which contains SupportTicket objects
+     * @return: the same data type of incoming argument, but with different ordering
+     */</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="nf">createOrdering</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This is the <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> we discussed at instruction, which all other ordering classes will inherit. We will override this <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>’s <strong><em>createOrdering()</em></strong> method in all those classes.</li>
+  <li>As we can see, the <strong><em>creatingOrdering()</em></strong> method’s prototype defines which arguments are needed for this method and what will be its return value data type.</li>
+</ol>
+
+<h3 id="fifoorderingstrategy">
+<a class="anchor" href="#fifoorderingstrategy" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>FIFOOrderingStrategy</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FIFOOrderingStrategy</span><span class="p">(</span><span class="n">TicketOrderingStrategy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FIFOOrderingStrategy</span> <span class="kd">implements</span> <span class="nc">TicketOrderingStrategy</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="nf">createOrdering</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;)</span> <span class="n">list</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ol>
+  <li>This class is one of the ordering ways classes implemented(inherited) from the <strong><em>TicketSupportingStrategy</em></strong> <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>.</li>
+  <li>We have overridden the <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>’s method as our desire for this class of ordering.</li>
+  <li>The list is already in order in this ordering method (<em>first in, first out</em>) der. You need to return it by creating a copy through the <a href="https://www.geeksforgeeks.org/clone-method-in-java-2/">clone</a> method.</li>
+  <li>
+<a href="https://www.geeksforgeeks.org/clone-method-in-java-2/">Clone</a>: <strong><em>clone()</em></strong> is a method to deeply copy an object in <strong><em>Java</em></strong> programming languages. When we use the “<strong>=</strong>” sign to copy an object, we are putting the address of the <em>source</em> (<strong><em>obj1</em></strong>) object to the <em>destination</em> (<strong><em>obj2</em></strong>); this means that if we change the <strong><em>boj1</em></strong>’s value, <strong><em>obj2</em></strong>’s value will be adjusted consequently. But with the <strong><em>clone()</em></strong> method, we can create an independent copy of <strong>obj1</strong> and assign it to the <strong><em>obj2</em></strong>, although still, we can do more about making a completely separate copy, which is out of the scope of this article. Please click <a href="https://www.baeldung.com/java-deep-copy">here</a> for more.</li>
+</ol>
+
+<h3 id="filoorderingstrategy">
+<a class="anchor" href="#filoorderingstrategy" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>FILOOrderingStrategy</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FILOOrderingStrategy</span><span class="p">(</span><span class="n">TicketOrderingStrategy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">]:</span>
+        <span class="n">list_copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">list_copy</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">list_copy</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FILOOrderingStrategy</span> <span class="kd">implements</span> <span class="nc">TicketOrderingStrategy</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="nf">createOrdering</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//clone() reates a partial deep copy of the object</span>
+        <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">listCopy</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;)</span> <span class="n">list</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="c1">//a function to reverse an ArrayList</span>
+        <span class="nc">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">listCopy</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">listCopy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Most of the <strong>FIFOOrderingStrategy</strong>’s points are applicable here<strong>.</strong></p>
+
+<ol>
+  <li>In this ordering class, after making a copy of the <strong><em>list</em></strong> by <a href="https://www.geeksforgeeks.org/clone-method-in-java-2/">clone</a>, we should <strong>reverse</strong> the list because of our ordering way (<em>first in, last out</em>). We did it using the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"><strong><em>Collection</em></strong></a> class and its method <strong>reverse()</strong>, which reversed the list and returned it.</li>
+</ol>
+
+<h3 id="randomorderingstrategy">
+<a class="anchor" href="#randomorderingstrategy" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>RandomOrderingStrategy</em></strong>
+</h3>
+
+<h5 id="python-version-4">
+<a class="anchor" href="#python-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">RandomOrderingStrategy</span><span class="p">(</span><span class="n">TicketOrderingStrategy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">]:</span>
+        <span class="n">list_copy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">list_copy</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">list_copy</span>
+</code></pre></div></div>
+
+<h5 id="java-version-4">
+<a class="anchor" href="#java-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RandomOrderingStrategy</span> <span class="kd">implements</span> <span class="nc">TicketOrderingStrategy</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="nf">createOrdering</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">listCopy</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;)</span> <span class="n">list</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+        <span class="c1">//shuffle the list randomly</span>
+        <span class="nc">Collections</span><span class="o">.</span><span class="na">shuffle</span><span class="o">(</span><span class="n">listCopy</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">listCopy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Most of the <strong><em>FIFOOrderingStrategy</em></strong>’s points are applicable here.</p>
+
+<ol>
+  <li>In this ordering class, after making a copy of the <strong><em>list</em></strong> by <a href="https://www.geeksforgeeks.org/clone-method-in-java-2/">clone</a>, we should <strong>shuffle</strong> the list because of our ordering way (<em>random</em>). 
+We did it using a class called <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"><strong><em>Collection</em></strong></a> and its method <strong>shuffle()</strong>, which shuffled the list and returned it.</li>
+</ol>
+
+<h3 id="blackholestrategy">
+<a class="anchor" href="#blackholestrategy" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>BlackHoleStrategy</em></strong>
+</h3>
+
+<h5 id="python-version-5">
+<a class="anchor" href="#python-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BlackHoleStrategy</span><span class="p">(</span><span class="n">TicketOrderingStrategy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SupportTicket</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<h5 id="java-version-5">
+<a class="anchor" href="#java-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlackHoleStrategy</span> <span class="kd">implements</span> <span class="nc">TicketOrderingStrategy</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="nf">createOrdering</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//just return an empty ArrayList</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Most of the <strong><em>FIFOOrderingStrategy</em></strong>’s points are applicable here.</p>
+
+<ol>
+  <li>This class returns an empty <strong><em>ArrayList&lt;&gt;()</em></strong> when we’ll need it for any reason.</li>
+</ol>
+
+<h3 id="customersupport">
+<a class="anchor" href="#customersupport" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>CustomerSupport</em></strong>
+</h3>
+
+<h5 id="python-version-6">
+<a class="anchor" href="#python-version-6" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CustomerSupport</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processing_strategy</span><span class="p">:</span> <span class="n">TicketOrderingStrategy</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">tickets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">processing_strategy</span> <span class="o">=</span> <span class="n">processing_strategy</span>
+
+    <span class="k">def</span> <span class="nf">create_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer</span><span class="p">,</span> <span class="n">issue</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">tickets</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">SupportTicket</span><span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="n">issue</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">process_tickets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># create the ordered list
+</span>        <span class="n">ticket_list</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">processing_strategy</span><span class="p">.</span><span class="n">create_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">tickets</span><span class="p">)</span>
+
+        <span class="c1"># if it's empty, don't do anything
+</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ticket_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"There are no tickets to process. Well done!"</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># go through the tickets in the list
+</span>        <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">ticket_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">process_ticket</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">process_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticket</span><span class="p">:</span> <span class="n">SupportTicket</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"=================================="</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Processing ticket id: </span><span class="si">{</span><span class="n">ticket</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Customer: </span><span class="si">{</span><span class="n">ticket</span><span class="p">.</span><span class="n">customer</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Issue: </span><span class="si">{</span><span class="n">ticket</span><span class="p">.</span><span class="n">issue</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"=================================="</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version-6">
+<a class="anchor" href="#java-version-6" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.sp</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerSupport</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">tickets</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">TicketOrderingStrategy</span> <span class="n">processingStrategy</span><span class="o">;</span>
+
+    <span class="nc">CustomerSupport</span><span class="o">(</span><span class="nc">TicketOrderingStrategy</span> <span class="n">processingStrategy</span><span class="o">){</span>
+        <span class="n">tickets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">processingStrategy</span> <span class="o">=</span> <span class="n">processingStrategy</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createTicket</span><span class="o">(</span><span class="nc">String</span> <span class="n">customer</span><span class="o">,</span> <span class="nc">String</span> <span class="n">issue</span><span class="o">){</span>
+        <span class="n">tickets</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">SupportTicket</span><span class="o">(</span><span class="n">customer</span><span class="o">,</span> <span class="n">issue</span><span class="o">));</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">processTickets</span><span class="o">(){</span>
+        <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">SupportTicket</span><span class="o">&gt;</span> <span class="n">ticketList</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">processingStrategy</span><span class="o">.</span><span class="na">createOrdering</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">tickets</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">ticketList</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"There are no tickets to process. Well done!"</span><span class="o">);</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">SupportTicket</span> <span class="nl">ticket:</span> <span class="n">ticketList</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">processTicket</span><span class="o">(</span><span class="n">ticket</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * As it has only internal usage, we can define this function as a private one.
+     * @param ticket
+     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">processTicket</span><span class="o">(</span><span class="nc">SupportTicket</span> <span class="n">ticket</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=================================="</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing ticket id: "</span> <span class="o">+</span> <span class="n">ticket</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Customer: "</span> <span class="o">+</span> <span class="n">ticket</span><span class="o">.</span><span class="na">getCustomer</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Issue: "</span> <span class="o">+</span> <span class="n">ticket</span><span class="o">.</span><span class="na">getIssue</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=================================="</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class is the heart of the application; create customers <strong><em>ArrayList</em></strong>, add tickets to it, process tickets and show them to the user by any request.</li>
+  <li>We have two private parameters whose value will be assigned to them in the class’s constructor.</li>
+  <li>In the constructor, we pass an object of the <strong><em>TicketOrderingStrategy</em></strong> interface, which is a non-primitive data type. This object will define the ordering in this class. Also, we are creating a new <strong><em>ArrayList</em></strong> object in this constructor.</li>
+  <li>In the <strong><em>createTickets ()</em></strong> public method, we create a <strong><em>SupportTicket</em></strong> object and add it to the <strong><em>tickets</em></strong> <em>ArrayList</em>.</li>
+  <li>In the <strong><em>proccessTicket()</em></strong> method, we are ordering the ticket <strong><em>ArrayList</em></strong> by passing this list to the <strong><em>processingStrategy</em></strong> object’s method (<strong>createOrdering()</strong>). This will return the desired ordered list, and the <strong><em>ticket</em></strong> - <strong><em>ArrayList</em></strong> will be replaced. Then, we will start to print each list entry by passing them to the <strong><em>processTicket()</em></strong> method.</li>
+</ol>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/3-StrategyPattern.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

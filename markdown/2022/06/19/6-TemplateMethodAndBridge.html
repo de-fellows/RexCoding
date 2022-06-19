@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Template Method &amp; Bridge in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Template Method &amp; Bridge in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/6-TemplateMethodAndBridge.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/6-TemplateMethodAndBridge.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Template Method &amp; Bridge in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"Template Method &amp; Bridge in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/6-TemplateMethodAndBridge.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/6-TemplateMethodAndBridge.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Template Method &amp; Bridge in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#template-method--bridge-code-translation-in-java">Template Method &amp; Bridge code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#general-introduction">General Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#implementational-instruction">Implementational Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#exchange">Exchange</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#binance">Binance</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#coinbase">Coinbase</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#tradingbot">TradingBot</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#averagetrader">AverageTrader</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-4">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-4">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#minmaxtrader">MinMaxTrader</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-5">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-5">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="template-method--bridge-code-translation-in-java">
+<a class="anchor" href="#template-method--bridge-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.youtube.com/watch?v=t0mCrXHsLbI">Template Method &amp; Bridge</a> <strong>code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="general-introduction">
+<a class="anchor" href="#general-introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>General Introduction</strong>
+</h2>
+
+<ul>
+  <li>The <a href="https://www.geeksforgeeks.org/template-method-design-pattern/">Template Method</a> design pattern is to define an algorithm as a skeleton of operations and leave the details to be implemented by the child classes. The parent class preserves the overall structure and sequence of the algorithm.
+Also, In computer science, <a href="https://en.wikipedia.org/wiki/Bridging_%5C(programming%5C)#:~:text=In%20computer%20science%2C%20bridging%20describes,two%20sides%20of%20the%20bridge.">bridging</a> describes systems that map the runtime behaviour of different programming languages so they can share common resources.</li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=t0mCrXHsLbI">video</a> first, understand all principles, and then look at the translation codes in <strong>Java</strong>. This documentation will help you to understand the translation better</li>
+  <li>This translation is based on the final code source of the <strong>Template method and Bridge</strong> lessons in python programming languages (<strong><em>with-bridge.py</em></strong>). That is the complete file, which contains all principles such as Abstraction, Inheritance, etc.</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite <strong>Python</strong>, in which you can run each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on <strong>Java</strong> is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+  <li>There is a <strong><em>UML.png</em></strong> file in this repository’s folder, which shows relationships between different classes. Please check it as a good reference for understanding this code.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project with the same directory with all dependencies can be good practice for OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.tmab</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files.</li>
+  <li>However, packages are unnecessary; you could use a default package or even have all classes in the same file; this is more <strong>Java</strong> best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="implementational-instruction">
+<a class="anchor" href="#implementational-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Implementational Instruction</strong>
+</h2>
+
+<ol>
+  <li>We will create one <strong><em>.java</em></strong> file per class under <strong><em>edu.def.tmab</em></strong> package.
+They can be interfaces, abstractions, child classes or simple classes.</li>
+  <li>After that, we will translate all classes to their belonging files based on the <strong>Python</strong> source. We will compare them with the original version in the following section.</li>
+  <li>This article will introduce the <a href="https://www.w3schools.com/java/java_abstract.asp#:~:text=Abstract%20class%3A%20is%20a%20restricted,the%20subclass%20%5C(inherited%20from%5C).">Abstract</a> class and method. The <a href="https://www.w3schools.com/java/java_abstract.asp#:~:text=Abstract%20class%3A%20is%20a%20restricted,the%20subclass%20%5C(inherited%20from%5C).">abstract</a> is a kind of parent class with both methods and parameters. Methods can be in two different categories; <a href="https://www.w3schools.com/java/java_abstract.asp#:~:text=Abstract%20class%3A%20is%20a%20restricted,the%20subclass%20%5C(inherited%20from%5C).">Abstract methods</a>  are those that we implement in the abstract class, and all children will inherit them the same as the parent. The other kind of method is just a prototype that shows the return type, name and arguments needed. Still, we will implement the content of the method on each child individually using the <strong><em>override</em></strong> keyword. We implement an <a href="https://www.w3schools.com/java/java_abstract.asp#:~:text=Abstract%20class%3A%20is%20a%20restricted,the%20subclass%20%5C(inherited%20from%5C).">abstract</a> class by using the “<strong><em>abstract</em></strong>” keyword at the start of the class definition.</li>
+  <li>
+<strong><em>Main.java</em></strong> contains our <strong><em>main()</em></strong> method to run the program.</li>
+  <li>Note that all steps here are entirely for the best OOP practice in Java programming; They can be done more straightforwardly, but not the best OOP ways.</li>
+</ol>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all .java files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/tmab/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the Main.java file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.tmab.Main
+</code></pre></div>    </div>
+  </li>
+  <li>If your main function is in a different class, but the name of that class instead of Main at the end of the command</li>
+  <li>You can find more about compiling instructions <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>.</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="exchange">
+<a class="anchor" href="#exchange" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Exchange</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Exchange</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_market_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Exchange</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="nf">getMarketData</span><span class="o">(</span><span class="nc">String</span> <span class="n">coin</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class is defined as an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> class, although it was described as an <a href="https://www.w3schools.com/java/java_abstract.asp">abstract</a> one on the <strong>Python</strong> version. The reason is that we don’t have an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> class specifically on Python programming languages. Please read about the <a href="https://www.guru99.com/interface-vs-abstract-class-java.html#:~:text=An%20interface%20is%20abstract%20so,code%20which%20should%20be%20overridden.&amp;text=You%20cannot%20use%20access%20modifiers%20for%20the%20method%2C%20properties%2C%20etc.">differences between interface and abstract class</a>.</li>
+  <li>In this class, we define the prototype of each method that a child will inherit. Then, we will override it at the child class later.</li>
+</ol>
+
+<h3 id="binance">
+<a class="anchor" href="#binance" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Binance</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Binance</span><span class="p">(</span><span class="n">Exchange</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Connecting to Binance exchange..."</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_market_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Binance</span> <span class="kd">implements</span> <span class="nc">Exchange</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connecting to Binance exchange..."</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="nf">getMarketData</span><span class="o">(</span><span class="nc">String</span> <span class="n">coin</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This is a child class which inherits the interface <strong><em>Exchange</em></strong>. As you can see, we override both interface methods in this class. Also, we don’t have any limitations to adding more parameters and methods in this class beyond the inherited interface.</li>
+  <li>In the <strong><em>getMarketData()</em></strong> method, we initialized the <strong><em>ArrayList</em></strong> by some numbers differently from <strong>Python</strong>. This is the proper way to do that In <strong>Java</strong>. You can find more <a href="https://www.geeksforgeeks.org/initialize-an-arraylist-in-java/">here</a>. (“<strong>f</strong>” in front of each number means “<strong><em>float</em></strong>” data type)</li>
+</ol>
+
+<h3 id="coinbase">
+<a class="anchor" href="#coinbase" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Coinbase</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Coinbase</span><span class="p">(</span><span class="n">Exchange</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Connecting to Coinbase exchange..."</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_market_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coinbase</span> <span class="kd">implements</span> <span class="nc">Exchange</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connecting to Binance exchange..."</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="nf">getMarketData</span><span class="o">(</span><span class="nc">String</span> <span class="n">coin</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same point as the <strong><em>Binance</em></strong> class.</p>
+
+<h3 id="tradingbot">
+<a class="anchor" href="#tradingbot" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>TradingBot</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TradingBot</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exchange</span><span class="p">:</span> <span class="n">Exchange</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">exchange</span> <span class="o">=</span> <span class="n">exchange</span>
+
+    <span class="k">def</span> <span class="nf">check_prices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coin</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">exchange</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">exchange</span><span class="p">.</span><span class="n">get_market_data</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+        <span class="n">should_buy</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">should_buy</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+        <span class="n">should_sell</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">should_sell</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">should_buy</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"You should buy </span><span class="si">{</span><span class="n">coin</span><span class="si">}</span><span class="s">!"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">should_sell</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"You should sell </span><span class="si">{</span><span class="n">coin</span><span class="si">}</span><span class="s">!"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"No action needed for </span><span class="si">{</span><span class="n">coin</span><span class="si">}</span><span class="s">."</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">should_buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">should_sell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">TradingBot</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Exchange</span> <span class="n">exchange</span><span class="o">;</span>
+
+    <span class="nc">TradingBot</span><span class="o">(</span><span class="nc">Exchange</span> <span class="n">exchange</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">exchange</span> <span class="o">=</span> <span class="n">exchange</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkPrices</span><span class="o">(</span><span class="nc">String</span> <span class="n">coin</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">exchange</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+        <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">exchange</span><span class="o">.</span><span class="na">getMarketData</span><span class="o">(</span><span class="n">coin</span><span class="o">);</span>
+
+        <span class="kt">boolean</span> <span class="n">shouldBuy</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">shouldBuy</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+        <span class="kt">boolean</span> <span class="n">shouldSell</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">shouldSell</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">shouldBuy</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You should buy "</span> <span class="o">+</span> <span class="n">coin</span> <span class="o">+</span> <span class="s">"!"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">shouldSell</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You should sell "</span> <span class="o">+</span> <span class="n">coin</span> <span class="o">+</span> <span class="s">"!"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"No action needed for "</span> <span class="o">+</span> <span class="n">coin</span> <span class="o">+</span> <span class="s">"."</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">shouldBuy</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">boolean</span> <span class="nf">shouldSell</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class is an <a href="https://www.w3schools.com/java/java_abstract.asp">Abstract</a> class, as we discussed at <em>Implementation Instruction</em>. You can see the “<strong><em>abstract</em></strong>” keyword in the class implementation, which is necessary for implementation.</li>
+  <li>As you can see, we have both implemented method and <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html"><strong>abstract method</strong></a> (only prototype) methods in this class. We will override all <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html"><strong>abstract methods</strong></a> for the children who will inherit from. In terms of the implemented method, all children will inherit them precisely with the same functionality we defined for the method in the abstraction class. We won’t override them later.</li>
+  <li>
+<strong><em>checkPrices()</em></strong> is a <em>local method</em>, but <strong><em>shouldBuy()</em></strong> and <strong><em>shouldSell()</em></strong> are <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html">abstract methods</a>.</li>
+  <li>As we said before, an abstract class acts like a regular class and can have <em>local methods</em>, <em>parameters</em>, <em>a</em> <em>constructor</em>, and <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html">abstract methods</a>.</li>
+</ol>
+
+<h3 id="averagetrader">
+<a class="anchor" href="#averagetrader" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>AverageTrader</em></strong>
+</h3>
+
+<h5 id="python-version-4">
+<a class="anchor" href="#python-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AverageTrader</span><span class="p">(</span><span class="n">TradingBot</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">list_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">should_buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">list_average</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">should_sell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">list_average</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version-4">
+<a class="anchor" href="#java-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AverageTrader</span> <span class="kd">extends</span> <span class="nc">TradingBot</span><span class="o">{</span>
+
+    <span class="cm">/**
+     * in java, when a class inherits an abstraction parent, we should have the constructor for the parent on the child class as well. The keyword for it is "super".
+     * @param exchange
+     */</span>
+    <span class="nc">AverageTrader</span><span class="o">(</span><span class="nc">Exchange</span> <span class="n">exchange</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">exchange</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">float</span> <span class="nf">listAverage</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
+
+        <span class="c1">//we don't have any function to calculate sum of the</span>
+        <span class="c1">// item on a list automatically.</span>
+        <span class="kt">float</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">float</span> <span class="nl">item:</span> <span class="n">list</span><span class="o">){</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">item</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">sum</span><span class="o">/</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldBuy</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// "(prices.size() - 1)" on get() method means getting the last item of the list.</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">listAverage</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldSell</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// "(prices.size() - 1)" on get() method means getting the last item of the list.</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">listAverage</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This child inherits the <strong><em>TradingBot</em></strong> abstraction class through the “<strong><em>extends</em></strong>” keyword.</li>
+  <li>The critical point is that we should first feed the parent’s constructor from this class’s constructor. It can be done by a <strong><em>super()</em></strong> method which takes arguments if the parent’s constructor needs any.  You can find out more <a href="https://stackoverflow.com/questions/10508107/why-call-super-in-a-constructor">here</a>. Also, we can initialize more parameters in this constructor if the class has any local ones.</li>
+  <li>As it is clear, we have two overridden methods, <strong><em>shouldBuy()</em></strong> and <strong><em>shouldSell()</em></strong> , which are <a href="https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html">abstract methods</a> that belong to the abstract parent. In addition, we have a local method <strong><em>listAverage()</em></strong> .</li>
+</ol>
+
+<h3 id="minmaxtrader">
+<a class="anchor" href="#minmaxtrader" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>MinMaxTrader</em></strong>
+</h3>
+
+<h5 id="python-version-5">
+<a class="anchor" href="#python-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinMaxTrader</span><span class="p">(</span><span class="n">TradingBot</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">should_buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">should_sell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version-5">
+<a class="anchor" href="#java-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.tmab</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MinMaxTrader</span> <span class="kd">extends</span> <span class="nc">TradingBot</span><span class="o">{</span>
+
+    <span class="cm">/**
+     * in java, when a class inherits an abstraction parent, we should have the constructor for the parent on the child class as well. The keyword for it is "super".
+     * @param exchange
+     */</span>
+    <span class="nc">MinMaxTrader</span><span class="o">(</span><span class="nc">Exchange</span> <span class="n">exchange</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">exchange</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldBuy</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// "(prices.size() - 1)" on get() method means getting the last item of the list.</span>
+        <span class="c1">//Also, Collections.min() will find the maximum item in a list</span>
+        <span class="k">return</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">prices</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldSell</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// "(prices.size() - 1)" on get() method means getting the last item of the list.</span>
+        <span class="c1">//Also, Collections.max() will find the maximum item in a list.</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points as <strong><em>AverageTrader</em></strong> class.</p>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/6-TemplateMethodAndBridge.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

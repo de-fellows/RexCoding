@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Cohesion and Coupling in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Cohesion and Coupling in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/1-CohesionAndCoupling.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/1-CohesionAndCoupling.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cohesion and Coupling in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"Cohesion and Coupling in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/1-CohesionAndCoupling.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/1-CohesionAndCoupling.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Cohesion and Coupling in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#cohesion-and-coupling-principles-code-translation-in-java">Cohesion and Coupling principles code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#vehicleinfo">VehicleInfo</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#vehicle">Vehicle</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#vehicleregistry">VehicleRegistry</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#application">Application</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="cohesion-and-coupling-principles-code-translation-in-java">
+<a class="anchor" href="#cohesion-and-coupling-principles-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.youtube.com/watch?v=eiDyK_ofPPM">Cohesion and Coupling</a> <strong>principles code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Introduction</strong>
+</h2>
+
+<ul>
+  <li>
+<strong>Cohesion</strong> is used to indicate the degree to which a class has a single, well-focused purpose. <strong>Coupling</strong> is all about how classes interact with each other; on the other hand, cohesion focuses on how the single class is designed. Higher the cohesiveness of the class, the better is the OO design.
+Benefits of Higher Cohesion:
+    <ul>
+      <li>Highly cohesive classes are much easier to maintain and less frequently changed.</li>
+      <li>Such classes are more usable than others as they are designed with a well-focused purpose.</li>
+    </ul>
+  </li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=eiDyK_ofPPM">video</a> first, understand all principles, and then look at the translation codes in Java. This documentation will help you to understand the translation better</li>
+  <li>This translation is based on the final code source of Cohesion and Coupling lessons in python programming languages (<strong><em>coupling-cohesion-after.py</em></strong>)</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite Python, in which you can run each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on java is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project with an exact directory with all dependencies can be good practice for OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.cac</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files.</li>
+  <li>However, packages are not necessary, you could use a default package, or even have all classes in the same file; this is more Java best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all <strong><em>.java</em></strong> files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/cac/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the <strong><em>Main.java</em></strong> file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.cac.Main
+</code></pre></div>    </div>
+    <p>If your <strong><em>main</em></strong> function is in a different class, put the name of that class instead of <strong><em>Main</em></strong> at the end of the command</p>
+  </li>
+  <li>You can find more about compiling instruction <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>
+</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="vehicleinfo">
+<a class="anchor" href="#vehicleinfo" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>VehicleInfo</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">VehicleInfo</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">electric</span><span class="p">,</span> <span class="n">catalogue_price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">electric</span> <span class="o">=</span> <span class="n">electric</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">catalogue_price</span> <span class="o">=</span> <span class="n">catalogue_price</span>
+
+    <span class="k">def</span> <span class="nf">compute_tax</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tax_percentage</span> <span class="o">=</span> <span class="mf">0.05</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">electric</span><span class="p">:</span>
+            <span class="n">tax_percentage</span> <span class="o">=</span> <span class="mf">0.02</span>
+        <span class="k">return</span> <span class="n">tax_percentage</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">catalogue_price</span>
+
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Brand: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">brand</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Payable tax: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">compute_tax</span><span class="p">()</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.cac</span><span class="o">;</span>
+
+<span class="cm">/**
+ * A class with 3 private parameters and two public
+ * methods. Also, a constructor with 3 arguments.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">VehicleInfo</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">electric</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">cataloguePrice</span><span class="o">;</span>
+
+    <span class="nc">VehicleInfo</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">electric</span><span class="o">,</span> <span class="kt">int</span> <span class="n">cataloguePrice</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">electric</span> <span class="o">=</span> <span class="n">electric</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cataloguePrice</span> <span class="o">=</span> <span class="n">cataloguePrice</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     *
+     * @return a double which is the computed tax.
+     */</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">computeTax</span><span class="o">(){</span>
+        <span class="kt">double</span> <span class="n">taxPercentage</span> <span class="o">=</span> <span class="mf">0.05</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">electric</span><span class="o">){</span>
+            <span class="n">taxPercentage</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">taxPercentage</span> <span class="o">*</span> <span class="n">cataloguePrice</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     *
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Brand: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">brand</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Payable tax: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">computeTax</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>we defined three private parameters in this class, and their values will be determined by the class instructor when we initialize the class. <strong>getters</strong> and <strong>setters</strong> for each <strong>private</strong> parameter, are not required, you can access fields directly by making parameters <strong>public</strong> in Java as well, but it’s (private parameters) frequently done in Java as an OOP principle. Still, as we won’t need direct access to any parameters in future, we do not implement them here (it’s acceptable).</li>
+  <li>Be careful that we specify all data types when we initialize them, although it’s unnecessary for python.</li>
+  <li>We can add strings together for printing by the “<strong><em>+</em></strong>” sign, although we used formatted string to do that on python.</li>
+</ol>
+
+<h3 id="vehicle">
+<a class="anchor" href="#vehicle" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Vehicle</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">license_plate</span> <span class="o">=</span> <span class="n">license_plate</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
+
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Id: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"License plate: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">license_plate</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">info</span><span class="p">.</span><span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.cac</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Public class Vehicle with 3 private parameters
+ * and one public method. Plus a constructor with
+ * 3 arguments.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Vehicle</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">licensePlate</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">VehicleInfo</span> <span class="n">info</span><span class="o">;</span>
+
+    <span class="nc">Vehicle</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">licensePlate</span><span class="o">,</span> <span class="nc">VehicleInfo</span> <span class="n">info</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">licensePlate</span> <span class="o">=</span> <span class="n">licensePlate</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">info</span> <span class="o">=</span> <span class="n">info</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Id: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">id</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"License plate: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">licensePlate</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">info</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>A simple class which has three parameters. As we explained in the previous class, we defined all of them as “<em>private</em>” without any getter and setter.</li>
+  <li>The same point about joining strings together for printing in the <strong><em>print</em></strong> function.</li>
+</ol>
+
+<h3 id="vehicleregistry">
+<a class="anchor" href="#vehicleregistry" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>VehicleRegistry</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">VehicleRegistry</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">vehicle_info</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">add_vehicle_info</span><span class="p">(</span><span class="s">"Tesla Model 3"</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">add_vehicle_info</span><span class="p">(</span><span class="s">"Volkswagen ID3"</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mi">35000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">add_vehicle_info</span><span class="p">(</span><span class="s">"BMW 5"</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">45000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">add_vehicle_info</span><span class="p">(</span><span class="s">"Tesla Model Y"</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mi">75000</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_vehicle_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">electric</span><span class="p">,</span> <span class="n">catalogue_price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">vehicle_info</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="n">VehicleInfo</span><span class="p">(</span><span class="n">brand</span><span class="p">,</span> <span class="n">electric</span><span class="p">,</span> <span class="n">catalogue_price</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generate_vehicle_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">ascii_uppercase</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">length</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">generate_vehicle_license</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="nb">id</span><span class="p">[</span><span class="si">:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">digits</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="si">}</span><span class="s">-</span><span class="si">{</span><span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">choices</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">ascii_uppercase</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="si">}</span><span class="s">"</span>
+
+    <span class="k">def</span> <span class="nf">create_vehicle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">):</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">generate_vehicle_id</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">license_plate</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">generate_vehicle_license</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Vehicle</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">license_plate</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">vehicle_info</span><span class="p">[</span><span class="n">brand</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.cac</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">VehicleRegistry</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * We use HashMap in java when we want to have a data structure as shows Key -&gt; Value
+     * here, the key is the car's brand and its is a VehicleInfo object
+     */</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">VehicleInfo</span><span class="o">&gt;</span> <span class="n">vehicleInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nc">VehicleRegistry</span><span class="o">(){</span>
+        <span class="c1">//Saturating the HashMap on constructor</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">addVehicleInfo</span><span class="o">(</span><span class="s">"Tesla Model 3"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="mi">60000</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">addVehicleInfo</span><span class="o">(</span><span class="s">"Volkswagen ID3"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="mi">35000</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">addVehicleInfo</span><span class="o">(</span><span class="s">"BMW 5"</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="mi">45000</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">addVehicleInfo</span><span class="o">(</span><span class="s">"Tesla Model Y"</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="mi">75000</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addVehicleInfo</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">electric</span><span class="o">,</span> <span class="kt">int</span> <span class="n">cataloguePrice</span><span class="o">){</span>
+        <span class="cm">/*create an entry for the HashMap which the Key is String type and the Vale is a
+        non-primary data type VehicleInfo
+         */</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">vehicleInfo</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="k">new</span> <span class="nc">VehicleInfo</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="n">electric</span><span class="o">,</span> <span class="n">cataloguePrice</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateVehicleId</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">getSaltString</span><span class="o">(</span><span class="s">"uppercase"</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateVehicleLicense</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="s">"-"</span> <span class="o">+</span> <span class="n">getSaltString</span><span class="o">(</span><span class="s">"digits"</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="s">"-"</span> <span class="o">+</span> <span class="n">getSaltString</span><span class="o">(</span><span class="s">"uppercase"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Vehicle</span> <span class="nf">createVehicle</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="n">generateVehicleId</span><span class="o">(</span><span class="mi">12</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">licensePlate</span> <span class="o">=</span> <span class="n">generateVehicleLicense</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Vehicle</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">licensePlate</span><span class="o">,</span> <span class="n">vehicleInfo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">brand</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * As we dont have a simple function to arrange a random string on Java, we are implementing
+     * this helper method to help us create one.
+     * It acts like "random.choices" in Python
+     * @param ascii
+     * @return
+     */</span>
+    <span class="kd">protected</span> <span class="nc">String</span> <span class="nf">getSaltString</span><span class="o">(</span><span class="nc">String</span> <span class="n">ascii</span><span class="o">,</span> <span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">//char sets based on the incoming argument</span>
+        <span class="nc">String</span> <span class="no">SALTCHARS</span><span class="o">;</span>
+
+        <span class="k">switch</span> <span class="o">(</span><span class="n">ascii</span><span class="o">){</span>
+            <span class="k">case</span> <span class="s">"uppercase"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="s">"lowercase"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"abcdefghijklmnopqrstuvwxyz"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="s">"digits"</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"1234567890"</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="no">SALTCHARS</span> <span class="o">=</span> <span class="s">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nc">StringBuilder</span> <span class="n">salt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="nc">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">salt</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// length of the random string.</span>
+            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextFloat</span><span class="o">()</span> <span class="o">*</span> <span class="no">SALTCHARS</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+            <span class="n">salt</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="no">SALTCHARS</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">salt</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>In this class, we are using <strong><em>vehicleInfo</em></strong> <a href="https://www.w3schools.com/java/java_hashmap.asp">HashMap</a> as an alternative data structure for <a href="https://www.w3schools.com/python/python_dictionaries.asp">Python’s dictionary</a>. <a href="https://www.w3schools.com/java/java_hashmap.asp">HashMap</a> is a data structure which allows us to define a key for a specific value and get access to that value with the key in future (<em>key -&gt; value</em>). In this class, we use a car’s brand as a key and attach it to belonging vehicle information (value). As a result, we will be able to access each car’s brand information through <em>key -&gt; value</em>. In addition, this parameter is a private one.</li>
+  <li>`  `We initialized <strong><em>vehicleInfo</em></strong> with some data at the class construction <em><strong>VehicleRegistry</strong>.</em> This isn’t a good and professional way to saturate a hash map, but it works in this example just for educational purposes.</li>
+  <li>The function <strong><em>addVehicleInfo</em></strong> is for adding new data to the <strong><em>vehicleInfo</em></strong> <a href="https://www.w3schools.com/java/java_hashmap.asp">HashMap</a> by getting three arguments. The first argument will be the key on the <a href="https://www.w3schools.com/java/java_hashmap.asp">HashMap</a>, and the others will be used to initialize an object from VehicleInfo class.  As you can see, <strong><em>vehicleInfo.put(key, value)</em></strong> is a function to add an entry to the HashMap.</li>
+  <li>
+    <p>At the function <strong><em>generateVicleId,</em></strong> we see a significant difference between the Java version and the Python one. We need to define the <strong><em>getSaltString</em></strong> <a href="https://teamtreehouse.com/community/what-exactly-is-a-helper-method">helper method</a> to generate random strings based on the three categories of ASCII characters (<em>uppercase, lowercase, digits</em>). However, we already have a predefined function to do this in Python. 
+In this function, we need to return a random string of uppercase characters with the size of <strong><em>length</em></strong>, which is the function’s argument.</p>
+  </li>
+  <li>At <strong><em>generateVehicleLicense,</em></strong> we create a specific string format. By the <a href="https://www.w3schools.com/jsref/jsref_substring.asp">substring()</a> method, we can split a particular part of a string. It’s identical to Python’s <strong><em>string[start, end] method</em></strong>.</li>
+  <li>As we said before, <strong><em>getSaltString</em></strong> is a <a href="https://teamtreehouse.com/community/what-exactly-is-a-helper-method">helper method</a> to generate random strings based on specific size and type. You can find more <a href="https://stackoverflow.com/questions/20536566/creating-a-random-string-with-a-z-and-0-9-in-java">here</a>.</li>
+</ol>
+
+<h3 id="application">
+<a class="anchor" href="#application" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Application</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Application</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">register_vehicle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">:</span> <span class="n">string</span><span class="p">):</span>
+        <span class="c1"># create a registry instance
+</span>        <span class="n">registry</span> <span class="o">=</span> <span class="n">VehicleRegistry</span><span class="p">()</span>
+
+        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">registry</span><span class="p">.</span><span class="n">create_vehicle</span><span class="p">(</span><span class="n">brand</span><span class="p">)</span>
+
+        <span class="c1"># print out the vehicle information
+</span>        <span class="n">vehicle</span><span class="p">.</span><span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.cac</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+    <span class="cm">/**
+     * to put all different components togather and create an application for a specific brand of car.
+     * @param brand: main input to create an application.
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerVehicle</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">){</span>
+        <span class="nc">VehicleRegistry</span> <span class="n">registry</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">VehicleRegistry</span><span class="o">();</span>
+        <span class="nc">Vehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="na">createVehicle</span><span class="o">(</span><span class="n">brand</span><span class="o">);</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class, with a simple public function, is created to put all other classes and their method together to lunch an application. The only argument that the <strong><em>registerVehicle</em></strong> method needs is a car’s brand string.</li>
+</ol>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/1-CohesionAndCoupling.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

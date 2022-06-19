@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Dependency Inversion in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Dependency Inversion in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/2-DependencyInversion.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/2-DependencyInversion.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dependency Inversion in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"Dependency Inversion in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/2-DependencyInversion.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/2-DependencyInversion.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dependency Inversion in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#dependency-inversion-principles-code-translation-in-java">Dependency Inversion principles code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#general-introduction">General Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#implementational-instruction">Implementational Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#switchable">Switchable</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#lightbulb">LightBulb</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#fan">Fan</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#electricpowerswitch">ElectricPowerSwitch</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="dependency-inversion-principles-code-translation-in-java">
+<a class="anchor" href="#dependency-inversion-principles-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.youtube.com/watch?v=Kv5jhbSkqLE">Dependency Inversion</a> <strong>principles code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="general-introduction">
+<a class="anchor" href="#general-introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>General Introduction</strong>
+</h2>
+
+<ul>
+  <li>This topic discusses how we can implement some object-oriented definitions like <a href="https://en.wikipedia.org/wiki/Abstraction_%5C(computer_science%5C)">Abstraction</a> or <a href="https://en.wikipedia.org/wiki/Interface_%5C(computing%5C)">Interfaces</a> in a language like a python which doesn’t have these definitions locally. 
+As Java is a strong OOP language, we already have these definitions for it. We will implement the translation of the video’s code here to understand how these principles work on Java.</li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=Kv5jhbSkqLE">video</a> first, understand all principles, and then look at the translation codes in Java. This documentation will help you to understand the translation better</li>
+  <li>This translation is based on the final code source of Dependency Inversion lessons in python programming languages (<strong><em>dependency-inversion-after.py</em></strong>)</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite Python, in which you can run each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on java is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project with an exact directory with all dependencies can be good practice for OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.di</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files.</li>
+  <li>However, packages are not necessary, you could use a default package, or even have all classes in the same file; this is more Java best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="implementational-instruction">
+<a class="anchor" href="#implementational-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Implementational Instruction</strong>
+</h2>
+
+<ol>
+  <li>we create one <strong><em>.java</em></strong> file per each class under <strong><em>edu.def.di</em></strong> package.</li>
+  <li>We are going to discuss <strong><em>Switchable</em></strong> class more here. This class is an interface class and we use the “<strong><em>interface</em></strong>” keyword instead of “<strong><em>class</em></strong>”. But why this is an interface? The answer is that this class just contains the prototypes of methods without any implementation. It is an index which shows a specific structure but can have different functionality when we override it on the child class. Please read about the <a href="https://en.wikipedia.org/wiki/Interface_%5C(computing%5C)">interface on OOP</a> and <a href="https://www.w3schools.com/java/java_interface.asp">interface on java</a>.</li>
+  <li>When we created other classes (<strong><em>LightBulb.java</em></strong>, <strong><em>Fan.java</em></strong>, <strong><em>ElectricPowerSwitch.java</em></strong>), we need <strong><em>Main.java</em></strong> to contain our main function to run the program.</li>
+  <li>After that, we will start to translate all classes to their belonging files based on the <strong><em>P</em>ython</strong> source. We will compare all of them with the original version in the following section.</li>
+</ol>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all <strong><em>.java</em></strong> files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/di/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the <strong><em>Main.java</em></strong> file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.di.Main
+</code></pre></div>    </div>
+    <p>If your <strong><em>main</em></strong> function is in a different class, put the name of that class instead of <strong><em>Main</em></strong> at the end of the command</p>
+  </li>
+  <li>You can find more about compiling instruction <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>
+</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="switchable">
+<a class="anchor" href="#switchable" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Switchable</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Switchable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.di</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Switchable</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This class is the main lesson for this session, as we are talking about interface and <strong><em>Switchable</em></strong> is an interface class. As we can see, we implemented it with “<strong><em>interface</em></strong>” keyword and it just contains prototype of each method, without any implementation or parameter.</li>
+  <li>As we don’t have interface in <strong>python</strong>, this class needs to inherit <strong><em>ABC</em></strong> class to act like an <strong>abstract</strong> class, although in <strong>Java</strong> we already have <strong>abstract</strong> and <strong>interface</strong> definitions locally. (in python version he used <strong><em>“@abstractmethod”</em></strong> keyword to show that they are abstract methods. Also, there are differences between <strong>abstract</strong> and <strong>interface</strong> which recommend <a href="https://stackoverflow.com/questions/1913098/what-is-the-difference-between-an-interface-and-abstract-class#:~:text=The%20key%20technical%20differences%20between,have%20constants%20and%20methods%20stubs.">learning about them</a>.)</li>
+  <li>Its child classes will inherit all methods from it, and we will implement all methods at child classes under the <strong><em>“@Override”</em></strong> keyword.</li>
+  <li>As we talked about it before, we don’t need any implementation for both <strong><em>turnOn</em></strong> and <strong><em>turnOff</em></strong> methods at the interface.</li>
+</ol>
+
+<h3 id="lightbulb">
+<a class="anchor" href="#lightbulb" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>LightBulb</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LightBulb</span><span class="p">(</span><span class="n">Switchable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"LightBulb: turned on..."</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"LightBulb: turned off..."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.di</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LightBulb</span> <span class="kd">implements</span> <span class="nc">Switchable</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"LightBulb: turned on..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"LightBulb: turned off..."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This is one of the <strong><em>Switchable</em></strong> children which is inheriting all methods from its parent class.</li>
+  <li>“<strong><em>Implements Switchable</em></strong>” is the keyword for inheritance.</li>
+  <li>As its obvious, all methods from interface parent are being overriding in this class, although we can have more methods and parameters in this class which don’t have any connection whith the parent class.</li>
+  <li>Notice that in <strong>python</strong> version we simply use general inheritance implementation and redefine all methods without any keyword.</li>
+</ol>
+
+<h3 id="fan">
+<a class="anchor" href="#fan" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Fan</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Fan</span><span class="p">(</span><span class="n">Switchable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Fan: turned on..."</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Fan: turned off..."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.di</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Fan</span> <span class="kd">implements</span> <span class="nc">Switchable</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Fan: turned on..."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Fan: turned off..."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points as <strong><em>LightBulb</em></strong> class.</p>
+
+<h3 id="electricpowerswitch">
+<a class="anchor" href="#electricpowerswitch" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>ElectricPowerSwitch</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Python version</strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ElectricPowerSwitch</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Switchable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">on</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">turn_off</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">turn_on</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Java version</strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.di</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ElectricPowerSwitch</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">Switchable</span> <span class="n">client</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">on</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="nc">ElectricPowerSwitch</span><span class="o">(</span><span class="nc">Switchable</span> <span class="n">client</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">client</span> <span class="o">=</span> <span class="n">client</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">press</span><span class="o">(){</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">on</span><span class="o">){</span>
+            <span class="n">client</span><span class="o">.</span><span class="na">turnOff</span><span class="o">();</span>
+            <span class="n">on</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">client</span><span class="o">.</span><span class="na">turnOn</span><span class="o">();</span>
+            <span class="n">on</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>This is a general class with specific functionality to act as an electric device. We will define the kind of device by passing related object to this class (this is an Aggregation relationship. More <a href="https://www.scaler.com/topics/association-composition-and-aggregation-in-java/">here</a>).</li>
+  <li>We have two parameters. The first one (<strong><em>client</em></strong>) is a non-primary data type with type of <strong><em>Switchable</em></strong> and we will define its value on the class constructor. The second one (<strong><em>on</em></strong>) is a primary data type <strong><em>Boolean</em></strong> with a default value of <strong><em>false</em></strong>. In addition a public method <strong><em>press.</em></strong>
+</li>
+</ol>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/2-DependencyInversion.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

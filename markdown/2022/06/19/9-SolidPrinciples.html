@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>SOLID principles in Java | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="SOLID principles in Java" />
+<meta name="author" content="<a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cmpletete traslation of Python code to Java." />
+<meta property="og:description" content="Cmpletete traslation of Python code to Java." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/9-SolidPrinciples.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/markdown/2022/06/19/9-SolidPrinciples.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SOLID principles in Java" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"<a href=\"https://github.com/sinapordanesh”>Saman Pordanesh</a>"},"dateModified":"2022-06-19T00:00:00-05:00","datePublished":"2022-06-19T00:00:00-05:00","description":"Cmpletete traslation of Python code to Java.","headline":"SOLID principles in Java","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/9-SolidPrinciples.html"},"url":"https://de-fellows.github.io/RexCoding/markdown/2022/06/19/9-SolidPrinciples.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SOLID principles in Java</h1><p class="page-description">Cmpletete traslation of Python code to Java.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-19T00:00:00-05:00" itemprop="datePublished">
+        Jun 19, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name"><a href="https://github.com/sinapordanesh”>Saman Pordanesh</a></span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#markdown">markdown</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h1"><a href="#solid-principles-code-translation-in-java">SOLID principles code translation in Java</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#directories-changes">Directories changes</a></li>
+<li class="toc-entry toc-h2"><a href="#compiling-instruction">Compiling Instruction</a></li>
+<li class="toc-entry toc-h2"><a href="#classes-changes">Classes changes</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#order">Order</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#authorizer">Authorizer</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-1">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-1">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#authorizersms">AuthorizerSMS</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-2">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-2">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#authorizergoogle">AuthorizerGoogle</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-3">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-3">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#authorizerrobot">AuthorizerRobot</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-4">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-4">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#paymentprocessor">PaymentProcessor</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-5">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-5">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#debitpaymentprocessor">DebitPaymentProcessor</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-6">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-6">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#creditpaymentprocessor">CreditPaymentProcessor</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-7">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-7">Java version</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#paypalpaymentprocessor">PaypalPaymentProcessor</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#python-version-8">Python version</a></li>
+<li class="toc-entry toc-h5"><a href="#java-version-8">Java version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="solid-principles-code-translation-in-java">
+<a class="anchor" href="#solid-principles-code-translation-in-java" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><a href="https://www.youtube.com/watch?v=pTB30aXS77U&amp;feature=youtu.be">SOLID principles</a> code translation in Java</strong>
+</h1>
+
+<p><em>Published by</em> <a href="https://github.com/sinapordanesh">Saman Pordanesh</a></p>
+
+<h2 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Introduction</strong>
+</h2>
+
+<ul>
+  <li>SOLID is an acronym for the first five object-oriented design (OOD) principles.
+These principles establish practices that lend to developing software with considerations for maintaining and extending as the project grows. Adopting these practices can also contribute to avoiding code smells, refactoring code, and Agile or Adaptive software development.
+SOLID stands for:
+S - Single-responsiblity Principle
+O - Open-closed Principle
+L - Liskov Substitution Principle
+I - Interface Segregation Principle
+D - Dependency Inversion Principle</li>
+  <li>You need to watch the <a href="https://www.youtube.com/watch?v=pTB30aXS77U&amp;feature=youtu.be">video</a> first, understand all principles, and then look at the translation codes in Java. This documentation will help you to understand the translation better.</li>
+  <li>This translation is based on the final code source of Solid Principles lessons in python programming languages (<strong><em>dependency-inversion-after.py</em></strong>)</li>
+  <li>We need a separate class with the <strong><em>main</em></strong> function to run the program, despite Python, which you can each <strong><em>.py</em></strong> file individually. <strong><em>Main.java</em></strong> is the file with the main function for that purpose.</li>
+  <li>Standard naming on java is different. You can find more information <a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html">here</a>.</li>
+</ul>
+
+<h2 id="directories-changes">
+<a class="anchor" href="#directories-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Directories changes</strong>
+</h2>
+
+<ul>
+  <li>This is one of the most significant changes we made to our translation. A <strong>Java</strong> project with an exact directory with all dependencies can be good practice for OOP designing.</li>
+  <li>We defined a package name for this project as <strong><em>edu.def.solid</em></strong> (<a href="https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html">package naming standards</a>) and its specific directory under the <strong><em>src</em></strong> folder. This package name keeps all project components connected to gather when we implement them on different <strong><em>.java</em></strong> files.</li>
+  <li>However, packages are not necessary, you could use a default package, or even have all classes in the same file; this is more Java best practice.</li>
+  <li>More information about <strong>Java’s</strong> project directory standards is <a href="https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories">here</a>.</li>
+</ul>
+
+<h2 id="compiling-instruction">
+<a class="anchor" href="#compiling-instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compiling Instruction</strong>
+</h2>
+
+<ul>
+  <li>Run the command prompt inside the <strong><em>src</em></strong> folder.</li>
+  <li>Run the following command to compile all <strong><em>.java</em></strong> files:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>javac edu/def/solid/*.java
+</code></pre></div>    </div>
+  </li>
+  <li>To execute the program, we should run the <strong><em>Main.java</em></strong> file from the command prompt. To do this, from the same directory, run the following command on the command prompt:
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>java edu.def.solid.Main
+</code></pre></div>    </div>
+    <p>If your <strong><em>main</em></strong> function is in a different class, put the name of that class instead of <strong><em>Main</em></strong> at the end of the command</p>
+  </li>
+  <li>You can find more about compiling instruction <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">here</a>
+</li>
+</ul>
+
+<h2 id="classes-changes">
+<a class="anchor" href="#classes-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Classes changes</strong>
+</h2>
+
+<h3 id="order">
+<a class="anchor" href="#order" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Order</em></strong>
+</h3>
+
+<h5 id="python-version">
+<a class="anchor" href="#python-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Order</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">quantities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s">"open"</span>
+
+    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">quantities</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">prices</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">total_price</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">prices</span><span class="p">)):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">quantities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">total</span>
+</code></pre></div></div>
+
+<h5 id="java-version">
+<a class="anchor" href="#java-version" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">items</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">quantities</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">status</span> <span class="o">=</span> <span class="s">"open"</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">numberOfItems</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="nc">Order</span><span class="o">(</span><span class="kt">int</span> <span class="n">numberOfItems</span><span class="o">){</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">];</span>
+        <span class="n">quantities</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">];</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addItem</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">quantity</span><span class="o">,</span> <span class="kt">int</span> <span class="n">price</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">items</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">]</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">quantities</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">]</span> <span class="o">=</span> <span class="n">quantity</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">prices</span><span class="o">[</span><span class="n">numberOfItems</span><span class="o">]</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="n">numberOfItems</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalPrice</span><span class="o">(){</span>
+        <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numberOfItems</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="k">this</span><span class="o">.</span><span class="na">quantities</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="na">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">total</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStatus</span><span class="o">(</span><span class="nc">String</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getStatus</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">status</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>In this class, we need to clarify each array’s size as a Java programming rule. We can do it at the initializer by passing the number of items on the class constructor.</li>
+  <li>We implemented all variables (items, quantities, …) as class attributes on Java with <strong>private</strong> visibility to protect them from direct access out of the class. Also, <strong><em>status</em></strong> has a default value of “<em>open</em>”.</li>
+  <li>A variable like <strong><em>numberOfItems</em></strong> is needed to keep track of the arrays and access them later, as Java doesn’t automatically detect where should add a new item in the array (nothing like append in python). In addition, we should keep updating this variable by adding every single item (in the <strong><em>addItem</em></strong> function).</li>
+  <li>
+<strong>getters</strong> and <strong>setters</strong> for each <strong>private</strong> parameter, are not required; You can access fields directly by making parameters <strong>public</strong> in Java as well, but it’s (private parameters) frequently done in Java as an OOP principle. We followed that principle here and as we will need to access <strong><em>status</em></strong> in other classes, we defined getter and setter for this class’s parameter.</li>
+</ol>
+
+<h3 id="authorizer">
+<a class="anchor" href="#authorizer" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Authorizer</em></strong>
+</h3>
+
+<h5 id="python-version-1">
+<a class="anchor" href="#python-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Authorizer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version-1">
+<a class="anchor" href="#java-version-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Authorizer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAuthorized</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>This class was an abstract class on the python version. Abstracts are usually used when we want to implement a specific function with all its functionalities that all children will use in the future. But when we need only the prototype (function naming, return type and arguments only), which will be implemented by each child later, we use <a href="https://www.w3schools.com/java/java_interface.asp">interfaces</a> in Java programming.
+As a result, we implement the <strong><em>Authorizer</em></strong> class as an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> class containing the <strong><em>isAuthotized</em></strong> function prototype.</p>
+  </li>
+  <li>
+    <p>A class in Java can inherit an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> by the “<strong><em>implements</em></strong>” keyword after the class name.</p>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizerSMS</span> <span class="kd">implements</span> <span class="nc">Authorizer</span><span class="o">{</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>Also, all <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> methods should be overridden in this child class (implement them completely)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAuthorized</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">authorized</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="authorizersms">
+<a class="anchor" href="#authorizersms" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>AuthorizerSMS</em></strong>
+</h3>
+
+<h5 id="python-version-2">
+<a class="anchor" href="#python-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Authorizer_SMS</span><span class="p">(</span><span class="n">Authorizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">verify_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Verifying SMS code </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">is_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span>
+</code></pre></div></div>
+
+<h5 id="java-version-2">
+<a class="anchor" href="#java-version-2" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizerSMS</span> <span class="kd">implements</span> <span class="nc">Authorizer</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">authorized</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Verifying SMS code "</span> <span class="o">+</span> <span class="n">code</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorized</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAuthorized</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">authorized</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>We defined the variable <strong><em>authorized</em></strong> as a private class attribute.</li>
+  <li>
+    <p>The <strong><em>isAuthorized</em></strong> method was <strong>overridden</strong> based on its <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>, inheriting that (<a href="#solid_class_authorizer"><strong><em>Authorizer</em></strong></a>).</p>
+  </li>
+  <li>At the <strong><em>verifyCode</em></strong> method, we appended the variable to the printed text by the “<strong><em>+**”</em> sign, although in python, a formatting printing method was used (the **<em>f</em></strong> char at the start of the string)</li>
+</ol>
+
+<h3 id="authorizergoogle">
+<a class="anchor" href="#authorizergoogle" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>AuthorizerGoogle</em></strong>
+</h3>
+
+<h5 id="python-version-3">
+<a class="anchor" href="#python-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Authorizer_Google</span><span class="p">(</span><span class="n">Authorizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">verify_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Verifying Google auth code </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">is_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span>
+</code></pre></div></div>
+
+<h5 id="java-version-3">
+<a class="anchor" href="#java-version-3" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizerGoogle</span> <span class="kd">implements</span> <span class="nc">Authorizer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">authorized</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">verifyCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Verifying Google code "</span> <span class="o">+</span> <span class="n">code</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorized</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAuthorized</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">authorized</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points as <a href="#solid_class_authorizersms"><strong><em>AuthorizerSMS</em></strong></a></p>
+
+<h3 id="authorizerrobot">
+<a class="anchor" href="#authorizerrobot" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>AuthorizerRobot</em></strong>
+</h3>
+
+<h5 id="python-version-4">
+<a class="anchor" href="#python-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Authorizer_Robot</span><span class="p">(</span><span class="n">Authorizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">not_a_robot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">is_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">authorized</span>
+</code></pre></div></div>
+
+<h5 id="java-version-4">
+<a class="anchor" href="#java-version-4" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizerRobot</span> <span class="kd">implements</span> <span class="nc">Authorizer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">authorized</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">notARobot</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorized</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isAuthorized</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">authorized</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points as <a href="#solid_class_authorizersms"><strong><em>AuthorizerSMS</em></strong></a></p>
+
+<h3 id="paymentprocessor">
+<a class="anchor" href="#paymentprocessor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>PaymentProcessor</em></strong>
+</h3>
+
+<h5 id="python-version-5">
+<a class="anchor" href="#python-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PaymentProcessor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h5 id="java-version-5">
+<a class="anchor" href="#java-version-5" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PaymentProcessor</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pay</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>this class is an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> and acts the same as the <a href="#solid_class_authorizer"><strong><em>Authorizer</em></strong></a> class. This is an <a href="https://www.w3schools.com/java/java_interface.asp">interface</a> which imposes the implementation of a specific method on each child, which will be inherent in this <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>.</li>
+  <li>In addition, be careful that the <strong><em>order</em></strong> argument in the payment method is in the type of <a href="#solid_class_order"><strong><em>Order</em></strong></a> class. (We call it <a href="https://www.geeksforgeeks.org/data-types-in-java/"><strong>non-primitive data type</strong></a>)</li>
+  <li>We have an Exception method under a specific condition in the python. In Java, we must specify the “<strong><em>throws Exception</em></strong>” keyword on the function’s prototype and <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>.</li>
+</ol>
+
+<h3 id="debitpaymentprocessor">
+<a class="anchor" href="#debitpaymentprocessor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>DebitPaymentProcessor</em></strong>
+</h3>
+
+<h5 id="python-version-6">
+<a class="anchor" href="#python-version-6" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DebitPaymentProcessor</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">security_code</span><span class="p">,</span> <span class="n">authorizer</span><span class="p">:</span> <span class="n">Authorizer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">security_code</span> <span class="o">=</span> <span class="n">security_code</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorizer</span> <span class="o">=</span> <span class="n">authorizer</span>
+    
+    <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">authorizer</span><span class="p">.</span><span class="n">is_authorized</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Not authorized"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Processing debit payment type"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Verifying security code: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">security_code</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">order</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s">"paid"</span>
+</code></pre></div></div>
+
+<h5 id="java-version-6">
+<a class="anchor" href="#java-version-6" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DebitPaymentProcessor</span> <span class="kd">implements</span> <span class="nc">PaymentProcessor</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">securityCode</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Authorizer</span> <span class="n">authorizer</span><span class="o">;</span>
+
+    <span class="nc">DebitPaymentProcessor</span><span class="o">(</span><span class="kt">int</span> <span class="n">securityCode</span><span class="o">,</span> <span class="nc">Authorizer</span> <span class="n">authorizer</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">securityCode</span> <span class="o">=</span> <span class="n">securityCode</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorizer</span> <span class="o">=</span> <span class="n">authorizer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pay</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">authorizer</span><span class="o">.</span><span class="na">isAuthorized</span><span class="o">()){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"Not authorized"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing debit payment type"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Verifying security code: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">securityCode</span><span class="o">);</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="s">"paid"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>We have a constructor to specify two-class parameter values, <strong><em>securitycode</em></strong> and <strong><em>authorizer</em></strong>. Notice that authorizer is a <a href="https://www.geeksforgeeks.org/data-types-in-java/"><strong><em>non-primitive data type</em></strong></a> in the type of <a href="#solid_class_authorizer"><strong><em>Authorizer</em></strong></a>.</li>
+  <li>We specified all parameters as private because of the Java OOP rules and without getter and setter, as they are being used only for internal purposes.</li>
+  <li>The <strong><em>pay</em></strong> method is an overridden method from the <a href="#solid_class_paymentProcessor"><strong><em>PaymentProcessor</em></strong></a> <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>. It shows us that this class inherits the <a href="#solid_class_paymentProcessor"><strong><em>PaymentProcessor</em></strong></a> <a href="https://www.w3schools.com/java/java_interface.asp">interface</a>.</li>
+  <li>The <strong><em>pay</em></strong> method in this class throws an exception, so we need “<strong><em>throws Exception</em></strong>” keyword at the method’s prototype.</li>
+</ol>
+
+<h3 id="creditpaymentprocessor">
+<a class="anchor" href="#creditpaymentprocessor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>CreditPaymentProcessor</em></strong>
+</h3>
+
+<h5 id="python-version-7">
+<a class="anchor" href="#python-version-7" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CreditPaymentProcessor</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">security_code</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">security_code</span> <span class="o">=</span> <span class="n">security_code</span>
+
+    <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Processing credit payment type"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Verifying security code: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">security_code</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">order</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s">"paid"</span>
+</code></pre></div></div>
+
+<h5 id="java-version-7">
+<a class="anchor" href="#java-version-7" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CreditPaymentProcessor</span> <span class="kd">implements</span> <span class="nc">PaymentProcessor</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">securityCode</span><span class="o">;</span>
+
+    <span class="nc">CreditPaymentProcessor</span><span class="o">(</span><span class="kt">int</span> <span class="n">securityCode</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">securityCode</span> <span class="o">=</span> <span class="n">securityCode</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pay</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing credit payment type"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Verifying security code: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">securityCode</span><span class="o">);</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="s">"paid"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points of <strong><em>debitPaymentProcessor</em></strong> will apply for this class, except we don’t <em>have the <strong>authorizer</strong></em> parameter and any exceptions for the <strong><em>pay</em></strong> method.</p>
+
+<h3 id="paypalpaymentprocessor">
+<a class="anchor" href="#paypalpaymentprocessor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>PaypalPaymentProcessor</em></strong>
+</h3>
+
+<h5 id="python-version-8">
+<a class="anchor" href="#python-version-8" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Python version</em></strong>
+</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PaypalPaymentProcessor</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email_address</span><span class="p">,</span> <span class="n">authorizer</span><span class="p">:</span> <span class="n">Authorizer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">email_address</span> <span class="o">=</span> <span class="n">email_address</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">authorizer</span> <span class="o">=</span> <span class="n">authorizer</span>
+
+    <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">authorizer</span><span class="p">.</span><span class="n">is_authorized</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"Not authorized"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Processing paypal payment type"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Using email address: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">email_address</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">order</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s">"paid"</span>
+</code></pre></div></div>
+
+<h5 id="java-version-8">
+<a class="anchor" href="#java-version-8" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><em>Java version</em></strong>
+</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">edu.def.solid</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PaypalPaymentProcessor</span> <span class="kd">implements</span> <span class="nc">PaymentProcessor</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">emailAddress</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Authorizer</span> <span class="n">authorizer</span><span class="o">;</span>
+
+    <span class="nc">PaypalPaymentProcessor</span><span class="o">(</span><span class="nc">String</span> <span class="n">emailAddress</span><span class="o">,</span> <span class="nc">Authorizer</span> <span class="n">authorizer</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">emailAddress</span> <span class="o">=</span> <span class="n">emailAddress</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorizer</span> <span class="o">=</span> <span class="n">authorizer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pay</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">authorizer</span><span class="o">.</span><span class="na">isAuthorized</span><span class="o">()){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"Not authorized"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing paypal payment type"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Using email address: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">emailAddress</span><span class="o">);</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="s">"paid"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same points of <strong><em>debitPaymentProcessor</em></strong> will apply to this class. Only some changes about authentication and change from security code to email verification.</p>
+
+  </div><a class="u-url" href="/RexCoding/markdown/2022/06/19/9-SolidPrinciples.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
