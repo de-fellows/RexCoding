@@ -662,7 +662,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Replay memory is essentially a catalogue of past states and actions kept when training our agent. Keras-RL provides a convenient class for storing this information, which can be used as follows.</p>
+<p>Replay memory is essentially a catalogue of past states and actions kept when training our agent. <sup id="fnref-2" class="footnote-ref"><a href="#fn-2">2</a></sup> Keras-RL provides a convenient class for storing this information, which can be used as follows.</p>
 
 </div>
 </div>
@@ -688,7 +688,7 @@ _________________________________________________________________
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The 'limit' hyperparameter specifies the size of memory made available during training. When we surpass 50000 experiences, the oldest will be replaced by the newest.</p>
 <p>This begs the question - why do we need memory when training?</p>
-<p>When we train our IA, it easy to build sequential correlation between actions and states. In simpler terms, if we train our agent on states as they come with time (sequentially), we run the risk of teaching our agent to perform actions soleley based on time, rather than information recieved from the environment. As such, we sample batches of experiences from our memory at random when training our agent as to break this correlation.</p>
+<p>When we train our IA, it easy to build sequential correlation between actions and states. In simpler terms, if we train our agent on states as they come with time (sequentially), we run the risk of teaching our agent to perform actions soleley based on time, rather than information recieved from the environment. As such, we sample batches of experiences from our memory at random when training our agent as to break this correlation. <sup id="fnref-2" class="footnote-ref"><a href="#fn-2">2</a></sup></p>
 <p>A great analogy here would be a comparison between 2 hypothetical students taking a multiple choice math exam. Student A gets hold of the answer key, and decides to remember the answer to every question based on its number in order. Student B decides to study the content, and learn how to answer each question based on what is asked. Student A here reflects training our agent without memory, relying solely on the sequential order of the questions to know the corresponding answer. Student B understands what each question presents, and represents training with memory.</p>
 
 </div>
@@ -702,7 +702,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Policy in Keras-RL defines the strategy we use to train our NN. We will be using a simple ε-greedy policy which seeks to balance exploration and exploitation.</p>
+<p>Policy in Keras-RL defines the strategy we use to train our NN. We will be using a simple ε-greedy policy which seeks to balance exploration and exploitation. <sup id="fnref-2" class="footnote-ref"><a href="#fn-2">2</a></sup></p>
 
 </div>
 </div>
@@ -1050,7 +1050,8 @@ Episode 1: reward: 210.000, steps: 210
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><div class="footnotes"><p id="fn-1">1. <a href="#fnref-1" class="footnote footnotes">↩</a></p></div></p>
+<p><div class="footnotes"><p id="fn-1">1. OpenAI Gym Documentation <a href="https://www.gymlibrary.ml/">link</a><a href="#fnref-1" class="footnote footnotes">↩</a></p></div>
+<div class="footnotes"><p id="fn-2">2. Reinforcement Learning: An Introduction, Second Edition by Richard S. Sutton and Andrew G. Bartow <a href="http://incompleteideas.net/book/RLbook2020.pdf">link</a><a href="#fnref-2" class="footnote footnotes">↩</a></p></div></p>
 
 </div>
 </div>
