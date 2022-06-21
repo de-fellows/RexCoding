@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Reinforcement Learning for Engineers in a Hurry | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Reinforcement Learning for Engineers in a Hurry" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/2022/05/31/Reinforcement-Learning.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/2022/05/31/Reinforcement-Learning.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-31T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Reinforcement Learning for Engineers in a Hurry" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-31T00:00:00-05:00","datePublished":"2022-05-31T00:00:00-05:00","headline":"Reinforcement Learning for Engineers in a Hurry","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/2022/05/31/Reinforcement-Learning.html"},"url":"https://de-fellows.github.io/RexCoding/2022/05/31/Reinforcement-Learning.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Reinforcement Learning for Engineers in a Hurry</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-31T00:00:00-05:00" itemprop="datePublished">
+        May 31, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      14 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2022-05-31-Reinforcement-Learning.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2022-05-31-Reinforcement-Learning.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2022-05-31-Reinforcement-Learning.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2022-05-31-Reinforcement-Learning.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-05-31-Reinforcement-Learning.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-Reinforcement-Learning?">What is Reinforcement Learning?<a class="anchor-link" href="#What-is-Reinforcement-Learning?"> </a></h2><p>Reinforcement Learning (RL) in the context of Machine Learning (ML) is one of the three fundamental ML paradigms.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/venn.png" alt="ML Intersection" style="max-width: 400px" />
+    
+    
+</figure>
+</p>
+<p>To properly answer this question, we first need to dive into the different aspects of RL.</p>
+<p>Herein, we will use certain terminology to discuss the nature of RL. It is crucial to understand their meanings and how they distunguish RL from the other branches of ML. To get things started, we will present the notion of an <strong>agent</strong> existing in an <strong>environment.</strong></p>
+<p>An <strong>environment</strong> in the relevant context refers to a space - not necessarily a physical one - that exists and can be interacted with. Interactions with such an environment are called <strong>actions</strong> and should produce some sort of response that can be percieved by anything existing in that environment.</p>
+<p>An <strong>agent</strong> exists in an environment and is able to percieve it, meaning that any response that the environment produces can be experienced by the agent. More specifically, an <strong>intelligent agent</strong> (IA) is one who takes non-random actions based on feedback from an environment. This feedback comes in the form of two notions, <strong>state</strong> and <strong>reward</strong>, which we will discuss more later. An IA takes said actions in order to reach some desirable end result. They may exhibit learning by adjusting their actions over time, or memory by using past experiences in an environment to adjust their current actions.</p>
+<p>Putting these concepts together, RL involves an agent learning to take actions in an environment to reach some goal.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Making-a-Move">Making a Move<a class="anchor-link" href="#Making-a-Move"> </a></h2><p>For the purpose of RL, it is necessary to have actions performed in a controlled and measurable manner so that we may use information produced by the environment for the benefit of learning. This is where our <strong>step function</strong> comes into play. A step function can be thought of as the process of taking an action, and recieving a response. It is best summarized in a diagram.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/RLflow.jpg" alt="RL flowchart" style="max-width: 500px" />
+    
+    
+</figure>
+</p>
+<p>We see the aforementioned terms <strong>state</strong> and <strong>reward</strong> appearing in this flowchart. The state of the environment embodies some variable that describes the environment and changes over time. For example, humidity may be a state variable of the atmosphere. The reward is some feedback from the environment that characterizes the action taken by the agent. A desirable action outcome recieves a positive reward, while an undesireable outcome recieves a negative reward.</p>
+<p>An agent chooses to take an action A on the environment at time t based on the current state S at that same time t. The current action A applied on the environment results in a new state produced at time t+1. As we 'take a step,' The new state becomes the current, producing a certain action. The cycle repeats, each being called a <strong>step</strong>. This results in a continuous feedback loop that allows the agent to exist meaningfully.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Decisions,-Decisions">Decisions, Decisions<a class="anchor-link" href="#Decisions,-Decisions"> </a></h2><p>The pertinent question still remains, how <em>does</em> an IA make decisions, or learn to do so? Noteably in the previous section, we had little to say about the reward aspect of the flowchart. This reward is what teaches our IA to make certain decisions.</p>
+<p>The 'brain' of the IA is the <strong>policy network</strong>. In essence, this is a mathematical function that takes a set of inputs and maps them to an output space. This function has parameters that can be changed to produce different outputs for a given input set. We can exploit this relationship if we are able to determine how to tune these parameters such that the mapping function always leads our IA to the best output based on its inputs. This is the concept of <strong>learning</strong>.</p>
+<p>More specifically, in RL an IA learns to tune these parameters so that it always makes the best choice for a given environment state. The notion of 'best' is where our reward comes in. If an IA recieves a positive reward for an action performed due to an input state, we tune the policy network's parameters such that the IA is a bit more likely to produce the same action the next time that state comes around. If an IA recieves a negative reward (penalty), we do the opposite and tune so that it is less likely to repeat this behaviour.</p>
+<p>The 'tuning' process is a vastly complex topic that need not be explained here to grasp the idea of RL. It suffices to know why this tuning happens and how it affects the IA's behaviour.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Brain">The Brain<a class="anchor-link" href="#The-Brain"> </a></h2><p>For the purpose of this tutorial, we will use a <strong>Neural Network</strong> (NN) as the policy network for our IA.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/NNtp.png" alt="NN flowchart" style="max-width: 500px" />
+    
+    
+</figure>
+</p>
+<p>Neural networks reflect the way that biological brains are designed (in a very simplified manner, that is). Once again, NNs are realtively complex and will not be explained here, but it suffices to know that they fit the role of a policy network. The NN has tunable parameters (weights, biases), an input layer (for our state) and an output layer (for our action). The weights and biases will be varied according to the reward recieved during learning.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Putting-the-Pieces-Together">Putting the Pieces Together<a class="anchor-link" href="#Putting-the-Pieces-Together"> </a></h2><p>All in all, we end up with a diagram that looks like the following.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/compile.png" alt="RL compiled" style="max-width: 500px" />
+    
+    
+</figure>
+</p>
+<p>The NN takes actions based on the state. When learning, the reward updates the parameters of the NN.</p>
+<p>Something to note is that when the agent is not learning, the rewards are out the picture. Rewards are only present when learning, and otherwise, our agent is only able to see the state of the environment.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-an-Intelligent-Agent">Training an Intelligent Agent<a class="anchor-link" href="#Training-an-Intelligent-Agent"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will be working in Python, using Keras/Tensorflow as our backbone as well as a reinforcement learning API, Keras-RL. Additionally, to simplify the creation of an environment we will be leveraging OpenAI Gym which presents many simple environments with states, steps, actions, rewards and such already integrated.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="0.-Getting-Things-Ready">0. Getting Things Ready<a class="anchor-link" href="#0.-Getting-Things-Ready"> </a></h3><p>First, we need to install any dependencies that we may not already have.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!pip install gym</span>
+<span class="c1">#!pip install pygame</span>
+<span class="c1">#!pip install tensorflow==2.5.0</span>
+<span class="c1">#!pip install keras</span>
+<span class="c1">#!pip install keras-rl2</span>
+<span class="c1">#!pip install nnv</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.-Testing-the-Environment">1. Testing the Environment<a class="anchor-link" href="#1.-Testing-the-Environment"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We make the necessary imports to get started with the design of our environment.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we can start setting up our environment as follows.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the purpose of this demonstration, I have chosen a simple game as the environment. The CartPole game runs on PyGame, and has the user attempt to balance a leaning pole on a moving cart.</p>
+<p>Let's learn a bit about our environment. What are the sizes of our state and action spaces?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">states</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">states</span><span class="p">,</span><span class="n">actions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4 2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see, our environment has 4 states and 2 possible actions. A bit of digging into the OpenAI Gym documentation and we are able to figure out what these actually are.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/states.png" alt="states" style="max-width: 400px" />
+    
+    
+</figure>
+</p>
+<p>The 4 states are the cart position and velocity, and pole angle and angular velocity. We can see the various boundaries for each of these states in the above tables. For context, the cart position is calculated from the origin and its velocity is the the difference in its position per step. Similarly, the pole angle is measured from the normal to the cart axis and the angular velocity is the change in this angle per step. These 4 states will serve as the input into our policy network.</p>
+<p>Now is probably a good time to mention that a step does not necessarily have to coincide with a unit of real time. As such, velocity in the above states does not involve change per unit time but rather change per step.</p>
+<p><figure>
+  
+    <img class="docimage" src="/RexCoding/images/copied_from_nb/imgs_for_RL/actions.png" alt="states" style="max-width: 210px" />
+    
+    
+</figure>
+</p>
+<p>The 2 actions that we can take involve moving the cart in either the positive or negative x direction ([1,0] respectively). These represent the output of our policy network.</p>
+<p>Looking into the documentation, the game is bounded by certain rules. We recieve a +1 reward (score) for each step in which the pole is still upright. Upright implies that the pole is within the angle range [-0.2095,0.2095]. The game terminates at a max score of 500, when the pole is no longer upright, or when the cart position exits the limits [-2.4, 2.4] - whichever condition is reached first.</p>
+<p>Now, we will attempt to test our environment with a random agent - one which does not have a policy network and makes decisions randomly.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">RandomAgentTest</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span><span class="n">episodes</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1">#Running summation of the score in each game run</span>
+    <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">episodes</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#Run game &#39;episode&#39; number of times</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1">#reset game environment to the base state</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>        <span class="c1">#variable holds boolean corresponding to whether game episode is complete or not</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1">#current episode score, resets to 0</span>
+        
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+          <span class="n">environment</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>                                         <span class="c1">#start our environment               </span>
+          <span class="n">action</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                        <span class="c1">#Choose a random action from action space. 1 -&gt; move right, 0 -&gt; move left</span>
+          <span class="n">n_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>       <span class="c1">#Take random action</span>
+          <span class="n">score</span><span class="o">+=</span><span class="n">reward</span>                                        <span class="c1">#Add reward to cumulative score</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Episode:</span><span class="si">{}</span><span class="s1"> Score:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">score</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean score over&#39;</span><span class="p">,</span><span class="n">episodes</span><span class="p">,</span><span class="s1">&#39;episodes  --&gt; &#39;</span><span class="p">,</span><span class="n">total</span><span class="o">/</span><span class="n">episodes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">RandomAgentTest</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Episode:1 Score:24.0
+Episode:2 Score:17.0
+Episode:3 Score:30.0
+Episode:4 Score:19.0
+Episode:5 Score:31.0
+---------------------
+Mean score over 5 episodes  --&gt;  24.2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a frame of reference, this game has a maximum score of 500. As we can see, random actions give a very poor score.</p>
+<p>Now, we will design a policy network for our agent to give it the ability to learn.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Adding-Intelligence---Keras-NN-Model">2. Adding Intelligence - Keras NN Model<a class="anchor-link" href="#2.-Adding-Intelligence---Keras-NN-Model"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, we need to import the necessary resources.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span><span class="p">,</span> <span class="n">Adam</span>
+
+<span class="kn">from</span> <span class="nn">rl.agents</span> <span class="kn">import</span> <span class="n">DQNAgent</span>
+<span class="kn">from</span> <span class="nn">rl.policy</span> <span class="kn">import</span> <span class="n">BoltzmannQPolicy</span>
+<span class="kn">from</span> <span class="nn">rl.memory</span> <span class="kn">import</span> <span class="n">SequentialMemory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our RL model need not be too complex, as the game that is being tackled is relatively simple. We need the input of the network to accept our 4 states, and we need an output of 2 actions. The action with the higher activation at the network's output is the action that the agent will perform.</p>
+<p>For the hidden (inner) layers of the NN, we will have two dense (fully connected) layers. Each layer will have 12 neurons, with ReLU activation between layers (to prevent the layers from collapsing into a linear function).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">states</span><span class="p">)))</span>      <span class="c1">#&#39;states&#39; variable holds the number of states of the environment (4 inputs)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>          <span class="c1">#dense -&gt; fully connected layer, relu activation between layers. 12 neurons.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">))</span>  <span class="c1">#&#39;actions&#39; variable holds the number of actions of the environment (2 outputs)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Model: &#34;sequential_11&#34;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+flatten_10 (Flatten)         (None, 4)                 0         
+_________________________________________________________________
+dense_28 (Dense)             (None, 12)                60        
+_________________________________________________________________
+dense_29 (Dense)             (None, 12)                156       
+_________________________________________________________________
+dense_30 (Dense)             (None, 2)                 26        
+=================================================================
+Total params: 242
+Trainable params: 242
+Non-trainable params: 0
+_________________________________________________________________
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For a visual representation of the above NN, we can add the following.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nnv</span> <span class="kn">import</span> <span class="n">NNV</span>
+<span class="n">layers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;input</span><span class="se">\n</span><span class="s2">(states)&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="n">states</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;darkBlue&quot;</span><span class="p">,</span><span class="s2">&quot;edges_color&quot;</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;hidden 1</span><span class="se">\n</span><span class="s2">(relu)&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;edges_color&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;hidden 2</span><span class="se">\n</span><span class="s2">(relu)&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;edges_color&quot;</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;output</span><span class="se">\n</span><span class="s2">(actions)&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="n">actions</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;darkBlue&quot;</span><span class="p">},</span>  <span class="p">]</span>
+<span class="n">NNV</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+" />
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&lt;Figure size 432x288 with 1 Axes&gt;, &lt;AxesSubplot:&gt;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Training-our-Model/Agent">3. Training our Model/Agent<a class="anchor-link" href="#3.-Training-our-Model/Agent"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are 2 popular schools of thought when it comes to training an agent in an environment. The first is called exploration, and involves the agent acting randomly in the environment, essentially exploring its options. Think of it like prodding with a stick to see what works. Secondly, we have exploitation which involves the agent focusing on 'promising' paths based on the reward they yield.</p>
+<p>For the purpose of this tutorial, we will use a combination of these approaches.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For starters, the Boltzmann Q Policy that we will be using takes the final values at the output of our NN and applies a softmax function to convert them into probabilities. As such, we select an output action for our agent based on the action with the largest probability.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="n">BoltzmannQPolicy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, Sequential Memory allows our agent to keep track of actions in sequency that it may have taken in the past. Essentially, memory tries to ensure that our agent is not exploring paths that returned minimal reward in the past.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">memory</span> <span class="o">=</span> <span class="n">SequentialMemory</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">window_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will be using a Deep Q-Network agent, which is a variation of Q-learning that uses a NN for decision making. Q-learning involves an agent 'learning' to take the path of actions that lead to greatest reward. Learning here is in quotations because Q-learning itself is model-free, meaning that the agent does not necessariy have the ability to 'learn' in the traditional sense. Truly, Q-learning involves a generally trial-and-error approach, while Deep Q-learning involves an agent leveraging a NN to give structure to its decision making.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agent</span>  <span class="o">=</span> <span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="n">policy</span> <span class="p">,</span><span class="n">nb_actions</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span> <span class="n">nb_steps_warmup</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">target_model_update</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In terms of our optimizer, we will be using Stochastic Gradient Descent (SGD). SGD is the agorithm responsible for adjusting the weights inside of our neural network, details of which we will not go into. Learning Rate (lr) is a hyperparameter that influences the optimization of our NN weights. For a performance metric, we will use mean squared error (mse).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agent</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mse&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The next step involves the training of our agent. We will call our .fit() method, which initiates this training. To this method we pass our environment, and give a limit to the number of steps for which we will train. Additionally, we set visualize to False so that our environment is not visible while training, as this would slow down the process.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span> <span class="c1">#Suppressing Deprecation Warnings</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">nb_steps</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training for 30000 steps ...
+Interval 1 (0 steps performed)
+10000/10000 [==============================] - 210s 21ms/step - reward: 1.0000
+46 episodes - episode_reward: 209.109 [19.000, 500.000] - loss: 3.548 - mse: 4086.661 - mean_q: 86.558
+
+Interval 2 (10000 steps performed)
+10000/10000 [==============================] - 202s 20ms/step - reward: 1.0000
+38 episodes - episode_reward: 264.316 [22.000, 500.000] - loss: 7.449 - mse: 5004.202 - mean_q: 98.088
+
+Interval 3 (20000 steps performed)
+10000/10000 [==============================] - 208s 21ms/step - reward: 1.0000
+done, took 620.613 seconds
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x2df128188b0&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we have our trained agent, we can test our agent's performance inside of the environment and compare it to our random agent at the beginning of this tutorial.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_test_episodes</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">nb_episodes</span><span class="o">=</span><span class="n">n_test_episodes</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------------------------------------&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean score over&#39;</span><span class="p">,</span><span class="n">n_test_episodes</span><span class="p">,</span><span class="s1">&#39;is    ---&gt;   &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;episode_reward&#39;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Testing for 20 episodes ...
+Episode 1: reward: 500.000, steps: 500
+Episode 2: reward: 500.000, steps: 500
+Episode 3: reward: 500.000, steps: 500
+Episode 4: reward: 500.000, steps: 500
+Episode 5: reward: 500.000, steps: 500
+Episode 6: reward: 500.000, steps: 500
+Episode 7: reward: 500.000, steps: 500
+Episode 8: reward: 500.000, steps: 500
+Episode 9: reward: 500.000, steps: 500
+Episode 10: reward: 500.000, steps: 500
+Episode 11: reward: 500.000, steps: 500
+Episode 12: reward: 500.000, steps: 500
+Episode 13: reward: 500.000, steps: 500
+Episode 14: reward: 500.000, steps: 500
+Episode 15: reward: 500.000, steps: 500
+Episode 16: reward: 500.000, steps: 500
+Episode 17: reward: 500.000, steps: 500
+Episode 18: reward: 500.000, steps: 500
+Episode 19: reward: 500.000, steps: 500
+Episode 20: reward: 500.000, steps: 500
+---------------------------------------
+Mean score over 20 is    ---&gt;    500.0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">RandomAgentTest</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Episode:1 Score:12.0
+Episode:2 Score:17.0
+Episode:3 Score:20.0
+Episode:4 Score:62.0
+Episode:5 Score:25.0
+Episode:6 Score:17.0
+Episode:7 Score:30.0
+Episode:8 Score:20.0
+Episode:9 Score:19.0
+Episode:10 Score:15.0
+Episode:11 Score:13.0
+Episode:12 Score:26.0
+Episode:13 Score:27.0
+Episode:14 Score:27.0
+Episode:15 Score:48.0
+Episode:16 Score:15.0
+Episode:17 Score:16.0
+Episode:18 Score:81.0
+Episode:19 Score:18.0
+Episode:20 Score:20.0
+---------------------
+Mean score over 20 episodes  --&gt;  26.4
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A simple comparison shows us that our trained agent averaged a score of 500 over 20 episodes, which is actually the maximum achievable score that one can obtain in the CartPole game. In contrast, our random agent scores 26.4 which is incredibly low, earning a maximum score of 81 over the 20 runs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Wrapping-Up">Wrapping Up<a class="anchor-link" href="#Wrapping-Up"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is with some caution that we can say that our trained agent is now 'smart enough' to solve this game. As we can infer, RL has numerous applications that extend from such a simplistic environment and can find usefulness in a large scope of fields. Having given this introduction, I implore the reader to further their knowledge into Reinforcement Learning by going out and seeking new information.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/RexCoding/2022/05/31/Reinforcement-Learning.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
