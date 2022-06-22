@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -132,7 +132,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Before reading the rest of this blog, make sure you read the <a href="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html"> Federated Learning (Data Scientist)</a>. Or have both of them open side by side.</p>
+<p>Before reading the rest of this blog, make sure you have the <a href="https://de-fellows.github.io/RexCoding/2022/06/09/MNIST_Data_Scientist.html"> Federated Learning (Data Scientist)</a> open side by side.</p>
 
 </div>
 </div>
@@ -162,6 +162,12 @@ To begin the process, you must launch a Duet session and help your Duet partner 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Make sure that the network_url you use is chosen from <a href="https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address">https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address</a></p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-1.-Initiate-Duet-Connection">Step 1. Initiate Duet Connection<a class="anchor-link" href="#Step-1.-Initiate-Duet-Connection"> </a></h3>
 </div>
 </div>
 </div>
@@ -245,8 +251,21 @@ duet = sy.duet(&#34;<span class="ansi-bold">00eec93acc58f144d78a365705d42223</sp
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's upload some data to the Duet server</p>
+<p><strong>Step 2. Go to Data Scientist Notebook <strong />&lt;/p&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After we have established connection between the data owner and the data scientist. Let's upload some data to the Duet server</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-3.-Create-Data-and-Upload-to-Duet-Server">Step 3. Create Data and Upload to Duet Server<a class="anchor-link" href="#Step-3.-Create-Data-and-Upload-to-Duet-Server"> </a></h3>
 </div>
 </div>
 </div>
@@ -320,6 +339,19 @@ duet = sy.duet(&#34;<span class="ansi-bold">00eec93acc58f144d78a365705d42223</sp
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Step 4. Go to Data Scientist Notebook <strong />&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-5.-Check-for-Requests-from-Data-Scientist">Step 5. Check for Requests from Data Scientist<a class="anchor-link" href="#Step-5.-Check-for-Requests-from-Data-Scientist"> </a></h3>
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -420,6 +452,19 @@ duet = sy.duet(&#34;<span class="ansi-bold">00eec93acc58f144d78a365705d42223</sp
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Step 6. Go to Data Scientist Notebook <strong />&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-7.-Request-Handling">Step 7. Request Handling<a class="anchor-link" href="#Step-7.-Request-Handling"> </a></h3>
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -538,6 +583,19 @@ duet = sy.duet(&#34;<span class="ansi-bold">00eec93acc58f144d78a365705d42223</sp
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Step 8. Go to Data Scientist Notebook <strong />&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Step-9.-Getting-MNIST-Data-and-Make-Add-Request-Handlers">Step 9. Getting MNIST Data and Make Add Request Handlers<a class="anchor-link" href="#Step-9.-Getting-MNIST-Data-and-Make-Add-Request-Handlers"> </a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="MNIST-with-Duet">MNIST with Duet<a class="anchor-link" href="#MNIST-with-Duet"> </a></h1>
@@ -766,8 +824,18 @@ Transform: Compose(
 </div>
     
 
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We have done everything on the data owner's side, the rest is continued on the data scientist's notebook <br /></p>
+<p><strong>Step 10. Go to Data Scientist Notebook <strong />&lt;/p&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ 
+
+</strong></p></div></div></div></strong></p></div></div></div></strong></p></div></div></div></strong></p></div></div></div></strong></p></div></div></div></div>
 
 
   </div><a class="u-url" href="/RexCoding/2022/06/09/MNIST_Data_Owner.html" hidden></a>
