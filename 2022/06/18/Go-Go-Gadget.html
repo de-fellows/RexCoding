@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Go, Go, Gadget! | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Go, Go, Gadget!" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/2022/06/18/Go-Go-Gadget.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/2022/06/18/Go-Go-Gadget.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-18T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Go, Go, Gadget!" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-18T00:00:00-05:00","datePublished":"2022-06-18T00:00:00-05:00","headline":"Go, Go, Gadget!","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/2022/06/18/Go-Go-Gadget.html"},"url":"https://de-fellows.github.io/RexCoding/2022/06/18/Go-Go-Gadget.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Go, Go, Gadget!</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-18T00:00:00-05:00" itemprop="datePublished">
+        Jun 18, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      29 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2022-06-18-Go-Go-Gadget.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2022-06-18-Go-Go-Gadget.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2022-06-18-Go-Go-Gadget.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2022-06-18-Go-Go-Gadget.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-06-18-Go-Go-Gadget.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>&lt;font color=#3090C7&gt;Sample Blue Text&lt;/font&gt;</strong></p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project-Scope">Project Scope<a class="anchor-link" href="#Project-Scope"> </a></h2><h3 id="Project-Goals">Project Goals<a class="anchor-link" href="#Project-Goals"> </a></h3><ol>
+<li>Gain a better understanding of computer hardware by using a Raspberry Pi 4.</li>
+<li>Learn methods of collecting data using electronic sensors.</li>
+<li>Compare temperature and humidity data from several different sensors.</li>
+<li>Implement a Graphical User Interface (GUI) to express data in a clear and meaningful way.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/project_scope.png" alt="Project Scope" /></p>
+<h3 id="Procedure">Procedure<a class="anchor-link" href="#Procedure"> </a></h3><ol>
+<li>Initialize Raspberry Pi 4 with Raspbian OS. Connect to mouse, keyboard and monitor.</li>
+<li>Connect temperature-humidity sensors to Raspberry Pi 4:<ul>
+<li>DHT11</li>
+<li>Grove
+Begin and test data collection.</li>
+</ul>
+</li>
+<li>Generate graphs using collected data. Compare temperature and humidity data across both sensors.</li>
+<li>Display data on webpage accessible from within the University of Calgary network.</li>
+</ol>
+<h3 id="Making-Learning-Whole-Paradigm"><em>Making Learning Whole</em> Paradigm<a class="anchor-link" href="#Making-Learning-Whole-Paradigm"> </a></h3><p>This project focuses on Principle 1 from <em>Making Learning Whole: How Seven Principles of Teaching Can Transform Education</em>: <strong>Play the Whole Game</strong></p>
+<p>What Does This Mean?</p>
+<ul>
+<li>Students already have most of the skills needed to complete the project</li>
+<li>This project will demonstrate a practical application of coding skills, instead of a theoretical application</li>
+<li>Students can complete the project feeling more confident about their ability to apply theoretical skills to a real-life problem</li>
+</ul>
+<h3 id="Connecting-Concepts">Connecting Concepts<a class="anchor-link" href="#Connecting-Concepts"> </a></h3><p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/connecting_concepts.png" alt="Connecting Concepts" /></p>
+<h3 id="FAQ">FAQ<a class="anchor-link" href="#FAQ"> </a></h3><p><strong>Q:</strong>  How can this project be applied to Digital Engineering curriculum?</p>
+<p><strong>A:</strong>  This work can be used as a project or large-scale assignment for Digital Engineering students.</p>
+<p><strong>Q:</strong>  Who should do this project?</p>
+<p><strong>A:</strong>  Students with proficient knowledge in Python and some experience with Matplotlib, Flask and HTML.</p>
+<p><strong>Q:</strong>  Why should I do this project?</p>
+<p><strong>A:</strong>  One of the best ways to learn is by doing. You will boost your self-confidence by proving to yourself that you can use what you already know to make something new and useful. You may be surprised what you learn along the way. Remember: No matter how hard the project seems, there is light at the end of the tunnel!</p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Phase-1:-Initializing-the-Raspberry-Pi">Phase 1: Initializing the Raspberry Pi<a class="anchor-link" href="#Phase-1:-Initializing-the-Raspberry-Pi"> </a></h2><p>You will need:</p>
+<ul>
+<li>A computer</li>
+<li>A microSD adapter (if your computer does not have a microSD port)</li>
+<li>Internet access</li>
+<li>A microSD card (preferably 32 GB or less)</li>
+<li>A Raspberry Pi 4 Model B</li>
+<li>A USB-C power cable (with an on/off switch is best)</li>
+<li>A Mouse with USB Cable</li>
+<li>A Keyboard with USB Cable</li>
+<li>A Monitor</li>
+<li>A Micro HDMI Cable or Adapter</li>
+</ul>
+<p>Estimated Time Required: 2-3 Hours</p>
+<h3 id="1.1:-A-Brief-Introduction">1.1: A Brief Introduction<a class="anchor-link" href="#1.1:-A-Brief-Introduction"> </a></h3><p>In Phase 1 we need to get the Raspberry Pi 4 up and running. Unlike the computers in your phone, laptop or smartwatch, Raspberry Pi computers do not come with a built-in Operating System (OS). This means you need to do it yourself, by putting the OS on a microSD card using your own computer and then inserting the microSD into the Raspberry Pi.</p>
+<p>There are several ways to do this. For a Raspberry Pi 4, you can use the New Out of Box Software (NOOBS) method, or the Raspberry Pi Imager method. We will be using the latter.</p>
+<p>It is important to have some sort of an adapter for your microSD card, since most laptops or computers do not have that kind of port. Some options are a microSD to USB adapter or a microSD to SD card adapter. The important part is that you have some way of connecting the microSD to your computer. I am using an ADATA microReader, because it is what I had on hand.</p>
+<blockquote><p>The content in Sections 1.1 to 1.5 is based on the video The New Method to Setup Raspberry Pi (2022 Update) by Refactored on YouTube (<a href="https://www.youtube.com/watch?v=jRKgEXiMtns">https://www.youtube.com/watch?v=jRKgEXiMtns</a>).</p>
+<h3 id="1.2:-Checking-the-File-Format">1.2: Checking the File Format<a class="anchor-link" href="#1.2:-Checking-the-File-Format"> </a></h3>
+</blockquote>
+<p>Raspberry Pi’s require your microSD card to be in FAT32 file format. This is the default format for SD cards with 32GB or less storage capacity.</p>
+<p>If your microSD card is 32GB or less, congratulations! You can move on to section 1.3.</p>
+<p>If your microSD card is greater than 32GB, you will need to convert it to FAT32. Both Windows and Mac have options for this that can be found with a simple Google search. Once this is completed, move on to section 1.3.</p>
+<h3 id="1.3:-Flashing-the-microSD-Card">1.3: Flashing the microSD Card<a class="anchor-link" href="#1.3:-Flashing-the-microSD-Card"> </a></h3><p>In the Raspberry Pi world, "flashing the SD card" means writing the OS image to the SD card. We will be doing this using Raspberry Pi Imager to install the Raspberry Pi OS (formerly Raspbian).</p>
+<p><strong>Follow these steps:</strong></p>
+<ol>
+<li>Go to the official Raspberry Pi website: <a href="https://www.raspberrypi.org/">https://www.raspberrypi.org/</a></li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup1.png" alt="Raspi Website Homepage" /></p>
+<ol>
+<li>Navigate to the Software page. It should be under Computers &gt; Software.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup2.png" alt="Raspi Software Page" /></p>
+<ol>
+<li>Under "Install Raspberry Pi OS using Raspberry Pi Imager", <strong>download</strong> the version that works on your computer (Windows, macOS or Ubuntu). I'm using the Windows option.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup3.png" alt="Raspberry Pi Imager Page" /></p>
+<ol>
+<li>Find the downloaded file in your File Explorer (or Finder on Mac) and <strong>open</strong> it. If it asks if you want to allow it to make changes to your device, click <strong>Yes</strong>.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup4.png" alt="Open Raspberry Pi Imager" /></p>
+<ol>
+<li>When the Raspberry Pi Imager pop-up window appears, click <strong>Install</strong>. You may want to close all other applications that are currently running on your computer.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup5.png" alt="Raspberry Pi Imager Setup" /></p>
+<ol>
+<li>When the Installation is complete, <strong>uncheck</strong> the "Run Raspberry Pi Imager" button and click Finish.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup6.png" alt="Raspberry Pi Imager Setup" /></p>
+<ol>
+<li>Now <strong>search</strong> for "Raspberry Pi Imager" on your computer. On Windows, it should pop up as shown here. Click <strong>Open</strong>. If the pop-up window asks if you would like Raspberry Pi Imager to make changes to your device, click <strong>Yes</strong>.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup7.png" alt="Open Raspberry Pi Imager" /></p>
+<blockquote><p><strong>Tip:</strong>  If you're interested in keeping your file system organized like I am, you can find where the application is stored by clicking <strong>Open File Location</strong>. <br /><br /> <img src="Go-Go-Gadget-Images/setup8.png" alt="Open File Location" /></p>
+<ol>
+<li>Connect your microSD card to your computer using the adapter of your choice.</li>
+</ol>
+</blockquote>
+<ol>
+<li><strong>Identify the name of the drive</strong> (the microSD card) you just connected using your File Explorer or Finder. On my computer, it is the D:/ drive but this may be a different letter for you. The important part is that <strong>it is not the drive that all of your computer files are stored on (my C:/ drive)</strong>.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup9.png" alt="Identify the Drive Name" /></p>
+<ol>
+<li>In Raspberry Pi Imager, we now need to select the Operating System we want and where we want to store it.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup10.png" alt="Raspberry Pi Imager" /></p>
+<p>For the <strong>Operating System</strong> choose the <strong>Raspberry Pi OS (32-bit)</strong> option.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup11.png" alt="Choosing the Operating System" /></p>
+<p>For the <strong>Storage</strong> choose the drive you just inserted (for me, the D:/ drive).</p>
+<blockquote><p><ins>__WARNING:__</ins> <strong>DO NOT CHOOSE A DRIVE YOU ARE NOT 100% CERTAIN ABOUT.</strong> <br /> This will overwrite the drive, which is <strong>IRREVERSIBLE</strong>. If you are unsure about which Storage option to choose, ask a friend, professor or TA for help.
+<img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup12.png" alt="Choosing the Storage" />
+<strong>A Note About Advanced Settings:</strong> These settings are found under the gear wheel button. I chose to keep all buttons checked off except for the two at the bottom - <strong>Eject media when finished</strong> and <strong>Enable telemetry</strong> (not pictured). These settings can be changed after the OS is "flashed" onto the microSD card. <br /><br /> <img src="Go-Go-Gadget-Images/setup13.png" alt="Advanced Options" /></p>
+<ol>
+<li>When you are satisfied with your Operating System, Storage and Advanced Settings choices, click <strong>Write</strong>. Make sure your computer is <strong>plugged in to a power source</strong> for this since it might take a while. Mine took a little over 30 minutes to write. Note that the adapter and microSD card will automatically be ejected when it is done.</li>
+</ol>
+</blockquote>
+<h3 id="1.4:-Powering-Up-the-Raspberry-Pi">1.4: Powering Up the Raspberry Pi<a class="anchor-link" href="#1.4:-Powering-Up-the-Raspberry-Pi"> </a></h3><p>Now we need to connect all the bits and bobs to our Raspberry Pi. The main challenge here is making sure you have the right cable for the job. Here are the ports we can use, courtesy of the official Raspberry Pi website:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/raspi_infographic.png" alt="Raspi Infographic" /></p>
+<p>Here's my setup:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/my_setup_1.png" alt="My Setup 1/2" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/my_setup_2.png" alt="My Setup 2/2" /></p>
+<ol>
+<li>USB-C Power Cable</li>
+<li>Monitor Connected via Micro HDMI Cable</li>
+<li>Keyboard and Mouse connected via USB cable in the USB 2 ports</li>
+<li>Micro SD Card (inserted into the slot on the underside of the Raspberry Pi)<blockquote><p>Using a USB-C power cable with an <strong>on/off switch</strong> makes it much easier to turn your Raspberry Pi on or off. Without a switch, you will be constantly unplugging and plugging the USB-C back in, since they do not have a built-in power button.</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="1.5:Navigating-the-Startup-Menu">1.5:Navigating the Startup Menu<a class="anchor-link" href="#1.5:Navigating-the-Startup-Menu"> </a></h3><p>When you plug the power into your Raspberry Pi, it automatically turns on. There is no built-in power button on your Raspberry Pi, so it will turn on if power is supplied to it. If your microSD card has been inserted into the Raspberry Pi, a Startup Menu will appear as shown below.</p>
+<p>Click <strong>Next</strong> to begin the setup process.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup14.jpg" alt="Startup Menu" /></p>
+<p>Set your language, time zone and keyboard. If you are doing this from Calgary, AB and you need an English keyboard, select the options shown here.</p>
+<p>Click <strong>Next</strong> to move on.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup15.jpg" alt="Set Language, Time Zone, Keyboard" /></p>
+<p>Choose a username and password. This will be your user account on the Raspberry Pi.</p>
+<blockquote><p>Make sure you write the username and password down, since you will need them later.</p>
+</blockquote>
+<p>Click <strong>Next</strong> to create your account.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup16.jpg" alt="Create User" /></p>
+<p>If there is no <strong>black border</strong> between the Raspberry Pi desktop and your monitor, it is possible that the monitor is slightly cutting off the display.</p>
+<p>In this case, click the button shown in the image to reduce the desktop size.</p>
+<p>It may take several seconds for this to take effect. You may also need to continue through the setup pages before the changes take effect.</p>
+<p>Click <strong>Next</strong> to continue. If you change your mind, you can click <strong>Back</strong> to return to this page.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup17.jpg" alt="Desktop Size" /></p>
+<p>Select the WiFi network you want to connect to and click <strong>Next</strong> to connect and input the WiFi password.</p>
+<p>Or, click <strong>Skip</strong> to continue without connecting to WiFi.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup18.jpg" alt="Select WiFi Network" /></p>
+<p>Click <strong>Next</strong> to check and update the software.</p>
+<p>This may take a while. My updates took a little longer than ten minutes.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup19.jpg" alt="Update Software" /></p>
+<p>Click <strong>Restart</strong> to make the new settings take effect.</p>
+<p>If the Raspberry Pi does not appear to be turning back on, try unplugging the power, waiting a couple seconds, and plugging it back in.</p>
+<p>If that doesn’t work, try doing the same thing with both the power and the Micro HDMI cables.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup20.jpg" alt="Setup Complete" /></p>
+<p>Congratulations! You have successfully set up your Raspberry Pi 4.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup21.jpg" alt="Raspi Desktop" /></p>
+<h3 id="1.6:Connecting-via-SSH">1.6:Connecting via SSH<a class="anchor-link" href="#1.6:Connecting-via-SSH"> </a></h3><p>There are a few main ways to access your Raspberry Pi. We just completed the first method – plugging in a monitor, mouse and keyboard to use the Raspberry Pi like a home computer.
+Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (SSH)</strong> connection. Here’s what you need to know about SSH:</p>
+<ul>
+<li>It allows you to run the terminal (command line interface) on your Raspberry Pi from the terminal on your own computer</li>
+<li>You can also share files between the Raspberry Pi and your own computer</li>
+<li>Both the Raspberry Pi and your own computer must be connected to the same network</li>
+<li>You need to know the IP address of the Raspberry Pi <strong>on that network</strong></li>
+<li>You need to know the <strong>username</strong> and <strong>password</strong> from your Raspberry Pi user account we created in section 1.5</li>
+<li>You won’t need to plug all of the cables and gadgets into your Raspberry Pi, only the <strong>power cable</strong><blockquote><p>SSH can be very useful if you want your Raspberry Pi to control something remotely, like a sensor or robot. It removes the desktop we saw in 1.5, so there is no need for a screen or a Graphical User Interface (GUI).</p>
+</blockquote>
+</li>
+</ul>
+<blockquote><p>The content in Section 1.6 is based on the article SSH:Remote control your Raspberry Pi by Russell Barnes in The MagPi Magazine (<a href="https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi">https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi</a>).
+Let’s set up our SSH connection! With the setup from section 1.5, follow these steps:</p>
+</blockquote>
+<ol>
+<li><p>Get the IP address of your Raspberry Pi <strong>on that network</strong>.</p>
+<ul>
+<li>Make sure your Raspberry Pi is on the same network (WiFi or Wired LAN) as your computer. To check this, go to the top right corner of the desktop and click the WiFi button.</li>
+<li>Open a Terminal. You can do this by clicking the terminal button in the top left corner of the desktop or by pressing <strong>Ctrl + Alt + T</strong> on the Raspberry Pi’s keyboard.</li>
+<li><p>In the terminal, there are two ways to find the IP address:</p>
+<ul>
+<li><p>(Easiest Method) Type <strong>hostname -I</strong> and hit <strong>Enter</strong> to get the IP address on that network. Shown below, the IP address is 192.168.1.138. This will be a different address on each network.</p>
+<p><img src="Go-Go-Gadget-Images/IP_Address_Method_1.png" alt="IP Address Method 1" /></p>
+<p><u>OR</u></p>
+</li>
+<li><p>Type <strong>ifconfig</strong> and hit <strong>Enter</strong>. The number underneath “wlan0” and beside “inet” is the Raspberry Pi’s IP address on that particular network. Shown below, we get the same the IP address (192.168.1.138).</p>
+<p><img src="Go-Go-Gadget-Images/IP_Address_Method_2.png" alt="IP Address Method 2" /></p>
+<blockquote><p>If you are frequently using the Raspberry Pi under the same network (for example, at your house), <strong>write down this IP address</strong> since you will be using it often.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Enable SSH on the Raspberry Pi.</p>
+<ul>
+<li>In the terminal, type <strong>sudo raspi-config</strong> and hit <strong>Enter</strong>. This will take you to the Configuration Tool.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_1.png" alt="sudo raspi-config" /></p>
+<ul>
+<li>On the Configuration Tool, use the up and down arrows to select <strong>Interface Options</strong>. Press <strong>Enter</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_2.png" alt="SSH Configuration Tool" /></p>
+<ul>
+<li>Use the up and down arrows to select <strong>SSH</strong>. Press <strong>Enter</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_3.png" alt="Select SSH" /></p>
+<ul>
+<li>Select <strong>Yes</strong> and hit <strong>Enter</strong> to enable SSH on the Raspberry Pi.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_4.png" alt="Enable SSH Server" /></p>
+<ul>
+<li>Press <strong>Enter</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_5.png" alt="SSH is Enabled" /></p>
+<ul>
+<li>On the Configuration Tool, use the <strong>Tab</strong> key to access the "Select" and "Finish" buttons at the bottom. Use the left and right arrow keys to select <strong>Finish</strong> and hit <strong>Enter</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_6.png" alt="Select &quot;Finish&quot;" /></p>
+</li>
+<li><p>Activate SSH Client (Windows).</p>
+<ul>
+<li><strong>This step is not needed for Linux or macOS.</strong></li>
+<li>In Windows 10, you can use SSH without having to download anything, but you need to activate it first.</li>
+<li>On your computer, search for and <strong>Open “Manage Optional Features”</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/setup22.png" alt="Manage Optional Features" /></p>
+<ul>
+<li>Click <strong>Add a feature</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/setup23.png" alt="Add a Feature" /></p>
+<ul>
+<li>Search for <strong>OpenSSH Server</strong> (may also be called OpenSSH Client). <strong>Install</strong> it.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/setup24.png" alt="Install OpenSSH Server" /></p>
+</li>
+<li><p>Open a Terminal/Command Prompt on your computer and type in <strong>ssh [username]@[IP]</strong> and press <strong>Enter</strong>. For example, since my username is “christina” and the Raspberry Pi IP address in the Makerspace is 192.168.1.48, I type in <strong>ssh christina@192.168.1.48</strong>. <br /> If this is your first time using SSH, it may say that the authenticity cannot be established and it will ask, “Are you sure you want to continue connecting?” Type <strong>yes</strong> and hit <strong>Enter</strong>. <br /> You will then need to <strong>enter your password</strong> for the Raspberry Pi that we wrote down in Section 1.5. <br /> Note that the password will <u>__not__</u> appear on the screen as you are typing it.</p>
+</li>
+<li><p>If you want to end the SSH connection, type <strong>exit</strong> into the terminal and hit <strong>Enter</strong>.</p>
+</li>
+</ol>
+<blockquote><p>The Raspberry Pi terminal uses <strong>Linux commands</strong>. An easy guide to Linux commands can be found on the SSE Tech Support website under M2Z &gt; Learning Resources &gt; Programming Skills and Tools &gt; Linux Terminal (<a href="https://schulich.libguides.com/c.php?g=721481).&gt;">https://schulich.libguides.com/c.php?g=721481).&gt;</a> <strong>Troubleshooting and Problem Solving:</strong> <br /><br /> While trying to connect via SSH, I had the following problems:<br />- My laptop was connected to a different network than the Raspberry Pi, so the SSH connection was refused<br />- I entered the wrong username into the terminal (shown in <strong>red</strong>), so it didn’t recognize the password I had written down<br /><br />Once I solved these problems, I had success connecting (shown in <strong>blue</strong>).<br /><br /><img src="Go-Go-Gadget-Images/setup25.png" alt="SSH Troubleshooting" /><br /><br />If you are having difficulty connecting, look for the problems listed above. You can also double-check that your IP address is correct and that the power to the Raspberry Pi is on. If these do not work, try using <strong>PuTTY</strong> to connect (see the article link in the green box at the beginning of this Section).</p>
+<hr />
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Phase-2:-Connecting-the-Sensors">Phase 2: Connecting the Sensors<a class="anchor-link" href="#Phase-2:-Connecting-the-Sensors"> </a></h2><p>You will need:</p>
+<ul>
+<li>A computer</li>
+<li>A Raspberry Pi 4 Model B with microSD card and OS already installed (Phase 1)</li>
+<li>A USB-C power cable (with an on/off switch is best)</li>
+<li>A Grove Base HAT for Raspberry Pi with included Screws and Spacers (Seeed brand)</li>
+<li>A Grove Temperature &amp; Humidity Sensor with included Ribbon Cable (Seeed brand)</li>
+<li>A DHT11 Temperature &amp; Humidity Sensor</li>
+<li>3 Female-to-Male electrical wires (should be compatible with a breadboard)</li>
+<li>A Solderless Breadboard</li>
+<li>Small Phillips-Head Screwdriver (size 0)</li>
+</ul>
+<p>Estimated Time Required: 3 Hours</p>
+<h3 id="2.1:-Connecting-the-Grove-Base-HAT">2.1: Connecting the Grove Base HAT<a class="anchor-link" href="#2.1:-Connecting-the-Grove-Base-HAT"> </a></h3><p>The Grove Base HAT for Raspberry Pi should include the Base HAT (a nifty way to connect sensors to your Raspberry Pi), four spacers and eight screws. The unit is called a HAT (Hardware Attached on Top) because it sits on top of the Raspberry Pi!</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_base_HAT_kit.png" alt="Grove Base HAT Kit" /></p>
+<blockquote><p>The content in Section 2.1 is based on the article How to mount a Grove Base Hat for Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/">https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/</a>).
+To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
+</blockquote>
+<ol>
+<li>Using your small Phillips-head screwdriver, attach the spacers to the Grove Base HAT as shown below.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT1.png" alt="Spacers Attached to Grove Base HAT" /></p>
+<ol>
+<li>Carefully press the Grove Base HAT onto the GPIO pins of the Raspberry Pi using the black ports on the underside of the HAT. Be careful not to bend the GPIO pins. Then, use the remaining four screws to attach the HAT to the Raspberry Pi, as shown below.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT2.png" alt="Grove Base HAT Attatched to Raspi" /></p>
+<ol>
+<li>Install the Seeed studio provided grove.py software, using one of two methods. Note: Only Method 1 worked for my setup.</li>
+</ol>
+<p><strong>Method 1:</strong> Git Clone Method, Successful</p>
+<ul>
+<li>Connect to the Raspberry Pi using SSH</li>
+<li>In the Terminal, type <strong>git clone <a href="https://github.com/Seeed-Studio/grove.py">https://github.com/Seeed-Studio/grove.py</a></strong> and hit <strong>Enter</strong></li>
+<li>Type <strong>cd grove.py</strong> into the terminal and hit <strong>Enter</strong></li>
+<li>Type <strong>sudo pip3 install .</strong> and wait for it to install (this may take a minute)</li>
+</ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT3.png" alt="Successful grove.py Download" /></p>
+<blockquote><p>The git clone method can also be found on the Seeed Studio webpage for the Grove Base HAT (<a href="https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/">https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/</a>).
+<strong>Method 2:</strong> Curl Method, Unsuccessful</p>
+</blockquote>
+<ul>
+<li>Connect to the Raspberry Pi using SSH</li>
+<li>In the Terminal, type <strong>sudo apt update</strong> and hit <strong>Enter</strong> (this line was not successful for me)</li>
+<li>Then, type <strong>sudo apt install -y curl</strong> and hit <strong>Enter</strong></li>
+<li>If needed, you can see the version of curl by typing <strong>curl --version</strong> and hitting <strong>Enter</strong></li>
+<li>Then, type <strong>curl -sL <a href="https://github.com/Seeed-Studio/grove.py/raw/master/install.sh">https://github.com/Seeed-Studio/grove.py/raw/master/install.sh</a> | sudo bash -s –</strong></li>
+</ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT4.png" alt="Unsuccessful grove.py Download 1/3" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT5.png" alt="Unsuccessful grove.py Download 2/3" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT6.png" alt="Unsuccessful grove.py Download 3/3" /></p>
+<ol>
+<li>After grove.py is installed, you can type <strong><code>grove_</code></strong> into the Terminal and hit <strong>Tab</strong>. This allows you to see the various modules you can use with your Internet of Things (IOT) devices.</li>
+</ol>
+<h3 id="2.2:-Connecting-the-Grove-Temperature-and-Humidity-Sensor">2.2: Connecting the Grove Temperature and Humidity Sensor<a class="anchor-link" href="#2.2:-Connecting-the-Grove-Temperature-and-Humidity-Sensor"> </a></h3><p>Even though it is not obvious from the packaging, the Grove Temperature and Humidity Sensor Version 2.0 is a DHT20 sensor. You may find this information useful during research. Your package should look something like this:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor_kit.png" alt="Grove Sensor Kit" /></p>
+<blockquote><p>The content in Section 2.2 is based on the article How to use a Grove Temperature and Humidity Sensor Pro with a Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;">https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;</a> <strong>Using Secure Copy (SCP):</strong><br /><br />In this section, we need to transfer files from our personal computer to the Raspberry Pi. We can do this using Secure Copy (SCP).<br /><br />Since we already enabled SSH, SCP is also enabled.<br /><br />Here’s what to do:<br /><br />1. Make sure your personal computer is on the <strong>same network</strong> as the Raspberry Pi, just like you would do for an SSH connection.<br /><br />2. In the Command Prompt on your computer, navigate to the folder that contains the file you want to transfer. On Windows, you can do this using the cd and dir commands.<br /><br />3. From that location, type into the terminal: <strong>scp filename.txt username@[IP]:folder/</strong><br /><br />4. You will then need to input the password of your Raspberry Pi.<br /><br />For example, if we needed to save a file called test_code.py to the “Code” folder on the Raspberry Pi at the IP address 192.168.1.138, the line would look like this:<br /><br /><strong>scp test_code.py christina@192.168.1.138:Code/</strong><br /><br />Note that the folder you specify is the location you want to save the file to on the Raspberry Pi. The folder is the file path relative to the “Home” folder on the Raspberry Pi.&gt; You can learn more about Secure Copying with the Raspberry Pi here (<a href="https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi">https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi</a>).
+To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we need to do the following:</p>
+</blockquote>
+<ol>
+<li><p>Install needed packages:</p>
+<ul>
+<li>Connect to the Raspberry Pi via SSH</li>
+<li>Install the seeed-python-dht package: Type <strong>pip3 install seeed-python-dht</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong></li>
+<li>Install the python-smbus package: Type <strong>sudo apt-get install -y python smbus</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong>. <u>Note:</u> This may not work as the package has become obsolete</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/grove_sensor1.png" alt="Installing python smbus" /></p>
+<ul>
+<li>Install the i2c-tools package: Type <strong>sudo apt-get install -y i2c-tools</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong></li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/grove_sensor2.png" alt="Installing i2c-tools" /></p>
+</li>
+<li><p>Make a folder to put our test code into called “Code”:</p>
+<ul>
+<li>If you type <strong>ls</strong> into the terminal, it lists all of the files and folders under the “Home” directory</li>
+<li>Type <strong>mkdir Code</strong> in the terminal to create a folder called “Code” under the “Home” directory</li>
+<li>We can confirm that the folder was created using <strong>ls</strong> again</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/grove_sensor3.png" alt="Creating a New Folder" /></p>
+</li>
+<li><p>Put some test code onto the Raspberry Pi:</p>
+<ul>
+<li>On your personal computer, create a Python script that will be used to test if the sensor is properly connected. I called mine <strong>“i2c_grove_test.py”</strong> and I used the code here, from user ultracold on the Raspberry Pi Stack Exchange: <a href="https://raspberrypi.stackexchange.com/questions/133457/how-can-rpi4b-use-python-to-talk-to-the-i2c-dht20-sht20-temperature-and-humidi">https://raspberrypi.stackexchange.com/questions/133457/how-can-rpi4b-use-python-to-talk-to-the-i2c-dht20-sht20-temperature-and-humidi</a> </li>
+<li>In the Raspberry Pi Terminal, type <strong>exit</strong> and hit <strong>Enter</strong> to end the SSH connection</li>
+<li>Using Secure Copy (SCP), copy this new file into the “Code” file of the Raspberry Pi. Do this by navigating to the directory containing “i2c_grove_test.py” in your command prompt, and then typing the line:</li>
+</ul>
+<p><strong>scp i2c_grove_test.py username@[IP]:Code/</strong></p>
+<p>For example, mine was:</p>
+<p><strong>scp i2c_grove_test.py christina@192.168.1.138:Code/</strong></p>
+</li>
+<li><p>Plug the sensor in:</p>
+<ul>
+<li>If you are still connected to the Raspberry Pi via SSH, type <strong>exit</strong> to end the connection</li>
+<li><strong>Power off</strong> the Raspberry Pi. Since we will be plugging things into it, it’s a good idea to <strong>unplug the power cable</strong> as well</li>
+<li>Using the ribbon cable that comes with the Grove Temperature and Humidity Sensor, plug the sensor into the <strong>first I2C port</strong> of the Grove Base HAT (labelled on the official pinout below)</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/grove_sensor4.png" alt="I2C Port Diagram" /></p>
+</li>
+<li><p>Power on the Raspberry Pi and reconnect via SSH</p>
+</li>
+<li><p>Enable the use of the I2C ports:</p>
+<ul>
+<li>In the Raspberry Pi terminal, type <strong>sudo raspi-config</strong> and hit <strong>Enter</strong></li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_1.png" alt="sudo raspi-config" /></p>
+<ul>
+<li>Like you did in Section 1.6, choose <strong>Interface Options</strong> and hit <strong>Enter</strong></li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_2.png" alt="Raspi Software Configuration Tool" /></p>
+<ul>
+<li>Now, instead of choosing SSH we will now choose <strong>I2C</strong> (option I5 below). Navigate through the menus and <strong>enable the I2C ports</strong></li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/SSH_3.png" alt="Choosing I2C" /></p>
+</li>
+<li><p>Now comes an interesting part. We need to know the I2C address of our sensor so our code can talk to it. But how do we do this? We use the line <strong>i2cdetect -y 1</strong> in our Raspberry Pi terminal. With the sensor attached, your output should look something like this:</p>
+<p><img src="Go-Go-Gadget-Images/i2c_detect_sensor_plugged_in.png" alt="I2C Detect with Sensor Plugged In" /></p>
+<p>Note that there are two numbers that show up: 08 and 38. This means that the Raspberry Pi recognizes two sensors, one with the address 0x08 and the other with the address 0x38.</p>
+<p>The “0x” part that we add on to the number just means the address is a hexadecimal code.</p>
+<p>You may be wondering how we can tell which number is the address of our sensor. Simple!</p>
+<ul>
+<li><strong>Exit</strong> the SSH connection and <strong>power off and unplug</strong> your Raspberry Pi</li>
+<li>When the power cable is unplugged, <strong>unplug the Grove sensor</strong></li>
+<li><strong>Plug the power cable back in</strong> and <strong>power on</strong> the Raspberry Pi</li>
+<li><strong>Run the I2C detection code</strong> again</li>
+</ul>
+<p>You should get something like this:</p>
+<p><img src="Go-Go-Gadget-Images/i2c_detect_sensor_not_plugged_in.png" alt="I2C Detect with Sensor Not Plugged In" /></p>
+<p>Notice how we don’t get the 0x38 address when the sensor isn’t plugged in? This means that <strong>0x38 is the I2C address of the sensor</strong> when plugged in to the first I2C port.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>A Few Notes About I2C Addresses:</strong><br /><br />- There is no guarantee that the sensor will have the same I2C address if you plug it into one of the other I2C ports. Make sure you use the same port every time or check the I2C address again.<br />- Don’t worry if you don’t get the same numbers as I did above. The important part is finding the address for your sensor.<br />- The purpose of the 0x08 I2C address is somewhat unclear. It may be a master or default I2C address. Either way, you may see it used in code to test if the I2C connection is set up properly. This is shown in the <strong>i2c_grove_test.py</strong> code below (lines 12-14), where “Initialization Error” is printed if there is no 0x08 present:</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># User ultracold</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">smbus</span>
+
+<span class="n">address</span> <span class="o">=</span> <span class="mh">0x38</span> <span class="c1">#Put your device&#39;s address here</span>
+
+<span class="n">i2cbus</span> <span class="o">=</span> <span class="n">smbus</span><span class="o">.</span><span class="n">SMBus</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">i2cbus</span><span class="o">.</span><span class="n">read_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0x71</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="mh">0x08</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initialization error&#39;</span><span class="p">)</span>
+
+<span class="n">i2cbus</span><span class="o">.</span><span class="n">write_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0xac</span><span class="p">,[</span><span class="mh">0x33</span><span class="p">,</span><span class="mh">0x00</span><span class="p">])</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">i2cbus</span><span class="o">.</span><span class="n">read_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0x71</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">Traw</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mi">200</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">Traw</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span> <span class="o">-</span> <span class="mi">50</span>
+
+<span class="n">Hraw</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xf0</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">Hraw</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">humidity</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li><p>Modify your test code if necessary:</p>
+<ul>
+<li>In the <strong>i2c_grove_test.py</strong> code above, you need to make sure that the default address (0x08) and sensor address (0x38) are included in the code. If you have different addresses in your setup, use those.</li>
+<li><p>You may also want to change the print statements. Right now, it will only print the temperature and humidity values but it is not obvious to a user which number is which. I recommend changing them to something like:</p>
+<p><code>print(“Temperature: ”, temperature)</code></p>
+<p><code>print(“Humidity: ”, humidity)</code></p>
+</li>
+<li><p>On the Raspberry Pi terminal, you can use the command <strong>nano</strong> to access and modify files using the GNU Nano text editor.</p>
+</li>
+<li>Navigate to the location of the test file by using <strong>cd</strong> (change directory) to get to the “Code” folder. The line should be <strong>cd Code</strong>. Then, hit <strong>Enter</strong>.</li>
+<li>Next, type <strong>nano i2c_grove_test.py</strong> and hit <strong>Enter</strong>. This will allow you to edit the file and move around the lines of code using arrow keys.</li>
+<li>There are commands at the bottom of the screen that tell you what to do (shown below). Note that “^X” means <strong>Ctrl + X</strong>.  The file will ask you if you want to <strong>overwrite</strong> (save your changes) before editing. Select <strong>Yes</strong>.</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/nano_controls.png" alt="Nano Controls" /></p>
+</li>
+<li><p>Finally, run the test code!</p>
+<ul>
+<li>In the Raspberry Pi terminal, navigate to the “Code” folder that contains the i2c_grove_test.py file (same command as before, use <strong>cd Code</strong>).</li>
+<li>Then, type <strong>python3 i2c_grove_test.py</strong> and hit <strong>Enter</strong>. This will run the file, which will look something like this:</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/grove_sensor5.png" alt="Running i2c_grove_test.py" /></p>
+<blockquote><p><strong>Troubleshooting:</strong><br /><br />- If the Python script will not run, check for errors in your code. If this does not solve the problem, it may help to make the first line of the code #!/usr/bin/python3 since this tells the system to use Python3 as the interpreter directly.<br />- If the temperature and humidity values are all zeros, this is a sign that the code is not actually talking to the sensor. Check that you have the right I2C addresses and, if necessary, unplug the power and unplug/plug in the sensor to the Grove Base HAT again.</p>
+<h3 id="2.3:-Connecting-the-ASAIR-DHT11-Sensor">2.3: Connecting the ASAIR DHT11 Sensor<a class="anchor-link" href="#2.3:-Connecting-the-ASAIR-DHT11-Sensor"> </a></h3>
+</blockquote>
+</li>
+</ol>
+<p>Now that we have successfully connected one temperature and humidity sensor to the Raspberry Pi, we will connect a sensor of a different type that does the same thing. This will be the ASAIR DHT11 sensor, which also collects temperature and humidity data from the environment.</p>
+<p>Here’s the key difference: We don’t have a ribbon cable and a port like last time. This sensor needs to be manually connected to the Raspberry Pi’s <strong>General-Purpose Input/Output (GPIO) pins</strong> using wires and possibly a breadboard.</p>
+<p>Your DHT11 should look like the one below. When researching these sensors, pay close attention to the information below:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_sensor1.jpg" alt="DHT11 Sensor" /></p>
+<blockquote><p><strong>Be Aware!</strong><br /><br />While all of these sensors look pretty much the same, researching the wrong sensor will set you back. Here are some things to look for:<br /><br />- <strong>Number of Pins</strong> – Does it have three pins coming out of the bottom or four?<br />- <strong>Brand</strong> – Is there a brand name visible anywhere on the sensor?<br />- <strong>The Letter S</strong> – If there is an “S” on one side of the sensor, it means the pin closest to it is the <strong>signal pin</strong>. This will be useful when researching pinouts.<br />- <strong>Small LED</strong> – Some sensors come with a small LED on the left side that lights up if you have wired it to power correctly. The sensor shown here <strong>does not have an LED</strong>. The small component above the “S” is a resistor, so don’t expect it to light up!&gt; The content in Section 2.3 is based on the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
+<ol>
+<li>Find the correct pinout for your DHT11 Sensor:</li>
+</ol>
+</blockquote>
+
+<pre><code>- A __pinout__ is a diagram that tells you what each pin does on an electrical device.
+- Pay close attention to the bullet points in the blue box above; we already know that our sensor has the __signal pin on the left__.
+- Three pins to look for:
+    - __Common Collector Voltage (VCC):__ The power supply pin, or positive (+) pin. You can use anywhere from 3.3V to 5V with the DHT11.
+    - __Sensor, Signal or Data:__ The pin that sends the data to the Raspberry Pi. If an “S” is present on the DHT11, it is the pin closest to the “S”.
+    - __Ground (GND):__ The ground pin, or negative (-) pin. Typically connected using a black-coloured wire.
+- Here’s a good pinout to use:
+
+![DHT11 Pinout](Go-Go-Gadget-Images/dht11_pinout.png)
+</code></pre>
+<blockquote><p>DHT11 pinout reference:<a href="https://components101.com/sensors/dht11-temperature-sensor">https://components101.com/sensors/dht11-temperature-sensor</a></p>
+<ol>
+<li>Find the correct pinout for the Raspberry Pi 4 Model B GPIO pins:</li>
+</ol>
+</blockquote>
+
+<pre><code>- We will need to connect the DHT11 to the __GPIO pins__ of the Raspberry Pi
+- We put the Grove Base HAT on top of the Raspberry Pi’s GPIO pins, so now we need to use the Grove Base HAT’s GPIO pins
+- The Grove Base HAT has the __same pinout__ as the Raspberry Pi beneath it
+- __Important Note:__ Each GPIO pin has both a __pin number__ and a __name__. Test codes use the name.
+- Here’s a good pinout to use: 
+
+![Raspberry Pi and Grove Base HAT Pinout](Go-Go-Gadget-Images/raspi_pinout.png)
+</code></pre>
+<blockquote><p>Raspberry Pi 4 GPIO pinout reference:<a href="https://linuxhint.com/gpio-pinout-raspberry-pi/">https://linuxhint.com/gpio-pinout-raspberry-pi/</a></p>
+<ol>
+<li>Wire the sensor to the Raspberry Pi’s GPIO Pins. Use one of two methods, depending on the wires you have available:</li>
+</ol>
+</blockquote>
+<p><strong>Method 1:</strong> (Easiest) Using three female-female wires</p>
+<ul>
+<li>Wire each sensor pin directly to its GPIO pin destination:<ul>
+<li>Attach one female end of each wire to the pins on the sensor</li>
+<li>Attach the other female end of each wire to the correct GPIO pin on the Raspberry Pi</li>
+</ul>
+</li>
+<li>You can use the two pinout sketches above to determine which pins should be connected to each other</li>
+<li>Your setup should look something like this:</li>
+</ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_connection_method1.PNG" alt="DHT11 Connection Method 1" /></p>
+<p><strong>Method 2:</strong> Using three male-female wires</p>
+<ul>
+<li>Put the sensor into the solderless breadboard. It should be inserted into one of the lettered rows, such as the “a” row</li>
+<li>Put the male end of each wire into the breadboard. Keep in mind:<ul>
+<li>Each sensor pin is connected to all of the breadboard holes in the same  column (numbered on the breadboard) <strong>on that side of the breadboard</strong></li>
+<li>In other words, you can plug the wire in anywhere inside the coloured box shown on the breadboard in the sketch below</li>
+<li>You may need to stagger the wires on the breadboard; plug them in so that they are in the correct (numbered) column but are not in the same (lettered) row</li>
+</ul>
+</li>
+<li>Attach the female end of each wire to the correct GPIO pin on the Raspberry Pi</li>
+<li>Your setup should look something like this:</li>
+</ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_connection_method2.PNG" alt="DHT11 Connection Method 2" /></p>
+<ol>
+<li>Gather the test code:</li>
+</ol>
+<ul>
+<li>Gather the test code from the reference below, under “Temperature &amp; Humidity Sensor (DHT11)”<blockquote><p>Find the test code in the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
+</blockquote>
+</li>
+<li>Modify the code slightly so that it matches the code below:</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">seeed_dht</span> <span class="kn">import</span> <span class="n">DHT</span>
+
+<span class="n">dht11</span> <span class="o">=</span> <span class="n">DHT</span><span class="p">(</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># Type, GPIO pin for signal cable</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">humi</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">dht11</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;DHT</span><span class="si">{0}</span><span class="s1">, humidity </span><span class="si">{1:.1f}</span><span class="s1">%, temperature </span><span class="si">{2:.1f}</span><span class="s1">*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dht11</span><span class="o">.</span><span class="n">dht_type</span><span class="p">,</span> <span class="n">humi</span><span class="p">,</span> <span class="n">temp</span><span class="p">))</span>
+    <span class="c1"># print(f&quot;Temp: {temp}&quot;)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Use Secure Copy (SCP) to copy it into the “Code” folder on the Raspberry Pi</li>
+</ul>
+<ol>
+<li>Run the test code:</li>
+</ol>
+<ul>
+<li>Turn your Raspberry Pi on</li>
+<li>Connect to the Raspberry Pi via SSH</li>
+<li>Navigate to the “Code” folder using <strong>cd Code</strong> in the terminal</li>
+<li>Run the test code by typing <strong>python3 filename.py</strong> into the terminal</li>
+</ul>
+<p>Your DHT11 is successfully connected if it gives you <strong>non-zero values</strong> for temperature and humidity.</p>
+<blockquote><p><strong>Sensor Accuracy:</strong><br /><br />The DHT11 can only give values with an accuracy of zero decimal places. You may notice that the test code prints values that end in “.0” - this is because the data has been formatted.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Phase-3:-Making-Sense-of-the-Data">Phase 3: Making Sense of the Data<a class="anchor-link" href="#Phase-3:-Making-Sense-of-the-Data"> </a></h2><p>You will need:</p>
+<ul>
+<li>The Raspberry Pi Setup from Phase 2</li>
+</ul>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Phase-4:-Showing-Off-the-Important-Stuff">Phase 4: Showing Off the Important Stuff<a class="anchor-link" href="#Phase-4:-Showing-Off-the-Important-Stuff"> </a></h2><p>Insert Things Here</p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+<h2 id="Test-Destination-">Test Destination <a class="anchor" id="test-destination" /><a class="anchor-link" href="#Test-Destination-"> </a></h2><p>A test destination for Table of Contents.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/RexCoding/2022/06/18/Go-Go-Gadget.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
