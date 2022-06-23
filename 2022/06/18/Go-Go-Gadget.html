@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      29 min read
+      48 min read
     
 </span></p>
 
@@ -125,19 +125,11 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>&lt;font color=#3090C7&gt;Sample Blue Text&lt;/font&gt;</strong></p>
-<hr />
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Project-Scope">Project Scope<a class="anchor-link" href="#Project-Scope"> </a></h2><h3 id="Project-Goals">Project Goals<a class="anchor-link" href="#Project-Goals"> </a></h3><ol>
 <li>Gain a better understanding of computer hardware by using a Raspberry Pi 4.</li>
 <li>Learn methods of collecting data using electronic sensors.</li>
 <li>Compare temperature and humidity data from several different sensors.</li>
-<li>Implement a Graphical User Interface (GUI) to express data in a clear and meaningful way.</li>
+<li>Implement a web application to express data in a clear and meaningful way.</li>
 </ol>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/project_scope.png" alt="Project Scope" /></p>
 <h3 id="Procedure">Procedure<a class="anchor-link" href="#Procedure"> </a></h3><ol>
@@ -676,7 +668,9 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Based on code from &quot;Temperature &amp; Humidity Sensor (DHT11)&quot; section here: https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">seeed_dht</span> <span class="kn">import</span> <span class="n">DHT</span>
 
 <span class="n">dht11</span> <span class="o">=</span> <span class="n">DHT</span><span class="p">(</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># Type, GPIO pin for signal cable</span>
@@ -711,6 +705,7 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 </ul>
 <p>Your DHT11 is successfully connected if it gives you <strong>non-zero values</strong> for temperature and humidity.</p>
 <blockquote><p><strong>Sensor Accuracy:</strong><br /><br />The DHT11 can only give values with an accuracy of zero decimal places. You may notice that the test code prints values that end in “.0” - this is because the data has been formatted.</p>
+<hr />
 </blockquote>
 
 </div>
@@ -720,25 +715,765 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Phase-3:-Making-Sense-of-the-Data">Phase 3: Making Sense of the Data<a class="anchor-link" href="#Phase-3:-Making-Sense-of-the-Data"> </a></h2><p>You will need:</p>
 <ul>
-<li>The Raspberry Pi Setup from Phase 2</li>
+<li>A computer</li>
+<li>The Raspberry Pi 4 Setup with DHT11 and DHT20 Sensors (from Phase 2)</li>
+</ul>
+<p>Estimated Time Required: 3 Hours</p>
+<h3 id="3.1:-Installing-Extra-Libraries">3.1: Installing Extra Libraries<a class="anchor-link" href="#3.1:-Installing-Extra-Libraries"> </a></h3><p>The code for Phase 3 will require us to install some extra libraries: <strong>Pandas</strong>, which will allow us to easily store the data in different forms, and <strong>Matplotlib</strong>, which will allow us to create graphs of the data. Follow the steps below:</p>
+<ol>
+<li>Connect to the Raspberry Pi via SSH.</li>
+<li>Install Pandas by typing <strong>sudo apt-get install python3-pandas</strong> into the Terminal and hitting <strong>Enter</strong>. If a message appears about disk space and it asks you if you want to continue, type <strong>Y</strong> for "Yes" and hit <strong>Enter</strong>.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_pandas.png" alt="Installing Pandas" /></p>
+<ol>
+<li>Install Matplotlib by typing <strong>sudo apt install python3-matplotlib</strong> into the Terminal and hitting <strong>Enter</strong>.</li>
+</ol>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_matplotlib.png" alt="Installing Matplotlib" /></p>
+<p>We will also use the Time and Datetime libraries, but these come built-in and we don’t need to install them.</p>
+<h3 id="3.2:-Writing-the-Data-Collection-Code">3.2: Writing the Data Collection Code<a class="anchor-link" href="#3.2:-Writing-the-Data-Collection-Code"> </a></h3><p>Now, we need to write the code that will collect the temperature and humidity data. I called my script <strong>“T_H_data_collector”</strong>.</p>
+<p>I’m a big fan of laying out what I want a script to do before I start writing it. Here is what the code should do:</p>
+<ul>
+<li>Gather data from the DHT11 sensor</li>
+<li>Gather data from the DHT20 sensor</li>
+<li>Store all data in a CSV file</li>
+<li>CSV file should be added to when new data is gathered and not overwrite old data</li>
+<li>Generate an exception if a sensor is not responding</li>
+</ul>
+<p>To allow us to see the data in real time as the code runs, it would also be a good idea to:</p>
+<ul>
+<li>Print each line of data to the terminal when it is collected</li>
+</ul>
+<p>In essence, I combined the previous scripts used to test each sensor and then added the exception handling and data storage code. Here’s my code, but you should try to generate a similar result on your own:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Current Version: v2-3, June 19, 2022</span>
+<span class="c1"># References:</span>
+    <span class="c1"># DHT11 data collection code is from grove.py documentation: https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</span>
+    <span class="c1"># DHT20 data collection code is from user ultracold on StackExchange: https://raspberrypi.stackexchange.com/questions/133457/how-can-rpi4b-use-python-to-talk-to-the-i2c-dht20-sht20-temperature-and-humidi </span>
+<span class="c1"># Instructions:</span>
+    <span class="c1"># Run via Raspberry Pi terminal using command: python3 T_H_data_collector_v1.py</span>
+    <span class="c1"># Stop code using Ctrl + C or Command + C</span>
+
+<span class="c1"># Changes from v2-2:</span>
+<span class="c1"># - Added an if-else statement so that the header of the DataFrame is not written to the CSV file every single time</span>
+<span class="c1"># - Removed import of csv library (no longer needed)</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">smbus</span>
+<span class="kn">from</span> <span class="nn">seeed_dht</span> <span class="kn">import</span> <span class="n">DHT</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="c1"># Exception class will stop the code if we cannot connect to either sensor</span>
+
+<span class="k">class</span> <span class="nc">ConnectionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Exception raised when a sensor is not connected or responding to test code.&quot;&quot;&quot;</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Using a function to write each line of the CSV file containing temperature and humidity data</span>
+
+<span class="k">def</span> <span class="nf">write_line</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write a line of data to a CSV file. Data is collected by one DHT11 and one DHT20 temperature and humidity sensor.</span>
+<span class="sd">    Each line contains: current date, current time, dht11_temp, dht11_humi, dht20_temp, dht20_humi.</span>
+<span class="sd">    - Arguments: None</span>
+<span class="sd">    - Returns: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Let&#39;s get data from the DHT11 sensor</span>
+
+    <span class="n">dht11</span> <span class="o">=</span> <span class="n">DHT</span><span class="p">(</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># Type, GPIO pin for signal cable</span>
+
+    <span class="c1"># Make sure DHT11 can connect. If not, raise ConnectionError</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht11_temp</span> <span class="o">=</span> <span class="n">dht11</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;DHT11 Sensor is not responding. Please check connection.&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Let&#39;s get data from the DHT20 sensor</span>
+
+    <span class="n">address</span> <span class="o">=</span> <span class="mh">0x38</span> <span class="c1"># Put your device&#39;s address here</span>
+
+    <span class="n">i2cbus</span> <span class="o">=</span> <span class="n">smbus</span><span class="o">.</span><span class="n">SMBus</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Check that I2C connection was initialized. If not, raise ConncectionError</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">i2cbus</span><span class="o">.</span><span class="n">read_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0x71</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="mh">0x08</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Initialization Error. Please check connection.&quot;</span><span class="p">)</span>
+
+    <span class="n">i2cbus</span><span class="o">.</span><span class="n">write_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0xac</span><span class="p">,[</span><span class="mh">0x33</span><span class="p">,</span><span class="mh">0x00</span><span class="p">])</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Make sure DHT20 can connect. If not, raise ConnectionError</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">i2cbus</span><span class="o">.</span><span class="n">read_i2c_block_data</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="mh">0x71</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;DHT20 Sensor is not responding. Please check connection.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Format the DHT20 data so it makes sense to us</span>
+
+    <span class="n">Traw</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">dht20_temp</span> <span class="o">=</span> <span class="mi">200</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">Traw</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span> <span class="o">-</span> <span class="mi">50</span>
+
+    <span class="n">Hraw</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xf0</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">dht20_humi</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">Hraw</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span>
+
+    <span class="c1"># list of date, time --&gt; Need to be converted into list format</span>
+
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+
+    <span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">))</span>
+
+    <span class="c1"># Save the dictionary of lists into a Pandas DataFrame</span>
+
+    <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="n">times</span><span class="p">,</span> <span class="s2">&quot;DHT11 Temp&quot;</span><span class="p">:</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="s2">&quot;DHT11 Humi&quot;</span><span class="p">:</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="s2">&quot;DHT20 Temp&quot;</span><span class="p">:</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="s2">&quot;DHT20 Humi&quot;</span><span class="p">:</span> <span class="n">dht20_humi</span><span class="p">}</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="c1"># Print current line of data to the terminal</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Write data to CSV file.</span>
+    <span class="c1"># If the file already exists, append to the file without the header &quot;Date, Time, DHT11 Temp, ...&quot;.</span>
+    <span class="c1"># If the file does not already exist, a new file will be created and the header &quot;Date, Time, DHT11 Temp, ...&quot; will be written to the file along with the data.</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;DHT_data.csv&quot;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;DHT_data.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>     <span class="c1"># &quot;a&quot; ensures you append to the CSV, not overwrite it</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;DHT_data.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">write_line</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I had to try several different versions of the code to get the result I wanted. The general procedure of how I collected the data is:</p>
+<ol>
+<li><p>Get data from sensors</p>
+</li>
+<li><p>Format data as needed</p>
+</li>
+<li><p>Store data in a list (of length 1)</p>
+</li>
+<li><p>Combine all lists into a dictionary containing the Date, Time, DHT11 Temp, DHT11 Humi, DHT20 Temp, and DHT20 Humi for that instant. There is only one data point per category.</p>
+</li>
+<li><p>Write the data to the CSV file “DHT_data.csv”:</p>
+<ul>
+<li><p>If the file already exists, append to the file without the header "Date, Time, DHT11 Temp, DHT11 Humi, DHT20 Temp, DHT20 Humi".</p>
+</li>
+<li><p>If the file does not already exist, a new file will be created and the header "Date, Time, DHT11 Temp, ..." will be written to the file along with the data.</p>
+<blockquote><p><strong>Try It Yourself:</strong> <br /><br />Try to make the code above more efficient or simpler; there are many different ways to write data to a CSV file, and the method used above could be improved.</p>
+<h3 id="3.3:-Writing-the-Statistics-and-Graphing-Code">3.3: Writing the Statistics and Graphing Code<a class="anchor-link" href="#3.3:-Writing-the-Statistics-and-Graphing-Code"> </a></h3>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>In another file, I wrote the code used to process the data and represent it in a meaningful way. I called this file <strong>“data_stats_graphs.py”</strong>. Whenever I needed to import this code into another file, I used the line <code>import data_stats_graphs as dsg</code>.</p>
+<p>The code achieves two main goals:</p>
+<ol>
+<li><p>Graph the data: Graph the values collected by both sensors and shade in the difference between these values. Create two graphs – one for temperature and one for humidity – and save each as a PNG file.</p>
+</li>
+<li><p>Give a meaningful statistic on the data: Calculate the average percent difference between the values from two sensors for both temperature and humidity data.</p>
+</li>
+</ol>
+<p>The overall structure of the code is explained in this infographic:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/data_stats_graphs_infographic.png" alt="Infographic of data_stats_graphs.py" /></p>
+<p>Here is the code:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># FINAL VERSION -- Currently in Use on R.Pi (June 20, 2022)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gather all data from the CSV file containing DHT11 and DHT20 temperature and humidity data. Sort data into lists.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    - filename: (str) Name of CSV file containing DHT11 and DHT20 data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - labels: (list of strings) List containing date, time information of the form &quot;Date, Time&quot;</span>
+<span class="sd">    - dht11_temp: (list of floats) List containing DHT11 temperature data</span>
+<span class="sd">    - dht11_humi: (list of floats) List containing DHT11 humidity data</span>
+<span class="sd">    - dht20_temp: (list of floats) List containing DHT20 temperature data</span>
+<span class="sd">    - dht20_humi: (list of floats) List containing DHT20 humidity data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Set up all data as lists</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">datelabels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">timelabels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+
+
+    <span class="c1"># Get labels for the x-axis of the graphs; has the form &quot;Date, Time&quot;</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datelabels</span><span class="p">)):</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datelabels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">timelabels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Get lists for temperature data</span>
+
+    <span class="n">dht11_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">dht20_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+
+    <span class="c1"># Get lists for humidity data</span>
+
+    <span class="n">dht11_humi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">dht20_humi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">5</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="n">dht20_humi</span>
+
+<span class="k">def</span> <span class="nf">line_graph_temp</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a PNG image of a Matplotlib graph for the DHT11 and DHT20 temperature data. Graph is a scatterplot with lines connecting discrete data points. Region between sets of data is shaded.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    - filename: (str) Name of CSV file containing data</span>
+
+<span class="sd">    Returns: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1"># Get all date-time labels and temp, humi data</span>
+
+    <span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="n">dht20_humi</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Convert DataFrames to List format</span>
+
+    <span class="n">dht11_temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht11_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht11_humi_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht11_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht20_temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht20_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht20_humi_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht20_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># Create figure object</span>
+
+    <span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+
+    <span class="c1"># Plot as a continuous line with dots at each data point</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp_list</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHT11 Sensor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht20_temp_list</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHT20 Sensor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># Fill between the curves</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp_list</span><span class="p">,</span> <span class="n">dht20_temp_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;thistle&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># Set axis labels, title and legend</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date, Time Recorded&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (Degrees Celsius)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparing Temperature Readings of Two Electronic Sensors&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+    <span class="c1"># Rotate text on x-axis</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+
+
+    <span class="c1"># Save as PNG</span>
+
+    <span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;static/line_graph_temp.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">line_graph_humi</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a PNG image of a Matplotlib graph for the DHT11 and DHT20 humidity data. Graph is a scatterplot with lines connecting discrete data points. Region between sets of data is shaded.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    - filename: (str) Name of CSV file containing data</span>
+
+<span class="sd">    Returns: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1"># Get all date-time labels and temp, humi data</span>
+
+    <span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="n">dht20_humi</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Convert DataFrames to List format</span>
+
+    <span class="n">dht11_temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht11_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht11_humi_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht11_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht20_temp_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht20_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dht20_humi_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dht20_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Create figure object</span>
+
+    <span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+
+    <span class="c1"># Plot as a continuous line with dots at each data point</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht11_humi_list</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHT11 Sensor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht20_humi_list</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHT20 Sensor&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># Fill between the curves</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dht11_humi_list</span><span class="p">,</span> <span class="n">dht20_humi_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;thistle&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># Set axis labels, title and legend</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date, Time Recorded&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Humidity (%)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparing Relative Humidity Readings of Two Electronic Sensors&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+    <span class="c1"># Rotate text on x-axis</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+
+
+    <span class="c1"># Save as PNG</span>
+
+    <span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;static/line_graph_humi.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">avg_percent_diff_temp</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the average percent difference between all DHT11 and DHT20 temperature data.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    - filename: (str) Name of CSV file containing data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - average: (float) Average percent difference between all DHT11 and DHT20 temperature data</span>
+<span class="sd">    - avg_statement: (str) String containing statement about calculated average, for display purposes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get all date-time labels and temp, humi data</span>
+
+    <span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="n">dht20_humi</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+
+    <span class="c1"># Calculate the percent difference between each data point</span>
+
+    <span class="n">rects</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dht11_temp</span><span class="p">)):</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dht11_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">dht20_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span> <span class="o">/</span> <span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">dht11_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">dht20_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">rects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
+
+
+    <span class="c1"># Find average of all percent differences and round to 3 decimal places</span>
+
+    <span class="n">average</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="nb">sum</span><span class="p">(</span><span class="n">rects</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rects</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Create an easy-to-print statement summarizing the result</span>
+
+    <span class="c1"># avg_statement = f&quot;Average Percent Difference Between DHT11 and DHT20 Sensors (Temperature): {average}%&quot;</span>
+
+    <span class="k">return</span> <span class="n">average</span>
+
+<span class="k">def</span> <span class="nf">avg_percent_diff_humi</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the average percent difference between all DHT11 and DHT20 humidity data.</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    - filename: (str) Name of CSV file containing data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - average: (float) Average percent difference between all DHT11 and DHT20 humidity data</span>
+<span class="sd">    - avg_statement: (str) String containing statement about calculated average, for display purposes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get all date-time labels and temp, humi data</span>
+
+    <span class="n">labels</span><span class="p">,</span> <span class="n">dht11_temp</span><span class="p">,</span> <span class="n">dht11_humi</span><span class="p">,</span> <span class="n">dht20_temp</span><span class="p">,</span> <span class="n">dht20_humi</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+
+    <span class="c1"># Calculate the percent difference between each data point</span>
+
+    <span class="n">rects</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dht11_humi</span><span class="p">)):</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">dht11_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">dht20_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span> <span class="o">/</span> <span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">dht11_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">dht20_humi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">rects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
+
+
+    <span class="c1"># Find average of all percent differences and round to 3 decimal places</span>
+
+    <span class="n">average</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="nb">sum</span><span class="p">(</span><span class="n">rects</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rects</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+    
+    <span class="c1"># Create an easy-to-print statement summarizing the result</span>
+
+    <span class="c1"># avg_statement = f&quot;Average Percent Difference Between DHT11 and DHT20 Sensors (Temperature): {average}%&quot;</span>
+
+    <span class="k">return</span> <span class="n">average</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;DHT_data.csv&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Observations:</strong><br /><br />- The data used in this code is stored in several Pandas DataFrames. However, you need to convert the data to <strong>list format</strong> for the graphing functions because the data needs to be one-dimensional.<br />- <strong>Pandas.DataFrame.iloc</strong> was a very useful tool for selecting specific rows or columns of Pandas DataFrame data. See the documentation for more details: <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html</a></p>
+<hr />
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Phase-4:-Putting-it-All-Together">Phase 4: Putting it All Together<a class="anchor-link" href="#Phase-4:-Putting-it-All-Together"> </a></h2><p>We have finally reached the part of this project where we can see our work and share it with others! This involves implementing a web application that we can use to show our new statistics and graphs over a network.</p>
+<p>A <strong>web application</strong> is an application software (i.e. Gmail, Google Docs, Microsoft Office 365, etc.) that runs on a network (for example, your Wi-Fi network at home).</p>
+<p>This is also sometimes called a <strong>web server</strong>, which is a different, but related, concept. Web servers can accept and fulfill HTTP GET and POST requests while also representing static data. Static data might be images, files, or text – generally things that don’t regularly change.</p>
+<p>Web applications are a way to represent both <strong>static and dynamic data</strong>. Dynamic data changes over time, and the web app can be used to reflect these changes in real time.</p>
+<p>For the purpose of this section, we will use “web application” and “web server” interchangeably.</p>
+<h3 id="4.1:-Structure-of-Files">4.1: Structure of Files<a class="anchor-link" href="#4.1:-Structure-of-Files"> </a></h3><p>It is important to use the organization of files as shown below. The functions of many of these files will be explained in the remainder of Phase 4.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/go-go-gadget-file-structure.png" alt="File Structure Infographic" /></p>
+<h3 id="4.2:-Installing-Flask">4.2: Installing Flask<a class="anchor-link" href="#4.2:-Installing-Flask"> </a></h3><p>We will use the <strong>Flask</strong> library to implement our web app. Flask may already be installed on the Raspberry Pi, but we need to be sure. Follow the steps below:</p>
+<ol>
+<li><p>Connect to the Raspberry Pi via SSH.</p>
+</li>
+<li><p>In the Terminal, type <strong>sudo pip3 install flask</strong> and hit <strong>Enter</strong>.</p>
+</li>
+</ol>
+<p>If Flask was already installed, the Raspberry Pi will tell you so.</p>
+<h3 id="4.3:-Setting-Up-the-Flask-App">4.3: Setting Up the Flask App<a class="anchor-link" href="#4.3:-Setting-Up-the-Flask-App"> </a></h3><p>I wrote my web application in a file called <strong>“web_server.py”</strong>. You can use this code (below) as a starting point:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">import</span> <span class="nn">data_stats_graphs</span> <span class="k">as</span> <span class="nn">dsg</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Static Route:</span>
+<span class="c1"># if someone requests the root route, execute the following (i.e. what the page shows when nothing or / is typed in the address bar after localhost:5000)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+
+    <span class="c1"># Generate PNG Graphs for the Data</span>
+    <span class="n">dsg</span><span class="o">.</span><span class="n">line_graph_temp</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">dsg</span><span class="o">.</span><span class="n">line_graph_humi</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Template Method:</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">t_avg_percent_diff</span><span class="o">=</span><span class="n">dsg</span><span class="o">.</span><span class="n">avg_percent_diff_temp</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">),</span> <span class="n">h_avg_percent_diff</span><span class="o">=</span><span class="n">dsg</span><span class="o">.</span><span class="n">avg_percent_diff_humi</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>    <span class="c1"># Have the HTML code ready as a template and ask flask to read it back to the user</span>
+                                            <span class="c1"># Templates separate the HTML from the logic and allow you to easily adjust content</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>    <span class="c1"># When we run the server, will run debug mode. Will automatically relaunch server when we change the code!</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">)</span>     <span class="c1"># Tells web server to listen on all network interfaces. Allows web server to be viewed by other devices on the same network.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is a quick breakdown of what is happening, in case you aren’t familiar with Flask apps:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Initializing the Flask app.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span> <span class="o">...</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The default (root) route for the web server. When you access the web server using <strong><a href="http://[IP">http://[IP</a> Address]:[Port #]</strong> or <strong><a href="http://[IP">http://[IP</a> Address]:[Port #]/</strong>, whatever page we put inside of the index() function will show up.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dsg</span><span class="o">.</span><span class="n">line_graph_temp</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">dsg</span><span class="o">.</span><span class="n">line_graph_humi</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create the PNG graphs of the data using the data_stats_graphs.py file we created in Phase 3. These PNGs will be saved to the destination we specified in each <code>line_graph_temp()</code> or <code>line_graph_humi()</code> function (the “static” folder).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">t_avg_percent_diff</span><span class="o">=</span><span class="n">dsg</span><span class="o">.</span><span class="n">avg_percent_diff_temp</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">),</span> <span class="n">h_avg_percent_diff</span><span class="o">=</span><span class="n">dsg</span><span class="o">.</span><span class="n">avg_percent_diff_humi</span><span class="p">(</span><span class="n">dsg</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>    <span class="c1"># Have the HTML code ready as a template and ask flask to read it back to the user</span>
+                                            <span class="c1"># Templates separate the HTML from the logic and allow you to easily adjust content</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This part looks more complicated than it is. If we only had <code>return render_template('index.html')</code>, this would load the HTML page onto the screen when the root route is accessed. All of the statements after this, like <code>t_avg_percent_diff=dsg.avg_percent_diff_temp(dsg.filename)</code> is just a way to load Python data into the HTML page. These lines are written in the form <strong><code>variable_name_in_HTML_page=python_variable</code></strong>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>    <span class="c1"># When we run the server, will run debug mode. Will automatically relaunch server when we change the code!</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">)</span>     <span class="c1"># Tells web server to listen on all network interfaces. Allows web server to be viewed by other devices on the same network.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Run the web server when we run the code. Also run debug mode, which will automatically reload the server when we make changes to the code. This lets us see changes without constantly killing the server and running it again.</p>
+<p>We also choose the “host” to be “0.0.0.0”. This tells the web server to listen on all network interfaces, so if we run this code on the Raspberry Pi and then type <strong><a href="http://[IP">http://[IP</a> Address of Raspberry Pi]:5000</strong> into the URL bar of a browser (Chrome, Microsoft Edge, Firefox, etc.) of a <strong>different computer on the same network</strong>, our web server will show up.</p>
+<p>If we didn’t include the “host” and instead used the line <strong>app.run()</strong>, the web server would only be available locally. This means that it could only be accessed on the same computer running the code. It would show up under the IP address 127.0.0.1, which allows the computer to connect and communicate with itself. This is also known as <strong>localhost</strong>, and we would need to type <strong><a href="http://localhost:5000">http://localhost:5000</a></strong> into the URL of a browser to see the web server.</p>
+<p>You may be wondering what the <strong>“5000”</strong> is. This is the default <strong>port number</strong> – a computer networking endpoint. You can change the port number if you like; instructions can be found in the Flask documentation.</p>
+<p>If this seems confusing, I like to think of the IP addresses and port numbers this way: The IP address is like the name of your street and the port number is like your house number. If someone wanted to go to your house, they would need both to find it. So if one computer wants to “talk” to another, it needs both the IP address of the other computer and the port number to use. It’s not a perfect analogy, but it helped me understand concepts that can seem very abstract.</p>
+<h3 id="4.4:-Creating-the-HTML-Page">4.4: Creating the HTML Page<a class="anchor-link" href="#4.4:-Creating-the-HTML-Page"> </a></h3><p>The HTML page is what will be displayed when we access the web app, and we will use HTML code to make this happen. I did this in a file called <strong>“index.html”</strong>, which is loaded into the web app using the <code>return render_template(…)</code> line from web_server.py. The code is found below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&lt;!</span>-- Author: Christina Kampel --&gt;
+<span class="o">&lt;!</span>DOCTYPE html&gt;
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">Go</span><span class="p">,</span> <span class="n">Go</span><span class="p">,</span> <span class="n">Gadget</span><span class="o">!</span>&lt;/title&gt;
+    <span class="o">&lt;!</span>-- Information we want to show on the App Tab --&gt;
+    <span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span>
+        <span class="o">.</span><span class="n">column</span><span class="p">{</span>
+            <span class="n">width</span><span class="p">:</span><span class="mi">50</span><span class="o">%</span><span class="p">;</span>
+            <span class="nb">float</span><span class="p">:</span><span class="n">left</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="n">row</span><span class="p">::</span><span class="n">after</span><span class="p">{</span>
+            <span class="n">content</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">clear</span><span class="p">:</span> <span class="n">both</span><span class="p">;</span>
+            <span class="n">display</span><span class="p">:</span> <span class="n">table</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+
+
+
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Go</span><span class="p">,</span> <span class="n">Go</span><span class="p">,</span> <span class="n">Gadget</span><span class="o">!</span>&lt;/h1&gt;
+    <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Raspberry</span> <span class="n">Pi</span> <span class="n">Weather</span> <span class="n">Stations</span> <span class="k">for</span> <span class="n">the</span> <span class="n">Absolute</span> <span class="n">Beginner</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Christina</span> <span class="n">Kampel</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="n">Digital</span> <span class="n">Engineering</span> <span class="n">Fellowship</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="n">University</span> <span class="n">of</span> <span class="n">Calgary</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="n">Spring</span> <span class="mi">2022</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;column&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/static/line_graph_temp.png&quot;</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Line Graph of Temperature Data&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;float:left; width:100%&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;column&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/static/line_graph_humi.png&quot;</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;Line Graph of Relative Humidity Data&quot;</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;float:left; width:100%&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="n">Average</span> <span class="n">Percent</span> <span class="n">Difference</span> <span class="n">Between</span> <span class="n">DHT11</span> <span class="ow">and</span> <span class="n">DHT20</span> <span class="n">Sensors</span> <span class="p">(</span><span class="n">Temperature</span><span class="p">):</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">t_avg_percent_diff</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;%&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+        <span class="n">Average</span> <span class="n">Percent</span> <span class="n">Difference</span> <span class="n">Between</span> <span class="n">DHT11</span> <span class="ow">and</span> <span class="n">DHT20</span> <span class="n">Sensors</span> <span class="p">(</span><span class="n">Relative</span> <span class="n">Humidity</span><span class="p">)):</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">h_avg_percent_diff</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;%&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some key points to note:</p>
+<ul>
+<li><p>The content within the <code>&lt;title&gt;</code> tag appears on the tab of the browser you are using to view the page.</p>
+</li>
+<li><p>The content within the <code>&lt;style&gt;</code> tag is used to format the two graphs on the same line, side-by-side. Without this content, the images appear one after the other on two separate lines.</p>
+</li>
+<li><p>The content within the <code>&lt;style&gt;</code> tag is written in CSS (Cascading Style Sheet) format. CSS files are often a separate file that is linked within the HTML file and used to format the HTML page (layouts, colours, fonts, etc.). More information about CSS files is available online.</p>
+</li>
+</ul>
+<p>Now that we have completed all of our project goals, make sure you Secure Copy the files onto the Raspberry Pi and organize them in the structure shown in 4.1. You are now ready to use your Raspberry Pi Weather Station!</p>
+<h3 id="4.5:-Running-the-Raspberry-Pi-Weather-Station">4.5: Running the Raspberry Pi Weather Station<a class="anchor-link" href="#4.5:-Running-the-Raspberry-Pi-Weather-Station"> </a></h3><p>To show off all your hard work, follow the steps below!</p>
+<ol>
+<li><p>Ensure your personal computer and the Raspberry Pi are on the <strong>same network</strong>.</p>
+</li>
+<li><p>Connect to the Raspberry Pi via SSH.</p>
+</li>
+<li><p>If needed, gather data from your DHT11 and DHT20 sensors, run the <strong>T_H_data_collector.py</strong> file on the Raspberry Pi. The Raspberry Pi should be connected to both sensors.</p>
+</li>
+<li><p>Start the web application by running the <strong>web_server.py</strong> file on the Raspberry Pi.</p>
+</li>
+<li><p>View the web application by opening a web browser on your personal computer and typing <strong><a href="http://[IP">http://[IP</a> Address of Raspberry Pi]:5000/</strong> into the address bar. The web page, graphs, and statistics will appear!</p>
+</li>
+</ol>
+<hr />
+<h2 id="Thank-You-For-Reading!">Thank You For Reading!<a class="anchor-link" href="#Thank-You-For-Reading!"> </a></h2><p>I hope you enjoyed this project as much as I did. If you are curious about other projects you can try with a Raspberry Pi, I highly recommend reading the inspiration for this project: <strong>Creative Projects with Raspberry Pi by Kirsten Kearney and Will Freeman</strong> (ISBN: 978-1-4197-2500-5).</p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Image-Sources">Image Sources<a class="anchor-link" href="#Image-Sources"> </a></h2><ul>
+<li><p>Raspberry Pi 4 Model B Image: <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">https://www.raspberrypi.com/products/raspberry-pi-4-model-b/</a></p>
+</li>
+<li><p>Grove Base HAT Pinout: <a href="https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/">https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/</a></p>
+</li>
+<li><p>DHT11 Image: <a href="https://components101.com/sensors/dht11-temperature-sensor">https://components101.com/sensors/dht11-temperature-sensor</a></p>
+</li>
 </ul>
 <hr />
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Phase-4:-Showing-Off-the-Important-Stuff">Phase 4: Showing Off the Important Stuff<a class="anchor-link" href="#Phase-4:-Showing-Off-the-Important-Stuff"> </a></h2><p>Insert Things Here</p>
-<hr />
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr />
-<h2 id="Test-Destination-">Test Destination <a class="anchor" id="test-destination" /><a class="anchor-link" href="#Test-Destination-"> </a></h2><p>A test destination for Table of Contents.</p>
 
 </div>
 </div>
