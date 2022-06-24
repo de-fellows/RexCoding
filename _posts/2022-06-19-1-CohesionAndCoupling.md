@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Cmpletete traslation of Python code to Java.
-categories: [markdown]
+categories: [Python, Java, OOP]
 title: Cohesion and Coupling in Java
 author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
 ---
