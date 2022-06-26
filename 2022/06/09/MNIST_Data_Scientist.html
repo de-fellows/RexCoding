@@ -164,7 +164,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-is-federated-learning?-">What is federated learning? <a class="anchor" id="intro" /><a class="anchor-link" href="#What-is-federated-learning?-"> </a></h2><p>In the world of evergrowing data in every industry, data is becoming more scarce due to security and privacy reasons. This makes our jobs as data scientists harder as companies and institutions are holding on to their data for security and competitive reasons. Furthermore, a lot of important data these days are sensitive personal information, things like health, and happiness, etc. Our ability to solve problems is limited because we can't access the existing data.</p>
+<h2 id="What-is-federated-learning?-">What is federated learning? <a class="anchor" id="intro" /><a class="anchor-link" href="#What-is-federated-learning?-"> </a></h2><p>In the world of evergrowing data in every industry, data is becoming more scarce due to security and privacy reasons. This makes our jobs as data scientists harder as companies and institutions are holding onto their data for security and competitive reasons. Nowadays, a lot of important data are sensitive personal information, things like health, and happiness, etc. Our ability to solve problems is limited because we can't access the existing data.</p>
 <p><br />
 Federated learning is a machine learning setting where multiple clients(data owners) can come together and solve a machine learning problem, under the coordination of a central server(data scientist). Each data owner's data is stored  locally, and will not be access without direct permission. Instead of traditionally training on one machine locally, the network is sent to all clients and trained on multiple clients simultaneously. After training, the machine learning model would aggregate the model updates from the trained model from the clients.</p>
 
@@ -173,8 +173,9 @@ Federated learning is a machine learning setting where multiple clients(data own
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are many situations in which this is the case. One use case of this is in the case with federated learning in the healthcare industry: Breast cancer is a something that is faced by 1 in 8 woman. It is actually a very treatable if it is detected early enough in a mamography. However, this is where the problem lies. In detection, there is a 1 in 4 chance that the radiologist saying that it is false positive or false negative, and with AI, the detection accuracy is even worse with the accuracy being 1 in 3 false positive or false negative. This is most likely due to our models not having enough training data, the amount of training data we have is less than &lt;0.1% of the world's mamography images. These data that we need are stored across thousands of organizations, and acquiring data from each organization is extremely difficult as some organizations will protect patient's privacy not mentioning the bureaucracy involved in signing contracts and risk management with thousands of different companies and organizations. <br /></p>
-<p>Federated learning could tackle this problem by having a massive federated data network, each data center(hospital, research center, etc) would act as a client. We, as the data scientist is able to send our machine learning model to each client, and have the client train the model locally, and finally update the global model by exchanging the weighted average of the weights. (FedAvg Algorithm)</p>
+<p>There are many situations in which federated learning can be used to solve problems. One use case of this is in the  healthcare industry: <br />
+Breast cancer is a something that is faced by 1 in 8 woman. It is actually very treatable if it is detected early enough in a mammogram. However, this is where the problem lies. In detection, there is a 1 in 4 chance that the radiologist will give false positive or false negative, and with AI, the detection accuracy is even worse with the accuracy being 1 in 3 false positive or false negative. This is most likely due to our models not having enough training data, the amount of training data we have is less than &lt;0.1% of the world's mammography images. These data we need are stored across thousands of organizations, and acquiring data from each organization is extremely difficult as some organizations will protect patients' privacy not mentioning the bureaucracy involved in signing contracts and risk management with thousands of different companies and organizations. <br /></p>
+<p>Federated learning could tackle this problem by having a massive federated data network, each data center(hospital, research center, etc) would act as a client. We, the data scientist is able to send our machine learning model to each client, and have the client train the model locally, and finally update the global model by exchanging the weighted average of the weights. (FedAvg Algorithm)</p>
 <p><img src="https://blogs.nvidia.com/wp-content/uploads/2019/10/federated_learning_animation_still_white.png" alt="source: Nividia" /></p>
 
 </div>
@@ -182,14 +183,14 @@ Federated learning is a machine learning setting where multiple clients(data own
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Advantage-of-federated-learning">Advantage of federated learning<a class="anchor-link" href="#Advantage-of-federated-learning"> </a></h3><ul>
-<li>Data never leaves the owner's device, privacy of sentitive data is stored. </li>
+<h3 id="Advantages-of-federated-learning">Advantages of federated learning<a class="anchor-link" href="#Advantages-of-federated-learning"> </a></h3><ul>
+<li>Data never leaves the owner's device, privacy of sensitive data is stored. </li>
 <li>Federated learning allows devices like cell phones to train collectively, thus saving computation and memory on the server, data scientist's side.</li>
 <li>Data owners are more comfortable with sharing their data, and leading to better machine learning models.</li>
 </ul>
 <h3 id="Limitations-of-federated-learning">Limitations of federated learning<a class="anchor-link" href="#Limitations-of-federated-learning"> </a></h3><ul>
 <li>Communication, latency is often the bottleneck for federated learning. </li>
-<li>Variability in client hardware, it is often the case that after each round of training, the server will have to wait for the slower devices to report back with their trained weights. These stragglers often slows down the network, often times, the network just drop the stragglers, but is that a good approach? Does that mean the model will cater more towards people with faster phones?</li>
+<li>Variability in client hardware, it is often the case that after each round of training, the server will have to wait for the slower devices to report back with their trained weights. These stragglers often slow down the network, often times, the network just drop the stragglers, but is that a good approach? Does that mean the model will cater more towards people with faster phones?</li>
 </ul>
 
 </div>
@@ -197,7 +198,7 @@ Federated learning is a machine learning setting where multiple clients(data own
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tools-that-made-federated-learning-possible-">Tools that made federated learning possible <a class="anchor" id="tools" /><a class="anchor-link" href="#Tools-that-made-federated-learning-possible-"> </a></h2><h3 id="1.-Remote-execution">1. Remote execution<a class="anchor-link" href="#1.-Remote-execution"> </a></h3><p>Remote execution is a core tool used in federated learning. Instead of downloading the data from the clients and then perform machine learning on it, remote execution allows you to use the client's data without their data leaving their devices.</p>
+<h2 id="Tools-that-made-federated-learning-possible-">Tools that made federated learning possible <a class="anchor" id="tools" /><a class="anchor-link" href="#Tools-that-made-federated-learning-possible-"> </a></h2><h3 id="1.-Remote-execution">1. Remote execution<a class="anchor-link" href="#1.-Remote-execution"> </a></h3><p>Remote execution is a core tool used in federated learning. Instead of downloading the data from the clients and then performing machine learning on it, remote execution allows you to use the client's data without their data leaving their devices.</p>
 <h3 id="2.-Search-and-example-data">2. Search and example data<a class="anchor-link" href="#2.-Search-and-example-data"> </a></h3><p>If we are executing functions remotely, how can we do data science without seeing the data? <br />
 With tools such as sample data, we can feature engineer the data without actually seeing the full data. We can request from the data owners to allow us to see a small sub sample of the data in order for us to get a better understanding of the data.</p>
 <h3 id="3.-Differential-privacy">3. Differential privacy<a class="anchor-link" href="#3.-Differential-privacy"> </a></h3><p>How do we query again a database without revealing too much information about its privacy data? <br />
@@ -318,7 +319,7 @@ Resolve this by
 <p>import syft as sy
 duet = sy.duet('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 This will create a direct connection from my notebook to the remote Duet server. Once the connection is established all traffic is sent directly between the two nodes.</p>
-<p>Paste the code or Server ID that the Data Owner gives you and run it in the cell below. It will return your Client ID which you must send to the Data Owner to enter into Duet so it can pair your notebooks.</p>
+<p>Copy and paste the code or Server ID that the Data Owner gives you and run it in the cell below. It will return your Client ID which you must send to the Data Owner to enter into Duet so it can pair your notebooks.</p>
 <p>Make sure that the network_url you use is chosen from
 <a href="https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address">https://raw.githubusercontent.com/OpenMined/OpenGridNodes/master/network_address</a></p>
 
@@ -593,7 +594,7 @@ This will create a direct connection from my notebook to the remote Duet server.
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Oh no, looks like we need to request for permission from the data owner. We can do this by using the .request with your reasoning inside.</p>
+<p>Looks like we need to request for permission from the data owner. We can do this by using the .request with your reasoning inside.</p>
 
 </div>
 </div>
@@ -1790,7 +1791,7 @@ tensor([0.0007, 0.0016, 0.0049, 0.0291, 0.4118, 0.0332, 0.0071, 0.0289, 0.0928,
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li><a href="https://courses.openmined.org/">https://courses.openmined.org/</a>
-  Openmined(PySyft).
+  OpenMined(PySyft).
   This is where I learned most of the federated learning material, and they have a great series on private AI technologies. Highly recommend.<hr /></li>
 <li><a href="https://flower.dev/">https://flower.dev/</a>
   Flower
@@ -1805,7 +1806,7 @@ tensor([0.0007, 0.0016, 0.0049, 0.0291, 0.4118, 0.0332, 0.0071, 0.0289, 0.0928,
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Acknowledgement">Acknowledgement<a class="anchor-link" href="#Acknowledgement"> </a></h2><p>I would like this last section by thanking the support of my professor Yves Pauchard, and the DE Followship group. As well as the openmined for innovating and building technology for the future, their work has inspired me to pursue more research and learning in the field of federated learning and I am extremely thankful. 
+<h2 id="Acknowledgement">Acknowledgement<a class="anchor-link" href="#Acknowledgement"> </a></h2><p>I would like to use this last section by thanking the support of my professor Yves Pauchard, and the DE Followship group. As well as the OpenMined Organization for innovating and building technology for the future, their work has inspired me to pursue more research and learning in the field of federated learning and I am extremely thankful. 
 <br /> <br />
 <img src="https://media.giphy.com/media/GVMhZwYv8U5NK/giphy.gif" alt="MVPUrl" title="MVP" /></p>
 
