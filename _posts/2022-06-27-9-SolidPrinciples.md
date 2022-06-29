@@ -4,7 +4,7 @@ layout: post
 description: Complete translation of Python code to Java
 categories: [Python, Java, OOP]
 title: SOLID principles in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 # **[SOLID principles](https://www.youtube.com/watch?v=pTB30aXS77U&feature=youtu.be) code translation in Java**

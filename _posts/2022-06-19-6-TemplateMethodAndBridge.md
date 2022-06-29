@@ -4,7 +4,7 @@ layout: post
 description: Complete translation of Python code to Java
 categories: [Python, Java, OOP]
 title: Template Method & Bridge in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 # [Template Method & Bridge](https://www.youtube.com/watch?v=t0mCrXHsLbI) **code translation in Java** 
