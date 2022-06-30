@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Create Your First Social Media Site with Flask | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Create Your First Social Media Site with Flask" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/2022/06/18/flask-media.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/2022/06/18/flask-media.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-18T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Create Your First Social Media Site with Flask" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-18T00:00:00-05:00","datePublished":"2022-06-18T00:00:00-05:00","headline":"Create Your First Social Media Site with Flask","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/2022/06/18/flask-media.html"},"url":"https://de-fellows.github.io/RexCoding/2022/06/18/flask-media.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Me</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Create Your First Social Media Site with Flask</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-18T00:00:00-05:00" itemprop="datePublished">
+        Jun 18, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      45 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2022-06-18-flask-media.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2022-06-18-flask-media.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2022-06-18-flask-media.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2022-06-18-flask-media.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-06-18-flask-media.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Principles-for-Educators">Principles for Educators<a class="anchor-link" href="#Principles-for-Educators"> </a></h3><h2 id="2.-Make-the-game-worth-playing">2. Make the game worth playing<a class="anchor-link" href="#2.-Make-the-game-worth-playing"> </a></h2><h4 id="Nowadays,-the-majority-of-students-spend-hours-a-day-on-social-media.-It-is-an-extremely-valuable-communication-tool-that-many-rely-on-to-spread-information-and-the-opportunity-to-connect-with-people-worldwide.-This-blog-will-teach-you-how-you-can-create-and-deploy-your-own-website-that-will-allow-anyone-on-the-world-wide-web-to-share-posts---no-matter-their-location.">Nowadays, the majority of students spend hours a day on social media. It is an extremely valuable communication tool that many rely on to spread information and the opportunity to connect with people worldwide. This blog will teach you how you can create and deploy your own website that will allow anyone on the world wide web to share posts - no matter their location.<a class="anchor-link" href="#Nowadays,-the-majority-of-students-spend-hours-a-day-on-social-media.-It-is-an-extremely-valuable-communication-tool-that-many-rely-on-to-spread-information-and-the-opportunity-to-connect-with-people-worldwide.-This-blog-will-teach-you-how-you-can-create-and-deploy-your-own-website-that-will-allow-anyone-on-the-world-wide-web-to-share-posts---no-matter-their-location."> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Structuring-Your-Packages-with-Flask-Blueprint">Structuring Your Packages with Flask Blueprint<a class="anchor-link" href="#Structuring-Your-Packages-with-Flask-Blueprint"> </a></h2><h3 id="To-minimize-potential-errors-in-your-code-and-avoid-long-hours-of-fustration,-it-is-important-that-programmers-understand-how-to-effectively-organize-their-files-in-their-directory.-Flask-Blueprint-allows-users-to-organize-their-application-into-small-packages.">To minimize potential errors in your code and avoid long hours of fustration, it is important that programmers understand how to effectively organize their files in their directory. <strong>Flask Blueprint</strong> allows users to organize their application into small packages.<a class="anchor-link" href="#To-minimize-potential-errors-in-your-code-and-avoid-long-hours-of-fustration,-it-is-important-that-programmers-understand-how-to-effectively-organize-their-files-in-their-directory.-Flask-Blueprint-allows-users-to-organize-their-application-into-small-packages."> </a></h3><h4 id="This-is-how-we-will-be-organizing-our-code:">This is how we will be organizing our code:<a class="anchor-link" href="#This-is-how-we-will-be-organizing-our-code:"> </a></h4><ol>
+<li>Create a new folder on your computer. Lets name it <code> <i>FlaskWebPage</i></code>. Open this folder in a code editor such as Visual Studio Code.</li>
+<li>Within your directory, create a folder named <code> <i>webpage</i></code>.</li>
+<li>Within this folder, make a file named <code> <i>__ init__.py</i></code> and another named <code> <i>models.py</i></code>.</li>
+<li>Within your <code> <i>webpage</i></code> folder, create a folder named <code> <i>templates</i></code>. This will be where we store the files that contain the HTML elements that describes the content and layout for each of our pages.</li>
+<li>Create another folder within the <code> <i>webpage</i></code> folder and name it <code> <i>static</i></code>. This is where we will be storing user's profile pictures and our CSS file which will allow us to customize and style our website. This type of file is considered static because they do not change while our program is running.</li>
+<li>Make three more folders in the <code> <i>webpage</i></code> folder named, <code> <i>users</i></code> (a module containing code to create, update, and validate the user's account), <code> <i>posts</i></code> (a module containing code to allow users to create posts), and <code> <i>main</i></code> (a module containing code to display the posts on the feed page of our website).</li>
+<li>Within each the <code> <i>users</i></code>, <code> <i>posts</i></code>, and <code> <i>main</i></code> files, make <code> <i>__ init__.py</i></code> and <code> <i>routes.py</i></code> files. <code> <i>__ init__.py</i></code> file lets the application know that the file it is contained in is a module. <code> <i>routes.py</i></code> file creates the different URLs for the different functions and pages on the website.</li>
+</ol>
+<p>This is how your files should be structures.</p>
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   ├── templates
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── __init__.py
+│   ├── models.py
+</pre></div>
+<h2 id="Implementing-Blueprint">Implementing Blueprint<a class="anchor-link" href="#Implementing-Blueprint"> </a></h2><h3 id="Within-each-module,-we-need-to-create-a-Blueprint-instance.">Within each module, we need to create a Blueprint instance.<a class="anchor-link" href="#Within-each-module,-we-need-to-create-a-Blueprint-instance."> </a></h3><h4 id="In-the--main--__-init__.py-file,-create-a-Blueprint-instance-with-the-following-code:">In the <code> <i>main</i></code> <code> <i>__ init__.py</i></code> file, create a Blueprint instance with the following code:<a class="anchor-link" href="#In-the--main--__-init__.py-file,-create-a-Blueprint-instance-with-the-following-code:"> </a></h4>
+<pre><code>from flask import Blueprint
+
+main = Blueprint('main', __name__)</code></pre>
+<h3 id="Similarly,-for-the--posts-and--users-__-init__.py-files,-use-the-same-code-to-create-Blueprint-instances,-however,-replace-&quot;main&quot;-with-the-module-name.">Similarly, for the <code> <i>posts</i></code> and <code> <i>users</i></code> <code><i>__ init__.py</i></code> files, use the same code to create Blueprint instances, however, replace "main" with the module name.<a class="anchor-link" href="#Similarly,-for-the--posts-and--users-__-init__.py-files,-use-the-same-code-to-create-Blueprint-instances,-however,-replace-&quot;main&quot;-with-the-module-name."> </a></h3><h4 id="Within--posts-__-init__.py-file:">Within <code> <i>posts</i></code> <code><i>__ init__.py</i></code> file:<a class="anchor-link" href="#Within--posts-__-init__.py-file:"> </a></h4>
+<pre><code>from flask import Blueprint
+
+posts = Blueprint('posts', __name__)</code></pre>
+<h4 id="Within--users-__-init__.py-file:">Within <code> <i>users</i></code> <code><i>__ init__.py</i></code> file:<a class="anchor-link" href="#Within--users-__-init__.py-file:"> </a></h4>
+<pre><code>from flask import Blueprint
+
+user = Blueprint('user', __name__)</code></pre>
+<h4>Open the <code><i>webage __ init__.py&lt;/code&gt;&lt;/i&gt; file. We will be importing the blueprint instances we created from each module, then registering them with the following code:&lt;/h4&gt;
+
+<pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+from webpage.users.routes import users
+from webpage.posts.routes import posts
+from webpage.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)</code></pre>
+<blockquote><p><code> app = Flask(__ name__) </code> is used in every Flask app in order to inherit the attributes and methods from the Flask class.</p>
+</blockquote>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Virtual-Environment">Virtual Environment<a class="anchor-link" href="#Virtual-Environment"> </a></h2><h3 id="It-is-important-that-we-are-programming-in-a-virtual-environment-to-avoid-instally-Python-packages-globally.-This-will-save-us-some-time-and-make-deploying-our-flask-application-easier.">It is important that we are programming in a virtual environment to avoid instally Python packages globally. This will save us some time and make deploying our flask application easier.<a class="anchor-link" href="#It-is-important-that-we-are-programming-in-a-virtual-environment-to-avoid-instally-Python-packages-globally.-This-will-save-us-some-time-and-make-deploying-our-flask-application-easier."> </a></h3><h3 id="Steps:">Steps:<a class="anchor-link" href="#Steps:"> </a></h3><ol>
+<li>Ensure the virtual environment package is installed on VSCode by typing in the terminal “pip install virtualenv”. </li>
+<li>Create your virtual environment by typing “virtualenv env”</li>
+<li>Activate your virtual environment with “env\Scripts\activate.bat” or for a MacBook “source env/bin/activate”. <blockquote><p>Ensure your virtual environment is activate when you install packages. This will be beneficial when creating your <code><i>requirements.txt&lt;/code&gt;&lt;/i&gt; file when we cover <strong>Deploying your Website</strong>.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+<h4 id="Here-is-a-list-of-packages-you-will-need-to-install:```BareNecessities==0.2.8">Here is a list of packages you will need to install:```BareNecessities==0.2.8<a class="anchor-link" href="#Here-is-a-list-of-packages-you-will-need-to-install:```BareNecessities==0.2.8"> </a></h4><p>bcrypt==3.2.2
+blinker==1.4
+cffi==1.15.0
+click==8.1.3
+colorama==0.4.5
+dnspython==2.2.1
+email-validator==1.2.1
+Flask==2.1.2
+Flask-Bcrypt==1.0.1
+Flask-Login==0.6.1
+Flask-Mail==0.9.1
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.0.1
+greenlet==1.1.2
+gunicorn==20.1.0
+idna==3.3
+importlib-metadata==4.11.4
+itsdangerous==2.1.2
+Jinja2==3.1.2
+Mail==2.1.0
+MarkupSafe==2.1.1
+Pillow==9.1.1
+psycopg2==2.9.3
+pycparser==2.21
+SQLAlchemy==1.4.37
+Werkzeug==2.1.2
+WTForms==3.0.1
+zipp==3.8.0
+```</p>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Templates-(HTML)">Templates (HTML)<a class="anchor-link" href="#Templates-(HTML)"> </a></h2><h3 id="Templates-allow-you-to-create-the-content-and-layout-of-the-different-pages-of-your-website-with-its-own-HTML-file.-In-this-section,-you-will-learn-how-to-create-a-parent-and-child-template.-Throughout-the-blog,-you-will-need-to-make-a-unique-child-template-for-every-page-on-your-website.">Templates allow you to create the content and layout of the different pages of your website with its own HTML file. In this section, you will learn how to create a <strong>parent</strong> and <strong>child</strong> template. Throughout the blog, you will need to make a unique <strong>child</strong> template for every page on your website.<a class="anchor-link" href="#Templates-allow-you-to-create-the-content-and-layout-of-the-different-pages-of-your-website-with-its-own-HTML-file.-In-this-section,-you-will-learn-how-to-create-a-parent-and-child-template.-Throughout-the-blog,-you-will-need-to-make-a-unique-child-template-for-every-page-on-your-website."> </a></h3><h4 id="Within-your--templates-folder,-create-three-files:-a-file-named-layout.html,-and-a-file-named--feed.html.">Within your <code> <i>templates</i></code> folder, create three files: a file named <code><i>layout.html</i></code>, and a file named <code> <i>feed.html</i></code>.<a class="anchor-link" href="#Within-your--templates-folder,-create-three-files:-a-file-named-layout.html,-and-a-file-named--feed.html."> </a></h4><div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── __init__.py
+│   ├── models.py
+</pre></div>
+<h3 id="Parent-Template"><strong>Parent Template</strong><a class="anchor-link" href="#Parent-Template"> </a></h3><h3 id="The--layout.html-file-will-be-the-parent-template,-providing-a-base-containing-the-common-elements-of-our-website.-The-other-templates-(child-templates)-will-inherit-these-common-elements.">The <code> <i>layout.html</i></code> file will be the parent template, providing a base containing the common elements of our website. The other templates (child templates) will inherit these common elements.<a class="anchor-link" href="#The--layout.html-file-will-be-the-parent-template,-providing-a-base-containing-the-common-elements-of-our-website.-The-other-templates-(child-templates)-will-inherit-these-common-elements."> </a></h3><h4 id="This-is-the-code-we-will-be-working-with-in-our--layout.html-file:">This is the code we will be working with in our <code> <i>layout.html</i></code> file:<a class="anchor-link" href="#This-is-the-code-we-will-be-working-with-in-our--layout.html-file:"> </a></h4><p></p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Required meta tags --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- Bootstrap CSS --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;main.css&#39;) }}&quot;</span><span class="p">&gt;</span>
+
+    {% if title %}
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Flask Scoial Media- {{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    {% else %}
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Flask Social Media<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    {% endif %}
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;site-header&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-expand-md navbar-dark bg-steel fixed-top&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-brand mr-4&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Flask Social Media<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-toggler&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;collapse&quot;</span> <span class="na">data-target</span><span class="o">=</span><span class="s">&quot;#navbarToggle&quot;</span> <span class="na">aria-controls</span><span class="o">=</span><span class="s">&quot;navbarToggle&quot;</span> <span class="na">aria-expanded</span><span class="o">=</span><span class="s">&quot;false&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle navigation&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-toggler-icon&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse navbar-collapse&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;navbarToggle&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-nav mr-auto&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;main.feed&#39;) }}&quot;</span><span class="p">&gt;</span>Feed<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="c">&lt;!-- Navbar Right Side --&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-nav&quot;</span><span class="p">&gt;</span>
+              {% if current_user.is_authenticated %}
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;posts.new_post&#39;) }}&quot;</span><span class="p">&gt;</span>New Post<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;users.account&#39;) }}&quot;</span><span class="p">&gt;</span>Account<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;users.logout&#39;) }}&quot;</span><span class="p">&gt;</span>Logout<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+              {% else %}
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;users.login&#39;) }}&quot;</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;users.register&#39;) }}&quot;</span><span class="p">&gt;</span>Register<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+              {% endif %}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;main&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-8&quot;</span><span class="p">&gt;</span>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-{{ category }}&quot;</span><span class="p">&gt;</span>
+                  {{ message }}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+
+
+    <span class="c">&lt;!-- Optional JavaScript --&gt;</span>
+    <span class="c">&lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p></p>
+<h4 id="Using-Bootstrap-for-your-templates,-can-make-designing-your-web-page-quicker-and-easier.-I-used-their-Starter-Template-from-their-official-website:-Bootstrap-website.">Using <strong>Bootstrap</strong> for your templates, can make designing your web page quicker and easier. I used their Starter Template from their official website: <a href="https://getbootstrap.com/docs/4.3/getting-started/introduction/">Bootstrap website</a>.<a class="anchor-link" href="#Using-Bootstrap-for-your-templates,-can-make-designing-your-web-page-quicker-and-easier.-I-used-their-Starter-Template-from-their-official-website:-Bootstrap-website."> </a></h4><h4 id="To-link-the-CSS-file-that-we-will-be-creating-in-the-Design-Your-Website-(CSS)-section,-use--link-rel=&quot;stylesheet&quot;-type=&quot;text/css&quot;-href=&quot;&quot;--to-indicate-that-the-location-of-our-stylesheet-will-be-in-the-static-folder-in-the-file-main.css-which-we-will-be-creating-later-on-in-blog.">To link the CSS file that we will be creating in the <strong>Design Your Website (CSS)</strong> section, use <code> link rel="stylesheet" type="text/css" href="" </code> to indicate that the location of our stylesheet will be in the <code><i>static</i></code> folder in the file <code><i>main.css</i></code> which we will be creating later on in blog.<a class="anchor-link" href="#To-link-the-CSS-file-that-we-will-be-creating-in-the-Design-Your-Website-(CSS)-section,-use--link-rel=&quot;stylesheet&quot;-type=&quot;text/css&quot;-href=&quot;&quot;--to-indicate-that-the-location-of-our-stylesheet-will-be-in-the-static-folder-in-the-file-main.css-which-we-will-be-creating-later-on-in-blog."> </a></h4><h4 id="div-class=&#8221;alert-alert-&#8221;--will-allow-us-to-send-out-alerts-to-the-user-on-our-webpage-every-time-the-user-successfully-fills-out-a-form-such-as-signing-up,-logging-in,-creating-posts,-or-updating-their-account.-In-our--layout.html-,-we-have-to-use-get_flashed_messages()-to-return-the-category.-Here-is-an-example-of-an-alert:"><code>div class=&#8221;alert alert-&#8221; </code> will allow us to send out alerts to the user on our webpage every time the user successfully fills out a form such as signing up, logging in, creating posts, or updating their account. In our <code> <i>layout.html</i> </code>, we have to use <code>get_flashed_messages()</code> to return the category. Here is an example of an alert:<a class="anchor-link" href="#div-class=&#8221;alert-alert-&#8221;--will-allow-us-to-send-out-alerts-to-the-user-on-our-webpage-every-time-the-user-successfully-fills-out-a-form-such-as-signing-up,-logging-in,-creating-posts,-or-updating-their-account.-In-our--layout.html-,-we-have-to-use-get_flashed_messages()-to-return-the-category.-Here-is-an-example-of-an-alert:"> </a></h4><p><img src="/RexCoding/images/copied_from_nb/img/alert.png" alt="title" /></p>
+<h4 id="-nav-class=&#8221;navbar-navbar-expand-md-navbar-dark-bg-steel-fixed-top&#8221;-creates-a-navigation-bar-at-the-top-of-our-webpage.-We-can-display-the-title-of-our-site-using-class=&quot;navbar-brand-mr-3&quot;-href=&quot;/&quot;&gt;Flask-Social-Media."><code> nav class=&#8221;navbar navbar-expand-md navbar-dark bg-steel fixed-top&#8221;</code> creates a navigation bar at the top of our webpage. We can display the title of our site using <code>class="navbar-brand mr-3" href="/"&gt;Flask Social Media</code>.<a class="anchor-link" href="#-nav-class=&#8221;navbar-navbar-expand-md-navbar-dark-bg-steel-fixed-top&#8221;-creates-a-navigation-bar-at-the-top-of-our-webpage.-We-can-display-the-title-of-our-site-using-class=&quot;navbar-brand-mr-3&quot;-href=&quot;/&quot;&gt;Flask-Social-Media."> </a></h4><h4 id="On-the-left-side-of-the-navigation-bar,-we-can-add-links-to-the-home-and-about-page-by-using--div-class=&#8221;navbar-nav-mr-auto&#8221;.">On the left side of the navigation bar, we can add links to the home and about page by using <code> div class=&#8221;navbar-nav mr-auto&#8221;</code>.<a class="anchor-link" href="#On-the-left-side-of-the-navigation-bar,-we-can-add-links-to-the-home-and-about-page-by-using--div-class=&#8221;navbar-nav-mr-auto&#8221;."> </a></h4><h4 id="On-the-right-side-of-the-navigation-bar,-we-can-add-links-to-the-login-and-register-page-by-using--div-class=&#8221;navbar-nav&#8221;.">On the right side of the navigation bar, we can add links to the login and register page by using <code> div class=&#8221;navbar-nav&#8221;</code>.<a class="anchor-link" href="#On-the-right-side-of-the-navigation-bar,-we-can-add-links-to-the-login-and-register-page-by-using--div-class=&#8221;navbar-nav&#8221;."> </a></h4><h4 id="-{%-block-content-%}{%-endblock-%}--is-used-for-overriding-specific-parts-of-the--layout.html--template-that-will-need-to-be-unique-to-certain-pages.-This-will-need-to-be-incorporated-in-every-child-template-you-create-to-ensure-your-website-shows-the-relevant-information-for-each-page."><code> {% block content %}{% endblock %} </code> is used for overriding specific parts of the <code> <i>layout.html</i> </code> template that will need to be unique to certain pages. This will need to be incorporated in every <strong>child</strong> template you create to ensure your website shows the relevant information for each page.<a class="anchor-link" href="#-{%-block-content-%}{%-endblock-%}--is-used-for-overriding-specific-parts-of-the--layout.html--template-that-will-need-to-be-unique-to-certain-pages.-This-will-need-to-be-incorporated-in-every-child-template-you-create-to-ensure-your-website-shows-the-relevant-information-for-each-page."> </a></h4><h3 id="Child-Template"><strong>Child Template</strong><a class="anchor-link" href="#Child-Template"> </a></h3><h3 id="First-lets-create-our-template-for-our-feed-page.-This-will-be-where-users-can-scroll-and-read-posts-made-by-themselves-and-other-users.">First lets create our template for our feed page. This will be where users can scroll and read posts made by themselves and other users.<a class="anchor-link" href="#First-lets-create-our-template-for-our-feed-page.-This-will-be-where-users-can-scroll-and-read-posts-made-by-themselves-and-other-users."> </a></h3><h4 id="In-your-feed.html-file,-copy-the-following-code:">In your <code><i>feed.html</i></code> file, copy the following code:<a class="anchor-link" href="#In-your-feed.html-file,-copy-the-following-code:"> </a></h4><p></p>
+<div class="highlight"><pre><span></span>{% extends &quot;layout.html&quot; %}
+{% block content %}
+    {% for post in posts %}
+        <span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media content-section&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rounded-circle article-img&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;profile_pics/&#39; + post.author.image_file) }}&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;article-metadata&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;</span> {{ post.author.username }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">small</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="p">&gt;</span>{{ post.date_posted.strftime(&#39;%Y-%m-%d&#39;) }}<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">a</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;article-content&quot;</span><span class="p">&gt;</span>{{ post.content }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+    {% endfor %}
+{% endblock content %}
+</pre></div>
+<h4 id="In-order-to-inherit-from-our-parent-template,-use--{%-extends-&quot;layout.html&quot;-%}.">In order to inherit from our parent template, use <code> {% extends "layout.html" %}</code>.<a class="anchor-link" href="#In-order-to-inherit-from-our-parent-template,-use--{%-extends-&quot;layout.html&quot;-%}."> </a></h4><h4 id="Like-I-mentioned-in-the-Parent-Template-section,-we-will-use-{%-block-content-%}{%-endblock-content-%}-to-create-the-specific-content-on-each-page.">Like I mentioned in the <strong>Parent Template</strong> section, we will use <code>{% block content %}{% endblock content %}</code> to create the specific content on each page.<a class="anchor-link" href="#Like-I-mentioned-in-the-Parent-Template-section,-we-will-use-{%-block-content-%}{%-endblock-content-%}-to-create-the-specific-content-on-each-page."> </a></h4><h4 id="On-our-feed-page,-we-will-be-displaying-the-posts.-The-code-block-{%-for-post-in-posts-%}-will-retrieve-information-from-a-post-object-containing-information-about-the-author,-the-date-the-post-was-posted,-the-title,-and-the-content-that-we-will-be-covering-later-on-in-in-the-Databases-(SQLAlchemy)-section.">On our feed page, we will be displaying the posts. The code block <code>{% for post in posts %}</code> will retrieve information from a post object containing information about the author, the date the post was posted, the title, and the content that we will be covering later on in in the <strong>Databases (SQLAlchemy)</strong> section.<a class="anchor-link" href="#On-our-feed-page,-we-will-be-displaying-the-posts.-The-code-block-{%-for-post-in-posts-%}-will-retrieve-information-from-a-post-object-containing-information-about-the-author,-the-date-the-post-was-posted,-the-title,-and-the-content-that-we-will-be-covering-later-on-in-in-the-Databases-(SQLAlchemy)-section."> </a></h4><h4>We can use Bootstrap to customize the shape of the user's profile picture that will be displayed on the posts using <code>"rounded-circle article-img"</code>. <code> url_for('static', filename='profile_pics/' + post.author.image_file)</code> tells the program where to look to obtain the profile pictures. In this case, the user's profile pictures will be under the <code><i>static&lt;/code&gt;&lt;/i&gt; folder, in a file named <code><i>profile_pics&lt;/code&gt;&lt;/i&gt; which we will be creating in the <strong>Default Profile Picture</strong> section.&lt;/h4&gt;
+<h4><code><i>url_for&lt;/code&gt;&lt;/i&gt; is a really useful function that helps determine the exact location to route to. We will be seeing more of this throughout the blog.&lt;/h4&gt;
+<p></p>
+<h3 id="Secret-Key"><strong>Secret Key</strong><a class="anchor-link" href="#Secret-Key"> </a></h3><h3 id="When-using-forms,-it-is-ideal-that-we-create-a-&#8220;secret-key&#8221;-to-prevent-hijacking-of-the-web-application.-This-is-used-to-sign-session-cookies-and-protect-against-cookie-data-tampering.-It-is-necessary-to-avoid-sharing-this-key-to-keep-your-Flask-application-secure.">When using forms, it is ideal that we create a &#8220;secret key&#8221; to prevent hijacking of the web application. This is used to sign session cookies and protect against cookie data tampering. It is necessary to avoid sharing this key to keep your Flask application secure.<a class="anchor-link" href="#When-using-forms,-it-is-ideal-that-we-create-a-&#8220;secret-key&#8221;-to-prevent-hijacking-of-the-web-application.-This-is-used-to-sign-session-cookies-and-protect-against-cookie-data-tampering.-It-is-necessary-to-avoid-sharing-this-key-to-keep-your-Flask-application-secure."> </a></h3><h4 id="Update-the-webpage-__-init.py-file-with-the-following-code:">Update the <code>webpage __ init.py</code> file with the following code:<a class="anchor-link" href="#Update-the-webpage-__-init.py-file-with-the-following-code:"> </a></h4>
+<pre><code>from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+
+from webpage.users.routes import users
+from webpage.posts.routes import posts
+from webpage.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)</code></pre>
+<h4 id="Use-app.config['SECRET_KEY']-to-implement-your-key.-Your-key-can-be-anything-you-wish,-however,-it-is-important-that-your-key-is-hard-to-guess.-I-would-recommend-using-a-random-string-generator-to-generate-a-long-random-string.">Use <code>app.config['SECRET_KEY']</code> to implement your key. Your key can be anything you wish, however, it is important that your key is hard to guess. I would recommend using a random string generator to generate a long random string.<a class="anchor-link" href="#Use-app.config['SECRET_KEY']-to-implement-your-key.-Your-key-can-be-anything-you-wish,-however,-it-is-important-that-your-key-is-hard-to-guess.-I-would-recommend-using-a-random-string-generator-to-generate-a-long-random-string."> </a></h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Designing-your-Web-Page-(CSS)">Designing your Web Page (CSS)<a class="anchor-link" href="#Designing-your-Web-Page-(CSS)"> </a></h2><h3 id="To-add-custom-style-and-format-your-HTML-templates,-you-will-need-to-create-a-Cascading-Style-Sheets-(CSS).-CSS-is-a-style-language-considered-static-because-there-is-no-interaction-with-the-code.">To add custom style and format your HTML templates, you will need to create a Cascading Style Sheets (CSS). CSS is a style language considered static because there is no interaction with the code.<a class="anchor-link" href="#To-add-custom-style-and-format-your-HTML-templates,-you-will-need-to-create-a-Cascading-Style-Sheets-(CSS).-CSS-is-a-style-language-considered-static-because-there-is-no-interaction-with-the-code."> </a></h3><h4>In your <code><i>static</i></code> folder, create a file named <code><i>main.css&lt;/code&gt;&lt;/i&gt;.&lt;/h4&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── __init__.py
+│   ├── models.py
+</pre></div>
+<h4 id="CSS-is-a-relatively-straight-forward-language.">CSS is a relatively straight forward language.<a class="anchor-link" href="#CSS-is-a-relatively-straight-forward-language."> </a></h4><h4>This is the code I used to design the webpage shown in this blog. Feel free to adjust the CSS code in the <code><i>main.css&lt;/code&gt;&lt;/i&gt; file to personalize the theme of your website to your liking.&lt;/h4&gt;
+
+<pre><code>body {
+  background: #E2C2B3;
+  color: #fff;
+  margin-top: 6rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffff;
+}
+
+.bg-steel {
+  background-color: #687477;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #E2C2B3;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 100;
+}
+
+.content-section {
+  padding: 4px 30px;
+  background: #403234;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #ffff;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+}
+
+.article-metadata {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: 5px solid #687477
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2rem;
+}</code></pre>
+<table>
+<thead><tr>
+<th>Common CSS Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>background</td>
+<td>Pick the background color or image, position, size, repeat (how the images are repeated), origin, clip (painting area), attachment (whether images are fixed or scrolls), initial (sets to default value), or whether to inherit from parent template</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Specify the text color</td>
+</tr>
+<tr>
+<td>font</td>
+<td>Pick your desired font style, variant, weight, size and font-family</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>Specify how much space is needed on top, bottom, left, or right side of elements.</td>
+</tr>
+<tr>
+<td>border</td>
+<td>Pick the type of border: dotted, dashed, solid, double, groove, ridge, inset, outset, no border, hidden border, mixed border.</td>
+</tr>
+<tr>
+<td>margin</td>
+<td>Set different margins on the top, bottom, right, and left side</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>Choose decorations like underline, overline, line-through, underline overline, as well as the color, style and thickness.</td>
+</tr>
+</tbody>
+</table>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Databases(SQLAlchemy)">Databases(SQLAlchemy)<a class="anchor-link" href="#Databases(SQLAlchemy)"> </a></h2><h3 id="SQLAlchemy-allows-programmers-to-easily-convert-data-stored-in-a-database-into-objects.-We-will-be-using-this-database-to-store-information-about-the-user-and-create-a-one-to-many-relationship-between-the-user's-account-such-as-their-username,-email,-and-profile-picture,-as-well-as-their-posts.">SQLAlchemy allows programmers to easily convert data stored in a database into objects. We will be using this database to store information about the user and create a one-to-many relationship between the user's account such as their username, email, and profile picture, as well as their posts.<a class="anchor-link" href="#SQLAlchemy-allows-programmers-to-easily-convert-data-stored-in-a-database-into-objects.-We-will-be-using-this-database-to-store-information-about-the-user-and-create-a-one-to-many-relationship-between-the-user's-account-such-as-their-username,-email,-and-profile-picture,-as-well-as-their-posts."> </a></h3><h4 id="First,-we-need-to-create-a-URI-for-the-database-to-use.-For-development-purposes,-we-will-be-using-SQLite-which-is-a-lightweight,-fast-open-SQL-engine---this-will-have-to-be-replaced-when-we-deploy-the-website-later-on.-Then-we-will-use-the-&#8220;app&#8221;-parameter-to-create-a-database-instance.">First, we need to create a URI for the database to use. For development purposes, we will be using <strong>SQLite</strong> which is a lightweight, fast open SQL engine - this will have to be replaced when we deploy the website later on. Then we will use the &#8220;app&#8221; parameter to create a database instance.<a class="anchor-link" href="#First,-we-need-to-create-a-URI-for-the-database-to-use.-For-development-purposes,-we-will-be-using-SQLite-which-is-a-lightweight,-fast-open-SQL-engine---this-will-have-to-be-replaced-when-we-deploy-the-website-later-on.-Then-we-will-use-the-&#8220;app&#8221;-parameter-to-create-a-database-instance."> </a></h4><h4>Open the <code><i>webage __ init__.py&lt;/code&gt;&lt;/i&gt; file. Update the code to the following:&lt;/h4&gt;
+
+<pre><code>from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+from webpage.users.routes import users
+from webpage.posts.routes import posts
+from webpage.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)</code></pre>
+<h4 id="Now-to-create-our-datbases-to-save-the-user's-account-information-and-their-posts,-code-the-following-in-the-webpage-models.py-file.">Now to create our datbases to save the user's account information and their posts, code the following in the <code><i>webpage models.py</i></code> file.<a class="anchor-link" href="#Now-to-create-our-datbases-to-save-the-user's-account-information-and-their-posts,-code-the-following-in-the-webpage-models.py-file."> </a></h4>
+<pre><code>from datetime import datetime
+from webpage import db, login_manager
+from flask_login import UserMixin
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    image_file = db.Column(db.String(130), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    posts = db.relationship('Post', backref='author', lazy=True)
+
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}')"</code></pre>
+<h4 id="In-this-file,-we-will-be-creating-two-databases.-the-first-one-will-be-the-class-User(db.Model)-which-will-contain-the-user-information,-and-the-second-one-will-be-class-Post(db.Model)-which-will-store-data-about-each-post.-class-User(db.Model)-will-take-in-the-UserMixin-parameter-which-allows-the-program-to-incorporate-the-following-properties:">In this file, we will be creating two databases. the first one will be the <code>class User(db.Model)</code> which will contain the user information, and the second one will be <code>class Post(db.Model)</code> which will store data about each post. <code>class User(db.Model)</code> will take in the <code>UserMixin</code> parameter which allows the program to incorporate the following properties:<a class="anchor-link" href="#In-this-file,-we-will-be-creating-two-databases.-the-first-one-will-be-the-class-User(db.Model)-which-will-contain-the-user-information,-and-the-second-one-will-be-class-Post(db.Model)-which-will-store-data-about-each-post.-class-User(db.Model)-will-take-in-the-UserMixin-parameter-which-allows-the-program-to-incorporate-the-following-properties:"> </a></h4><ul>
+<li>is_authenticated() returns True if the user has provided valid credentials.</li>
+<li>is_active() returns True if the user’s account is active.</li>
+<li>is_anonymous() returns True if the current user is an anonymous user.</li>
+<li>get_id() given a User instance, returns the unique ID for that object.</li>
+</ul>
+<h4 id="To-use-this-login_manager-extension,-we-will-have-to-tell-the-program-how-to-find-one-of-our-users-by-their-id.--The-&lt;code&gt;@login_manager&lt;/code&gt;-is-a-key-naming-convention-that-identifies-that-this-is-the-function-specifying-how-to-get-a-user-by-their-id.-load_user,-takes-the-user_id-as-the-parameter-and-gets-the-user-using-user.query.get-from-the-database-we-will-be-creating-next.">To use this <code>login_manager</code> extension, we will have to tell the program how to find one of our users by their id.  The &lt;code&gt;@login_manager&lt;/code&gt; is a key naming convention that identifies that this is the function specifying how to get a user by their id. <code>load_user</code>, takes the <code>user_id</code> as the parameter and gets the user using <code>user.query.get</code> from the database we will be creating next.<a class="anchor-link" href="#To-use-this-login_manager-extension,-we-will-have-to-tell-the-program-how-to-find-one-of-our-users-by-their-id.--The-&lt;code&gt;@login_manager&lt;/code&gt;-is-a-key-naming-convention-that-identifies-that-this-is-the-function-specifying-how-to-get-a-user-by-their-id.-load_user,-takes-the-user_id-as-the-parameter-and-gets-the-user-using-user.query.get-from-the-database-we-will-be-creating-next."> </a></h4><h4 id="We-imported-db-which-will-allow-us-to-program-the-SQLAlchemy-database-and-datetime.">We imported <code>db</code> which will allow us to program the SQLAlchemy database and <code>datetime</code>.<a class="anchor-link" href="#We-imported-db-which-will-allow-us-to-program-the-SQLAlchemy-database-and-datetime."> </a></h4><h3 id="1.-The-class-User(db.Model)-is-created-first.">1. The <strong><code>class User(db.Model)</code></strong> is created first.<a class="anchor-link" href="#1.-The-class-User(db.Model)-is-created-first."> </a></h3><h4 id="This-object-will-create-a-table-containing-user-information.-An-unique-id-will-be-given-to-our-users-so-we-will-set-primary_key=True.">This object will create a table containing user information. An unique <code>id</code> will be given to our users so we will set <code>primary_key=True</code>.<a class="anchor-link" href="#This-object-will-create-a-table-containing-user-information.-An-unique-id-will-be-given-to-our-users-so-we-will-set-primary_key=True."> </a></h4><h4 id="The-username-will-have-db.string(17)-because-I-set-the-maximum-characters-for-the-username-to-be-17.-We-also-want-each-username-to-be-unique,-hence,-unique=True.-Each-user-is-required-to-have-a-username-so-nullable=False.">The username will have <code>db.string(17)</code> because I set the maximum characters for the username to be 17. We also want each username to be unique, hence, <code>unique=True</code>. Each user is required to have a username so <code>nullable=False</code>.<a class="anchor-link" href="#The-username-will-have-db.string(17)-because-I-set-the-maximum-characters-for-the-username-to-be-17.-We-also-want-each-username-to-be-unique,-hence,-unique=True.-Each-user-is-required-to-have-a-username-so-nullable=False."> </a></h4><h4 id="The-user&#8217;s-profile-image-will-be-limited-to-22-characters.-A-default-image-will-be-provided-to-those-without-profile-images,-therefore-nullable=False.">The user&#8217;s profile image will be limited to 22 characters. A default image will be provided to those without profile images, therefore <code>nullable=False</code>.<a class="anchor-link" href="#The-user&#8217;s-profile-image-will-be-limited-to-22-characters.-A-default-image-will-be-provided-to-those-without-profile-images,-therefore-nullable=False."> </a></h4><h4 id="To-link-the-user-with-their-own-posts,-we-will-need-to-use-db.relationship-to-associate-with-our-Post-model-which-we-will-make-in-the-next-step.-The-function-backref=&#8217;author&#8217;-allows-us-to-retrieve-the-user-of-the-post.-lazy-loading-allows-us-to-retrieve-every-post-from-a-single-user.">To link the user with their own posts, we will need to use <code>db.relationship</code> to associate with our <code>Post</code> model which we will make in the next step. The function <code>backref=&#8217;author&#8217;</code> allows us to retrieve the user of the post. <code>lazy</code> loading allows us to retrieve every post from a single user.<a class="anchor-link" href="#To-link-the-user-with-their-own-posts,-we-will-need-to-use-db.relationship-to-associate-with-our-Post-model-which-we-will-make-in-the-next-step.-The-function-backref=&#8217;author&#8217;-allows-us-to-retrieve-the-user-of-the-post.-lazy-loading-allows-us-to-retrieve-every-post-from-a-single-user."> </a></h4><h4 id="def-__repr__(self):-represents-the-string-from-our-User-object-in-a-printable-representation.-This-will-come-in-handy-when-displaying-the-posts-to-the-feed-page."><code>def __repr__(self):</code> represents the string from our User object in a printable representation. This will come in handy when displaying the posts to the feed page.<a class="anchor-link" href="#def-__repr__(self):-represents-the-string-from-our-User-object-in-a-printable-representation.-This-will-come-in-handy-when-displaying-the-posts-to-the-feed-page."> </a></h4><h3 id="2.-Then-we-create-class-Post(db.Model).">2. Then we create <strong><code>class Post(db.Model)</code></strong>.<a class="anchor-link" href="#2.-Then-we-create-class-Post(db.Model)."> </a></h3><h4 id="Each-post-will-need-a-title,-therefore-nullable=False.-The-title-is-also-limited-to-150-characters.">Each post will need a title, therefore <code>nullable=False</code>. The title is also limited to 150 characters.<a class="anchor-link" href="#Each-post-will-need-a-title,-therefore-nullable=False.-The-title-is-also-limited-to-150-characters."> </a></h4><h4 id="The-posts-will-also-show-the-time-posted-using-db.DateTime-which-we-imported-earlier.-The-function-datetime.utcnow-will-allow-our-program-to-determine-the-current-time-the-post-was-posted.">The posts will also show the time posted using <code>db.DateTime</code> which we imported earlier. The function <code>datetime.utcnow</code> will allow our program to determine the current time the post was posted.<a class="anchor-link" href="#The-posts-will-also-show-the-time-posted-using-db.DateTime-which-we-imported-earlier.-The-function-datetime.utcnow-will-allow-our-program-to-determine-the-current-time-the-post-was-posted."> </a></h4><h4 id="The-content-will-have-the-text-and-does-not-have-to-be-unique.">The content will have the text and does not have to be unique.<a class="anchor-link" href="#The-content-will-have-the-text-and-does-not-have-to-be-unique."> </a></h4><h4 id="We-need-our-database-to-correlate-the-user.id-to-their-post.-The-function-db.ForeignKey-allows-the-program-to-reference-information-from-the-user_id-column-(child-table)-to-the-Post-column-(parent-table).">We need our database to correlate the <code>user.id</code> to their post. The function <code>db.ForeignKey</code> allows the program to reference information from the <code>user_id</code> column (child table) to the <code>Post</code> column (parent table).<a class="anchor-link" href="#We-need-our-database-to-correlate-the-user.id-to-their-post.-The-function-db.ForeignKey-allows-the-program-to-reference-information-from-the-user_id-column-(child-table)-to-the-Post-column-(parent-table)."> </a></h4><h4 id="The-printable-representation-of-our-post-will-show-the-title-and-the-date-posted.">The printable representation of our post will show the title and the date posted.<a class="anchor-link" href="#The-printable-representation-of-our-post-will-show-the-title-and-the-date-posted."> </a></h4><h3 id="Lastly,-we-need-to-create-the-database."><strong>Lastly, we need to create the database.</strong><a class="anchor-link" href="#Lastly,-we-need-to-create-the-database."> </a></h3><ol>
+<li>In your terminal, first type “python”.</li>
+<li>Then type “from flaskblog import db”.</li>
+<li>Finally type “db.create_all()”.</li>
+</ol>
+<h4 id="Since-we-are-using-SQLite,-a-site.db-file-will-be-created-in-our-directory.">Since we are using SQLite, a site.db file will be created in our directory.<a class="anchor-link" href="#Since-we-are-using-SQLite,-a-site.db-file-will-be-created-in-our-directory."> </a></h4><div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4 id="Now-we-have-a-database!">Now we have a database!<a class="anchor-link" href="#Now-we-have-a-database!"> </a></h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sign-up-and-Log-in">Sign-up and Log-in<a class="anchor-link" href="#Sign-up-and-Log-in"> </a></h2><h3 id="Every-file-related-to-creating,-updating-or-validating-a-user's-account-will-be-found-in-the-users-module.-Currently-we-have-a-__-init__.py-and-a-routes.py-file-within-users.-We-will-also-need-to-add-a-users-forms.py-file.">Every file related to creating, updating or validating a user's account will be found in the <code><i>users</i></code> module. Currently we have a <code><i>__ init__.py</i></code> and a <code><i>routes.py</i></code> file within <code><i>users</i></code>. We will also need to add a <code><i>users forms.py</i></code> file.<a class="anchor-link" href="#Every-file-related-to-creating,-updating-or-validating-a-user's-account-will-be-found-in-the-users-module.-Currently-we-have-a-__-init__.py-and-a-routes.py-file-within-users.-We-will-also-need-to-add-a-users-forms.py-file."> </a></h3><div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h3 id="WTForms"><strong>WTForms</strong><a class="anchor-link" href="#WTForms"> </a></h3><h3 id="Within-users-forms.py-file,-we-will-use-a-function-called-WTForms---a-handy-Flask-extension-that-allows-programmers-to-easily-validate-forms-and-deploy-security-features.-Perfect-for-sign-up-and-log-in-pages!">Within <code><i>users</i></code> <code><i>forms.py</i></code> file, we will use a function called WTForms - a handy Flask extension that allows programmers to easily validate forms and deploy security features. Perfect for sign-up and log-in pages!<a class="anchor-link" href="#Within-users-forms.py-file,-we-will-use-a-function-called-WTForms---a-handy-Flask-extension-that-allows-programmers-to-easily-validate-forms-and-deploy-security-features.-Perfect-for-sign-up-and-log-in-pages!"> </a></h3>
+<pre><code>from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from webpage.models import User
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username',
+                           validators=[DataRequired(), Length(min=5, max=17)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('That username is taken. Please choose a different one.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('That email is taken. Please choose a different one.')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+
+
+class UpdateAccountForm(FlaskForm):
+    username = StringField('Username',
+                           validators=[DataRequired(), Length(min=5, max=17)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update')</code></pre>
+<h4 id="The-RegistrationForm-Class-will-take-in-the-necessary-information-from-the-user-to-create-an-account.">The <strong><code><b>RegistrationForm</b></code></strong> Class will take in the necessary information from the user to create an account.<a class="anchor-link" href="#The-RegistrationForm-Class-will-take-in-the-necessary-information-from-the-user-to-create-an-account."> </a></h4><h4 id="We-will-be-using-validators-to-create-certain-requirements-for-the-user&#8217;s-account.-For-example,-validators=[DataRequired(),-Length(min=5,-max=17)]-ensures-usernames-have-a-minimum-of-5-characters-and-a-maximum-of-17.">We will be using validators to create certain requirements for the user&#8217;s account. For example, <code>validators=[DataRequired(), Length(min=5, max=17)]</code> ensures usernames have a minimum of 5 characters and a maximum of 17.<a class="anchor-link" href="#We-will-be-using-validators-to-create-certain-requirements-for-the-user&#8217;s-account.-For-example,-validators=[DataRequired(),-Length(min=5,-max=17)]-ensures-usernames-have-a-minimum-of-5-characters-and-a-maximum-of-17."> </a></h4><h4 id="We-can-also-validate-their-email-to-ensure-it-is-legitimate-with-Email().-We-use-the-EqualTo-validator-for-the-password-to-ensure-the-password-and-the-password-confirmation-are-the-same.">We can also validate their email to ensure it is legitimate with <code>Email()</code>. We use the <code>EqualTo</code> validator for the password to ensure the password and the password confirmation are the same.<a class="anchor-link" href="#We-can-also-validate-their-email-to-ensure-it-is-legitimate-with-Email().-We-use-the-EqualTo-validator-for-the-password-to-ensure-the-password-and-the-password-confirmation-are-the-same."> </a></h4><h4>The user can then click 'Sign Up' on the website to submit their form. 'Sign Up' will be displayed as a button, which we will create using Bootstrap in our template <code><i>register.html&lt;/code&gt;&lt;/i&gt; we will be creating later on in this section.&lt;/h4&gt;
+<h4>The <code><i>def validate_username&lt;/code&gt;&lt;/i&gt; and <code><i>def validate_email&lt;/code&gt;&lt;/i&gt; ensures that there are no duplicates within the database. <code><i>User.query.filter_by&lt;/code&gt;&lt;/i&gt; is a helpful function that filters through the application's database to look for the relevant information. If <code><i>user&lt;/code&gt;&lt;/i&gt; returns True, a <code>ValidationError</code> message will occur.&lt;/h4&gt;
+<h4 id="Similarly,-we-will-create-the-LoginForm-Class.-Here-we-will-be-asking-the-user-for-their-email-and-password-to-log-in.-A-remember-field-can-be-incorporated-by-using-BooleanField-which-allows-the-user-to-pick-between-&#8220;true&#8221;-or-&#8220;false&#8221;.-Then-the-user-submits-the-form-by-pressing-'Login'.">Similarly, we will create the <strong><code><b>LoginForm</b></code></strong> Class. Here we will be asking the user for their email and password to log-in. A remember field can be incorporated by using <code>BooleanField</code> which allows the user to pick between &#8220;true&#8221; or &#8220;false&#8221;. Then the user submits the form by pressing 'Login'.<a class="anchor-link" href="#Similarly,-we-will-create-the-LoginForm-Class.-Here-we-will-be-asking-the-user-for-their-email-and-password-to-log-in.-A-remember-field-can-be-incorporated-by-using-BooleanField-which-allows-the-user-to-pick-between-&#8220;true&#8221;-or-&#8220;false&#8221;.-Then-the-user-submits-the-form-by-pressing-'Login'."> </a></h4><h4 id="Finally,-the-UpdateAccountForm-Class-will-take-in-a-username-and-email-with-the-same-requirements-from-the-RegistrationForm-Class.-This-form-will-also-allow-users-to-update-their-profile-picture-only-as-a-.jpg-or-.png-file.">Finally, the <strong><code><b>UpdateAccountForm</b></code></strong> Class will take in a username and email with the same requirements from the <code>RegistrationForm</code> Class. This form will also allow users to update their profile picture only as a .jpg or .png file.<a class="anchor-link" href="#Finally,-the-UpdateAccountForm-Class-will-take-in-a-username-and-email-with-the-same-requirements-from-the-RegistrationForm-Class.-This-form-will-also-allow-users-to-update-their-profile-picture-only-as-a-.jpg-or-.png-file."> </a></h4><h3 id="Routing"><strong>Routing</strong><a class="anchor-link" href="#Routing"> </a></h3><h3><code><i>users</i></code> <code><i>routes.py&lt;/code&gt;&lt;/i&gt; will be used to route to different pages using the <code>.route</code> function. This function allows you to create a unique URL for each page. For example, we made the path to the sign up page “/register”. The URL 127.0.0.1:5000/about will route us here. We will be using <code>render_template</code> to allow the program to generate output from our HTML template files we created.&lt;/h3&gt;
+
+<pre><code>from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask_login import login_user, current_user, logout_user, login_required
+from webpage import db, bcrypt
+from webpage.models import User
+from webpage.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm)
+from webpage.users.save_pics import save_picture
+users = Blueprint('users', __name__)
+
+@users.route("/register", methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.feed'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created!', 'success')
+        return redirect(url_for('users.login'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@users.route("/login", methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.feed'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('main.feed'))
+        else:
+            flash('Login Unsuccessful.', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
+
+@users.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('main.feed'))
+
+@users.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Account updated!', 'success')
+        return redirect(url_for('users.account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template('account.html', title='Account',
+                           image_file=image_file, form=form)</code></pre>
+<h4 id="The-&#8216;GET&#8217;-and-&#8216;POST&#8217;-requests-are-required-to-retrieve-and-send-the-user&#8217;s-information-from-and-to-our-web-server.">The <code>&#8216;GET&#8217;</code> and <code>&#8216;POST&#8217;</code> requests are required to retrieve and send the user&#8217;s information from and to our web server.<a class="anchor-link" href="#The-&#8216;GET&#8217;-and-&#8216;POST&#8217;-requests-are-required-to-retrieve-and-send-the-user&#8217;s-information-from-and-to-our-web-server."> </a></h4><h4 id="form.validate_on_submit-will-indicate-if-the-form-is-accepted-by-all-the-validator-fields-when-submitted-to-determine-where-the-webpage-should-reroute-to.-url_for-will-determine-the-exact-location-of-the-route."><code>form.validate_on_submit</code> will indicate if the form is accepted by all the validator fields when submitted to determine where the webpage should reroute to. <code>url_for</code> will determine the exact location of the route.<a class="anchor-link" href="#form.validate_on_submit-will-indicate-if-the-form-is-accepted-by-all-the-validator-fields-when-submitted-to-determine-where-the-webpage-should-reroute-to.-url_for-will-determine-the-exact-location-of-the-route."> </a></h4><h4 id="flash-allows-us-to-generate-message-alerts-using-Bootstrap.-This-is-used-to-inform-the-user-if-they-have-successfully-logged-in-or-if-their-login-was-unsuccessful."><code>flash</code> allows us to generate message alerts using Bootstrap. This is used to inform the user if they have successfully logged in or if their login was unsuccessful.<a class="anchor-link" href="#flash-allows-us-to-generate-message-alerts-using-Bootstrap.-This-is-used-to-inform-the-user-if-they-have-successfully-logged-in-or-if-their-login-was-unsuccessful."> </a></h4><h4>When registering, a user is redirected to the feed page. The function to route to the feed page will be in the <code><i>main&lt;/code&gt;&lt;/i&gt; folder hence <code>'main.feed'</code>. The <code><i>routes.py&lt;/code&gt;&lt;/i&gt; file will also require access to the forms we previously created in the <code><i>forms.py&lt;/code&gt;&lt;/i&gt;. <code>if form.validate_on_submit()</code> will check if the form is valid, then will start hashing using <strong>Bcrypt</strong> the password that the user inputed before saving it in the database. A <code>flash</code> message informing the user that their account has been created appears, then they are redirected to the login page.&lt;/h4&gt;
+<h4 id="Hashing-is-irreversible;-unlike-encryption-and-encoding,-there-is-no-way-to-de-hash-a-password.-It-is-good-practice-to-hash-sensitive-information-like-passwords-incase-of-potential-data-leaks.-The-user's-information-and-hashed-password-is-added-to-the-database---the-actual-password-is-never-stored!"><strong>Hashing</strong> is irreversible; unlike encryption and encoding, there is no way to de-hash a password. It is good practice to hash sensitive information like passwords incase of potential data leaks. The user's information and hashed password is added to the database - the actual password is never stored!<a class="anchor-link" href="#Hashing-is-irreversible;-unlike-encryption-and-encoding,-there-is-no-way-to-de-hash-a-password.-It-is-good-practice-to-hash-sensitive-information-like-passwords-incase-of-potential-data-leaks.-The-user's-information-and-hashed-password-is-added-to-the-database---the-actual-password-is-never-stored!"> </a></h4><h4 id="The-login-page-will-check-whether-the-information-that-the-user-inputs-on-the-form-matched-the-database.-user-=-User.query.filter_by(email=form.email.data).first()-checks-the-email-that-the-user-inputs-with-the-database-to-see-if-it-exists.-Then-if-user-is-true-(email-matches-with-the-database),-the-program-checks-the-password-that-the-user-inputted-with-the-password-that-was-remembered-by-the-program-(this-password-is-the-unhashed-password-that-is-not-saved-in-the-database,-only-remembered).-If-successful,-user-will-be-redirected-to-their-feed,-else,-a-flash-message-will-appear.">The login page will check whether the information that the user inputs on the form matched the database. <code>user = User.query.filter_by(email=form.email.data).first()</code> checks the email that the user inputs with the database to see if it exists. Then if user is true (email matches with the database), the program checks the password that the user inputted with the password that was remembered by the program (this password is the unhashed password that is not saved in the database, only remembered). If successful, user will be redirected to their feed, else, a flash message will appear.<a class="anchor-link" href="#The-login-page-will-check-whether-the-information-that-the-user-inputs-on-the-form-matched-the-database.-user-=-User.query.filter_by(email=form.email.data).first()-checks-the-email-that-the-user-inputs-with-the-database-to-see-if-it-exists.-Then-if-user-is-true-(email-matches-with-the-database),-the-program-checks-the-password-that-the-user-inputted-with-the-password-that-was-remembered-by-the-program-(this-password-is-the-unhashed-password-that-is-not-saved-in-the-database,-only-remembered).-If-successful,-user-will-be-redirected-to-their-feed,-else,-a-flash-message-will-appear."> </a></h4><h4 id="flask_login-provides-an-easy-to-use-logout_user-function."><code>flask_login</code> provides an easy to use <code>logout_user</code> function.<a class="anchor-link" href="#flask_login-provides-an-easy-to-use-logout_user-function."> </a></h4><h4>To update your account, <code>flask_login</code> ensures that the user is logged in using &lt;code&gt;@login_required&lt;/code&gt;. Using the <code>UpdateAccountForm()</code> we created in the <code><i>forms.py&lt;/code&gt;&lt;/i&gt; file will be used here to replace the original data with the newly inputted data. The account data will be immediately updatted in the account page.&lt;/h4&gt;
+<h3>To use <strong><code>Bcrypt</code></strong> and <strong><code>flask_login</code></strong> we will need to create instances with these functions in the <code><i>webpage __ init__.py&lt;/code&gt;, similar to how we created instances for <code>SQLAlchemy</code>.&lt;/h3&gt;
+<h4>Update the code in <code><i>webpage __ init__.py&lt;/code&gt; with the following:&lt;/h4&gt;
+
+<pre><code>from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+
+from webpage.users.routes import users
+from webpage.posts.routes import posts
+from webpage.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)</code></pre>
+<h3 id="Saving-Profile-Pictures"><strong>Saving Profile Pictures</strong><a class="anchor-link" href="#Saving-Profile-Pictures"> </a></h3><h3>We will also need another file in our <code><i>users&lt;/code&gt;&lt;/i&gt; file in order to save the profile pictures. Create a <code><i>save_pics.py&lt;/code&gt;&lt;/i&gt; file.&lt;/h3&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4 id="Import-the-following-code:">Import the following code:<a class="anchor-link" href="#Import-the-following-code:"> </a></h4>
+<pre><code>import os
+import secrets
+from PIL import Image
+from webpage import app
+
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(10)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+
+    output_size = (130, 130)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn</code></pre>
+<h4 id="To-avoid-saving-pictures-with-the-same-name,-we-can-import-secrets-and-use-the-secrets.token_hex()-function-to-generate-a-random-hex.">To avoid saving pictures with the same name, we can import <code>secrets</code> and use the <code>secrets.token_hex()</code> function to generate a random hex.<a class="anchor-link" href="#To-avoid-saving-pictures-with-the-same-name,-we-can-import-secrets-and-use-the-secrets.token_hex()-function-to-generate-a-random-hex."> </a></h4><h4 id="We-need-to-make-sure-the-file-extension-is-the-same-when-it-is-saved.-in-order-to-determine-the-file-extension-we-can-use-os-and-the-split.text-function.-The-final-picture-name-that-will-be-stored-will-be-the-random-hex-with-the-picture-extension.-This-is-this-saved-to-the-profile_pic-file-within-the-static-folder.">We need to make sure the file extension is the same when it is saved. in order to determine the file extension we can use <code>os</code> and the <code>split.text</code> function. The final picture name that will be stored will be the random hex with the picture extension. This is this saved to the <code><i>profile_pic</i></code> file within the <code><i>static</i></code> folder.<a class="anchor-link" href="#We-need-to-make-sure-the-file-extension-is-the-same-when-it-is-saved.-in-order-to-determine-the-file-extension-we-can-use-os-and-the-split.text-function.-The-final-picture-name-that-will-be-stored-will-be-the-random-hex-with-the-picture-extension.-This-is-this-saved-to-the-profile_pic-file-within-the-static-folder."> </a></h4><h4 id="Before-the-image-is-saved,-we-also-need-to-resize-it.-Using-Image-programmers-can-open-and-resize-the-image-to-a-certain-size.-The-program-will-resize-the-image-to-the-output_size-before-saving.">Before the image is saved, we also need to resize it. Using <code>Image</code> programmers can open and resize the image to a certain size. The program will resize the image to the <code>output_size</code> before saving.<a class="anchor-link" href="#Before-the-image-is-saved,-we-also-need-to-resize-it.-Using-Image-programmers-can-open-and-resize-the-image-to-a-certain-size.-The-program-will-resize-the-image-to-the-output_size-before-saving."> </a></h4><h3 id="Now-we-have-to-create-templates-for-our-log-in-and-register-pages.">Now we have to create templates for our log-in and register pages.<a class="anchor-link" href="#Now-we-have-to-create-templates-for-our-log-in-and-register-pages."> </a></h3><h4>Within <code><i>templates&lt;/code&gt;&lt;/i&gt;, create a file named <code><i>login.html&lt;/code&gt;&lt;/i&gt; and <code><i>register.html&lt;/code&gt;&lt;/i&gt;.&lt;/h4&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4>Copy the following code into <strong><code><i>register.html&lt;/code&gt;&lt;/i&gt;&lt;/strong&gt;:&lt;/h4&gt;
+<p></p>
+<div class="highlight"><pre><span></span>{% extends &quot;layout.html&quot; %}
+{% block content %}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content-section&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
+            {{ form.hidden_tag() }}
+            <span class="p">&lt;</span><span class="nt">fieldset</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">legend</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;border-bottom mb-4&quot;</span><span class="p">&gt;</span>Join Today<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                    {{ form.username.label(class=&quot;form-control-label&quot;) }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                            {% for error in form.username.errors %}
+                                <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                            {% endfor %}
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    {% else %}
+                        {{ form.username(class=&quot;form-control form-control-lg&quot;) }}
+                    {% endif %}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                    {{ form.email.label(class=&quot;form-control-label&quot;) }}
+                    {% if form.email.errors %}
+                        {{ form.email(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                            {% for error in form.email.errors %}
+                                <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                            {% endfor %}
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    {% else %}
+                        {{ form.email(class=&quot;form-control form-control-lg&quot;) }}
+                    {% endif %}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                    {{ form.password.label(class=&quot;form-control-label&quot;) }}
+                    {% if form.password.errors %}
+                        {{ form.password(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                            {% for error in form.password.errors %}
+                                <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                            {% endfor %}
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    {% else %}
+                        {{ form.password(class=&quot;form-control form-control-lg&quot;) }}
+                    {% endif %}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                    {{ form.confirm_password.label(class=&quot;form-control-label&quot;) }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                            {% for error in form.confirm_password.errors %}
+                                <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                            {% endfor %}
+                        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    {% else %}
+                        {{ form.confirm_password(class=&quot;form-control form-control-lg&quot;) }}
+                    {% endif %}
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                {{ form.submit(class=&quot;btn btn-outline-info&quot;) }}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;border-top pt-3&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock content %}
+</pre></div>
+<p></p>
+<h4 id="form.hidden-_tag()-works-with-the-secret-key-to-add-protection-against-CSRF-attacks."><code>form.hidden _tag()</code> works with the secret key to add protection against CSRF attacks.<a class="anchor-link" href="#form.hidden-_tag()-works-with-the-secret-key-to-add-protection-against-CSRF-attacks."> </a></h4><h4 id="We-need-to-create-a-div-class=&#8221;form-group&#8221;&gt;-for-each-of-our-variables.">We need to create a <code>div class=&#8221;form-group&#8221;&gt;</code> for each of our variables.<a class="anchor-link" href="#We-need-to-create-a-div-class=&#8221;form-group&#8221;&gt;-for-each-of-our-variables."> </a></h4><h4 id="Username,-email,-and-password-will-use-the-Bootstrap-class-form-control-label-to-create-a-text-box-for-the-user-the-type-in-the-information.">Username, email, and password will use the Bootstrap class <code>form-control-label</code> to create a text box for the user the type in the information.<a class="anchor-link" href="#Username,-email,-and-password-will-use-the-Bootstrap-class-form-control-label-to-create-a-text-box-for-the-user-the-type-in-the-information."> </a></h4><h4 id="The-submit-variable-will-use-btn-btn-outline-info-to-create-a-button-that-the-user-can-press-to-submit-the-form.">The submit variable will use <code>btn btn-outline-info</code> to create a button that the user can press to submit the form.<a class="anchor-link" href="#The-submit-variable-will-use-btn-btn-outline-info-to-create-a-button-that-the-user-can-press-to-submit-the-form."> </a></h4><p></p>
+<h4 id="When-there-is-an-error-in-the-form,-we-will-need-the-program-to-run-a-conditional.-For-example,-if-there-is-an-error-in-the-username,-the-condition-{%-if-form.username.errors-%}-will-be-true.-This-will-result-in-the-error-variable-from-the-for-loop-to-print.">When there is an error in the form, we will need the program to run a conditional. For example, if there is an error in the username, the condition <code>{% if form.username.errors %}</code> will be true. This will result in the error variable from the for loop to print.<a class="anchor-link" href="#When-there-is-an-error-in-the-form,-we-will-need-the-program-to-run-a-conditional.-For-example,-if-there-is-an-error-in-the-username,-the-condition-{%-if-form.username.errors-%}-will-be-true.-This-will-result-in-the-error-variable-from-the-for-loop-to-print."> </a></h4><p></p>
+<h4>Copy the following code into <strong><code><i>login.html&lt;/code&gt;&lt;/i&gt;&lt;/strong&gt;:&lt;/h4&gt;
+<p></p>
+
+<pre><code>{% extends "layout.html" %}
+{% block content %}
+    &lt;div class="content-section"&gt;
+        &lt;form method="POST" action=""&gt;
+            {{ form.hidden_tag() }}
+            &lt;fieldset class="form-group"&gt;
+                &lt;legend class="border-bottom mb-4"&gt;Log In&lt;/legend&gt;
+                &lt;div class="form-group"&gt;
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        &lt;div class="invalid-feedback"&gt;
+                            {% for error in form.email.errors %}
+                                &lt;span&gt;{{ error }}&lt;/span&gt;
+                            {% endfor %}
+                        &lt;/div&gt;
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        &lt;div class="invalid-feedback"&gt;
+                            {% for error in form.password.errors %}
+                                &lt;span&gt;{{ error }}&lt;/span&gt;
+                            {% endfor %}
+                        &lt;/div&gt;
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/div&gt;
+                &lt;div class="form-check"&gt;
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                &lt;/div&gt;
+            &lt;/fieldset&gt;
+            &lt;div class="form-group"&gt;
+                {{ form.submit(class="btn btn-outline-info") }}
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div class="border-top pt-3"&gt;
+    &lt;/div&gt;
+{% endblock content %}</code></pre>
+<p></p>
+<h4 id="This-file-uses-similar-functions-to-the-register.html-file-with-slight-variation.">This file uses similar functions to the <code><i>register.html</i></code> file with slight variation.<a class="anchor-link" href="#This-file-uses-similar-functions-to-the-register.html-file-with-slight-variation."> </a></h4><h4 id="The-legend-is-now-&#8220;Log-in&#8221;-instead-of-&#8220;Signup&#8221;.">The legend is now &#8220;Log in&#8221; instead of &#8220;Signup&#8221;.<a class="anchor-link" href="#The-legend-is-now-&#8220;Log-in&#8221;-instead-of-&#8220;Signup&#8221;."> </a></h4><h4 id="We-do-not-need-the-confirm-password-form-group.">We do not need the confirm password form group.<a class="anchor-link" href="#We-do-not-need-the-confirm-password-form-group."> </a></h4><h4 id="We-will-need-div-class=&#8221;form-check&#8221;-for-our-&#8220;Remember-Me&#8221;-function-which-will-allow-the-user-to-check-a-box-if-they-would-like-to-be-remembered">We will need <code>div class=&#8221;form-check&#8221;</code> for our &#8220;Remember Me&#8221; function which will allow the user to check a box if they would like to be remembered<a class="anchor-link" href="#We-will-need-div-class=&#8221;form-check&#8221;-for-our-&#8220;Remember-Me&#8221;-function-which-will-allow-the-user-to-check-a-box-if-they-would-like-to-be-remembered"> </a></h4><h3 id="Lastly,-lets-create-a-template-to-allow-users-to-easily-update-their-account-information.">Lastly, lets create a template to allow users to easily update their account information.<a class="anchor-link" href="#Lastly,-lets-create-a-template-to-allow-users-to-easily-update-their-account-information."> </a></h3><h4>Within <code><i>templates&lt;/code&gt;&lt;/i&gt;, create a file named <code><i>account.html&lt;/code&gt;&lt;/i&gt; and <code><i>register.html&lt;/code&gt;&lt;/i&gt;.&lt;/h4&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4>Copy the following code into <strong><code><i>account.html&lt;/code&gt;&lt;/i&gt;&lt;/strong&gt;:&lt;/h4&gt;
+<p></p>
+
+<pre><code>{% extends "layout.html" %}
+{% block content %}
+    &lt;div class="content-section"&gt;
+      &lt;div class="media"&gt;
+        &lt;img class="rounded-circle account-img" src="{{ image_file }}"&gt;
+        &lt;div class="media-body"&gt;
+          &lt;h2 class="account-heading"&gt;{{ current_user.username }}&lt;/h2&gt;
+          &lt;p class="text-secondary"&gt;{{ current_user.email }}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+        &lt;form method="POST" action="" enctype="multipart/form-data"&gt;
+            {{ form.hidden_tag() }}
+            &lt;fieldset class="form-group"&gt;
+                &lt;legend class="border-bottom mb-4"&gt;Account Info&lt;/legend&gt;
+                &lt;div class="form-group"&gt;
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        &lt;div class="invalid-feedback"&gt;
+                            {% for error in form.username.errors %}
+                                &lt;span&gt;{{ error }}&lt;/span&gt;
+                            {% endfor %}
+                        &lt;/div&gt;
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        &lt;div class="invalid-feedback"&gt;
+                            {% for error in form.email.errors %}
+                                &lt;span&gt;{{ error }}&lt;/span&gt;
+                            {% endfor %}
+                        &lt;/div&gt;
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            &lt;span class="text-danger"&gt;{{ error }}&lt;/span&gt;&lt;/br&gt;
+                        {% endfor %}
+                    {% endif %}
+                &lt;/div&gt;
+            &lt;/fieldset&gt;
+            &lt;div class="form-group"&gt;
+                {{ form.submit(class="btn btn-outline-info") }}
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+{% endblock content %}</code></pre>
+<p></p>
+<h4 id="This-template-uses-the-same-bootstrap-functions-we-have-seen-in-the-other-templates.">This template uses the same bootstrap functions we have seen in the other templates.<a class="anchor-link" href="#This-template-uses-the-same-bootstrap-functions-we-have-seen-in-the-other-templates."> </a></h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-Posts">Creating Posts<a class="anchor-link" href="#Creating-Posts"> </a></h2><h3>In this section, we will work on the files within our <code><i>posts&lt;/code&gt;&lt;/i&gt; module to allow users to create posts on the website. Lets add a <code><i>forms.py&lt;/code&gt;&lt;/i&gt; to this module.&lt;/h3&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h3>We will be using <strong>WTForms</strong> once again for our <code><i>posts&lt;/code&gt;&lt;/i&gt; <code><i>forms.py&lt;/code&gt;&lt;/i&gt;.&lt;/h3&gt;
+
+<pre><code>from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')</code></pre>
+<h4 id="A-title-and-content-is-required-for-our-post-form-hence-validators=[DataRequired()].-StringField-is-used-for-a-shorter-string-of-characters,-perfect-for-the-title.-TextAreaField-is-for-a-larger-amount-of-text,-great-for-the-content-section.-We-will-also-be-creating-a-submit-button-on-this-page-when-we-create-our-templates.">A title and content is required for our post form hence <code>validators=[DataRequired()]</code>. <code>StringField</code> is used for a shorter string of characters, perfect for the title. <code>TextAreaField</code> is for a larger amount of text, great for the content section. We will also be creating a submit button on this page when we create our templates.<a class="anchor-link" href="#A-title-and-content-is-required-for-our-post-form-hence-validators=[DataRequired()].-StringField-is-used-for-a-shorter-string-of-characters,-perfect-for-the-title.-TextAreaField-is-for-a-larger-amount-of-text,-great-for-the-content-section.-We-will-also-be-creating-a-submit-button-on-this-page-when-we-create-our-templates."> </a></h4><h3>Now lets work on the <code><i>posts&lt;/code&gt;&lt;/i&gt; <code><i>routes.py&lt;/code&gt;&lt;/i&gt; file.&lt;/h3&gt;
+
+<pre><code>from flask import (render_template, url_for, flash,
+                   redirect, request, Blueprint)
+from flask_login import current_user, login_required
+from webpage import db
+from webpage.models import Post
+from webpage.posts.forms import PostForm
+
+posts = Blueprint('posts', __name__)
+
+@posts.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('main.feed'))
+    return render_template('create_post.html', title='New Post',
+                           form=form, legend='New Post')</code></pre>
+<h4 id="To-create-a-new-post,-a-user-must-be-logged-in.-This-function-&lt;code&gt;@login_required&lt;/code&gt;-only-allows-logged-in-users-to-use-the-/post/new-route.-This-route-uses-the-form-we-just-created-and-validates-the-user-inputs-before-the-post-is-added-to-the-database.">To create a new post, a user must be logged in. This function &lt;code&gt;@login_required&lt;/code&gt; only allows logged in users to use the <code>/post/new</code> route. This route uses the form we just created and validates the user inputs before the post is added to the database.<a class="anchor-link" href="#To-create-a-new-post,-a-user-must-be-logged-in.-This-function-&lt;code&gt;@login_required&lt;/code&gt;-only-allows-logged-in-users-to-use-the-/post/new-route.-This-route-uses-the-form-we-just-created-and-validates-the-user-inputs-before-the-post-is-added-to-the-database."> </a></h4><h4 id="A-flash-alert-is-shown-when-the-post-is-created-then-the-user-is-redirected-to-the-feed-page.">A <code>flash</code> alert is shown when the post is created then the user is redirected to the feed page.<a class="anchor-link" href="#A-flash-alert-is-shown-when-the-post-is-created-then-the-user-is-redirected-to-the-feed-page."> </a></h4><h3 id="Now-we-will-be-creating-the-create_post.html-file-this-route-will-render-from.">Now we will be creating the <code>create_post.html</code> file this route will render from.<a class="anchor-link" href="#Now-we-will-be-creating-the-create_post.html-file-this-route-will-render-from."> </a></h3><h4>Create a new template called <code><i>create_post.html&lt;/code&gt;&lt;/i&gt;.&lt;/h4&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4>Similar to the <code><i>register.html&lt;/code&gt;&lt;/i&gt; and <code><i>login.html&lt;/code&gt;&lt;/i&gt; templates, the <code><i>create_post.html&lt;/code&gt;&lt;/i&gt; template will be formatting the form with textboxes and buttons where needed using the following code:&lt;/h4&gt;
+<p></p>
+<div class="highlight"><pre><span></span>{% extends &quot;layout.html&quot; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content-section&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
+        {{ form.hidden_tag() }}
+        <span class="p">&lt;</span><span class="nt">fieldset</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">legend</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;border-bottom mb-4&quot;</span><span class="p">&gt;</span>{{ legend }}<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                {{ form.title.label(class=&quot;form-control-label&quot;) }}
+                {% if form.title.errors %}
+                    {{ form.title(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                        {% for error in form.title.errors %}
+                            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                        {% endfor %}
+                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                {% else %}
+                    {{ form.title(class=&quot;form-control form-control-lg&quot;) }}
+                {% endif %}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+                {{ form.content.label(class=&quot;form-control-label&quot;) }}
+                {% if form.content.errors %}
+                    {{ form.content(class=&quot;form-control form-control-lg is-invalid&quot;) }}
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="p">&gt;</span>
+                        {% for error in form.content.errors %}
+                            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ error }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                        {% endfor %}
+                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                {% else %}
+                    {{ form.content(class=&quot;form-control form-control-lg&quot;) }}
+                {% endif %}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+            {{ form.submit(class=&quot;btn btn-outline-info&quot;) }}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock content %}
+</pre></div>
+<p></p>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Displaying-Posts-on-the-Feed-Page">Displaying Posts on the Feed Page<a class="anchor-link" href="#Displaying-Posts-on-the-Feed-Page"> </a></h2><h3>The feed page will display the posts created by the user. The code required to make this page will be in the <code><i>main&lt;/code&gt;&lt;/i&gt; module.&lt;/h3&gt;
+<h4>In the <code><i>main routes.py&lt;/code&gt;&lt;/i&gt; file, copy the following code:&lt;/h4&gt;
+
+<pre><code>from flask import render_template, Blueprint
+from webpage.models import Post
+main = Blueprint('main', __name__)
+
+@main.route("/")
+@main.route("/feed")
+def feed():
+    posts = Post.query.order_by(Post.date_posted.desc())
+    return render_template('feed.html', posts=posts)</code></pre>
+<h4>The <code>feed</code> function searches for the posts within the database and orders them by the date posted. Newer posts will appear at the top of the feed. Earlier in the blog, we created the <code><i>feed.html&lt;/code&gt;&lt;/i&gt; template in the <strong>Child Template</strong> section which this function will render from.&lt;/h4&gt;
+<blockquote><p>We already created the template for our feed page in the <strong>Child Template</strong>.</p>
+</blockquote>
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Default-Profile-Picture">Default Profile Picture<a class="anchor-link" href="#Default-Profile-Picture"> </a></h2><h3 id="New-users-or-users-without-a-profile-picture,-will-be-automatically-given-a-default-profile-picture.">New users or users without a profile picture, will be automatically given a default profile picture.<a class="anchor-link" href="#New-users-or-users-without-a-profile-picture,-will-be-automatically-given-a-default-profile-picture."> </a></h3><h4 id="Since-profile-pictures-will-not-alter-the-code-as-the-application-is-running,-the-file-we-will-create-to-save-these-pictures-will-be-in-the-static-folder.-Name-it-profile_pics.-Within-this-file,-upload-a-default-image.-Make-sure-this-image-is-named-default-as-shown-below:">Since profile pictures will not alter the code as the application is running, the file we will create to save these pictures will be in the <code>static</code> folder. Name it <code>profile_pics</code>. Within this file, upload a default image. Make sure this image is named <code>default</code> as shown below:<a class="anchor-link" href="#Since-profile-pictures-will-not-alter-the-code-as-the-application-is-running,-the-file-we-will-create-to-save-these-pictures-will-be-in-the-static-folder.-Name-it-profile_pics.-Within-this-file,-upload-a-default-image.-Make-sure-this-image-is-named-default-as-shown-below:"> </a></h4><div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   │   ├── profile_pics
+│   │   │   ├── default.jpg
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+</pre></div>
+<h4 id="Here-is-an-example-default-image-used-in-the-website-shown-in-this-blog:">Here is an example default image used in the website shown in this blog:<a class="anchor-link" href="#Here-is-an-example-default-image-used-in-the-website-shown-in-this-blog:"> </a></h4><p><code>![title](img/default.jpg)</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Running-Your-Application">Running Your Application<a class="anchor-link" href="#Running-Your-Application"> </a></h2><h3 id="While-developing-your-program,-you-will-need-to-run-your-code-to-ensure-your-application-runs-smoothly-before-it-is-deployed.">While developing your program, you will need to run your code to ensure your application runs smoothly before it is deployed.<a class="anchor-link" href="#While-developing-your-program,-you-will-need-to-run-your-code-to-ensure-your-application-runs-smoothly-before-it-is-deployed."> </a></h3><h4>Create an <code><i>app.py&lt;/code&gt;&lt;/i&gt; file outside of the <code><i>webpage&lt;/code&gt;&lt;/i&gt; folder.&lt;/h4&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   │   ├── profile_pics
+│   │   │   ├── default.jpg
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+├── app.py
+</pre></div>
+<h4 id="Import-the-following-code-into-this-file:">Import the following code into this file:<a class="anchor-link" href="#Import-the-following-code-into-this-file:"> </a></h4>
+<pre><code>from webpage import app
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+<h4>The only purpose of the <code><i>ap.py&lt;/code&gt;&lt;/i&gt; is to run the code. The file grabs the <code><i>app&lt;/code&gt;&lt;/i&gt; variable from <code><i>webpage __ init__.py&lt;/code&gt;&lt;/i&gt; and runs it. The <code><i>app&lt;/code&gt;&lt;/i&gt; variable must be inside the <code><i>__ init__.py&lt;/code&gt;&lt;/i&gt; since this is where we are initializing the application.&lt;/h4&gt;
+<h3 id="Launching-Your-Site"><strong>Launching Your Site</strong><a class="anchor-link" href="#Launching-Your-Site"> </a></h3><h4 id="To-run-the-application,-type-&#8220;python-run.py&#8221;-into-the-terminal.-Click-on-the-http://127.0.0.1:5000-link-or-paste-it-into-your-browser-and-your-website-should-open!">To run the application, type &#8220;python run.py&#8221; into the terminal. Click on the <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a> link or paste it into your browser and your website should open!<a class="anchor-link" href="#To-run-the-application,-type-&#8220;python-run.py&#8221;-into-the-terminal.-Click-on-the-http://127.0.0.1:5000-link-or-paste-it-into-your-browser-and-your-website-should-open!"> </a></h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Deploying-Your-Website">Deploying Your Website<a class="anchor-link" href="#Deploying-Your-Website"> </a></h2><h3 id="In-this-section,-I-will-be-explaining-how-to-deploy-your-Flask-application-onto-the-World-Wide-Web-for-free-so-that-anyone-with-internet-is-able-to-access-it.-I-will-be-using-Heruko's-&quot;Free-and-Hobby&quot;-package,-however,-you-can-also-upgrade-to-a-paid-package-for-more-web-functions.">In this section, I will be explaining how to deploy your Flask application onto the World Wide Web <strong>for free</strong> so that anyone with internet is able to access it. I will be using Heruko's "Free and Hobby" package, however, you can also upgrade to a paid package for more web functions.<a class="anchor-link" href="#In-this-section,-I-will-be-explaining-how-to-deploy-your-Flask-application-onto-the-World-Wide-Web-for-free-so-that-anyone-with-internet-is-able-to-access-it.-I-will-be-using-Heruko's-&quot;Free-and-Hobby&quot;-package,-however,-you-can-also-upgrade-to-a-paid-package-for-more-web-functions."> </a></h3><h4 id="Steps:">Steps:<a class="anchor-link" href="#Steps:"> </a></h4><ol>
+<li>Download Heroku Toolbelt CLI using <a href="https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli">this link</a></li>
+<li>Once installed, open your computer's command prompt terminal and make sure you are in your <code><i>FlaskWebPage&lt;/code&gt;&lt;/i&gt; directory and that your virtual environment is active. This is what your terminal should say: <blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;</i></p>
+</blockquote>
+&lt;/li&gt;
+<li>We will need to install gunicornpip install Gunicorn (a Python Web Server Gateway Interface (WSGI) HTTP server) and Psycopg 2 (a PostgreSQL database for Python). In the terminal type "pip install gunicorn".<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;pip install gunicorn</i> 
+Once Gunicorn is installed, type "pip install psycopg2".
+<i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;pip install psycopg2</i></p>
+</blockquote>
+</li>
+<li><p>Next we will have to create a file with the required packages that Heroku will need to download in order to use the different functions in our application. Create a new file called <code><i>requirements.txt&lt;/code&gt;&lt;/i&gt;.&lt;/p&gt;
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   │   ├── profile_pics
+│   │   │   ├── default.jpg
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+├── app.py
+├── requirements.txt
+</pre></div>
+<p>Type "pip freeze" into the terminal:</p>
+<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;pip install psycopg2</i> 
+Copy all the requirements into the <code><i>requirements.txt&lt;/code&gt;&lt;/i&gt; file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+<li><p>Now we have to tell Heroku what kind of app we are running. Create a new file called "Procfile".</p>
+<div class="highlight"><pre><span></span>├── webpage
+│   ├── static
+│   │   ├── main.css
+│   │   ├── profile_pics
+│   │   │   ├── default.jpg
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+├── app.py
+├── Procfile
+├── requirements.txt
+</pre></div>
+<p>A Procfile tells Heroku what kind of app we are running. Type the following into the Procfile:</p>
+
+<pre><code>web: gunicorn app:app</code></pre>
+<p>This implies that the application is a web app using the gunicorn webserver and our app is called "app" since we named it app.py.</p>
+</li>
+<li><p>Create an account on the Heroku website, then type "heroku login" into the command prompt.</p>
+<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku login</i> 
+This will open up the Heroku login page.</p>
+</blockquote>
+</li>
+<li><p>After logging in, we can now create a unique domain for our web server. Type "heroku create" then the name of what you want to call your app. For example, "heroku create flaskmediapage" was typed into the command prompt:</p>
+<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku create flaskmediapage</i> 
+The terminal will inform you whether or not that domain name is taken. If the domain name is not taken, a URL to your website is created and should look similar to this: <a href="https://flaskmediapage.herokuapp.com/">https://flaskmediapage.herokuapp.com/</a></p>
+</blockquote>
+</li>
+<li><p>The database we currently have is an SQLite database which was great during development of our app, however, is unable to run over a network. In order to deploy the app, we need to switch to a PostgreSQL database. To create a database with heroku, type "heroku addons:create heroku-postgresql:hobby-dev --app flasksocialmedia" into the terminal.</p>
+<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku addons:create heroku-postgresql:hobby-dev --app flaskmediapage</i> 
+Ensure the last word of this command is the name of your app you chose from step 7. Now you have a free empty database.</p>
+</blockquote>
+</li>
+<li><p>Now we have to alter our code to make sure our application is using the PostgreSQL database. First we need to get the URL for database. Type this into your command prompt: "heroku config --app flaskmediapage".</p>
+<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku config --app flaskmediapage</i> 
+This should create a URL similar to this:
+postgres://baeiyrmyxoecvu:c38f07af1eb3ad0da3e952189097972948241444bafe16ebfe86227aa089e8f1@ec2-52-206-182-219.compute-1.amazonaws.com:5432/des45gq4vda2q
+Now copy this URL and paste it into the <code><i>webpage __ init__.py&lt;/code&gt;&lt;/i&gt; file, replacing the SQLite link we initially had. <strong>Add "ql" after "postgres" to indicate that it is an SQLAlchemy database</strong> Your code should look like this:
+```
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+<p>app = Flask(<strong>name</strong>)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://baeiyrmyxoecvu:c38f07af1eb3ad0da3e952189097972948241444bafe16ebfe86227aa089e8f1@ec2-52-206-182-219.compute-1.amazonaws.com:5432/des45gq4vda2q'
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)</p>
+<p>from webpage.users.routes import users
+from webpage.posts.routes import posts
+from webpage.main.routes import main</p>
+<p>app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)</p>
+
+<pre><code>
+10. We will be pushing our application onto Heroku using Github repositories.
+* Create a &lt;code&gt;&lt;i&gt;.gitignore&lt;/code&gt;&lt;/i&gt; file.
+```bash
+├── webpage
+│   ├── static
+│   │   ├── main.css
+│   │   ├── profile_pics
+│   │   │   ├── default.jpg
+│   ├── templates
+│   │   ├── account.html
+│   │   ├── create_post.html
+│   │   ├── feed.html
+│   │   ├── layout.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   ├── main
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   ├── posts
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── forms.py
+│   │   ├── routes.py
+│   │   ├── save_pics.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── site.db
+├── .gitignore
+├── app.py
+├── Procfile
+├── requirements.txt</code></pre>
+<p>Paste the following code:</p>
+
+<pre><code># Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/</code></pre>
+<p>This file tells Git which files to not commit.</p>
+<ul>
+<li>Type "git init" into the command prompt to initialize your repository.<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;git init</i></p>
+</blockquote>
+</li>
+<li>"git add -A" collects all the files.<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;git add -A</i></p>
+</blockquote>
+</li>
+<li>"git commit -m "initial commit"" commits the files into the repository.<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;git commit -m "initial commit"</i></p>
+</blockquote>
+</li>
+<li>"git push heroku master" pushes the repository onto Heroku.<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;git push heroku master</i></p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>The last step is to migrate the PostgreSQL database, similar to what we did with SQLite.</li>
+</ol>
+<ul>
+<li>Type "heroku run python" in the command prompt.<blockquote><p><i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku run python</i></p>
+</blockquote>
+</li>
+<li><p>Now we will import our database:</p>
+<blockquote><p><i>&gt;&gt;&gt; from webpage import db</i></p>
+</blockquote>
+</li>
+<li><p>Then we will create the database:&gt;<i>&gt;&gt;&gt; db.create_all()</i></p>
+</li>
+<li>Exit out of the python terminal:<blockquote><p><i>&gt;&gt;&gt; exit()</i></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Now-you-should-have-your-own-fully-functioning-social-media-page!">Now you should have your own fully functioning social media page!<a class="anchor-link" href="#Now-you-should-have-your-own-fully-functioning-social-media-page!"> </a></h3><h4 id="You-can-paste-the-URL-you-are-given-from-step-7-into-your-browser-or-use-the-following-command-to-open-your-web-server:&gt;(env)-C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku-open">You can paste the URL you are given from <strong>step 7</strong> into your browser or use the following command to open your web server:&gt;<i>(env) C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku open</i><a class="anchor-link" href="#You-can-paste-the-URL-you-are-given-from-step-7-into-your-browser-or-use-the-following-command-to-open-your-web-server:&gt;(env)-C:\Users\jenni\OneDrive\Desktop\FlaskWebPage&gt;heroku-open"> </a></h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sources">Sources<a class="anchor-link" href="#Sources"> </a></h2><ol>
+<li>Schafer, C. (2018, May 4). Python flask tutorial: Full-featured web app part 1 - getting started. YouTube. Retrieved June 26, 2022, from <a href="https://www.youtube.com/watch?v=MwZwr5Tvyxo&amp;amp;list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH">https://www.youtube.com/watch?v=MwZwr5Tvyxo&amp;amp;list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH</a> </li>
+<li>Walker, R. (n.d.). Education at bat: Seven principles for educators. Harvard Graduate School of Education. Retrieved June 26, 2022, from <a href="https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators">https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators</a> </li>
+<li>Mark Otto, J. T. (n.d.). Bootstrap. Bootstrap · The most popular HTML, CSS, and JS library in the world. Retrieved June 26, 2022, from <a href="https://getbootstrap.com/">https://getbootstrap.com/</a> </li>
+<li>Real Python. (2021, February 6). Use a flask blueprint to architect your applications. Real Python. Retrieved June 27, 2022, from <a href="https://realpython.com/flask-blueprint/">https://realpython.com/flask-blueprint/</a> </li>
+<li>Jemastock. (2019, April 17). Thumb up icon vector image on vectorstock. VectorStock. Retrieved June 27, 2022, from <a href="https://www.vectorstock.com/royalty-free-vector/thumb-up-icon-vector-24957601">https://www.vectorstock.com/royalty-free-vector/thumb-up-icon-vector-24957601</a> </li>
+<li>CoreyMSchafer. (n.d.). Code_snippets/python/flask_blog at master · coreymschafer/code_snippets. GitHub. Retrieved June 27, 2022, from <a href="https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog">https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Flask_Blog</a> </li>
+<li>Github. (2021, December 11). Gitignore/jetbrains.gitignore at main · github/gitignore. GitHub. Retrieved June 27, 2022, from <a href="https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore">https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore</a> </li>
+<li>Codemy.com. (2022, January 14). Deploy flask app with database on Heroku for webhosting - flask fridays #39. YouTube. Retrieved June 27, 2022, from <a href="https://www.youtube.com/watch?v=SiCAIRc0pEI">https://www.youtube.com/watch?v=SiCAIRc0pEI</a> </li>
+</ol>
+
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</i></code></p></blockquote></li></i></code></p></blockquote></i></code></p></li></i></code></li></ol></div></div></div></i></code></i></code></i></code></i></code></i></code></h4></i></code></i></code></h4></div></div></div></i></code></h4></i></code></h4></i></code></h3></div></div></div></i></code></i></code></i></code></h4></i></code></h4></i></code></i></code></h3></i></code></i></code></h3></i></code></i></code></h3></div></div></div></i></code></strong></h4></i></code></i></code></i></code></h4></i></code></strong></h4></i></code></strong></h4></i></code></i></code></i></code></h4></i></code></i></code></h3></i></code></h4></i></code></h3></i></code></h4></i></code></i></code></i></code></h4></i></code></h3></i></code></i></code></i></code></i></code></h4></i></code></h4></div></div></div></i></code></h4></div></div></div></i></code></h4></i></code></h4></div></div></div></i></code></h4></i></code></i></code></h4></div></div></div></i></code></p></blockquote></li></ol></div></div></div></i></code></h4></div></div></div></div>
+
+
+  </div><a class="u-url" href="/RexCoding/2022/06/18/flask-media.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
