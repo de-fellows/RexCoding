@@ -1,10 +1,10 @@
 ﻿---
 toc: true
 layout: post
-description: Cmpletete traslation of Python code to Java.
-categories: [markdown]
+description: Complete translation of Python code to Java
+categories: [Python, Java, OOP]
 title: Dependency Inversion in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 

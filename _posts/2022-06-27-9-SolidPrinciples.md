@@ -1,10 +1,10 @@
 ﻿---
 toc: true
 layout: post
-description: Cmpletete traslation of Python code to Java.
-categories: [markdown]
+description: Complete translation of Python code to Java
+categories: [Python, Java, OOP]
 title: SOLID principles in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 # **[SOLID principles](https://www.youtube.com/watch?v=pTB30aXS77U&feature=youtu.be) code translation in Java**
@@ -32,6 +32,17 @@ D - Dependency Inversion Principle
 - We defined a package name for this project as ***edu.def.solid*** ([package naming standards](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html)) and its specific directory under the ***src*** folder. This package name keeps all project components connected to gather when we implement them on different ***.java*** files. 
 - However, packages are not necessary, you could use a default package, or even have all classes in the same file; this is more Java best practice.
 - More information about **Java’s** project directory standards is [here](https://www.ibm.com/docs/en/i/7.1?topic=topics-java-classes-packages-directories).
+
+## **SOLID Principles - Code progression**
+1. First, please consider the original code ***OrderOriginal.java*** and see how the code looks like, before implementing **SOLID Principles.**
+1. Applying the **S (Single Responsibility Principle)** order has too many responsibilities, such as adding a new class PaymentProcessor and separating out two different ***pay()*** methods.
+1. By applying **O** **(Open/Closed Principle)**, we added an extra payment method which would require changing ***PaymentProcessor*** class. Making an [interfaces](https://d.docs.live.net/1a7d4b5a20685305/Documents/w3schools.com/java/java_interface.asp) from ***PaymentProcessor*** is one of them, which gives us the ability to specialize inherited classes in terms of payment methods; Like adding ***PaypalProcessor*** class which is inheriting ***PaymentProcessor*** [interfaces](https://d.docs.live.net/1a7d4b5a20685305/Documents/w3schools.com/java/java_interface.asp).
+1. Applying **L (Liskov Substitution Principle)** on ***PaypalProcessor***, ***securityCode*** will be substituted by ***emailAddress*** as a class parameter, not a function’s argument anymore. Also, it will be valued at the class’s constructor and not on the ***pay()*** method.
+1. By refactoring because of **I (Interface segregation),** we added SMS authentication to ***PaymentProcessor***. Before that there was a problem (**Liskov violation**) with credit payment, that was no SMS authorization.
+1. Applying **I (Interface segregation)** with **inheritance**. Create two interfaces: ***PaymentProcessor*** with ***pay ()*** method and ***PaymentProcessorSMS*** interface which inherits from ***PaymentProcessor***, as well as adding ***authSMS()*** method.
+1. Applying **I (Interface segregation)** with [composition](https://www.geeksforgeeks.org/composition-in-java/). Create two interfaces: ***PaymentProcessor*** with ***pay()*** , and create a ***SMSAuthorizer*** class which is passed to all class’s constructors that need a kind of SMS authentication ([aggregation](https://www.geeksforgeeks.org/association-composition-aggregation-java/)).
+1. Applying **D (Dependency inversion)**. Desire to add another type of authorizer. Some processor classes depend on ***SMSAuthorizer***. We created an interface ***Authorizer*** to have a more general interface for authorizing by SMS, Google or NotRobot. Also, a new ***NotARobotAuthorizer*** was added.
+
 
 ## **Compiling Instruction**
 

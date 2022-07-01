@@ -1,10 +1,10 @@
 ﻿---
 toc: true
 layout: post
-description: Cmpletete traslation of Python code to Java.
-categories: [markdown]
+description: Complete translation of Python code to Java
+categories: [Python, Java, OOP]
 title: Cohesion and Coupling in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 # [Cohesion and Coupling](https://www.youtube.com/watch?v=eiDyK_ofPPM) **principles code translation in Java**

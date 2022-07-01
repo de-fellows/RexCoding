@@ -1,10 +1,10 @@
 ﻿---
 toc: true
 layout: post
-description: Cmpletete traslation of Python code to Java.
-categories: [markdown]
+description: Complete translation of Python code to Java
+categories: [Python, Java, OOP]
 title: The Strategy Pattern in Java
-author: <a href="https://github.com/sinapordanesh”>Saman Pordanesh</a>
+author: <a href="https://github.com/sinapordanesh">Saman Pordanesh</a>
 ---
 
 # [The Strategy Pattern](https://www.youtube.com/watch?v=WQ8bNdxREHU) **code translation in Java** 
