@@ -149,7 +149,7 @@ window.onload = wrap_img;
 </figure>
 </p>
 <p>To properly answer this question, we first need to dive into the different aspects of RL.</p>
-<p>Herein, we will use certain terminology to discuss the nature of RL. It is crucial to understand their meanings and how they distunguish RL from the other branches of ML. To get things started, we will present the notion of an <strong>agent</strong> existing in an <strong>environment.</strong></p>
+<p>Herein, we will use certain terminology to discuss the nature of RL. It is crucial to understand their meanings and how they distinguish RL from the other branches of ML. To get things started, we will present the notion of an <strong>agent</strong> existing in an <strong>environment.</strong></p>
 <p>An <strong>environment</strong> in the relevant context refers to a space - not necessarily a physical one - that exists and can be interacted with. Interactions with such an environment are called <strong>actions</strong> and should produce some sort of response that can be percieved by anything existing in that environment.</p>
 <p>An <strong>agent</strong> exists in an environment and is able to percieve it, meaning that any response that the environment produces can be experienced by the agent. More specifically, an <strong>intelligent agent</strong> (IA) is one who takes non-random actions based on feedback from an environment. This feedback comes in the form of two notions, <strong>state</strong> and <strong>reward</strong>, which we will discuss more later. An IA takes said actions in order to reach some desirable end result. They may exhibit learning by adjusting their actions over time, or memory by using past experiences in an environment to adjust their current actions.</p>
 <p>Putting these concepts together, RL involves an agent learning to take actions in an environment to reach some goal.</p>
@@ -518,7 +518,7 @@ Mean score over 10 episodes  --&gt;  22.4
 
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span><span class="p">,</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
 
 <span class="kn">from</span> <span class="nn">rl.agents</span> <span class="kn">import</span> <span class="n">DQNAgent</span>
 <span class="kn">from</span> <span class="nn">rl.policy</span> <span class="kn">import</span> <span class="n">EpsGreedyQPolicy</span>
@@ -596,7 +596,7 @@ _________________________________________________________________
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For a visual representation of the above NN, we can add the following code.</p>
+<p>For a visual representation of the above NN:</p>
 
 </div>
 </div>
@@ -669,7 +669,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="i)-Replay-Memory">i) Replay Memory<a class="anchor-link" href="#i)-Replay-Memory"> </a></h4>
+<h4 id="3A.-Preparation">3A. Preparation<a class="anchor-link" href="#3A.-Preparation"> </a></h4><h4 id="i)-Replay-Memory">i) Replay Memory<a class="anchor-link" href="#i)-Replay-Memory"> </a></h4>
 </div>
 </div>
 </div>
@@ -803,6 +803,12 @@ _________________________________________________________________
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3B.-Training">3B. Training<a class="anchor-link" href="#3B.-Training"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>The next step involves the training of our agent. We will call our .fit() method, which initiates this training. To this method we pass our environment, and give a limit to the number of steps for which we will train. Additionally, we set visualize to False so that our environment is not visible while training, as this would slow down the process.</p>
 
 </div>
@@ -885,9 +891,7 @@ done, took 218.268 seconds
     </div>
 </div>
 </div>
-<details class="description">
-      <summary class="btn btn-sm" data-open="Hide Output" data-close="Show Output"></summary>
-        <p>
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -923,8 +927,7 @@ Mean score over 20 is    ---&gt;    207.1
 
 </div>
 </div>
-</p>
-    </details>
+
 </div>
     
 
@@ -941,9 +944,7 @@ Mean score over 20 is    ---&gt;    207.1
     </div>
 </div>
 </div>
-<details class="description">
-      <summary class="btn btn-sm" data-open="Hide Output" data-close="Show Output"></summary>
-        <p>
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -978,15 +979,14 @@ Mean score over 20 episodes  --&gt;  26.4
 
 </div>
 </div>
-</p>
-    </details>
+
 </div>
     
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If we expand the above output cells, we can see that our trained agent averaged a score of 207.1 over 20 episodes, while our random agent averaged 26.4.</p>
-<p>We can see how our IA perform on a single run of the game below.</p>
+<p>If we observe the above output cells, we can see that our trained agent averaged a score of 207.1 over 20 episodes, while our random agent averaged 26.4 - a huge difference!</p>
+<p>We can see how our IA performs on a single run of the game below.</p>
 
 </div>
 </div>
@@ -1042,7 +1042,7 @@ Episode 1: reward: 210.000, steps: 210
     
 </figure>
 </p>
-<p>Note the ability of the agent to keep the pole balanced for a significantly longer period of time when contrasted to the random agent. This difference reflects the fact that we now have an agent with some hint of intellegence.</p>
+<p>Note the ability of the agent to keep the pole balanced for a significantly longer period of time when contrasted to the random agent. This difference reflects the fact that we now have an agent with some hint of useful decision making.</p>
 
 </div>
 </div>
@@ -1056,7 +1056,8 @@ Episode 1: reward: 210.000, steps: 210
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is with some caution that we can say that our trained agent is now 'smart enough' to play this game.</p>
-<p>As we can infer, RL has numerous applications that extend from such a simplistic environment and can find usefulness in a large scope of fields. It is a field with diverse reach that finds a place for itself in a modern world concerned with automation. Simple environments like the one presented here can serve as an analogue to more real-world problems. Having given this introduction, I implore the reader to further their knowledge into Reinforcement Learning by going out and seeking new information.</p>
+<p>As we can infer, RL has numerous applications that extend from such a simplistic environment and can find usefulness in a large scope of fields. It is a field with diverse reach that finds a place for itself in a modern world concerned with automation. Simple environments like the one presented here can serve as an analogue to more real-world problems. Having given this introduction, I implore the reader to further their knowledge into Reinforcement Learning.</p>
+<p>Hopefully this read has made you wonder how you can apply RL to other tasks similar to the one presented here. A great stepping stone would be to look into the <a href="https://www.gymlibrary.ml/">OpenAI Gym Documentation </a> and explore the environemnets available its users, which range from Atari game recreations to simple 3D locomotion simulations. Try your hand at creating an agent to traverse these environments and along the way explore the various tweaks that can be applied during training to maximize your score!</p>
 
 </div>
 </div>
