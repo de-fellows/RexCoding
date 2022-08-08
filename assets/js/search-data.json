@@ -171,8 +171,8 @@
 
   
       ,"page1": {
-          "title": "About Me",
-          "content": "This website is powered by fastpages 1. . a blogging platform that natively supports Jupyter notebooks in addition to other formats. &#8617; . |",
+          "title": "About Us",
+          "content": "We are students, faculty and friends of the Schulich School of Engineering at the University of Calgary. . Blog posts by Digital Engineering Fellows created during the Spring 2022 term were supported by a Schulich School of Engineering - Engineering Education Innovation Award. . If you have questions or suggestions for improvements, please contact the author of the blog post directly, open an issue (or pull request) in the github repository. . This website is powered by fastpages 1. . a blogging platform that natively supports Jupyter notebooks in addition to other formats. &#8617; . |",
           "url": "https://de-fellows.github.io/RexCoding/about/",
           "relUrl": "/about/",
           "date": ""
