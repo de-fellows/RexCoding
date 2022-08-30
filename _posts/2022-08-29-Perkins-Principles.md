@@ -14,8 +14,8 @@ In the Spring 2022 term, the Digital Engineering Fellowship Program supported st
 
 Fellows identified topics of interest that align with current Digital Engineering courses ranging from Software development, Machine Learning, Internt of Things, and Cyberphysical Systems. Subsequently, they researched the topic, build demonstrators and summarized their activity in a blog post available on this site.
 
-To guide Fellows pedagogially, we studied Perkins *Seven Principles* explained in this article:
-[Education at Bat: Seven Principles for Educators \| Harvard Graduate School of Education](https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators)
+To guide Fellows pedagogially, we studied Perkins *Seven Principles* [^1] explained in this article:
+[Education at Bat: Seven Principles for Educators \| Harvard Graduate School of Education](https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators). 
 
 Below are notes from our discussions and resarch highlighting possible applications to Digital Engineering for each of the seven principles.
 
@@ -97,3 +97,5 @@ In our discussions, DE Fellows were excited to consider principles:
 - *4. Play out of town*
 
 and you will find references to these topics at the start of many of the blog posts from the Spring 2022 edition. Enjoy!
+
+[^1]: Thanks to Jeremy at [fastai](https://www.fast.ai) for introducing me to Perkins.
