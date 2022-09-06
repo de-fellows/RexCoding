@@ -242,9 +242,8 @@ Begin and test data collection.</li>
 <p>There are several ways to do this. For a Raspberry Pi 4, you can use the New Out of Box Software (NOOBS) method, or the Raspberry Pi Imager method. We will be using the latter.</p>
 <p>It is important to have some sort of an adapter for your microSD card, since most laptops or computers do not have that kind of port. Some options are a microSD to USB adapter or a microSD to SD card adapter. The important part is that you have some way of connecting the microSD to your computer. I am using an ADATA microReader, because it is what I had on hand.</p>
 <blockquote><p>The content in Sections 1.1 to 1.5 is based on the video The New Method to Setup Raspberry Pi (2022 Update) by Refactored on YouTube (<a href="https://www.youtube.com/watch?v=jRKgEXiMtns">https://www.youtube.com/watch?v=jRKgEXiMtns</a>).</p>
-<h3 id="1.2:-Checking-the-File-Format">1.2: Checking the File Format<a class="anchor-link" href="#1.2:-Checking-the-File-Format"> </a></h3>
 </blockquote>
-<p>Raspberry Pi’s require your microSD card to be in FAT32 file format. This is the default format for SD cards with 32GB or less storage capacity.</p>
+<h3 id="1.2:-Checking-the-File-Format">1.2: Checking the File Format<a class="anchor-link" href="#1.2:-Checking-the-File-Format"> </a></h3><p>Raspberry Pi’s require your microSD card to be in FAT32 file format. This is the default format for SD cards with 32GB or less storage capacity.</p>
 <p>If your microSD card is 32GB or less, congratulations! You can move on to section 1.3.</p>
 <p>If your microSD card is greater than 32GB, you will need to convert it to FAT32. Both Windows and Mac have options for this that can be found with a simple Google search. Once this is completed, move on to section 1.3.</p>
 <h3 id="1.3:-Flashing-the-microSD-Card">1.3: Flashing the microSD Card<a class="anchor-link" href="#1.3:-Flashing-the-microSD-Card"> </a></h3><p>In the Raspberry Pi world, "flashing the SD card" means writing the OS image to the SD card. We will be doing this using Raspberry Pi Imager to install the Raspberry Pi OS (formerly Raspbian).</p>
@@ -361,20 +360,21 @@ Let’s set up our SSH connection! With the setup from section 1.5, follow these
 <ul>
 <li>Make sure your Raspberry Pi is on the same network (WiFi or Wired LAN) as your computer. To check this, go to the top right corner of the desktop and click the WiFi button.</li>
 <li>Open a Terminal. You can do this by clicking the terminal button in the top left corner of the desktop or by pressing <strong>Ctrl + Alt + T</strong> on the Raspberry Pi’s keyboard.</li>
-<li><p>In the terminal, there are two ways to find the IP address:</p>
-<ul>
-<li><p>(Easiest Method) Type <strong>hostname -I</strong> and hit <strong>Enter</strong> to get the IP address on that network. Shown below, the IP address is 192.168.1.138. This will be a different address on each network.</p>
-<p><img src="Go-Go-Gadget-Images/IP_Address_Method_1.png" alt="IP Address Method 1" /></p>
-<p><u>OR</u></p>
+<li>In the terminal, there are two ways to find the IP address:<ul>
+<li>(Easiest Method) Type <strong>hostname -I</strong> and hit <strong>Enter</strong> to get the IP address on that network. Shown below, the IP address is 192.168.1.138. This will be a different address on each network.</li>
+</ul>
 </li>
-<li><p>Type <strong>ifconfig</strong> and hit <strong>Enter</strong>. The number underneath “wlan0” and beside “inet” is the Raspberry Pi’s IP address on that particular network. Shown below, we get the same the IP address (192.168.1.138).</p>
+</ul>
+<p><img src="Go-Go-Gadget-Images/IP_Address_Method_1.png" alt="IP Address Method 1" /></p>
+
+<pre><code>&lt;u&gt;OR&lt;/u&gt;
+
+- Type __ifconfig__ and hit __Enter__. The number underneath “wlan0” and beside “inet” is the Raspberry Pi’s IP address on that particular network. Shown below, we get the same the IP address (192.168.1.138).
+
+</code></pre>
 <p><img src="Go-Go-Gadget-Images/IP_Address_Method_2.png" alt="IP Address Method 2" /></p>
 <blockquote><p>If you are frequently using the Raspberry Pi under the same network (for example, at your house), <strong>write down this IP address</strong> since you will be using it often.</p>
 </blockquote>
-</li>
-</ul>
-</li>
-</ul>
 </li>
 <li><p>Enable SSH on the Raspberry Pi.</p>
 <ul>
