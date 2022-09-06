@@ -355,7 +355,7 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 <blockquote><p>The content in Section 1.6 is based on the article SSH:Remote control your Raspberry Pi by Russell Barnes in The MagPi Magazine (<a href="https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi">https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi</a>).
 Let’s set up our SSH connection! With the setup from section 1.5, follow these steps:</p>
 </blockquote>
-<h4 id="Step-1:-Get-the-IP-address-of-your-Raspberry-Pi-on-that-network.">Step 1: Get the IP address of your Raspberry Pi <strong>on that network</strong>.<a class="anchor-link" href="#Step-1:-Get-the-IP-address-of-your-Raspberry-Pi-on-that-network."> </a></h4><ul>
+<h4 id="Step-1:--Get-the-IP-address-of-your-Raspberry-Pi-on-that-network">Step 1:  Get the IP address of your Raspberry Pi <strong>on that network</strong><a class="anchor-link" href="#Step-1:--Get-the-IP-address-of-your-Raspberry-Pi-on-that-network"> </a></h4><ul>
 <li>Make sure your Raspberry Pi is on the same network (WiFi or Wired LAN) as your computer. To check this, go to the top right corner of the desktop and click the WiFi button.</li>
 <li>Open a Terminal. You can do this by clicking the terminal button in the top left corner of the desktop or by pressing <strong>Ctrl + Alt + T</strong> on the Raspberry Pi’s keyboard.</li>
 <li>In the terminal, there are two ways to find the IP address:<ul>
@@ -371,7 +371,7 @@ Let’s set up our SSH connection! With the setup from section 1.5, follow these
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/IP_Address_Method_2.png" alt="IP Address Method 2" /></p>
 <blockquote><p>If you are frequently using the Raspberry Pi under the same network (for example, at your house), <strong>write down this IP address</strong> since you will be using it often.</p>
 </blockquote>
-<h4 id="Step-2:Enable-SSH-on-the-Raspberry-Pi.">Step 2:Enable SSH on the Raspberry Pi.<a class="anchor-link" href="#Step-2:Enable-SSH-on-the-Raspberry-Pi."> </a></h4><ul>
+<h4 id="Step-2:Enable-SSH-on-the-Raspberry-Pi">Step 2:Enable SSH on the Raspberry Pi<a class="anchor-link" href="#Step-2:Enable-SSH-on-the-Raspberry-Pi"> </a></h4><ul>
 <li>In the terminal, type <strong>sudo raspi-config</strong> and hit <strong>Enter</strong>. This will take you to the Configuration Tool.</li>
 </ul>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/SSH_1.png" alt="sudo raspi-config" /></p>
@@ -395,31 +395,25 @@ Let’s set up our SSH connection! With the setup from section 1.5, follow these
 <li>On the Configuration Tool, use the <strong>Tab</strong> key to access the "Select" and "Finish" buttons at the bottom. Use the left and right arrow keys to select <strong>Finish</strong> and hit <strong>Enter</strong>.</li>
 </ul>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/SSH_6.png" alt="Select &quot;Finish&quot;" /></p>
-<ol>
-<li><p>Activate SSH Client (Windows).</p>
-<ul>
+<h4 id="Step-3:--Activate-SSH-Client-(Windows)">Step 3:  Activate SSH Client (Windows)<a class="anchor-link" href="#Step-3:--Activate-SSH-Client-(Windows)"> </a></h4><ul>
 <li><strong>This step is not needed for Linux or macOS.</strong></li>
 <li>In Windows 10, you can use SSH without having to download anything, but you need to activate it first.</li>
 <li>On your computer, search for and <strong>Open “Manage Optional Features”</strong>.</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/setup22.png" alt="Manage Optional Features" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup22.png" alt="Manage Optional Features" /></p>
 <ul>
 <li>Click <strong>Add a feature</strong>.</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/setup23.png" alt="Add a Feature" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup23.png" alt="Add a Feature" /></p>
 <ul>
 <li>Search for <strong>OpenSSH Server</strong> (may also be called OpenSSH Client). <strong>Install</strong> it.</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/setup24.png" alt="Install OpenSSH Server" /></p>
-</li>
-<li><p>Open a Terminal/Command Prompt on your computer and type in <strong>ssh [username]@[IP]</strong> and press <strong>Enter</strong>. For example, since my username is “christina” and the Raspberry Pi IP address in the Makerspace is 192.168.1.48, I type in <strong>ssh christina@192.168.1.48</strong>. <br /> If this is your first time using SSH, it may say that the authenticity cannot be established and it will ask, “Are you sure you want to continue connecting?” Type <strong>yes</strong> and hit <strong>Enter</strong>. <br /> You will then need to <strong>enter your password</strong> for the Raspberry Pi that we wrote down in Section 1.5. <br /> Note that the password will <u>__not__</u> appear on the screen as you are typing it.</p>
-</li>
-<li><p>If you want to end the SSH connection, type <strong>exit</strong> into the terminal and hit <strong>Enter</strong>.</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup24.png" alt="Install OpenSSH Server" /></p>
+<h4 id="Step-4:--Access-Raspberry-Pi-via-SSH-Client">Step 4:  Access Raspberry Pi via SSH Client<a class="anchor-link" href="#Step-4:--Access-Raspberry-Pi-via-SSH-Client"> </a></h4><p>Open a Terminal/Command Prompt on your computer and type in <strong>ssh [username]@[IP]</strong> and press <strong>Enter</strong>. For example, since my username is “christina” and the Raspberry Pi IP address in the Makerspace is 192.168.1.48, I type in <strong>ssh christina@192.168.1.48</strong>. <br /> If this is your first time using SSH, it may say that the authenticity cannot be established and it will ask, “Are you sure you want to continue connecting?” Type <strong>yes</strong> and hit <strong>Enter</strong>. <br /> You will then need to <strong>enter your password</strong> for the Raspberry Pi that we wrote down in Section 1.5. <br /> Note that the password will <u>not</u> appear on the screen as you are typing it.</p>
+<h4 id="Step-5:--Exiting-SSH">Step 5:  Exiting SSH<a class="anchor-link" href="#Step-5:--Exiting-SSH"> </a></h4><p>If you want to end the SSH connection, type <strong>exit</strong> into the terminal and hit <strong>Enter</strong>.</p>
 <blockquote><p>The Raspberry Pi terminal uses <strong>Linux commands</strong>. An easy guide to Linux commands can be found on the SSE Tech Support website under M2Z &gt; Learning Resources &gt; Programming Skills and Tools &gt; Linux Terminal (<a href="https://schulich.libguides.com/c.php?g=721481).&gt;">https://schulich.libguides.com/c.php?g=721481).&gt;</a> <strong>Troubleshooting and Problem Solving:</strong> <br /><br /> While trying to connect via SSH, I had the following problems:<br />- My laptop was connected to a different network than the Raspberry Pi, so the SSH connection was refused<br />- I entered the wrong username into the terminal (shown in <strong>red</strong>), so it didn’t recognize the password I had written down<br /><br />Once I solved these problems, I had success connecting (shown in <strong>blue</strong>).<br /><br /><img src="Go-Go-Gadget-Images/setup25.png" alt="SSH Troubleshooting" /><br /><br />If you are having difficulty connecting, look for the problems listed above. You can also double-check that your IP address is correct and that the power to the Raspberry Pi is on. If these do not work, try using <strong>PuTTY</strong> to connect (see the article link in the green box at the beginning of this Section).</p>
-</blockquote>
-</li>
-</ol>
 <hr />
+</blockquote>
 
 </div>
 </div>
