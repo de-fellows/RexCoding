@@ -411,9 +411,10 @@ Let’s set up our SSH connection! With the setup from section 1.5, follow these
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup24.png" alt="Install OpenSSH Server" /></p>
 <h4 id="Step-4:--Access-Raspberry-Pi-via-SSH-Client">Step 4:  Access Raspberry Pi via SSH Client<a class="anchor-link" href="#Step-4:--Access-Raspberry-Pi-via-SSH-Client"> </a></h4><p>Open a Terminal/Command Prompt on your computer and type in <strong>ssh [username]@[IP]</strong> and press <strong>Enter</strong>. For example, since my username is “christina” and the Raspberry Pi IP address in the Makerspace is 192.168.1.48, I type in <strong>ssh christina@192.168.1.48</strong>. <br /> If this is your first time using SSH, it may say that the authenticity cannot be established and it will ask, “Are you sure you want to continue connecting?” Type <strong>yes</strong> and hit <strong>Enter</strong>. <br /> You will then need to <strong>enter your password</strong> for the Raspberry Pi that we wrote down in Section 1.5. <br /> Note that the password will <u>not</u> appear on the screen as you are typing it.</p>
 <h4 id="Step-5:--Exiting-SSH">Step 5:  Exiting SSH<a class="anchor-link" href="#Step-5:--Exiting-SSH"> </a></h4><p>If you want to end the SSH connection, type <strong>exit</strong> into the terminal and hit <strong>Enter</strong>.</p>
-<blockquote><p>The Raspberry Pi terminal uses <strong>Linux commands</strong>. An easy guide to Linux commands can be found on the SSE Tech Support website under M2Z &gt; Learning Resources &gt; Programming Skills and Tools &gt; Linux Terminal (<a href="https://schulich.libguides.com/c.php?g=721481).&gt;">https://schulich.libguides.com/c.php?g=721481).&gt;</a> <strong>Troubleshooting and Problem Solving:</strong> <br /><br /> While trying to connect via SSH, I had the following problems:<br />- My laptop was connected to a different network than the Raspberry Pi, so the SSH connection was refused<br />- I entered the wrong username into the terminal (shown in <strong>red</strong>), so it didn’t recognize the password I had written down<br /><br />Once I solved these problems, I had success connecting (shown in <strong>blue</strong>).<br /><br /><img src="Go-Go-Gadget-Images/setup25.png" alt="SSH Troubleshooting" /><br /><br />If you are having difficulty connecting, look for the problems listed above. You can also double-check that your IP address is correct and that the power to the Raspberry Pi is on. If these do not work, try using <strong>PuTTY</strong> to connect (see the article link in the green box at the beginning of this Section).</p>
-<hr />
+<blockquote><p>The Raspberry Pi terminal uses <strong>Linux commands</strong>. An easy guide to Linux commands can be found on the SSE Tech Support website under M2Z &gt; Learning Resources &gt; Programming Skills and Tools &gt; Linux Terminal (<a href="https://schulich.libguides.com/c.php?g=721481).&gt;">https://schulich.libguides.com/c.php?g=721481).&gt;</a> <strong>Troubleshooting and Problem Solving:</strong> <br /><br /> While trying to connect via SSH, I had the following problems:<br />- My laptop was connected to a different network than the Raspberry Pi, so the SSH connection was refused<br />- I entered the wrong username into the terminal (shown in <strong>red</strong>), so it didn’t recognize the password I had written down<br /><br />Once I solved these problems, I had success connecting (shown in <strong>blue</strong>).<br /><br />If you are having difficulty connecting, look for the problems listed above. You can also double-check that your IP address is correct and that the power to the Raspberry Pi is on. If these do not work, try using <strong>PuTTY</strong> to connect (see the article link in the green box at the beginning of this Section).</p>
 </blockquote>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup25.png" alt="SSH Troubleshooting" /></p>
+<hr />
 
 </div>
 </div>
@@ -478,29 +479,23 @@ To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
 <blockquote><p>The content in Section 2.2 is based on the article How to use a Grove Temperature and Humidity Sensor Pro with a Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;">https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;</a> <strong>Using Secure Copy (SCP):</strong><br /><br />In this section, we need to transfer files from our personal computer to the Raspberry Pi. We can do this using Secure Copy (SCP).<br /><br />Since we already enabled SSH, SCP is also enabled.<br /><br />Here’s what to do:<br /><br />1. Make sure your personal computer is on the <strong>same network</strong> as the Raspberry Pi, just like you would do for an SSH connection.<br /><br />2. In the Command Prompt on your computer, navigate to the folder that contains the file you want to transfer. On Windows, you can do this using the cd and dir commands.<br /><br />3. From that location, type into the terminal: <strong>scp filename.txt username@[IP]:folder/</strong><br /><br />4. You will then need to input the password of your Raspberry Pi.<br /><br />For example, if we needed to save a file called test_code.py to the “Code” folder on the Raspberry Pi at the IP address 192.168.1.138, the line would look like this:<br /><br /><strong>scp test_code.py christina@192.168.1.138:Code/</strong><br /><br />Note that the folder you specify is the location you want to save the file to on the Raspberry Pi. The folder is the file path relative to the “Home” folder on the Raspberry Pi.&gt; You can learn more about Secure Copying with the Raspberry Pi here (<a href="https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi">https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi</a>).
 To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we need to do the following:</p>
 </blockquote>
-<ol>
-<li><p>Install needed packages:</p>
-<ul>
+<h4 id="Step-1:--Install-needed-packages">Step 1:  Install needed packages<a class="anchor-link" href="#Step-1:--Install-needed-packages"> </a></h4><ul>
 <li>Connect to the Raspberry Pi via SSH</li>
 <li>Install the seeed-python-dht package: Type <strong>pip3 install seeed-python-dht</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong></li>
 <li>Install the python-smbus package: Type <strong>sudo apt-get install -y python smbus</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong>. <u>Note:</u> This may not work as the package has become obsolete</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/grove_sensor1.png" alt="Installing python smbus" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor1.png" alt="Installing python smbus" /></p>
 <ul>
 <li>Install the i2c-tools package: Type <strong>sudo apt-get install -y i2c-tools</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong></li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/grove_sensor2.png" alt="Installing i2c-tools" /></p>
-</li>
-<li><p>Make a folder to put our test code into called “Code”:</p>
-<ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor2.png" alt="Installing i2c-tools" /></p>
+<h4 id="Step-2:--Make-a-folder-to-put-our-test-code-into-called-&#8220;Code&#8221;">Step 2:  Make a folder to put our test code into called &#8220;Code&#8221;<a class="anchor-link" href="#Step-2:--Make-a-folder-to-put-our-test-code-into-called-&#8220;Code&#8221;"> </a></h4><ul>
 <li>If you type <strong>ls</strong> into the terminal, it lists all of the files and folders under the “Home” directory</li>
 <li>Type <strong>mkdir Code</strong> in the terminal to create a folder called “Code” under the “Home” directory</li>
 <li>We can confirm that the folder was created using <strong>ls</strong> again</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/grove_sensor3.png" alt="Creating a New Folder" /></p>
-</li>
-<li><p>Put some test code onto the Raspberry Pi:</p>
-<ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor3.png" alt="Creating a New Folder" /></p>
+<h4 id="Step-3:--Put-some-test-code-onto-the-Raspberry-Pi">Step 3:  Put some test code onto the Raspberry Pi<a class="anchor-link" href="#Step-3:--Put-some-test-code-onto-the-Raspberry-Pi"> </a></h4><ul>
 <li>On your personal computer, create a Python script that will be used to test if the sensor is properly connected. I called mine <strong>“i2c_grove_test.py”</strong> and I used the code here, from user ultracold on the Raspberry Pi Stack Exchange: <a href="https://raspberrypi.stackexchange.com/questions/133457/how-can-rpi4b-use-python-to-talk-to-the-i2c-dht20-sht20-temperature-and-humidi">https://raspberrypi.stackexchange.com/questions/133457/how-can-rpi4b-use-python-to-talk-to-the-i2c-dht20-sht20-temperature-and-humidi</a> </li>
 <li>In the Raspberry Pi Terminal, type <strong>exit</strong> and hit <strong>Enter</strong> to end the SSH connection</li>
 <li>Using Secure Copy (SCP), copy this new file into the “Code” file of the Raspberry Pi. Do this by navigating to the directory containing “i2c_grove_test.py” in your command prompt, and then typing the line:</li>
@@ -508,33 +503,26 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 <p><strong>scp i2c_grove_test.py username@[IP]:Code/</strong></p>
 <p>For example, mine was:</p>
 <p><strong>scp i2c_grove_test.py christina@192.168.1.138:Code/</strong></p>
-</li>
-<li><p>Plug the sensor in:</p>
-<ul>
+<h4 id="Step-4:--Plug-the-sensor-in">Step 4:  Plug the sensor in<a class="anchor-link" href="#Step-4:--Plug-the-sensor-in"> </a></h4><ul>
 <li>If you are still connected to the Raspberry Pi via SSH, type <strong>exit</strong> to end the connection</li>
 <li><strong>Power off</strong> the Raspberry Pi. Since we will be plugging things into it, it’s a good idea to <strong>unplug the power cable</strong> as well</li>
 <li>Using the ribbon cable that comes with the Grove Temperature and Humidity Sensor, plug the sensor into the <strong>first I2C port</strong> of the Grove Base HAT (labelled on the official pinout below)</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/grove_sensor4.png" alt="I2C Port Diagram" /></p>
-</li>
-<li><p>Power on the Raspberry Pi and reconnect via SSH</p>
-</li>
-<li><p>Enable the use of the I2C ports:</p>
-<ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor4.png" alt="I2C Port Diagram" /></p>
+<h4 id="Step-5:--Power-on-the-Raspberry-Pi-and-reconnect-via-SSH">Step 5:  Power on the Raspberry Pi and reconnect via SSH<a class="anchor-link" href="#Step-5:--Power-on-the-Raspberry-Pi-and-reconnect-via-SSH"> </a></h4><h4 id="Step-6:--Enable-the-use-of-the-I2C-ports">Step 6:  Enable the use of the I2C ports<a class="anchor-link" href="#Step-6:--Enable-the-use-of-the-I2C-ports"> </a></h4><ul>
 <li>In the Raspberry Pi terminal, type <strong>sudo raspi-config</strong> and hit <strong>Enter</strong></li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/SSH_1.png" alt="sudo raspi-config" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/SSH_1.png" alt="sudo raspi-config" /></p>
 <ul>
 <li>Like you did in Section 1.6, choose <strong>Interface Options</strong> and hit <strong>Enter</strong></li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/SSH_2.png" alt="Raspi Software Configuration Tool" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/SSH_2.png" alt="Raspi Software Configuration Tool" /></p>
 <ul>
 <li>Now, instead of choosing SSH we will now choose <strong>I2C</strong> (option I5 below). Navigate through the menus and <strong>enable the I2C ports</strong></li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/SSH_3.png" alt="Choosing I2C" /></p>
-</li>
-<li><p>Now comes an interesting part. We need to know the I2C address of our sensor so our code can talk to it. But how do we do this? We use the line <strong>i2cdetect -y 1</strong> in our Raspberry Pi terminal. With the sensor attached, your output should look something like this:</p>
-<p><img src="Go-Go-Gadget-Images/i2c_detect_sensor_plugged_in.png" alt="I2C Detect with Sensor Plugged In" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/SSH_3.png" alt="Choosing I2C" /></p>
+<h4 id="Step-7:-Find-the-I2C-address">Step 7: Find the I2C address<a class="anchor-link" href="#Step-7:-Find-the-I2C-address"> </a></h4><p>Now comes an interesting part. We need to know the I2C address of our sensor so our code can talk to it. But how do we do this? We use the line <strong>i2cdetect -y 1</strong> in our Raspberry Pi terminal. With the sensor attached, your output should look something like this:</p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/i2c_detect_sensor_plugged_in.png" alt="I2C Detect with Sensor Plugged In" /></p>
 <p>Note that there are two numbers that show up: 08 and 38. This means that the Raspberry Pi recognizes two sensors, one with the address 0x08 and the other with the address 0x38.</p>
 <p>The “0x” part that we add on to the number just means the address is a hexadecimal code.</p>
 <p>You may be wondering how we can tell which number is the address of our sensor. Simple!</p>
@@ -545,10 +533,8 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 <li><strong>Run the I2C detection code</strong> again</li>
 </ul>
 <p>You should get something like this:</p>
-<p><img src="Go-Go-Gadget-Images/i2c_detect_sensor_not_plugged_in.png" alt="I2C Detect with Sensor Not Plugged In" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/i2c_detect_sensor_not_plugged_in.png" alt="I2C Detect with Sensor Not Plugged In" /></p>
 <p>Notice how we don’t get the 0x38 address when the sensor isn’t plugged in? This means that <strong>0x38 is the I2C address of the sensor</strong> when plugged in to the first I2C port.</p>
-</li>
-</ol>
 
 </div>
 </div>
