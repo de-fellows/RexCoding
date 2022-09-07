@@ -333,9 +333,9 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 </blockquote>
 </li>
 </ul>
-<blockquote><p>The content in Section 1.6 is based on the article SSH:Remote control your Raspberry Pi by Russell Barnes in The MagPi Magazine (<a href="https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi">https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi</a>).
-Let’s set up our SSH connection! With the setup from section 1.5, follow these steps:</p>
+<blockquote><p>The content in Section 1.6 is based on the article SSH:Remote control your Raspberry Pi by Russell Barnes in The MagPi Magazine (<a href="https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi">https://magpi.raspberrypi.com/articles/ssh-remote-control-raspberry-pi</a>).</p>
 </blockquote>
+<p>Let’s set up our SSH connection! With the setup from section 1.5, follow these steps:</p>
 <h4 id="Step-1:--Get-the-IP-address-of-your-Raspberry-Pi-on-that-network">Step 1:  Get the IP address of your Raspberry Pi <strong>on that network</strong><a class="anchor-link" href="#Step-1:--Get-the-IP-address-of-your-Raspberry-Pi-on-that-network"> </a></h4><ul>
 <li>Make sure your Raspberry Pi is on the same network (WiFi or Wired LAN) as your computer. To check this, go to the top right corner of the desktop and click the WiFi button.</li>
 <li>Open a Terminal. You can do this by clicking the terminal button in the top left corner of the desktop or by pressing <strong>Ctrl + Alt + T</strong> on the Raspberry Pi’s keyboard.</li>
@@ -417,9 +417,9 @@ Let’s set up our SSH connection! With the setup from section 1.5, follow these
 <p>Estimated Time Required: 3 Hours</p>
 <h3 id="2.1:-Connecting-the-Grove-Base-HAT">2.1: Connecting the Grove Base HAT<a class="anchor-link" href="#2.1:-Connecting-the-Grove-Base-HAT"> </a></h3><p>The Grove Base HAT for Raspberry Pi should include the Base HAT (a nifty way to connect sensors to your Raspberry Pi), four spacers and eight screws. The unit is called a HAT (Hardware Attached on Top) because it sits on top of the Raspberry Pi!</p>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_base_HAT_kit.png" alt="Grove Base HAT Kit" /></p>
-<blockquote><p>The content in Section 2.1 is based on the article How to mount a Grove Base Hat for Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/">https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/</a>).
-To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
+<blockquote><p>The content in Section 2.1 is based on the article How to mount a Grove Base Hat for Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/">https://geraldonit.com/2020/01/12/how-to-mount-a-grove-base-hat-for-raspberry-pi/</a>).</p>
 </blockquote>
+<p>To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
 <ol>
 <li>Using your small Phillips-head screwdriver, attach the spacers to the Grove Base HAT as shown below.</li>
 </ol>
@@ -439,9 +439,9 @@ To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
 <li>Type <strong>sudo pip3 install .</strong> and wait for it to install (this may take a minute)</li>
 </ul>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/groveHAT3.png" alt="Successful grove.py Download" /></p>
-<blockquote><p>The git clone method can also be found on the Seeed Studio webpage for the Grove Base HAT (<a href="https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/">https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/</a>).
-<strong>Method 2:</strong> Curl Method, Unsuccessful</p>
+<blockquote><p>The git clone method can also be found on the Seeed Studio webpage for the Grove Base HAT (<a href="https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/">https://wiki.seeedstudio.com/Grove_Base_Hat_for_Raspberry_Pi/</a>).</p>
 </blockquote>
+<p><strong>Method 2:</strong> Curl Method, Unsuccessful</p>
 <ul>
 <li>Connect to the Raspberry Pi using SSH</li>
 <li>In the Terminal, type <strong>sudo apt update</strong> and hit <strong>Enter</strong> (this line was not successful for me)</li>
@@ -457,9 +457,9 @@ To connect the Grove Base HAT to the Raspberry Pi, follow these steps:</p>
 </ol>
 <h3 id="2.2:-Connecting-the-Grove-Temperature-and-Humidity-Sensor">2.2: Connecting the Grove Temperature and Humidity Sensor<a class="anchor-link" href="#2.2:-Connecting-the-Grove-Temperature-and-Humidity-Sensor"> </a></h3><p>Even though it is not obvious from the packaging, the Grove Temperature and Humidity Sensor Version 2.0 is a DHT20 sensor. You may find this information useful during research. Your package should look something like this:</p>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor_kit.png" alt="Grove Sensor Kit" /></p>
-<blockquote><p>The content in Section 2.2 is based on the article How to use a Grove Temperature and Humidity Sensor Pro with a Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;">https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;</a> <strong>Using Secure Copy (SCP):</strong><br /><br />In this section, we need to transfer files from our personal computer to the Raspberry Pi. We can do this using Secure Copy (SCP).<br /><br />Since we already enabled SSH, SCP is also enabled.<br /><br />Here’s what to do:<br /><br />1. Make sure your personal computer is on the <strong>same network</strong> as the Raspberry Pi, just like you would do for an SSH connection.<br /><br />2. In the Command Prompt on your computer, navigate to the folder that contains the file you want to transfer. On Windows, you can do this using the cd and dir commands.<br /><br />3. From that location, type into the terminal: <strong>scp filename.txt username@[IP]:folder/</strong><br /><br />4. You will then need to input the password of your Raspberry Pi.<br /><br />For example, if we needed to save a file called test_code.py to the “Code” folder on the Raspberry Pi at the IP address 192.168.1.138, the line would look like this:<br /><br /><strong>scp test_code.py christina@192.168.1.138:Code/</strong><br /><br />Note that the folder you specify is the location you want to save the file to on the Raspberry Pi. The folder is the file path relative to the “Home” folder on the Raspberry Pi.&gt; You can learn more about Secure Copying with the Raspberry Pi here (<a href="https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi">https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi</a>).
-To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we need to do the following:</p>
+<blockquote><p>The content in Section 2.2 is based on the article How to use a Grove Temperature and Humidity Sensor Pro with a Raspberry Pi by Gerald Venzl (<a href="https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;">https://geraldonit.com/2020/01/19/how-to-use-a-grove-temperature-and-humidity-sensor-pro-with-a-raspberry-pi/).&gt;</a> <strong>Using Secure Copy (SCP):</strong><br /><br />In this section, we need to transfer files from our personal computer to the Raspberry Pi. We can do this using Secure Copy (SCP).<br /><br />Since we already enabled SSH, SCP is also enabled.<br /><br />Here’s what to do:<br /><br />1. Make sure your personal computer is on the <strong>same network</strong> as the Raspberry Pi, just like you would do for an SSH connection.<br /><br />2. In the Command Prompt on your computer, navigate to the folder that contains the file you want to transfer. On Windows, you can do this using the cd and dir commands.<br /><br />3. From that location, type into the terminal: <strong>scp filename.txt username@[IP]:folder/</strong><br /><br />4. You will then need to input the password of your Raspberry Pi.<br /><br />For example, if we needed to save a file called test_code.py to the “Code” folder on the Raspberry Pi at the IP address 192.168.1.138, the line would look like this:<br /><br /><strong>scp test_code.py christina@192.168.1.138:Code/</strong><br /><br />Note that the folder you specify is the location you want to save the file to on the Raspberry Pi. The folder is the file path relative to the “Home” folder on the Raspberry Pi.&gt; You can learn more about Secure Copying with the Raspberry Pi here (<a href="https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi">https://howchoo.com/pi/how-to-transfer-files-to-the-raspberry-pi</a>).</p>
 </blockquote>
+<p>To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we need to do the following:</p>
 <h4 id="Step-1:--Install-needed-packages">Step 1:  Install needed packages<a class="anchor-link" href="#Step-1:--Install-needed-packages"> </a></h4><ul>
 <li>Connect to the Raspberry Pi via SSH</li>
 <li>Install the seeed-python-dht package: Type <strong>pip3 install seeed-python-dht</strong> into the Raspberry Pi terminal and hit <strong>Enter</strong></li>
@@ -596,49 +596,47 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 </ul>
 <p><img src="Go-Go-Gadget-Images/grove_sensor5.png" alt="Running i2c_grove_test.py" /></p>
 <blockquote><p><strong>Troubleshooting:</strong><br /><br />- If the Python script will not run, check for errors in your code. If this does not solve the problem, it may help to make the first line of the code #!/usr/bin/python3 since this tells the system to use Python3 as the interpreter directly.<br />- If the temperature and humidity values are all zeros, this is a sign that the code is not actually talking to the sensor. Check that you have the right I2C addresses and, if necessary, unplug the power and unplug/plug in the sensor to the Grove Base HAT again.</p>
-<h3 id="2.3:-Connecting-the-ASAIR-DHT11-Sensor">2.3: Connecting the ASAIR DHT11 Sensor<a class="anchor-link" href="#2.3:-Connecting-the-ASAIR-DHT11-Sensor"> </a></h3>
 </blockquote>
 </li>
 </ol>
-<p>Now that we have successfully connected one temperature and humidity sensor to the Raspberry Pi, we will connect a sensor of a different type that does the same thing. This will be the ASAIR DHT11 sensor, which also collects temperature and humidity data from the environment.</p>
+<h3 id="2.3:-Connecting-the-ASAIR-DHT11-Sensor">2.3: Connecting the ASAIR DHT11 Sensor<a class="anchor-link" href="#2.3:-Connecting-the-ASAIR-DHT11-Sensor"> </a></h3><p>Now that we have successfully connected one temperature and humidity sensor to the Raspberry Pi, we will connect a sensor of a different type that does the same thing. This will be the ASAIR DHT11 sensor, which also collects temperature and humidity data from the environment.</p>
 <p>Here’s the key difference: We don’t have a ribbon cable and a port like last time. This sensor needs to be manually connected to the Raspberry Pi’s <strong>General-Purpose Input/Output (GPIO) pins</strong> using wires and possibly a breadboard.</p>
 <p>Your DHT11 should look like the one below. When researching these sensors, pay close attention to the information below:</p>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_sensor1.jpg" alt="DHT11 Sensor" /></p>
 <blockquote><p><strong>Be Aware!</strong><br /><br />While all of these sensors look pretty much the same, researching the wrong sensor will set you back. Here are some things to look for:<br /><br />- <strong>Number of Pins</strong> – Does it have three pins coming out of the bottom or four?<br />- <strong>Brand</strong> – Is there a brand name visible anywhere on the sensor?<br />- <strong>The Letter S</strong> – If there is an “S” on one side of the sensor, it means the pin closest to it is the <strong>signal pin</strong>. This will be useful when researching pinouts.<br />- <strong>Small LED</strong> – Some sensors come with a small LED on the left side that lights up if you have wired it to power correctly. The sensor shown here <strong>does not have an LED</strong>. The small component above the “S” is a resistor, so don’t expect it to light up!&gt; The content in Section 2.3 is based on the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
-<ol>
-<li>Find the correct pinout for your DHT11 Sensor:</li>
-</ol>
 </blockquote>
-
-<pre><code>- A __pinout__ is a diagram that tells you what each pin does on an electrical device.
-- Pay close attention to the bullet points in the blue box above; we already know that our sensor has the __signal pin on the left__.
-- Three pins to look for:
-    - __Common Collector Voltage (VCC):__ The power supply pin, or positive (+) pin. You can use anywhere from 3.3V to 5V with the DHT11.
-    - __Sensor, Signal or Data:__ The pin that sends the data to the Raspberry Pi. If an “S” is present on the DHT11, it is the pin closest to the “S”.
-    - __Ground (GND):__ The ground pin, or negative (-) pin. Typically connected using a black-coloured wire.
-- Here’s a good pinout to use:
-
-![DHT11 Pinout](Go-Go-Gadget-Images/dht11_pinout.png)
-</code></pre>
+<ol>
+<li><p>Find the correct pinout for your DHT11 Sensor:</p>
+<ul>
+<li>A <strong>pinout</strong> is a diagram that tells you what each pin does on an electrical device.</li>
+<li>Pay close attention to the bullet points in the blue box above; we already know that our sensor has the <strong>signal pin on the left</strong>.</li>
+<li>Three pins to look for:<ul>
+<li><strong>Common Collector Voltage (VCC):</strong> The power supply pin, or positive (+) pin. You can use anywhere from 3.3V to 5V with the DHT11.</li>
+<li><strong>Sensor, Signal or Data:</strong> The pin that sends the data to the Raspberry Pi. If an “S” is present on the DHT11, it is the pin closest to the “S”.</li>
+<li><strong>Ground (GND):</strong> The ground pin, or negative (-) pin. Typically connected using a black-coloured wire.</li>
+</ul>
+</li>
+<li>Here’s a good pinout to use:</li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/dht11_pinout.png" alt="DHT11 Pinout" /></p>
 <blockquote><p>DHT11 pinout reference:<a href="https://components101.com/sensors/dht11-temperature-sensor">https://components101.com/sensors/dht11-temperature-sensor</a></p>
-<ol>
-<li>Find the correct pinout for the Raspberry Pi 4 Model B GPIO pins:</li>
-</ol>
 </blockquote>
-
-<pre><code>- We will need to connect the DHT11 to the __GPIO pins__ of the Raspberry Pi
-- We put the Grove Base HAT on top of the Raspberry Pi’s GPIO pins, so now we need to use the Grove Base HAT’s GPIO pins
-- The Grove Base HAT has the __same pinout__ as the Raspberry Pi beneath it
-- __Important Note:__ Each GPIO pin has both a __pin number__ and a __name__. Test codes use the name.
-- Here’s a good pinout to use: 
-
-![Raspberry Pi and Grove Base HAT Pinout](Go-Go-Gadget-Images/raspi_pinout.png)
-</code></pre>
+</li>
+<li><p>Find the correct pinout for the Raspberry Pi 4 Model B GPIO pins:</p>
+<ul>
+<li>We will need to connect the DHT11 to the <strong>GPIO pins</strong> of the Raspberry Pi</li>
+<li>We put the Grove Base HAT on top of the Raspberry Pi’s GPIO pins, so now we need to use the Grove Base HAT’s GPIO pins</li>
+<li>The Grove Base HAT has the <strong>same pinout</strong> as the Raspberry Pi beneath it</li>
+<li><strong>Important Note:</strong> Each GPIO pin has both a <strong>pin number</strong> and a <strong>name</strong>. Test codes use the name.</li>
+<li>Here’s a good pinout to use: </li>
+</ul>
+<p><img src="Go-Go-Gadget-Images/raspi_pinout.png" alt="Raspberry Pi and Grove Base HAT Pinout" /></p>
 <blockquote><p>Raspberry Pi 4 GPIO pinout reference:<a href="https://linuxhint.com/gpio-pinout-raspberry-pi/">https://linuxhint.com/gpio-pinout-raspberry-pi/</a></p>
-<ol>
-<li>Wire the sensor to the Raspberry Pi’s GPIO Pins. Use one of two methods, depending on the wires you have available:</li>
-</ol>
 </blockquote>
+</li>
+<li><p>Wire the sensor to the Raspberry Pi’s GPIO Pins. Use one of two methods, depending on the wires you have available:</p>
+</li>
+</ol>
 <p><strong>Method 1:</strong> (Easiest) Using three female-female wires</p>
 <ul>
 <li>Wire each sensor pin directly to its GPIO pin destination:<ul>
@@ -667,10 +665,12 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 <li>Gather the test code:</li>
 </ol>
 <ul>
-<li>Gather the test code from the reference below, under “Temperature &amp; Humidity Sensor (DHT11)”<blockquote><p>Find the test code in the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
+<li><p>Gather the test code from the reference below, under “Temperature &amp; Humidity Sensor (DHT11)”</p>
+<blockquote><p>Find the test code in the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
 </blockquote>
 </li>
-<li>Modify the code slightly so that it matches the code below:</li>
+<li><p>Modify the code slightly so that it matches the code below:</p>
+</li>
 </ul>
 
 </div>
@@ -720,8 +720,8 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 </ul>
 <p>Your DHT11 is successfully connected if it gives you <strong>non-zero values</strong> for temperature and humidity.</p>
 <blockquote><p><strong>Sensor Accuracy:</strong><br /><br />The DHT11 can only give values with an accuracy of zero decimal places. You may notice that the test code prints values that end in “.0” - this is because the data has been formatted.</p>
-<hr />
 </blockquote>
+<hr />
 
 </div>
 </div>
@@ -907,13 +907,12 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 </li>
 <li><p>If the file does not already exist, a new file will be created and the header "Date, Time, DHT11 Temp, ..." will be written to the file along with the data.</p>
 <blockquote><p><strong>Try It Yourself:</strong> <br /><br />Try to make the code above more efficient or simpler; there are many different ways to write data to a CSV file, and the method used above could be improved.</p>
-<h3 id="3.3:-Writing-the-Statistics-and-Graphing-Code">3.3: Writing the Statistics and Graphing Code<a class="anchor-link" href="#3.3:-Writing-the-Statistics-and-Graphing-Code"> </a></h3>
 </blockquote>
 </li>
 </ul>
 </li>
 </ol>
-<p>In another file, I wrote the code used to process the data and represent it in a meaningful way. I called this file <strong>“data_stats_graphs.py”</strong>. Whenever I needed to import this code into another file, I used the line <code>import data_stats_graphs as dsg</code>.</p>
+<h3 id="3.3:-Writing-the-Statistics-and-Graphing-Code">3.3: Writing the Statistics and Graphing Code<a class="anchor-link" href="#3.3:-Writing-the-Statistics-and-Graphing-Code"> </a></h3><p>In another file, I wrote the code used to process the data and represent it in a meaningful way. I called this file <strong>“data_stats_graphs.py”</strong>. Whenever I needed to import this code into another file, I used the line <code>import data_stats_graphs as dsg</code>.</p>
 <p>The code achieves two main goals:</p>
 <ol>
 <li><p>Graph the data: Graph the values collected by both sensors and shade in the difference between these values. Create two graphs – one for temperature and one for humidity – and save each as a PNG file.</p>
@@ -1178,8 +1177,8 @@ To connect the Raspberry Pi to the Grove Temperature and Humidity Sensor, we nee
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Observations:</strong><br /><br />- The data used in this code is stored in several Pandas DataFrames. However, you need to convert the data to <strong>list format</strong> for the graphing functions because the data needs to be one-dimensional.<br />- <strong>Pandas.DataFrame.iloc</strong> was a very useful tool for selecting specific rows or columns of Pandas DataFrame data. See the documentation for more details: <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.iloc.html</a></p>
-<hr />
 </blockquote>
+<hr />
 
 </div>
 </div>
