@@ -273,7 +273,7 @@ Begin and test data collection.</li>
 <p>For the <strong>Operating System</strong> choose the <strong>Raspberry Pi OS (32-bit)</strong> option.</p>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup11.png" alt="Choosing the Operating System" /></p>
 <p>For the <strong>Storage</strong> choose the drive you just inserted (for me, the D:/ drive).</p>
-<blockquote><p><strong><em>WARNING:</em> DO NOT CHOOSE A DRIVE YOU ARE NOT 100% CERTAIN ABOUT.</strong> <br /> This will overwrite the drive, which is <strong>IRREVERSIBLE</strong>. If you are unsure about which Storage option to choose, ask a friend, professor or TA for help.</p>
+<blockquote><p><strong>WARNING:DO NOT CHOOSE A DRIVE YOU ARE NOT 100% CERTAIN ABOUT.</strong> <br /> This will overwrite the drive, which is <strong>IRREVERSIBLE</strong>. If you are unsure about which Storage option to choose, ask a friend, professor or TA for help.</p>
 </blockquote>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/setup12.png" alt="Choosing the Storage" /></p>
 <blockquote><p><strong>A Note About Advanced Settings:</strong> These settings are found under the gear wheel button. I chose to keep all buttons checked off except for the two at the bottom - <strong>Eject media when finished</strong> and <strong>Enable telemetry</strong> (not pictured). These settings can be changed after the OS is "flashed" onto the microSD card.</p>
@@ -573,9 +573,7 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li><p>Modify your test code if necessary:</p>
-<ul>
+<h4 id="Step-8:-Modify-your-test-code-if-necessary:">Step 8: Modify your test code if necessary:<a class="anchor-link" href="#Step-8:-Modify-your-test-code-if-necessary:"> </a></h4><ul>
 <li>In the <strong>i2c_grove_test.py</strong> code above, you need to make sure that the default address (0x08) and sensor address (0x38) are included in the code. If you have different addresses in your setup, use those.</li>
 <li><p>You may also want to change the print statements. Right now, it will only print the temperature and humidity values but it is not obvious to a user which number is which. I recommend changing them to something like:</p>
 <p><code>print(“Temperature: ”, temperature)</code></p>
@@ -587,27 +585,21 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 <li>Next, type <strong>nano i2c_grove_test.py</strong> and hit <strong>Enter</strong>. This will allow you to edit the file and move around the lines of code using arrow keys.</li>
 <li>There are commands at the bottom of the screen that tell you what to do (shown below). Note that “^X” means <strong>Ctrl + X</strong>.  The file will ask you if you want to <strong>overwrite</strong> (save your changes) before editing. Select <strong>Yes</strong>.</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/nano_controls.png" alt="Nano Controls" /></p>
-</li>
-<li><p>Finally, run the test code!</p>
-<ul>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/nano_controls.png" alt="Nano Controls" /></p>
+<h4 id="Step-9:-Finally,-run-the-test-code!">Step 9: Finally, run the test code!<a class="anchor-link" href="#Step-9:-Finally,-run-the-test-code!"> </a></h4><ul>
 <li>In the Raspberry Pi terminal, navigate to the “Code” folder that contains the i2c_grove_test.py file (same command as before, use <strong>cd Code</strong>).</li>
 <li>Then, type <strong>python3 i2c_grove_test.py</strong> and hit <strong>Enter</strong>. This will run the file, which will look something like this:</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/grove_sensor5.png" alt="Running i2c_grove_test.py" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/grove_sensor5.png" alt="Running i2c_grove_test.py" /></p>
 <blockquote><p><strong>Troubleshooting:</strong><br /><br />- If the Python script will not run, check for errors in your code. If this does not solve the problem, it may help to make the first line of the code #!/usr/bin/python3 since this tells the system to use Python3 as the interpreter directly.<br />- If the temperature and humidity values are all zeros, this is a sign that the code is not actually talking to the sensor. Check that you have the right I2C addresses and, if necessary, unplug the power and unplug/plug in the sensor to the Grove Base HAT again.</p>
 </blockquote>
-</li>
-</ol>
 <h3 id="2.3:-Connecting-the-ASAIR-DHT11-Sensor">2.3: Connecting the ASAIR DHT11 Sensor<a class="anchor-link" href="#2.3:-Connecting-the-ASAIR-DHT11-Sensor"> </a></h3><p>Now that we have successfully connected one temperature and humidity sensor to the Raspberry Pi, we will connect a sensor of a different type that does the same thing. This will be the ASAIR DHT11 sensor, which also collects temperature and humidity data from the environment.</p>
 <p>Here’s the key difference: We don’t have a ribbon cable and a port like last time. This sensor needs to be manually connected to the Raspberry Pi’s <strong>General-Purpose Input/Output (GPIO) pins</strong> using wires and possibly a breadboard.</p>
 <p>Your DHT11 should look like the one below. When researching these sensors, pay close attention to the information below:</p>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_sensor1.jpg" alt="DHT11 Sensor" /></p>
 <blockquote><p><strong>Be Aware!</strong><br /><br />While all of these sensors look pretty much the same, researching the wrong sensor will set you back. Here are some things to look for:<br /><br />- <strong>Number of Pins</strong> – Does it have three pins coming out of the bottom or four?<br />- <strong>Brand</strong> – Is there a brand name visible anywhere on the sensor?<br />- <strong>The Letter S</strong> – If there is an “S” on one side of the sensor, it means the pin closest to it is the <strong>signal pin</strong>. This will be useful when researching pinouts.<br />- <strong>Small LED</strong> – Some sensors come with a small LED on the left side that lights up if you have wired it to power correctly. The sensor shown here <strong>does not have an LED</strong>. The small component above the “S” is a resistor, so don’t expect it to light up!&gt; The content in Section 2.3 is based on the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
 </blockquote>
-<ol>
-<li><p>Find the correct pinout for your DHT11 Sensor:</p>
-<ul>
+<h4 id="Step-1:-Find-the-correct-pinout-for-your-DHT11-Sensor:">Step 1: Find the correct pinout for your DHT11 Sensor:<a class="anchor-link" href="#Step-1:-Find-the-correct-pinout-for-your-DHT11-Sensor:"> </a></h4><ul>
 <li>A <strong>pinout</strong> is a diagram that tells you what each pin does on an electrical device.</li>
 <li>Pay close attention to the bullet points in the blue box above; we already know that our sensor has the <strong>signal pin on the left</strong>.</li>
 <li>Three pins to look for:<ul>
@@ -618,26 +610,20 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 </li>
 <li>Here’s a good pinout to use:</li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/dht11_pinout.png" alt="DHT11 Pinout" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_pinout.png" alt="DHT11 Pinout" /></p>
 <blockquote><p>DHT11 pinout reference:<a href="https://components101.com/sensors/dht11-temperature-sensor">https://components101.com/sensors/dht11-temperature-sensor</a></p>
 </blockquote>
-</li>
-<li><p>Find the correct pinout for the Raspberry Pi 4 Model B GPIO pins:</p>
-<ul>
+<h4 id="Step-2:-Find-the-correct-pinout-for-the-Raspberry-Pi-4-Model-B-GPIO-pins:">Step 2: Find the correct pinout for the Raspberry Pi 4 Model B GPIO pins:<a class="anchor-link" href="#Step-2:-Find-the-correct-pinout-for-the-Raspberry-Pi-4-Model-B-GPIO-pins:"> </a></h4><ul>
 <li>We will need to connect the DHT11 to the <strong>GPIO pins</strong> of the Raspberry Pi</li>
 <li>We put the Grove Base HAT on top of the Raspberry Pi’s GPIO pins, so now we need to use the Grove Base HAT’s GPIO pins</li>
 <li>The Grove Base HAT has the <strong>same pinout</strong> as the Raspberry Pi beneath it</li>
 <li><strong>Important Note:</strong> Each GPIO pin has both a <strong>pin number</strong> and a <strong>name</strong>. Test codes use the name.</li>
 <li>Here’s a good pinout to use: </li>
 </ul>
-<p><img src="Go-Go-Gadget-Images/raspi_pinout.png" alt="Raspberry Pi and Grove Base HAT Pinout" /></p>
+<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/raspi_pinout.png" alt="Raspberry Pi and Grove Base HAT Pinout" /></p>
 <blockquote><p>Raspberry Pi 4 GPIO pinout reference:<a href="https://linuxhint.com/gpio-pinout-raspberry-pi/">https://linuxhint.com/gpio-pinout-raspberry-pi/</a></p>
 </blockquote>
-</li>
-<li><p>Wire the sensor to the Raspberry Pi’s GPIO Pins. Use one of two methods, depending on the wires you have available:</p>
-</li>
-</ol>
-<p><strong>Method 1:</strong> (Easiest) Using three female-female wires</p>
+<h4 id="Step-3:-Wire-the-sensor-to-the-Raspberry-Pi&#8217;s-GPIO-Pins.-Use-one-of-two-methods,-depending-on-the-wires-you-have-available:">Step 3: Wire the sensor to the Raspberry Pi&#8217;s GPIO Pins. Use one of two methods, depending on the wires you have available:<a class="anchor-link" href="#Step-3:-Wire-the-sensor-to-the-Raspberry-Pi&#8217;s-GPIO-Pins.-Use-one-of-two-methods,-depending-on-the-wires-you-have-available:"> </a></h4><p><strong>Method 1:</strong> (Easiest) Using three female-female wires</p>
 <ul>
 <li>Wire each sensor pin directly to its GPIO pin destination:<ul>
 <li>Attach one female end of each wire to the pins on the sensor</li>
@@ -661,10 +647,7 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 <li>Your setup should look something like this:</li>
 </ul>
 <p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/dht11_connection_method2.PNG" alt="DHT11 Connection Method 2" /></p>
-<ol>
-<li>Gather the test code:</li>
-</ol>
-<ul>
+<h4 id="Step-4:-Gather-the-test-code:">Step 4: Gather the test code:<a class="anchor-link" href="#Step-4:-Gather-the-test-code:"> </a></h4><ul>
 <li><p>Gather the test code from the reference below, under “Temperature &amp; Humidity Sensor (DHT11)”</p>
 <blockquote><p>Find the test code in the Seeed Studio grove.py documentation:<a href="https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md">https://github.com/Seeed-Studio/grove.py/blob/master/doc/README.md</a></p>
 </blockquote>
@@ -709,10 +692,7 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 <ul>
 <li>Use Secure Copy (SCP) to copy it into the “Code” folder on the Raspberry Pi</li>
 </ul>
-<ol>
-<li>Run the test code:</li>
-</ol>
-<ul>
+<h4 id="Step-5:-Run-the-test-code:">Step 5: Run the test code:<a class="anchor-link" href="#Step-5:-Run-the-test-code:"> </a></h4><ul>
 <li>Turn your Raspberry Pi on</li>
 <li>Connect to the Raspberry Pi via SSH</li>
 <li>Navigate to the “Code” folder using <strong>cd Code</strong> in the terminal</li>
@@ -735,15 +715,8 @@ Another popular way to use your Raspberry Pi is through a <strong>Secure Shell (
 </ul>
 <p>Estimated Time Required: 3 Hours</p>
 <h3 id="3.1:-Installing-Extra-Libraries">3.1: Installing Extra Libraries<a class="anchor-link" href="#3.1:-Installing-Extra-Libraries"> </a></h3><p>The code for Phase 3 will require us to install some extra libraries: <strong>Pandas</strong>, which will allow us to easily store the data in different forms, and <strong>Matplotlib</strong>, which will allow us to create graphs of the data. Follow the steps below:</p>
-<ol>
-<li>Connect to the Raspberry Pi via SSH.</li>
-<li>Install Pandas by typing <strong>sudo apt-get install python3-pandas</strong> into the Terminal and hitting <strong>Enter</strong>. If a message appears about disk space and it asks you if you want to continue, type <strong>Y</strong> for "Yes" and hit <strong>Enter</strong>.</li>
-</ol>
-<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_pandas.png" alt="Installing Pandas" /></p>
-<ol>
-<li>Install Matplotlib by typing <strong>sudo apt install python3-matplotlib</strong> into the Terminal and hitting <strong>Enter</strong>.</li>
-</ol>
-<p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_matplotlib.png" alt="Installing Matplotlib" /></p>
+<h4 id="Step-1:-Connect-to-the-Raspberry-Pi-via-SSH.">Step 1: Connect to the Raspberry Pi via SSH.<a class="anchor-link" href="#Step-1:-Connect-to-the-Raspberry-Pi-via-SSH."> </a></h4><h4 id="Step-2:-Install-Pandas-by-typing-sudo-apt-get-install-python3-pandas-into-the-Terminal-and-hitting-Enter.-If-a-message-appears-about-disk-space-and-it-asks-you-if-you-want-to-continue,-type-Y-for-&quot;Yes&quot;-and-hit-Enter.">Step 2: Install Pandas by typing <strong>sudo apt-get install python3-pandas</strong> into the Terminal and hitting <strong>Enter</strong>. If a message appears about disk space and it asks you if you want to continue, type <strong>Y</strong> for "Yes" and hit <strong>Enter</strong>.<a class="anchor-link" href="#Step-2:-Install-Pandas-by-typing-sudo-apt-get-install-python3-pandas-into-the-Terminal-and-hitting-Enter.-If-a-message-appears-about-disk-space-and-it-asks-you-if-you-want-to-continue,-type-Y-for-&quot;Yes&quot;-and-hit-Enter."> </a></h4><p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_pandas.png" alt="Installing Pandas" /></p>
+<h4 id="Step-3:-Install-Matplotlib-by-typing-sudo-apt-install-python3-matplotlib-into-the-Terminal-and-hitting-Enter.">Step 3: Install Matplotlib by typing <strong>sudo apt install python3-matplotlib</strong> into the Terminal and hitting <strong>Enter</strong>.<a class="anchor-link" href="#Step-3:-Install-Matplotlib-by-typing-sudo-apt-install-python3-matplotlib-into-the-Terminal-and-hitting-Enter."> </a></h4><p><img src="/RexCoding/images/copied_from_nb/Go-Go-Gadget-Images/install_matplotlib.png" alt="Installing Matplotlib" /></p>
 <p>We will also use the Time and Datetime libraries, but these come built-in and we don’t need to install them.</p>
 <h3 id="3.2:-Writing-the-Data-Collection-Code">3.2: Writing the Data Collection Code<a class="anchor-link" href="#3.2:-Writing-the-Data-Collection-Code"> </a></h3><p>Now, we need to write the code that will collect the temperature and humidity data. I called my script <strong>“T_H_data_collector”</strong>.</p>
 <p>I’m a big fan of laying out what I want a script to do before I start writing it. Here is what the code should do:</p>
