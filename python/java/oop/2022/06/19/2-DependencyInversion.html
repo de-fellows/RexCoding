@@ -152,7 +152,7 @@ window.onload = wrap_img;
 </h2>
 
 <ul>
-  <li>This topic discusses how we can implement some object-oriented definitions like <a href="https://en.wikipedia.org/wiki/Abstraction_%5C(computer_science%5C)">Abstraction</a> or <a href="https://en.wikipedia.org/wiki/Interface_%5C(computing%5C)">Interfaces</a> in a language like a python which doesn’t have these definitions locally. 
+  <li>This topic discusses how we can implement some object-oriented definitions like <a href="https://en.wikipedia.org/wiki/Abstraction_\(computer_science\)">Abstraction</a> or <a href="https://en.wikipedia.org/wiki/Interface_\(computing\)">Interfaces</a> in a language like a python which doesn’t have these definitions locally. 
 As Java is a strong OOP language, we already have these definitions for it. We will implement the translation of the video’s code here to understand how these principles work on Java.</li>
   <li>You need to watch the <a href="https://www.youtube.com/watch?v=Kv5jhbSkqLE">video</a> first, understand all principles, and then look at the translation codes in Java. This documentation will help you to understand the translation better</li>
   <li>This translation is based on the final code source of Dependency Inversion lessons in python programming languages (<strong><em>dependency-inversion-after.py</em></strong>)</li>
@@ -177,7 +177,7 @@ As Java is a strong OOP language, we already have these definitions for it. We w
 
 <ol>
   <li>we create one <strong><em>.java</em></strong> file per each class under <strong><em>edu.def.di</em></strong> package.</li>
-  <li>We are going to discuss <strong><em>Switchable</em></strong> class more here. This class is an interface class and we use the “<strong><em>interface</em></strong>” keyword instead of “<strong><em>class</em></strong>”. But why this is an interface? The answer is that this class just contains the prototypes of methods without any implementation. It is an index which shows a specific structure but can have different functionality when we override it on the child class. Please read about the <a href="https://en.wikipedia.org/wiki/Interface_%5C(computing%5C)">interface on OOP</a> and <a href="https://www.w3schools.com/java/java_interface.asp">interface on java</a>.</li>
+  <li>We are going to discuss <strong><em>Switchable</em></strong> class more here. This class is an interface class and we use the “<strong><em>interface</em></strong>” keyword instead of “<strong><em>class</em></strong>”. But why this is an interface? The answer is that this class just contains the prototypes of methods without any implementation. It is an index which shows a specific structure but can have different functionality when we override it on the child class. Please read about the <a href="https://en.wikipedia.org/wiki/Interface_\(computing\)">interface on OOP</a> and <a href="https://www.w3schools.com/java/java_interface.asp">interface on java</a>.</li>
   <li>When we created other classes (<strong><em>LightBulb.java</em></strong>, <strong><em>Fan.java</em></strong>, <strong><em>ElectricPowerSwitch.java</em></strong>), we need <strong><em>Main.java</em></strong> to contain our main function to run the program.</li>
   <li>After that, we will start to translate all classes to their belonging files based on the <strong><em>P</em>ython</strong> source. We will compare all of them with the original version in the following section.</li>
 </ol>
