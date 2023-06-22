@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Streamlit Data Visualization | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Streamlit Data Visualization" />
+<meta name="author" content="Gia Khang Ngo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A guide to creating a web application showing the visualization of a dataset using Streamlit." />
+<meta property="og:description" content="A guide to creating a web application showing the visualization of a dataset using Streamlit." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/python/streamlit/pandas/2023/06/22/Streamlit.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/python/streamlit/pandas/2023/06/22/Streamlit.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-22T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Streamlit Data Visualization" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Gia Khang Ngo"},"dateModified":"2023-06-22T00:00:00-05:00","datePublished":"2023-06-22T00:00:00-05:00","description":"A guide to creating a web application showing the visualization of a dataset using Streamlit.","headline":"Streamlit Data Visualization","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/python/streamlit/pandas/2023/06/22/Streamlit.html"},"url":"https://de-fellows.github.io/RexCoding/python/streamlit/pandas/2023/06/22/Streamlit.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Us</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Streamlit Data Visualization</h1><p class="page-description">A guide to creating a web application showing the visualization of a dataset using Streamlit.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2023-06-22T00:00:00-05:00" itemprop="datePublished">
+        Jun 22, 2023
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Gia Khang Ngo</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Streamlit">Streamlit</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Pandas">Pandas</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2023-06-22-Streamlit.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2023-06-22-Streamlit.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2023-06-22-Streamlit.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2023-06-22-Streamlit.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Goals">Goals </a></li>
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Installing-Streamlit-and-Displaying-the-Web-Application">Installing Streamlit and Displaying the Web Application </a></li>
+<li class="toc-entry toc-h3"><a href="#Adding-Web-Application-Titles-and-Introduction">Adding Web Application Titles and Introduction </a></li>
+<li class="toc-entry toc-h3"><a href="#Import-and-Display-Raw-Data">Import and Display Raw Data </a></li>
+<li class="toc-entry toc-h3"><a href="#Sidebar-for-User-Inputs">Sidebar for User Inputs </a></li>
+<li class="toc-entry toc-h3"><a href="#Bar-Chart-Plotting-for-Field-Goals">Bar Chart Plotting for Field Goals </a></li>
+<li class="toc-entry toc-h3"><a href="#Supplementerary-exercise-1">Supplementerary exercise 1 </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Answer:">Answer: </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Supplementary-exercise-2">Supplementary exercise 2 </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Conclusion">Conclusion </a></li>
+<li class="toc-entry toc-h2"><a href="#Reference">Reference </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2023-06-22-Streamlit.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Goals">
+<a class="anchor" href="#Goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals<a class="anchor-link" href="#Goals"> </a>
+</h2>
+<ul>
+<li>Create a web application displaying Steph Curry's statistics from 2009 to 2021.<ul>
+<li>Installing Streamlit</li>
+<li>Set up a Streamlit web application</li>
+<li>Working with data using Pandas</li>
+</ul>
+</li>
+</ul>
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h2>
+<p>Streamlit is an open-source Python framework used for building interactive web applications. It simplifies the process of creating and deploying data science and machine learning models by providing a user-friendly interface. With Streamlit, Python scripts can be converted into web applications without the need for extensive web development knowledge. It allows a coder to create interactive and responsive UI components, such as sliders, buttons, dropdown menus, and data visualizations, with just a few lines of code. Coding with Streamlit is similar to coding with Graphic User Interface modules like tkinter, where the coder can add widgets and interactive functions to the application. This creates a “junior version” of a project where the coder does not have to worry about Webserver developing with POST and GET methods, but focus more on front-end developing like sorting through data with Pandas module, and back-end GUI development. Hence, this tackles the <strong>Play the whole game</strong> principle of Perkins’ <a href="https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators">Making Learning Whole</a> paradigm.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Installing-Streamlit-and-Displaying-the-Web-Application">
+<a class="anchor" href="#Installing-Streamlit-and-Displaying-the-Web-Application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing Streamlit and Displaying the Web Application<a class="anchor-link" href="#Installing-Streamlit-and-Displaying-the-Web-Application"> </a>
+</h3>
+<p>In order to install Streamlit, the following line can be written in the cmd terminal:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After installing Streamlit, create a blank Python file. For example: <code>curry.py</code>. Then a blank server can be displayed using the following command in cmd terminal:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># streamlit run (Python file name)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/RexCoding/images/copied_from_nb/./streamlit-supp/blank.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>While not necessary, it is convenient to enable <code>Rerun on save</code>. This allows the web application to be updated everytime the Python file is changed and saved. It is done by clicking on the three horizontal bars on the upper right corner. Then click on <code>Settings</code> and check the <code>Run on save</code> box.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/RexCoding/images/copied_from_nb/./streamlit-supp/rerun.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-Web-Application-Titles-and-Introduction">
+<a class="anchor" href="#Adding-Web-Application-Titles-and-Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Web Application Titles and Introduction<a class="anchor-link" href="#Adding-Web-Application-Titles-and-Introduction"> </a>
+</h3>
+<p>In the Python file <code>curry.py</code>, import the module <code>streamlit</code>. Then, the title and subheading of the web application can be displayed using the Streamlit API text widgets <code>st.markdown</code>. This shows lines of markdown text that can be modified. As an example, the color of the title will be changed to the Warriors yellow using hex-code color through markdown format. In addition, it is important to use the argument <code>unsafe_allow_html=True</code> as it allows color markdown format to show in the web application. Please refer to <a href="https://docs.streamlit.io/library/api-reference">Streamlit API Documentation</a> for more details regarding different types of Streamlit widgets.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'# &lt;font color="#ffc72c"&gt;Stephen Curry NBA Statistics&lt;/font&gt;'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'*Gia Khang Ngo*'</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'## &lt;font color="#006BB6"&gt;Introduction&lt;/font&gt;'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/RexCoding/images/copied_from_nb/./streamlit-supp/title.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the Introduction, if it is preffered to display two images or two blocks of texts side-by-side, <code>st.columns</code> is used to insert containers laid out as side-by-side columns. This is similar to GUI development with tkinter grid with rows and columns. Two column containers are created. Then in each columns, an image is inserted using <code>st.image</code>, where a link to the image is posted and the argument <code>width</code> is used to set the image size. Moreover, with <code>st.markdown</code>, a brief introduction is provided with the link to the original data source.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span> <span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">col2</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="s1">'https://i.pinimg.com/originals/82/9a/82/829a82bd6f39f7456c6f4cc2dacc27f6.jpg'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">col1</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'''* A visual graphic of NBA player Stephen Curry's statistics from 2009 to 2021.</span>
+<span class="s1">    * **Data source:** [Kaggle.com](https://www.kaggle.com/datasets/mujinjo/stephen-curry-stats-20092021-in-nba).'''</span><span class="p">)</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="s1">'https://pbs.twimg.com/media/FVbqDw1WQAM6BmI?format=jpg&amp;name=large'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span> <span class="mi">350</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/RexCoding/images/copied_from_nb/./streamlit-supp/intro.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-and-Display-Raw-Data">
+<a class="anchor" href="#Import-and-Display-Raw-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import and Display Raw Data<a class="anchor-link" href="#Import-and-Display-Raw-Data"> </a>
+</h3>
+<p>The csv file containing Stephen Curry data is imported using Pandas module through <code>pd.read_csv</code>. Then <code>st.expander</code> is used to create a container that can be expanded or collapsed. This container holds the data table, to make the layout less clustered. With <code>st.dataframe</code>, the Pandas dataframe is displayed in a table in Streamlit. Furthermore, a download button can be created using <code>st.download_button</code> to allow the user to download the utf-8 encoded csv file of the database. The argument <code>mime</code> is used to set the MIME type of the data, which is csv.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">curry_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./streamlit-supp/Stephen-Curry-Stats.csv'</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'#### &lt;font color = "#006BB6"&gt;Raw Data'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">check_data</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expander</span><span class="p">(</span><span class="s1">'Click to see raw data'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">check_data</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">dataframe</span><span class="p">(</span><span class="n">curry_data</span><span class="p">)</span>
+
+<span class="c1"># Download Data Button</span>
+<span class="n">st</span><span class="o">.</span><span class="n">download_button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span> <span class="s1">'Download Raw Data'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">curry_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">),</span> <span class="n">file_name</span><span class="o">=</span><span class="s1">'Stephen Curry Stats.csv'</span><span class="p">,</span> <span class="n">mime</span><span class="o">=</span><span class="s1">'text/csv'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Collapsed Raw data:</em>
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/collapse-data.png" alt="Screenshot"></p>
+<p><em>Expanded Raw data:</em>
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/expand-data.png" alt="Screenshot"></p>
+<p><em>Using Download button:</em>
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/download.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sidebar-for-User-Inputs">
+<a class="anchor" href="#Sidebar-for-User-Inputs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sidebar for User Inputs<a class="anchor-link" href="#Sidebar-for-User-Inputs"> </a>
+</h3>
+<p>In order to add more features and allow user inputs, <code>st.sidebar</code> is used to create a sidebar of the web application. In order to access and implement widgets in the sidebar, access it using <code>st.sidebar.(widget)</code>. For example with <code>st.sidebar.markdown</code>, a markdown text is displayed in the sidebar, with functions similar to <code>st.markdown</code> for the main page. Moreover, <code>st.sidebar.multiselect</code> adds a dropdown menu, where the user can input which season years they would like to display the data for. The user input is assigned to a python variable for further data sorting with Pandas.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'**&lt;font color="#ffc72c"&gt;User Input Features&lt;/font&gt;**'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">"*Select the seasons you want to analyze:*"</span><span class="p">)</span>
+<span class="n">season_year</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">multiselect</span><span class="p">(</span><span class="s1">'Curry</span><span class="se">\'</span><span class="s1">s Seasonal Year (Bar chart)'</span><span class="p">,</span> <span class="n">curry_data</span><span class="p">[</span><span class="s1">'Season_year'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/RexCoding/images/copied_from_nb/./streamlit-supp/sidebar.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Bar-Chart-Plotting-for-Field-Goals">
+<a class="anchor" href="#Bar-Chart-Plotting-for-Field-Goals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bar Chart Plotting for Field Goals<a class="anchor-link" href="#Bar-Chart-Plotting-for-Field-Goals"> </a>
+</h3>
+<p>Before plotting, it is necessary to take into account what will happen when the user does not input any seasonal year. An if-else statement is used for said situation, where the else statement contains <code>st.error</code>, which shows an error asking the user to input at least one seasonal year if there are none inputted. Within the if statement, the Field goal data is sorted using <a href="https://pandas.pydata.org/docs/reference/index.html#api">Pandas</a> slicing for the user-inputted seasonal years. Then the success rate is calculated using the Field Goals Made and Field Goals Attempted data. It is important to note that the Python method <code>sorted</code> is used to sort the user-inputted seasonal years. This means that no matter the order that the user selected the years, the seasonal years displayed on the bar chart is always from the earliest to the latest.</p>
+<p>To plot the bar chart, the Python charting library <code>plotly</code> is used through <code>st.plotly_chart</code>, specifically <code>plotly.graph_objects</code> is imported to access the bar chart drawing functions. <code>matplotlib.pyplot</code> may also be used through <code>st.pyplot</code>. However, <code>plotly</code> is integrated better with Streamlit. Please refer to the <code>Chart elements</code> section of the <a href="https://docs.streamlit.io/library/api-reference/charts">API Documentation</a> for more details about the available Streamlit plotting widgets.</p>
+<p>Looking at the code section below, an instance <code>go.Figure</code> is created where the argument contains the method <code>go.Bar</code> to plot the bar graphs of the Field Goals Made (FGM) and Field Goals Attempted (FGA) of the user-inputted seasonal years. Within it, the <code>hovertext</code> argument in <code>plotly</code> allows the user to hover over the bar chart to see the percentage success, calculated using the FGM and FGA. Finally, the graph title and axis labels are edited using <code>update_layout</code> method. Then, the Figure instance is inputted to <code>st.plotly_chart</code> to display the graph on the web appplication.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'## &lt;font color = "#006BB6"&gt;Field Goals Made and Attempted per Year'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">season_year</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Hover over the graph to see success percentage.'</span><span class="p">)</span>
+    <span class="n">list_year</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_FGA</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_FGM</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_percent</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Create lists of seasonal years, field goals attempts, field goals mades.</span>
+    <span class="k">for</span> <span class="n">i_year</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">season_year</span><span class="p">):</span>
+        <span class="n">yA</span> <span class="o">=</span> <span class="n">curry_data</span><span class="p">[</span><span class="n">curry_data</span><span class="p">[</span><span class="s1">'Season_year'</span><span class="p">]</span> <span class="o">==</span> <span class="n">i_year</span><span class="p">][</span><span class="s1">'FGA'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>   <span class="c1"># The sum of field goals attempted for the user-inputted season years</span>
+        <span class="n">yM</span> <span class="o">=</span> <span class="n">curry_data</span><span class="p">[</span><span class="n">curry_data</span><span class="p">[</span><span class="s1">'Season_year'</span><span class="p">]</span> <span class="o">==</span> <span class="n">i_year</span><span class="p">][</span><span class="s1">'FGM'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>   <span class="c1"># The sum of field goals made for the user-inputted season years</span>
+        <span class="n">list_year</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i_year</span><span class="p">)</span>
+        <span class="n">list_FGA</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yA</span><span class="p">)</span>
+        <span class="n">list_FGM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yM</span><span class="p">)</span>
+        <span class="n">list_percent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Success rate: </span><span class="si">{</span><span class="n">yM</span><span class="o">/</span><span class="n">yA</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%'</span><span class="p">)</span>              <span class="c1"># Success rate list by dividing field goals made by field goals attempted</span>
+    
+    <span class="c1"># Plot bar chart</span>
+    <span class="n">fig1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">list_year</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">list_FGM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Field Goals Made'</span><span class="p">,</span>
+        <span class="n">hovertext</span><span class="o">=</span><span class="n">list_percent</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">'rgb(253, 185, 39)'</span><span class="p">),</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">list_year</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">list_FGA</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Field Goals Attempted'</span><span class="p">,</span>
+        <span class="n">hovertext</span><span class="o">=</span><span class="n">list_percent</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="s1">'rgb(29, 66, 138)'</span><span class="p">)</span>
+    <span class="p">])</span>
+    
+    <span class="n">fig1</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'Steph Curry Field Goals Statistics'</span><span class="p">,</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">'Season year'</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">'Number of Field Goals'</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+    <span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">plotly_chart</span><span class="p">(</span><span class="n">fig1</span><span class="p">)</span>
+    
+<span class="c1"># Display error when no season year is inputed</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Please select at least one season year in the sidebar."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Error when no user inputs:</em>
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/no-input.png" alt="Screenshot"></p>
+<p><em>Bar chart:</em>
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/bar-chart.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Supplementerary-exercise-1">
+<a class="anchor" href="#Supplementerary-exercise-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supplementerary exercise 1<a class="anchor-link" href="#Supplementerary-exercise-1"> </a>
+</h3>
+<p>In order to drill in all the information, it is a good idea to do a few exercises. The first exercise is to extend on all the given codes given on this blog, based on the <a href="./Stephen-Curry-Stats.csv">Stephen Curry statistics</a> csv file.</p>
+<p>First, please copy and paste all the codes from the beginning of the blog to a new python file. Or, simply download <code>curry.py</code> from the following <a href="https://github.com/de-fellows/Khang-Draft-2023.git">GitHub link</a> under the <code>Code</code> folder. Then, write a code block to display a heat map showing Stephen Curry's assists made vs minutes played. The code must contains:</p>
+<ul>
+<li>A subheading with similar color font.</li>
+<li>Data slicing with <a href="https://pandas.pydata.org/docs/reference/index.html#api">Pandas</a>.</li>
+<li>A heat map displaying Stephen Curry's assists made for minutes played. <em>Hint: look up <code>go.Figure</code> and <code>go.Histogram2d</code> functions from <code>plotly.graph_objects</code>, which can be found in the <a href="https://docs.streamlit.io/library/api-reference">API Documentation</a></em>.</li>
+<li>An error being displayed if there are no season year inputted.</li>
+<li>Some comments on what the data visualization shows about the data.</li>
+</ul>
+<p>An example of what the heat map looks like on the web application:
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/heat-map.png" alt="Screenshot"></p>
+<h4 id="Answer:">
+<a class="anchor" href="#Answer:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Answer:<a class="anchor-link" href="#Answer:"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Heat map for Curry's assists made for minutes played     </span>
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'## &lt;font color = "#006BB6"&gt;Assists made for Minutes Played'</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">season_year</span><span class="p">:</span>
+    <span class="c1">#Create empty lists for assists and minutes to add to</span>
+    <span class="n">list_AST</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_MIN</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1">#loops through and adds the assists and minutes from the csv file for the years the user chooses</span>
+    <span class="k">for</span> <span class="n">i_year</span> <span class="ow">in</span> <span class="n">season_year</span><span class="p">:</span>
+        <span class="n">yAST</span> <span class="o">=</span> <span class="n">curry_data</span><span class="p">[</span><span class="n">curry_data</span><span class="p">[</span><span class="s1">'Season_year'</span><span class="p">]</span> <span class="o">==</span> <span class="n">i_year</span><span class="p">][</span><span class="s1">'AST'</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+        <span class="n">yMIN</span> <span class="o">=</span> <span class="n">curry_data</span><span class="p">[</span><span class="n">curry_data</span><span class="p">[</span><span class="s1">'Season_year'</span><span class="p">]</span> <span class="o">==</span> <span class="n">i_year</span><span class="p">][</span><span class="s1">'MIN'</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+        <span class="n">list_AST</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">yAST</span><span class="p">)</span>
+        <span class="n">list_MIN</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">yMIN</span><span class="p">)</span>
+        
+    <span class="c1">#creates graph in the form of a 2d histogram (AKA a heatmap), and changes size if each square on heatmap</span>
+    <span class="n">fig3</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> 
+        <span class="n">go</span><span class="o">.</span><span class="n">Histogram2d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">list_MIN</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">list_AST</span><span class="p">,</span>
+        <span class="n">autobinx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">xbins</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+        <span class="n">autobiny</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">ybins</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+        <span class="p">))</span>
+    
+    <span class="c1">#adds title and axis names</span>
+    <span class="n">fig3</span> <span class="o">=</span> <span class="n">fig3</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'Steph Curry Assists per Minute Played'</span><span class="p">,</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">'Minutes'</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">'Assists'</span>
+        <span class="p">)</span>
+
+    <span class="c1">#plots graph</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">plotly_chart</span><span class="p">(</span><span class="n">fig3</span><span class="p">)</span>
+
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'- The heatmap demonstates Steph Curry</span><span class="se">\'</span><span class="s1">s average assists made for the amount of minutes played in a game.'</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s1">'- Stephen Curry normally averages 4-8 assists and 30-40 minutes played per game.'</span><span class="p">)</span>
+ 
+<span class="c1"># Display error when no season year is chosen</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Please select at least one season year in the sidebar."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Supplementary-exercise-2">
+<a class="anchor" href="#Supplementary-exercise-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supplementary exercise 2<a class="anchor-link" href="#Supplementary-exercise-2"> </a>
+</h3>
+<p>Finally, please design a web application with your own theme and layout, using the <a href="./streamlit-supp/winequality-red.csv">Red Wine Quality</a>, which can be downloaded from the <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">UCI Repository</a>. The data can be seen under the table below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wine_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'streamlit-supp/winequality-red.csv'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">';'</span><span class="p">)</span>
+<span class="n">wine_data</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fixed acidity</th>
+      <th>volatile acidity</th>
+      <th>citric acid</th>
+      <th>residual sugar</th>
+      <th>chlorides</th>
+      <th>free sulfur dioxide</th>
+      <th>total sulfur dioxide</th>
+      <th>density</th>
+      <th>pH</th>
+      <th>sulphates</th>
+      <th>alcohol</th>
+      <th>quality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.4</td>
+      <td>0.700</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.99780</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.8</td>
+      <td>0.880</td>
+      <td>0.00</td>
+      <td>2.6</td>
+      <td>0.098</td>
+      <td>25.0</td>
+      <td>67.0</td>
+      <td>0.99680</td>
+      <td>3.20</td>
+      <td>0.68</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.8</td>
+      <td>0.760</td>
+      <td>0.04</td>
+      <td>2.3</td>
+      <td>0.092</td>
+      <td>15.0</td>
+      <td>54.0</td>
+      <td>0.99700</td>
+      <td>3.26</td>
+      <td>0.65</td>
+      <td>9.8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.2</td>
+      <td>0.280</td>
+      <td>0.56</td>
+      <td>1.9</td>
+      <td>0.075</td>
+      <td>17.0</td>
+      <td>60.0</td>
+      <td>0.99800</td>
+      <td>3.16</td>
+      <td>0.58</td>
+      <td>9.8</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7.4</td>
+      <td>0.700</td>
+      <td>0.00</td>
+      <td>1.9</td>
+      <td>0.076</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>0.99780</td>
+      <td>3.51</td>
+      <td>0.56</td>
+      <td>9.4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1594</th>
+      <td>6.2</td>
+      <td>0.600</td>
+      <td>0.08</td>
+      <td>2.0</td>
+      <td>0.090</td>
+      <td>32.0</td>
+      <td>44.0</td>
+      <td>0.99490</td>
+      <td>3.45</td>
+      <td>0.58</td>
+      <td>10.5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1595</th>
+      <td>5.9</td>
+      <td>0.550</td>
+      <td>0.10</td>
+      <td>2.2</td>
+      <td>0.062</td>
+      <td>39.0</td>
+      <td>51.0</td>
+      <td>0.99512</td>
+      <td>3.52</td>
+      <td>0.76</td>
+      <td>11.2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1596</th>
+      <td>6.3</td>
+      <td>0.510</td>
+      <td>0.13</td>
+      <td>2.3</td>
+      <td>0.076</td>
+      <td>29.0</td>
+      <td>40.0</td>
+      <td>0.99574</td>
+      <td>3.42</td>
+      <td>0.75</td>
+      <td>11.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1597</th>
+      <td>5.9</td>
+      <td>0.645</td>
+      <td>0.12</td>
+      <td>2.0</td>
+      <td>0.075</td>
+      <td>32.0</td>
+      <td>44.0</td>
+      <td>0.99547</td>
+      <td>3.57</td>
+      <td>0.71</td>
+      <td>10.2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1598</th>
+      <td>6.0</td>
+      <td>0.310</td>
+      <td>0.47</td>
+      <td>3.6</td>
+      <td>0.067</td>
+      <td>18.0</td>
+      <td>42.0</td>
+      <td>0.99549</td>
+      <td>3.39</td>
+      <td>0.66</td>
+      <td>11.0</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<p>1599 rows × 12 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The data visualization web application should contain:</p>
+<ul>
+<li>A title</li>
+<li>Subheadings</li>
+<li>Data table and download button</li>
+<li>Two user-inputted functions of choice to select different wine qualities. <em>Suggestion: <code>st.selectbox</code> from <a href="https://docs.streamlit.io/library/api-reference">API Documentation</a></em>
+</li>
+<li>A scatter plot showing two attributes of your choice (for example: citric acid vs alcohol), of the two user-inputted wine qualities. <em>Hint: Use <a href="https://plotly.com/python/line-and-scatter/">plotly</a> or <a href="https://matplotlib.org/2.0.2/api/pyplot_api.html#matplotlib.pyplot.scatter">pyplot</a>, with <code>st.plotly_chart</code> or <code>st.pyplot</code> respectively</em>
+</li>
+</ul>
+<p>An example of a scatter plot displaying wine citric acid vs alcohol content when the user inputted wine quality 4 and 7:
+<img src="/RexCoding/images/copied_from_nb/./streamlit-supp/wine.png" alt="Screenshot"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">
+<a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
+</h2>
+<p>Through Streamlit, one can easily create a web application displaying data visualization. Using the Field Goals Made and Field Goals Attempted data of Steph Curry, an example of the web application was shown. It is encouraged to go through the <a href="https://docs.streamlit.io/library/api-reference">API Documentation</a> and expand on this example through <code>Supplementary exercise 1</code>, or create a new web application through <code>Supplementary exercise 2</code>. I hope you are able to gain a new understanding about Streamlit.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reference">
+<a class="anchor" href="#Reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reference<a class="anchor-link" href="#Reference"> </a>
+</h2>
+<ul>
+<li>
+<p>Jo, M. Stephen Curry stats 2009-2021 in NBA. Kaggle. <a href="https://www.kaggle.com/datasets/mujinjo/stephen-curry-stats-20092021-in-nba">https://www.kaggle.com/datasets/mujinjo/stephen-curry-stats-20092021-in-nba</a> (accessed 17th May 2023).</p>
+</li>
+<li>
+<p>Streamlit API Documentation. <a href="https://docs.streamlit.io/library/api-reference">https://docs.streamlit.io/library/api-reference</a> (accessed 17th May 2023).</p>
+</li>
+<li>
+<p>Cortez,Paulo, Cerdeira,A., Almeida,F., Matos,T., and Reis,J.. (2009). Wine Quality. UCI Machine Learning Repository. <a href="https://doi.org/10.24432/C56S3T">https://doi.org/10.24432/C56S3T</a> (accessed 17th June 2023).</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="de-fellows/RexCoding"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/RexCoding/python/streamlit/pandas/2023/06/22/Streamlit.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
