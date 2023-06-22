@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Pygame with AI | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Pygame with AI" />
+<meta name="author" content="Christina Kampel" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using language models in a pygame-based video game!" />
+<meta property="og:description" content="Using language models in a pygame-based video game!" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/python/pygame/huggingface/transformers/pipelines/natural%20language%20processing/nlp/machine%20learning/ml/artificial%20intelligence/ai/conversational%20models/question-answering%20models/fill-mask/text-generation/2023/06/21/Pygame-with-AI.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/python/pygame/huggingface/transformers/pipelines/natural%20language%20processing/nlp/machine%20learning/ml/artificial%20intelligence/ai/conversational%20models/question-answering%20models/fill-mask/text-generation/2023/06/21/Pygame-with-AI.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-21T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pygame with AI" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Christina Kampel"},"dateModified":"2023-06-21T00:00:00-05:00","datePublished":"2023-06-21T00:00:00-05:00","description":"Using language models in a pygame-based video game!","headline":"Pygame with AI","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/python/pygame/huggingface/transformers/pipelines/natural%20language%20processing/nlp/machine%20learning/ml/artificial%20intelligence/ai/conversational%20models/question-answering%20models/fill-mask/text-generation/2023/06/21/Pygame-with-AI.html"},"url":"https://de-fellows.github.io/RexCoding/python/pygame/huggingface/transformers/pipelines/natural%20language%20processing/nlp/machine%20learning/ml/artificial%20intelligence/ai/conversational%20models/question-answering%20models/fill-mask/text-generation/2023/06/21/Pygame-with-AI.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Us</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pygame with AI</h1><p class="page-description">Using language models in a pygame-based video game!</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2023-06-21T00:00:00-05:00" itemprop="datePublished">
+        Jun 21, 2023
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Christina Kampel</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      26 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#pygame">pygame</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#HuggingFace">HuggingFace</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#transformers">transformers</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#pipelines">pipelines</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#natural language processing">natural language processing</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#NLP">NLP</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#machine learning">machine learning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#ML">ML</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#artificial intelligence">artificial intelligence</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#AI">AI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#conversational models">conversational models</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#question-answering models">question-answering models</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#fill-mask">fill-mask</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#text-generation">text-generation</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2023-06-21-Pygame-with-AI.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2023-06-21-Pygame-with-AI.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2023-06-21-Pygame-with-AI.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2023-06-21-Pygame-with-AI.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Working-on-the-Hard-Parts">Working on the Hard Parts </a></li>
+<li class="toc-entry toc-h2"><a href="#Try-This-Out!">Try This Out! </a></li>
+<li class="toc-entry toc-h2"><a href="#HuggingFace-and-Natural-Language-Processing">HuggingFace and Natural Language Processing </a></li>
+<li class="toc-entry toc-h2"><a href="#Pipelines">Pipelines </a></li>
+<li class="toc-entry toc-h2"><a href="#Conversational-Models">Conversational Models </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#The-Slow-Way---Manually-Loading-a-Model-and-Tokenizer">The Slow Way - Manually Loading a Model and Tokenizer </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Tokenizers">Tokenizers </a></li>
+<li class="toc-entry toc-h4"><a href="#Padding-and-Attention-Masks">Padding and Attention Masks </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#The-Fast-Way---Pipelines">The Fast Way - Pipelines </a></li>
+<li class="toc-entry toc-h3"><a href="#Trimming-a-Conversation">Trimming a Conversation </a></li>
+<li class="toc-entry toc-h3"><a href="#Model-Caveats">Model Caveats </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Question-Answering-Models">Question-Answering Models </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Extractive-Model">Extractive Model </a></li>
+<li class="toc-entry toc-h3"><a href="#Text-to-Text-Generation-Model">Text-to-Text Generation Model </a></li>
+<li class="toc-entry toc-h3"><a href="#Adding-to-the-Context">Adding to the Context </a></li>
+<li class="toc-entry toc-h3"><a href="#Model-Caveats">Model Caveats </a></li>
+<li class="toc-entry toc-h3"><a href="#Replicating-the-Conversation-Object">Replicating the Conversation Object </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Fill-Mask-Models">Fill-Mask Models </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Model-Caveats">Model Caveats </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Text-Generating-Models">Text-Generating Models </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Model-Caveats">Model Caveats </a></li>
+<li class="toc-entry toc-h3"><a href="#Resetting-the-Story">Resetting the Story </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#References-and-Companion-Files">References and Companion Files </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2023-06-21-Pygame-with-AI.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Working-on-the-Hard-Parts">
+<a class="anchor" href="#Working-on-the-Hard-Parts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working on the Hard Parts<a class="anchor-link" href="#Working-on-the-Hard-Parts"> </a>
+</h2>
+<p>This tutorial follows the third principle of <a href="https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators">David Perkins' Seven Principles of Teaching</a>: Work on the Hard Parts. Here, we will become familiar with the HuggingFace library and implement a pre-trained machine learning model into a pygame-based video game. We will then improve our skills by practicing with three more types of models. By the end of this tutorial, you should feel confident exploring the HuggingFace library on your own.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Try-This-Out!">
+<a class="anchor" href="#Try-This-Out!" aria-hidden="true"><span class="octicon octicon-link"></span></a>Try This Out!<a class="anchor-link" href="#Try-This-Out!"> </a>
+</h2>
+<p>This game uses the models explored in this tutorial to power non-player characters the player can talk to: <strong>LINK</strong></p>
+<p>To see the game above without AI models, check out this simple pygame example: <a href="simple_pygame.py">simple_pygame.py</a></p>
+<p>To learn about the basics of pygame, check out the <strong>Intro to Pygame</strong> blog post: <a href="Intro_to_Pygame.ipynb">Intro_to_Pygame.ipynb</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="HuggingFace-and-Natural-Language-Processing">
+<a class="anchor" href="#HuggingFace-and-Natural-Language-Processing" aria-hidden="true"><span class="octicon octicon-link"></span></a>HuggingFace and Natural Language Processing<a class="anchor-link" href="#HuggingFace-and-Natural-Language-Processing"> </a>
+</h2>
+<p>The goals of this tutorial are to:</p>
+<ul>
+<li>Explore a variety of language models from the <a href="https://huggingface.co/">HuggingFace</a> library</li>
+<li>Load the models into a pygame-based video game</li>
+<li>Use the models to generate text for non-player characters (NPCs) that a player can interact with</li>
+</ul>
+<p>Natural Language Processing (NLP) is when a machine learning model is trained and used on linguistic data to achieve a task. Tasks may include text classification (assigning a label to text), question answering, text generation. HuggingFace is a great source for all kinds of models and datasets, including those for NLP.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pipelines">
+<a class="anchor" href="#Pipelines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipelines<a class="anchor-link" href="#Pipelines"> </a>
+</h2>
+<p>There are two main ways to use a publicly-available model:</p>
+<ol>
+<li>
+<strong>The Slow Way - Manually loading a model and tokenizer into variables.</strong> This requires encoding (converting to numeric values) text data before it can be inputted into the model, and decoding the model's output.</li>
+<li>
+<strong>The Fast Way - Pipelines.</strong> The HuggingFace <code>pipeline()</code> function is a wrapper for models that automatically encodes and decodes data. It also allows a <code>task</code> to be specified, a.k.a. what you want the model to do. Each task has an out-of-the-box default model and tokenizer, or a model can be specified. See the <a href="https://huggingface.co/docs/transformers/main_classes/pipelines">pipeline API reference</a> for more information.</li>
+</ol>
+<p>The section below will use both methods to implement a conversational NLP model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conversational-Models">
+<a class="anchor" href="#Conversational-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conversational Models<a class="anchor-link" href="#Conversational-Models"> </a>
+</h2>
+<p>"Conversational response modelling is <strong>the task of generating conversational text that is relevant, coherent and knowledgeable given a prompt.</strong> These models have applications in chatbots, and as a part of voice assistants." - <a href="https://huggingface.co/tasks/conversational">HuggingFace Guide on Conversational NLP Tasks</a>.</p>
+<p>In our video game, the goal is to make a character that the player can chat back-and-forth with. We will use a conversational model to do so.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Slow-Way---Manually-Loading-a-Model-and-Tokenizer">
+<a class="anchor" href="#The-Slow-Way---Manually-Loading-a-Model-and-Tokenizer" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Slow Way - Manually Loading a Model and Tokenizer<a class="anchor-link" href="#The-Slow-Way---Manually-Loading-a-Model-and-Tokenizer"> </a>
+</h3>
+<p>First, we need to load the conversational model <a href="https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi.">facebook/blenderbot-400M-distill</a> into a <code>tokenizer</code> and a <code>model</code>:</p>
+<ul>
+<li>The <code>tokenizer</code> takes text data and turns it into a list of numbers (<code>tokens</code>), where each token represents a certain word or character. This step is needed for the model to process the data.</li>
+<li>The <code>model</code> takes a tokenized input and generates a response that is also tokenized. This response must be decoded (converted from numbers into words) using the <code>tokenizer</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p><strong>Tip:</strong> Models can be found at <a href="https://huggingface.co/models">https://huggingface.co/models</a>. On each model's page, look for the "&lt;/&gt; Use in Transformers" button for the code needed to initialize the model.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># code to initalize model found at: https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi.</span>
+
+<span class="c1"># import libraries</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
+
+<span class="c1"># set up tokenizer and model</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Tokenizers">
+<a class="anchor" href="#Tokenizers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tokenizers<a class="anchor-link" href="#Tokenizers"> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's write a sentence for the model to respond to:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">utterance</span> <span class="o">=</span> <span class="s2">"What is your favourite colour?"</span>
+<span class="n">utterance</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'What is your favourite colour?'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Convert the sentence into a format the model can process (PyTorch tensors):</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># otherwise, the tokenizer will return lists</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">utterance</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">'pt'</span><span class="p">)</span>
+<span class="n">inputs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'input_ids': tensor([[ 714,  315,  414, 6179, 7796,   38,    2]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1]])}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The tokenizer has encoded the sentence into <code>input_ids</code>. Note that the end of the sequence, &lt;\/s&gt;, is its own character. Ignore <code>attention_mask</code> for now.</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>input_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>'What'</td>
+<td>714</td>
+</tr>
+<tr>
+<td>'is'</td>
+<td>315</td>
+</tr>
+<tr>
+<td>'your'</td>
+<td>414</td>
+</tr>
+<tr>
+<td>'favourite'</td>
+<td>6179</td>
+</tr>
+<tr>
+<td>'colour'</td>
+<td>7796</td>
+</tr>
+<tr>
+<td>'?'</td>
+<td>38</td>
+</tr>
+<tr>
+<td>'&lt;\/s&gt;'</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also use the tokenizer as a decoder:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>' What is your favourite colour?&lt;/s&gt;'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's get the model's response to our question:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">response</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-Kampel-Draft-2023\ai-game-env\lib\site-packages\transformers\generation\utils.py:1346: UserWarning: Using `max_length`'s default (60) to control the generation length. This behaviour is deprecated and will be removed from the config in v5 of Transformers -- we recommend using `max_new_tokens` to control the maximum length of the generation.
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[   1,  863, 2297, 3183,  315, 3002,   21,  228,  714,  315, 4228,   38,
+          228,  946,  304,  360,  265, 2297, 3183,   38,    2]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Decode the response into words:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'&lt;s&gt; My favorite color is blue.  What is yours?  Do you have a favorite color?&lt;/s&gt;'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Padding-and-Attention-Masks">
+<a class="anchor" href="#Padding-and-Attention-Masks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Padding and Attention Masks<a class="anchor-link" href="#Padding-and-Attention-Masks"> </a>
+</h4>
+<p>Above, we gave the model one sentence to respond to. What if we want to give it a batch of a few sentences? Then, we need to do things:</p>
+<ol>
+<li>Make all of the encoded tensors the same length by <strong>padding</strong> them (adding a token to make all of the encoded sentences the same length).</li>
+<li>Give the model an <strong>attention mask</strong> - a tensor that tells the model which tokens are important and which tokens are padding.</li>
+</ol>
+<p>For more information on padding and attention masks, see: <a href="https://lukesalamone.github.io/posts/what-are-attention-masks/">https://lukesalamone.github.io/posts/what-are-attention-masks/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's make a batch of sentences for the model to respond to:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">utterance_batch</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"What is your favourite colour?"</span><span class="p">,</span>
+                   <span class="s2">"I like coding. What do you like to do?"</span><span class="p">,</span>
+                   <span class="s2">"What time is dinner?"</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can control the direction that the padding tokens are applied:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also specify which token is used for padding. This is not always needed. Here, we are using the "end of sequence" token for padding:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Use the updated tokenizer to encode the batch:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_batch</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">utterance_batch</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">'pt'</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">input_batch</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'input_ids': tensor([[   2,    2,    2,    2,    2,    2,  714,  315,  414, 6179, 7796,   38,
+            2],
+        [ 281,  398, 6601,  278,   21,  714,  361,  304,  398,  287,  361,   38,
+            2],
+        [   2,    2,    2,    2,    2,    2,    2,  714,  552,  315, 5048,   38,
+            2]]), 'attention_mask': tensor([[0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]])}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice:</p>
+<ul>
+<li>the padding token is <code>2</code>, which appears on the left of each tensor</li>
+<li>each tensor in <code>input_ids</code> has a corresponding tensor in <code>attention_mask</code> (see below)</li>
+</ul>
+<p>The attention mask tells the model if a token in <code>input_ids</code> is important (<code>1</code>), or is a padding value, and therefore not important (<code>0</code>).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># encoded ids</span>
+<span class="n">first_sentence_ids</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># attention mask</span>
+<span class="n">first_sentence_mask</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">attention_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"input_ids = </span><span class="si">{</span><span class="n">first_sentence_ids</span><span class="si">}</span><span class="se">\n</span><span class="s2">attention_mask = </span><span class="si">{</span><span class="n">first_sentence_mask</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>input_ids = tensor([   2,    2,    2,    2,    2,    2,  714,  315,  414, 6179, 7796,   38,
+           2])
+attention_mask = tensor([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1])
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's pass the entire batch to the model and get its responses:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response_batch</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">input_batch</span><span class="p">)</span>
+<span class="n">response_batch</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[   1,  863, 2297, 3183,  315, 3002,   21,  228,  714,  315, 4228,   38,
+          228,  946,  304,  360,  265, 2297, 3183,   38,    2,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0],
+        [   1,  281,  398,  287,  525, 1620, 1012,  298, 1484, 2842,   21,  714,
+          906,  306, 6601,  278,  361,  304,  361,   38,  228,    2,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0],
+        [   1,    1,  417,  267, 1336,  315,  403, 1226,   33, 2527,   21,  228,
+          281,  632,  655,  287,  627,  265,  893, 1718,  306,  508,  558, 2595,
+           91,   80,  298, 3597, 1884,   90,   21,    2]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Decode the responses:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response_batch</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;s&gt; My favorite color is blue.  What is yours?  Do you have a favorite color?&lt;/s&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;
+&lt;s&gt; I like to play video games and watch movies. What kind of coding do you do? &lt;/s&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;&lt;pad&gt;
+&lt;s&gt;&lt;s&gt; Dinner is at 8:30.  I am going to make a big pot of spaghetti and meatballs.&lt;/s&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Fast-Way---Pipelines">
+<a class="anchor" href="#The-Fast-Way---Pipelines" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Fast Way - Pipelines<a class="anchor-link" href="#The-Fast-Way---Pipelines"> </a>
+</h3>
+<p>The <code>pipeline</code> transformer performs the same tasks as above, but automatically encodes and decodes text!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's start with the same model and tokenizer as before:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Use the <code>pipeline</code> wrapper on the <code>model</code> and <code>tokenizer</code> to create a chatbot:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="c1"># the chatbot - since task="conversational", pipline returns a ConversationalPipeline</span>
+<span class="n">blenderbot</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"conversational"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The chatbot is a <code>ConversationalPipeline</code> object, which accepts a <code>Conversation</code> object as its input:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">Conversation</span>
+
+<span class="c1"># start a conversation with a chatbot - no need for encoding!</span>
+<span class="c1"># conversation_id is manually set for reproducibility</span>
+<span class="c1"># if conversation_id is not set, an id is randomly generated</span>
+<span class="n">conversation</span> <span class="o">=</span> <span class="n">Conversation</span><span class="p">(</span><span class="s2">"Hi. How are you?"</span><span class="p">,</span> <span class="n">conversation_id</span><span class="o">=</span><span class="s2">"100"</span><span class="p">)</span>
+<span class="n">conversation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; Hi. How are you? </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our conversation has unprocessed user input, so we can pass it to the chatbot to get a response:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; Hi. How are you? 
+bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any plans for the weekend? </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The bot's response has been appended to the <code>Conversation</code> object! This way, the object stores the conversation history:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; Hi. How are you? 
+bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any plans for the weekend? </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>past_user_inputs</code> attribute returns a list of everything the user said:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">past_user_inputs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['Hi. How are you?']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>generated_responses</code> attribute returns a list of everything the bot said:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">generated_responses</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[" I'm doing well, thank you. How about yourself? Do you have any plans for the weekend?"]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>add_user_input()</code> method allows us to add new user input to the conversation. Note that the chatbot can only respond to conversations that have unprocessed user input:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">add_user_input</span><span class="p">(</span><span class="s2">"What do you want to do this weekend?"</span><span class="p">)</span>
+<span class="n">conversation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; Hi. How are you? 
+bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any plans for the weekend? 
+user &gt;&gt; What do you want to do this weekend? </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; Hi. How are you? 
+bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any plans for the weekend? 
+user &gt;&gt; What do you want to do this weekend? 
+bot &gt;&gt;  I'm going to a concert with some friends. I've never been to one before. </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Trimming-a-Conversation">
+<a class="anchor" href="#Trimming-a-Conversation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Trimming a Conversation<a class="anchor-link" href="#Trimming-a-Conversation"> </a>
+</h3>
+<p>The "Conversation input is too long" warning may appear after only a few back-and-forth exchanges. The pipeline automatically trims the input, but manual trimming is also an option. This is useful if you only want to show the most recent few lines of a conversation, not the entire chat history.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="p">):</span>
+    <span class="sd">"""Trim the earliest user and bot lines from a Conversation.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - conversation (transformers.pipelines.conversational.Conversation object): conversation to trim</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - Trimmed conversation (transformers.pipelines.conversational.Conversation object)</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conversation</span><span class="o">.</span><span class="n">past_user_inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">conversation</span><span class="o">.</span><span class="n">generated_responses</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">conversation</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">warning</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Conversation is too short to be trimmed."</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="o">=</span><span class="n">conversation</span><span class="p">)</span>
+
+<span class="c1"># see results</span>
+<span class="n">conversation</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Conversation id: 100 
+user &gt;&gt; What do you want to do this weekend? 
+bot &gt;&gt;  I'm going to a concert with some friends. I've never been to one before. </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model-Caveats">
+<a class="anchor" href="#Model-Caveats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model Caveats<a class="anchor-link" href="#Model-Caveats"> </a>
+</h3>
+<p>While it is useful for producing a back-and-forth conversation, the blenderbot model does not store information from the entire conversation in its responses. For example, if you tell the blenderbot that your favourite colour is blue, and then ask it what your favourite colour is, it will not remember the answer. It may also lose the context of the conversation and give answers that are nonsensical or unrelated to the question.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Question-Answering-Models">
+<a class="anchor" href="#Question-Answering-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Question-Answering Models<a class="anchor-link" href="#Question-Answering-Models"> </a>
+</h2>
+<p>"Question Answering models can <strong>retrieve the answer to a question from a given text</strong>, which is useful for searching for an answer in a document. Some question answering models can generate answers without context!" - <a href="https://huggingface.co/tasks/question-answering">HuggingFace Guide on Question-Answering Tasks</a></p>
+<p>For our video game, the goal is to make a non-player-character (NPC) that can answer questions about the game. This means that context - the information the model uses in its responses - is important.</p>
+<p>For this tutorial, let's compare two question-answering models:</p>
+<ul>
+<li>
+<a href="https://huggingface.co/distilbert-base-cased-distilled-squad">distilbert-base-cased-distilled-squad</a>: an <strong>extractive model</strong>, meaning that it extracts the answer out of the given context</li>
+<li>
+<a href="https://huggingface.co/t5-base">t5-base</a>: a <strong>text-to-text generation model</strong> that has a wide range of applications such as question-answering, translating and summarizing. This model generates new text based on the given context.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Extractive-Model">
+<a class="anchor" href="#Extractive-Model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extractive Model<a class="anchor-link" href="#Extractive-Model"> </a>
+</h3>
+<p>Set up the model using a <code>pipeline</code> and <code>task="question-answering"</code>. Note that <code>distilbert-base-cased-distilled-squad</code> is the default model for this task, so there is no need to specify the model and tokenizer when we are just testing the model out.
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>
+    <strong>Note: </strong>In production, it’s good practice to specify the model and tokenizer as was done for the Conversational Model.
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="c1"># set up model</span>
+<span class="n">qa_model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-Kampel-Draft-2023\ai-game-env\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+No model was supplied, defaulted to distilbert-base-cased-distilled-squad and revision 626af31 (https://huggingface.co/distilbert-base-cased-distilled-squad).
+Using a pipeline without specifying a model name and revision in production is not recommended.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's give the model a question and some context, and see what it's response is:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">"Where is the key?"</span>
+<span class="n">context</span> <span class="o">=</span> <span class="s2">"The key is at the top of the tree."</span>
+
+<span class="c1"># get model's response</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.2849337160587311,
+ 'start': 14,
+ 'end': 33,
+ 'answer': 'the top of the tree'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Text-to-Text-Generation-Model">
+<a class="anchor" href="#Text-to-Text-Generation-Model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Text-to-Text Generation Model<a class="anchor-link" href="#Text-to-Text-Generation-Model"> </a>
+</h3>
+<p>Set up the model using a <code>pipeline</code> and <code>task="text2text-generation"</code>. Note that <code>t5-base</code> is the default model for this task.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"text2text-generation"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>No model was supplied, defaulted to t5-base and revision 686f1db (https://huggingface.co/t5-base).
+Using a pipeline without specifying a model name and revision in production is not recommended.
+c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-Kampel-Draft-2023\ai-game-env\lib\site-packages\transformers\models\t5\tokenization_t5_fast.py:155: FutureWarning: This tokenizer was incorrectly instantiated with a model max length of 512 which will be corrected in Transformers v5.
+For now, this behavior is kept to avoid breaking backwards compatibility when padding/encoding with `truncation is True`.
+- Be aware that you SHOULD NOT rely on t5-base automatically truncating your input to 512 when padding/encoding.
+- If you want to encode/pad to sequences longer than 512 you can either instantiate this tokenizer with `model_max_length` or pass `max_length` when encoding/padding.
+- To avoid this warning, please instantiate this tokenizer with `model_max_length` set to your preferred value.
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Give the model a question and some context. For this model, the "question" and "context" labels are used inside a string as shown below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="s2">"question: Where can I find the key? context: The key is at the top of the tree."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'the top of the tree'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-to-the-Context">
+<a class="anchor" href="#Adding-to-the-Context" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding to the Context<a class="anchor-link" href="#Adding-to-the-Context"> </a>
+</h3>
+<p>So far, the two models have given the same responses. To test out their differences, let's give the models a larger chunk of information as its context so it can answer a wider range of questions:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">context_large</span> <span class="o">=</span> <span class="s2">"""This game has the following objects in it: Player Bear, Wall, Tree, Key, Lock and Polar Bear.</span>
+<span class="s2">                The Player Bear is a character controlled by you, the user. You can use the arrow keys to make the Player Bear move around,</span>
+<span class="s2">                 and the RETURN or ENTER keys to talk with other chatbots. The wall is an impassible obstacle.</span>
+<span class="s2">                  The tree and the lock are interactive objects. You can climb the tree to find the key at the top.</span>
+<span class="s2">                   Once you have the key, you can use the key to open or unlock the lock.</span>
+<span class="s2">                    You can talk to the Polar Bear as well. "NPC" stands for "non-player character". The Polar Bear is a conversational chatbot NPC that uses the</span>
+<span class="s2">                     facebook/blenderbot-400M-distill model. """</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's compare the models' responses to the same questions:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Question 1:</strong> How do I move around?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I move around?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.5670624375343323, 'start': 186, 'end': 196, 'answer': 'arrow keys'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I move around? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'arrow keys'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Question 2:</strong> How do I get to the key?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I get to the key?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.3596245348453522,
+ 'start': 526,
+ 'end': 549,
+ 'answer': 'open or unlock the lock'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I get to the key? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'climb the tree'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Question 3:</strong> How many bears are there?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How many bears are there?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.3472032845020294,
+ 'start': 43,
+ 'end': 92,
+ 'answer': 'Player Bear, Wall, Tree, Key, Lock and Polar Bear'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How many bears are there? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'Polar Bear'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Question 4:</strong> Who is the Polar Bear?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"Who is the Polar Bear?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.5299234986305237,
+ 'start': 670,
+ 'end': 698,
+ 'answer': 'a conversational chatbot NPC'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: Who is the Polar Bear? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'conversational chatbot NPC'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model-Caveats">
+<a class="anchor" href="#Model-Caveats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model Caveats<a class="anchor-link" href="#Model-Caveats"> </a>
+</h3>
+<p>As shown above, both models give similar answers. However, neither model can correctly answer Question 3 ("How many bears are there?"). The answer should be "two", which can be inferred from the context but is not explicitly stated. This shows that neither model is good at inferring information from the context. To solve this problem, a different model could be used, or more information could be included in the context to make answers easier for the model to find.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Replicating-the-Conversation-Object">
+<a class="anchor" href="#Replicating-the-Conversation-Object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Replicating the <code>Conversation</code> Object<a class="anchor-link" href="#Replicating-the-Conversation-Object"> </a>
+</h3>
+<p>When we put the Question-Answering model into production, we may want to store conversation data in a similar way as the <code>Conversation</code> object used for the Conversational Model. This can be done using a dictionary:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># like the Conversation object, past_user_inputs will store the user's input and generated_responses will store the chatbot's responses</span>
+<span class="n">conversation2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"past_user_inputs"</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">"generated_responses"</span><span class="p">:</span> <span class="p">[]}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lines of text can be added using <code>.append()</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Hi, I'm a question-answering bot. Ask me a question!"</span><span class="p">)</span>
+
+<span class="c1"># add a line to the user input</span>
+<span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"How do I get the key?"</span><span class="p">)</span>
+
+<span class="c1"># show the conversation</span>
+<span class="n">conversation2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'past_user_inputs': ['How do I get the key?'],
+ 'generated_responses': ["Hi, I'm a question-answering bot. Ask me a question!"]}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can get the chatbot's responses to the question, and print it out:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">question</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'How do I get the key?'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'score': 0.35603067278862,
+ 'start': 526,
+ 'end': 549,
+ 'answer': 'open or unlock the lock'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)[</span><span class="s2">"answer"</span><span class="p">]</span>
+<span class="n">response</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'open or unlock the lock'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"."</span>
+<span class="n">response</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Open or unlock the lock.'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, add the chatbot's response to the conversation history:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># show results</span>
+<span class="n">conversation2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'past_user_inputs': ['How do I get the key?'],
+ 'generated_responses': ["Hi, I'm a question-answering bot. Ask me a question!",
+  'Open or unlock the lock.']}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If needed, we can show the back-and-forth conversation:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]):</span>
+    <span class="c1"># print bot response</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Bot: "</span> <span class="o">+</span> <span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">]):</span>
+        <span class="c1"># print user input</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"User: "</span> <span class="o">+</span> <span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+    
+    <span class="c1"># increment counters</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Bot: Hi, I'm a question-answering bot. Ask me a question!
+User: How do I get the key?
+Bot: Open or unlock the lock.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fill-Mask-Models">
+<a class="anchor" href="#Fill-Mask-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fill-Mask Models<a class="anchor-link" href="#Fill-Mask-Models"> </a>
+</h2>
+<p>"Masked language modeling is the task of <strong>masking some of the words in a sentence and predicting which words should replace those masks.</strong> These models are useful when we want to get a statistical understanding of the language in which the model is trained in." - <a href="https://huggingface.co/tasks/fill-mask">HuggingFace Guide on Fill-Mask Tasks</a></p>
+<p>For our video game, we will make an NPC that fills in the blanks of a sentence using a fill-mask model.</p>
+<p>We will use the <a href="https://huggingface.co/distilroberta-base">distilroberta-base</a> model, the default model for <code>task='fill-mask'</code> when using a <code>pipeline</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's set up the model:
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>
+    <strong>Note: </strong>Since <code>distilroberta-base</code> is the default model for this task, we do not need to specify the model and tokenizer. This is done so anyways because it is the conventional way of loading a model into production.
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForMaskedLM</span>
+
+<span class="c1"># set up model and tokenizer</span>
+<span class="n">fm_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"distilroberta-base"</span><span class="p">)</span>
+<span class="n">fm_model</span> <span class="o">=</span> <span class="n">AutoModelForMaskedLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"distilroberta-base"</span><span class="p">)</span>
+
+<span class="c1"># create chatbot</span>
+<span class="n">fm_chatbot</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"fill-mask"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">fm_model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">fm_tokenizer</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's test it out. Give the model a sentence containing the mask token (\<mask>) in the place of a missing word:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"></path></svg>
+    <strong>Important: </strong>The input must contain ’\<mask>\’ or the pipeline will raise an error.
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">"Paris is the &lt;mask&gt; of France."</span>
+
+<span class="c1"># get the model's output</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">fm_chatbot</span><span class="p">(</span><span class="s2">"Paris is the &lt;mask&gt; of France."</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'score': 0.6790177226066589,
+  'token': 812,
+  'token_str': ' capital',
+  'sequence': 'Paris is the capital of France.'},
+ {'score': 0.05177992954850197,
+  'token': 32357,
+  'token_str': ' birthplace',
+  'sequence': 'Paris is the birthplace of France.'},
+ {'score': 0.03825283423066139,
+  'token': 1144,
+  'token_str': ' heart',
+  'sequence': 'Paris is the heart of France.'},
+ {'score': 0.024348977953195572,
+  'token': 29778,
+  'token_str': ' envy',
+  'sequence': 'Paris is the envy of France.'},
+ {'score': 0.022851353511214256,
+  'token': 1867,
+  'token_str': ' Capital',
+  'sequence': 'Paris is the Capital of France.'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The model returned five sentences containing the five words most likely to fill in the mask.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can select only certain results if needed:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'score': 0.6790177226066589,
+  'token': 812,
+  'token_str': ' capital',
+  'sequence': 'Paris is the capital of France.'},
+ {'score': 0.05177992954850197,
+  'token': 32357,
+  'token_str': ' birthplace',
+  'sequence': 'Paris is the birthplace of France.'},
+ {'score': 0.03825283423066139,
+  'token': 1144,
+  'token_str': ' heart',
+  'sequence': 'Paris is the heart of France.'},
+ {'score': 0.024348977953195572,
+  'token': 29778,
+  'token_str': ' envy',
+  'sequence': 'Paris is the envy of France.'},
+ {'score': 0.022851353511214256,
+  'token': 1867,
+  'token_str': ' Capital',
+  'sequence': 'Paris is the Capital of France.'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'sequence'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Paris is the capital of France.'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also give a summary of the most likely tokens by iterating through the model's output:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># string to hold the most likely words</span>
+<span class="n">print_string</span> <span class="o">=</span> <span class="s2">""</span>
+
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="c1"># if we have reached the last word, insert a period</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">print_string</span> <span class="o">+=</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'token_str'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"."</span>
+    <span class="c1"># otherwise, insert a comma and space</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">print_string</span> <span class="o">+=</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'token_str'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">", "</span>
+
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># show results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The most likely words are:"</span> <span class="o">+</span> <span class="n">print_string</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The most likely words are: capital,  birthplace,  heart,  envy,  Capital.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model-Caveats">
+<a class="anchor" href="#Model-Caveats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model Caveats<a class="anchor-link" href="#Model-Caveats"> </a>
+</h3>
+<p>Since this model gets its data from the Internet, the output of certain phrases may include harmful stereotypes. A good example is shown in the <a href="https://huggingface.co/distilroberta-base#bias-risks-and-limitations">Bias, Risks, and Limitations</a> section of the model's information page, where the creators compare the model's responses to the phrases, "The man worked as a \<mask>\", and, "The woman worked as a \<mask>\".&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Text-Generating-Models">
+<a class="anchor" href="#Text-Generating-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Text-Generating Models<a class="anchor-link" href="#Text-Generating-Models"> </a>
+</h2>
+<p>"Generating text is the task of <strong>producing new text</strong>. These models can, for example, fill in incomplete text or paraphrase." - <a href="https://huggingface.co/tasks/text-generation">HuggingFace Guide on Text Generation Tasks</a></p>
+<p>For our video game, we will use the text-generating model <a href="https://huggingface.co/gpt2?text=Once+upon+a+time%2C">gpt2</a> to complete the phrase, "Once upon a time,".</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's set up the model and tokenizer, and pass them to the <code>pipeline</code> object along with <code>task="text-generation"</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">set_seed</span>
+
+<span class="c1"># set up model and tokenizer</span>
+<span class="n">tg_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"gpt2"</span><span class="p">)</span>
+<span class="n">tg_model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"gpt2"</span><span class="p">)</span>
+
+<span class="c1"># create chatbot</span>
+<span class="n">tg_chatbot</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"text-generation"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">tg_model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tg_tokenizer</span><span class="p">,</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Above, we set <code>do_sample=True</code>. This is not required for text generation, but it enables various decoding strategies when new text is generated. From the <a href="https://huggingface.co/docs/transformers/generation_strategies#:~:text=do_sample%20%3A%20if%20set%20to%20True,with%20various%20strategy%2Dspecific%20adjustments.">HuggingFace transformers documentation</a>:</p>
+<p><em>"<strong>do_sample:</strong> if set to True, this parameter enables decoding strategies such as multinomial sampling, beam-search multinomial sampling, Top-K sampling and Top-p sampling. All these strategies select the next token from the probability distribution over the entire vocabulary with various strategy-specific adjustments."</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, let's ask the model to complete a story starting with "Once upon a time,". Note that we since the generation relies on randomness, we need to set a seed for reproducibility:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">set_seed</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># have the model fill in the story</span>
+<span class="n">story</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="s2">"Once upon a time,"</span><span class="p">)</span>
+<span class="c1"># show results</span>
+<span class="n">story</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-Kampel-Draft-2023\ai-game-env\lib\site-packages\transformers\generation\utils.py:1346: UserWarning: Using `max_length`'s default (50) to control the generation length. This behaviour is deprecated and will be removed from the config in v5 of Transformers -- we recommend using `max_new_tokens` to control the maximum length of the generation.
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'Once upon a time, in the case of Mr. Pate, the most important part of our work, and especially when the subject of the present discussion is taken into consideration, is that the individual and the particular case are quite separate. The particular'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To only see the generated text, do the following:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story_text</span> <span class="o">=</span> <span class="n">story</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
+<span class="c1"># show results</span>
+<span class="n">story_text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Once upon a time, in the case of Mr. Pate, the most important part of our work, and especially when the subject of the present discussion is taken into consideration, is that the individual and the particular case are quite separate. The particular'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To continue the story, we can take this output and input it back into the model:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">)</span>
+<span class="c1"># get only the string of generated text</span>
+<span class="n">story2_text</span> <span class="o">=</span> <span class="n">story2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
+<span class="c1"># show results</span>
+<span class="n">story_text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Input length of input_ids is 50, but `max_length` is set to 50. This can lead to unexpected behavior. You should consider increasing `max_new_tokens`.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Once upon a time, in the case of Mr. Pate, the most important part of our work, and especially when the subject of the present discussion is taken into consideration, is that the individual and the particular case are quite separate. The particular'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What happened here? It looks like no new text was added.</p>
+<p>By default, the model has a <code>max_length</code> of 50 output tokens (words), including the input. To fix this, we could do one of two things:</p>
+<ol>
+<li>Increase <code>max_length</code>: A good short-term solution, but not useful if we want to keep expanding on the same text, since this number includes the input text.</li>
+<li>Set the <code>max_new_tokens</code>: Controls the maximum number of new words the model generates, not including the input text. A good long-term solution if we want the model to continue expanding one block of text.</li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1"># get only the string of generated text</span>
+<span class="n">story2_text</span> <span class="o">=</span> <span class="n">story2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
+<span class="c1"># show results</span>
+<span class="n">story2_text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'Once upon a time, in the case of Mr. Pate, the most important part of our work, and especially when the subject of the present discussion is taken into consideration, is that the individual and the particular case are quite separate. The particular case is one which has been dealt with by the Courts so far in this Court, without reference to'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model-Caveats">
+<a class="anchor" href="#Model-Caveats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model Caveats<a class="anchor-link" href="#Model-Caveats"> </a>
+</h3>
+<p>In production, using gpt2 to continously expand on the same block of text can result in the model giving the same output after a certain number of iterations. This may look like:</p>
+
+<pre><code>Iteration 1:
+&gt; &gt;&gt; Input:"Once upon a time,"&gt; &gt;&gt; Output:"Once upon a time, there was a snake"
+Iteration 2:
+&gt; &gt;&gt; Input:"Once upon a time, there was a snake"&gt; &gt;&gt; Output:"Once upon a time, there was a snake in the garden"
+Iteration 3:
+&gt; &gt;&gt; Input:"Once upon a time, there was a snake in the garden"&gt; &gt;&gt; Output:"Once upon a time, there was a snake in the garden in the garden"</code></pre>
+<p>As a result, we may need to have the option to reset the story when using this model in production.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Resetting-the-Story">
+<a class="anchor" href="#Resetting-the-Story" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resetting the Story<a class="anchor-link" href="#Resetting-the-Story"> </a>
+</h3>
+<p>To reset the story while using the same loaded model, we need to:</p>
+<ol>
+<li>Change the input text back to "Once upon a time,"</li>
+<li>Change the seed</li>
+</ol>
+<p>If the seed remains the same, the model will generate the same results as before.</p>
+<p>Here's proof:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set the seed for reproducibility</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># have the model fill in the story</span>
+<span class="n">story</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="s2">"Once upon a time,"</span><span class="p">)</span>
+<span class="c1"># show results</span>
+<span class="n">story</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-Kampel-Draft-2023\ai-game-env\lib\site-packages\transformers\generation\utils.py:1346: UserWarning: Using `max_length`'s default (50) to control the generation length. This behaviour is deprecated and will be removed from the config in v5 of Transformers -- we recommend using `max_new_tokens` to control the maximum length of the generation.
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[{'generated_text': 'Once upon a time, in the case of Mr. Pate, the most important part of our work, and especially when the subject of the present discussion is taken into consideration, is that the individual and the particular case are quite separate. The particular'}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="References-and-Companion-Files">
+<a class="anchor" href="#References-and-Companion-Files" aria-hidden="true"><span class="octicon octicon-link"></span></a>References and Companion Files<a class="anchor-link" href="#References-and-Companion-Files"> </a>
+</h1>
+<p><strong>References:</strong></p>
+<ul>
+<li>
+<p>Education at Bat: Seven Principles for Educators: <a href="https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators">https://www.gse.harvard.edu/news/uk/09/01/education-bat-seven-principles-educators</a></p>
+</li>
+<li>
+<p>HuggingFace:</p>
+<ul>
+<li>Website: <a href="https://huggingface.co/">https://huggingface.co/</a>
+</li>
+<li>Quicktour: <a href="https://huggingface.co/docs/transformers/quicktour">https://huggingface.co/docs/transformers/quicktour</a>
+</li>
+<li>Pipelines API Reference: <a href="https://huggingface.co/docs/transformers/main_classes/pipelines">https://huggingface.co/docs/transformers/main_classes/pipelines</a>
+</li>
+<li>Models Page: <a href="https://huggingface.co/models">https://huggingface.co/models</a>
+</li>
+<li>Transformers Documentation: <a href="https://huggingface.co/docs/transformers/generation_strategies#:~:text=do_sample%20%3A%20if%20set%20to%20True,with%20various%20strategy%2Dspecific%20adjustments">https://huggingface.co/docs/transformers/generation_strategies#:~:text=do_sample%20%3A%20if%20set%20to%20True,with%20various%20strategy%2Dspecific%20adjustments</a>.</li>
+</ul>
+</li>
+<li>
+<p>Conversational Models:</p>
+<ul>
+<li>HuggingFace Guide on Conversational NLP Tasks: <a href="https://huggingface.co/tasks/conversational">https://huggingface.co/tasks/conversational</a>
+</li>
+<li>facebook/blenderbot-400M-distill Model Card: <a href="https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi">https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi</a>
+</li>
+<li>Blenderbot tutorial video: <a href="https://www.youtube.com/watch?v=FfywuRCPmqY">https://www.youtube.com/watch?v=FfywuRCPmqY</a>
+</li>
+<li>Blenderbot tutorial GitHub: <a href="https://github.com/nicknochnack/Blenderbot/blob/main/Blenderbot-Tutorial.ipynb">https://github.com/nicknochnack/Blenderbot/blob/main/Blenderbot-Tutorial.ipynb</a> </li>
+<li>What are Attention Masks? by Luke Salamone: <a href="https://lukesalamone.github.io/posts/what-are-attention-masks/">https://lukesalamone.github.io/posts/what-are-attention-masks/</a>
+</li>
+</ul>
+</li>
+<li>
+<p>Question-Answering Models:</p>
+<ul>
+<li>HuggingFace Guide on Question-Answering Tasks: <a href="https://huggingface.co/tasks/question-answering">https://huggingface.co/tasks/question-answering</a>
+</li>
+<li>distilbert-base-cased-distilled-squad Model Card: <a href="https://huggingface.co/distilbert-base-cased-distilled-squad">https://huggingface.co/distilbert-base-cased-distilled-squad</a>
+</li>
+<li>t5-base Model Card: <a href="https://huggingface.co/t5-base">https://huggingface.co/t5-base</a>
+</li>
+</ul>
+</li>
+<li>
+<p>Fill-Mask Models:</p>
+<ul>
+<li>HuggingFace Guide on Fill-Mask Tasks: <a href="https://huggingface.co/tasks/fill-mask">https://huggingface.co/tasks/fill-mask</a>
+</li>
+<li>distilroberta-base Model Card: <a href="https://huggingface.co/distilroberta-base">https://huggingface.co/distilroberta-base</a>
+</li>
+<li>Bias, Risks, and Limitations of the distilroberta-base Model: <a href="https://huggingface.co/distilroberta-base#bias-risks-and-limitations">https://huggingface.co/distilroberta-base#bias-risks-and-limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<p>Text-Generation Models:</p>
+<ul>
+<li>HuggingFace Guide on Text Generation Tasks: <a href="https://huggingface.co/tasks/text-generation">https://huggingface.co/tasks/text-generation</a>
+</li>
+<li>gpt2 Model Card: <a href="https://huggingface.co/gpt2?text=Once+upon+a+time%2C">https://huggingface.co/gpt2?text=Once+upon+a+time%2C</a>
+</li>
+<li>ChatGPT-at-Home GitHub Repository: <a href="https://github.com/Sentdex/ChatGPT-at-Home/blob/main/app.py">https://github.com/Sentdex/ChatGPT-at-Home/blob/main/app.py</a>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Companion Files:</strong></p>
+<ul>
+<li>A pygame-based video game with AI: <strong>LINK</strong>
+</li>
+<li>Intro to Pygame tutorial: <a href="Intro_to_Pygame.ipynb">Intro_to_Pygame.ipynb</a>
+</li>
+<li>A simple pygame example: <a href="simple_pygame.py">simple_pygame.py</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</mask></mask></p>
+</div>
+</div></div></mask>
+</div>
+</div>
+</div></div></mask></p>
+</div>
+</div></div>
+</div>
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="de-fellows/RexCoding"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/RexCoding/python/pygame/huggingface/transformers/pipelines/natural%20language%20processing/nlp/machine%20learning/ml/artificial%20intelligence/ai/conversational%20models/question-answering%20models/fill-mask/text-generation/2023/06/21/Pygame-with-AI.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
