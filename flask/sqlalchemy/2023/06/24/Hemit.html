@@ -151,9 +151,9 @@ window.onload = wrap_img;
 
 <p>Here’s a block of code responsible for the login functionality and how it will turn out to be:</p>
 
-<p><img src="images/Screenshot_login_code.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_login_code.png" alt="Screenshot"></p>
 
-<p><img src="images/Screenshot_login_page.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_login_page.png" alt="Screenshot"></p>
 
 <p>In simple terms, what we’re doing here is defining a route at /login that will handle both GET and POST requests.</p>
 
@@ -164,9 +164,9 @@ For POST requests, which occur when the user submits their login form, we extrac
 
 <p>Here’s how these would look:</p>
 
-<p><img src="images/Screenshot_signup_page.png" alt="Screenshot">
-<img src="images/Screenshot_Profile_Update.png" alt="Screenshot">
-<img src="images/Screenshot_Account_Deletion.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_signup_page.png" alt="Screenshot">
+<img src="/RexCoding/images/2023-flask-sql_images/Screenshot_Profile_Update.png" alt="Screenshot">
+<img src="/RexCoding/images/2023-flask-sql_images/Screenshot_Account_Deletion.png" alt="Screenshot"></p>
 
 <h3 id="posts-management">
 <a class="anchor" href="#posts-management" aria-hidden="true"><span class="octicon octicon-link"></span></a>Posts Management</h3>
@@ -174,8 +174,8 @@ For POST requests, which occur when the user submits their login form, we extrac
 
 <p>Let’s explore how to create a new post and the output:</p>
 
-<p><img src="images/Screenshot_Post_code.png" alt="Screenshot">
-<img src="images/Screenshot_Post_Creation.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_Post_code.png" alt="Screenshot">
+<img src="/RexCoding/images/2023-flask-sql_images/Screenshot_Post_Creation.png" alt="Screenshot"></p>
 
 <p>In this code, we define a route at / to handle both GET and POST requests. For a POST request, which is triggered when a user submits a new post, we retrieve the entered content and uploaded file. If both are provided, we securely save the file to our server and create a new Post object, linking it with the current user. After adding this new post to our database and committing the changes, we flash a success message to the user.</p>
 
@@ -186,7 +186,7 @@ For POST requests, which occur when the user submits their login form, we extrac
 <p>In the edit function, we provide the user with a form pre-filled with the current content and file of the post. Once the user updates and submits this form, we validate the input, update the post in our database, and flash a success message.
 For the delete function, we check if the current user is the author of the post before deleting it. This ensures that only the post’s author can delete the post, adding a layer of security to our application.</p>
 
-<p><img src="images/Screenshot_Post_Editing.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_Post_Editing.png" alt="Screenshot"></p>
 
 <p>Remember, though the lines of code may appear complex, they form the core functionality of our social media app, providing the features users expect from a modern platform. As we move forward,  you’ll gain a deeper understanding of how Flask and SQLite work together to create a dynamic, interactive web application</p>
 
@@ -198,8 +198,8 @@ For the delete function, we check if the current user is the author of the post 
 
 <p>Here’s how HTML templates are used to create the home page of a website and the result:</p>
 
-<p><img src="images/Screenshot_HTML_1.png" alt="Screenshot">
-<img src="images/Screenshot_home_page.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_HTML_1.png" alt="Screenshot">
+<img src="/RexCoding/images/2023-flask-sql_images/Screenshot_home_page.png" alt="Screenshot"></p>
 
 <p>The navigation bar on the top uses Bootstrap’s navbar class. It is responsive and will automatically collapse on smaller screens. Inside this bar, we have different links, some of which are only visible if the user is authenticated. This is controlled using the <code class="language-plaintext highlighter-rouge">{% if user.is_authenticated %}</code> statement.
 Flashed messages (like success messages after successful account creation or login) are displayed using Bootstrap’s alert class. The color of the alert depends on the category of the message - either success (green) or error (red).</p>
@@ -208,7 +208,7 @@ Flashed messages (like success messages after successful account creation or log
 
 <p>For example, in the signup page:</p>
 
-<p><img src="images/Screenshot_HTML_2.png" alt="Screenshot"></p>
+<p><img src="/RexCoding/images/2023-flask-sql_images/Screenshot_HTML_2.png" alt="Screenshot"></p>
 
 <p>Here, we use Bootstrap’s form and input classes to create a clean, modern form. The form-group class is used to wrap labels and input fields, providing appropriate spacing. The btn btn-primary classes are used to style the submit button.</p>
 
