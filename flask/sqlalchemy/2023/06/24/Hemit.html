@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Exploring FLASK with the help of SQLALCHEMY | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Exploring FLASK with the help of SQLALCHEMY" />
+<meta name="author" content="Hemit Dedhia" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction The highlight of our exploration will be an interactive project named “Flask Social Media”. This isn’t just any project, but a fully-featured social media application, similar to the platforms you likely use every day. I chose this project because it allows us to explore the core features of Flask and SQLite while creating something tangible and functional." />
+<meta property="og:description" content="Introduction The highlight of our exploration will be an interactive project named “Flask Social Media”. This isn’t just any project, but a fully-featured social media application, similar to the platforms you likely use every day. I chose this project because it allows us to explore the core features of Flask and SQLite while creating something tangible and functional." />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/flask/sqlalchemy/2023/06/24/Hemit.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/flask/sqlalchemy/2023/06/24/Hemit.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-24T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Exploring FLASK with the help of SQLALCHEMY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hemit Dedhia"},"dateModified":"2023-06-24T00:00:00-05:00","datePublished":"2023-06-24T00:00:00-05:00","description":"Introduction The highlight of our exploration will be an interactive project named “Flask Social Media”. This isn’t just any project, but a fully-featured social media application, similar to the platforms you likely use every day. I chose this project because it allows us to explore the core features of Flask and SQLite while creating something tangible and functional.","headline":"Exploring FLASK with the help of SQLALCHEMY","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/flask/sqlalchemy/2023/06/24/Hemit.html"},"url":"https://de-fellows.github.io/RexCoding/flask/sqlalchemy/2023/06/24/Hemit.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Us</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Exploring FLASK with the help of SQLALCHEMY</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2023-06-24T00:00:00-05:00" itemprop="datePublished">
+        Jun 24, 2023
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hemit Dedhia</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Flask">Flask</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#SQLAlchemy">SQLAlchemy</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h2"><a href="#technologies-used">Technologies Used</a></li>
+<li class="toc-entry toc-h2"><a href="#backend-flask-and-sqlite">Backend: Flask and SQLite</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#user-authentication">User Authentication</a></li>
+<li class="toc-entry toc-h3"><a href="#posts-management">Posts Management</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#frontend-html-and-bootstrap">Frontend: HTML and Bootstrap</a></li>
+<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
+<li class="toc-entry toc-h2"><a href="#appendix">Appendix</a></li>
+</ul><h2 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+<p>The highlight of our exploration will be an interactive project named “Flask Social Media”. This isn’t just any project, but a fully-featured social media application, similar to the platforms you likely use every day. I chose this project because it allows us to explore the core features of Flask and SQLite while creating something tangible and functional.</p>
+
+<p>Flask, for those who may not be familiar, is  a micro web framework written in Python. It is known for its simplicity and flexibility, making it a popular choice for web developers worldwide. Alongside Flask, we’ll be utilizing FLASK_SQLalchemy, a FLASK extension that provides a lightweight disk-based database. This allows us to interact with a relational database in a way that is seamless and efficient, without the need for a separate server process.</p>
+
+<p>The Flask Social Media project is an interactive and fully-featured social media application built using Flask and SQLite. It aims to provide functionalities similar to popular social media platforms. This project focuses on implementing the following core features:</p>
+
+<ul>
+  <li>User and post management</li>
+  <li>Following other users</li>
+  <li>Messaging</li>
+  <li>Notifications</li>
+  <li>Search function</li>
+</ul>
+
+<p>In addition to these features, we’ll have the opportunity to style our application using CSS, adding an aesthetic touch to the robust functionality.</p>
+
+<h2 id="technologies-used">
+<a class="anchor" href="#technologies-used" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technologies Used</h2>
+
+<p>The project utilizes the following technologies:</p>
+
+<ul>
+  <li>Flask: A micro web framework written in Python, known for its simplicity and flexibility, making it a popular choice for web developers worldwide.</li>
+  <li>SQLAlchemy: A powerful SQL toolkit and Object-Relational Mapping (ORM) library that provides a high-level and expressive approach to interacting with databases, including SQLite. It simplifies database operations and enables efficient database management.</li>
+</ul>
+
+<p>So, whether you’re a seasoned developer wanting to explore Flask and SQLite or a novice just dipping your toes into the world of web development, this blog will guide you through each step. By the end of our journey, you will have gained practical, hands-on experience with Flask and SQLite and have a fully-functional social media application to show for it.</p>
+
+<h2 id="backend-flask-and-sqlite">
+<a class="anchor" href="#backend-flask-and-sqlite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Backend: Flask and SQLite</h2>
+<h3 id="user-authentication">
+<a class="anchor" href="#user-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Authentication</h3>
+<p>To begin with,  we’re focusing on user authentication - a fundamental feature for any social media application. This involves handling user login, logout, registration, account updates, and account deletion. We’ll be using Flask’s routing and form capabilities along with the SQLite database to accomplish these tasks.</p>
+
+<p>Here’s a block of code responsible for the login functionality and how it will turn out to be:</p>
+
+<p><img src="./images/Screenshot_login_code.png" alt="Screenshot"></p>
+
+<p><img src="./images/Screenshot_login_page.png" alt="Screenshot"></p>
+
+<p>In simple terms, what we’re doing here is defining a route at /login that will handle both GET and POST requests.</p>
+
+<p>In case of a GET request, the server will simply render and return the “login.html” template.
+For POST requests, which occur when the user submits their login form, we extract the entered email and password. We then use these details to find the user in our SQLite database. If a user with the given email exists and the provided password matches the stored password (after hashing), we log the user in and redirect them to the homepage. If not, appropriate error messages are flashed to inform the user about the incorrect credentials.</p>
+
+<p>This same pattern is extended for logout, sign-up, update profile, and delete account operations, each with its respective checks and user prompts. As we progress through these operations, the code may seem complex, but don’t worry! As you work more with Flask and SQLite, this code will start to feel more intuitive.</p>
+
+<p>Here’s how these would look:</p>
+
+<p><img src="./images/Screenshot_signup_page.png" alt="Screenshot">
+<img src="./images/Screenshot_Profile_Update.png" alt="Screenshot">
+<img src="./images/Screenshot_Account_Deletion.png" alt="Screenshot"></p>
+
+<h3 id="posts-management">
+<a class="anchor" href="#posts-management" aria-hidden="true"><span class="octicon octicon-link"></span></a>Posts Management</h3>
+<p>Now that we have user management in place, the next step is to handle posts - the heart of any social media platform. Our focus will be on creating, editing, and deleting posts.</p>
+
+<p>Let’s explore how to create a new post and the output:</p>
+
+<p><img src="./images/Screenshot_Post_code.png" alt="Screenshot">
+<img src="./images/Screenshot_Post_Creation.png" alt="Screenshot"></p>
+
+<p>In this code, we define a route at / to handle both GET and POST requests. For a POST request, which is triggered when a user submits a new post, we retrieve the entered content and uploaded file. If both are provided, we securely save the file to our server and create a new Post object, linking it with the current user. After adding this new post to our database and committing the changes, we flash a success message to the user.</p>
+
+<p>This function also handles GET requests, which occur when a user visits the home page. In this case, we retrieve all posts from our database and render the “home.html” template, passing in the current user and posts to be displayed.</p>
+
+<p>For the edit and delete functionalities, we create separate routes, each accepting an id parameter. The id is used to fetch the post to be edited or deleted from our SQLite database.</p>
+
+<p>In the edit function, we provide the user with a form pre-filled with the current content and file of the post. Once the user updates and submits this form, we validate the input, update the post in our database, and flash a success message.
+For the delete function, we check if the current user is the author of the post before deleting it. This ensures that only the post’s author can delete the post, adding a layer of security to our application.</p>
+
+<p><img src="./images/Screenshot_Post_Editing.png" alt="Screenshot"></p>
+
+<p>Remember, though the lines of code may appear complex, they form the core functionality of our social media app, providing the features users expect from a modern platform. As we move forward,  you’ll gain a deeper understanding of how Flask and SQLite work together to create a dynamic, interactive web application</p>
+
+<h2 id="frontend-html-and-bootstrap">
+<a class="anchor" href="#frontend-html-and-bootstrap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Frontend: HTML and Bootstrap</h2>
+<p>Moving on to the user interface of our social media application, we use HTML, a markup language for creating web pages, enhanced with the power of Bootstrap, a popular CSS framework for building responsive and mobile-first websites.</p>
+
+<p>Firstly, we have a root.html file. This is a base template which provides a consistent structure for our application - including the navigation bar, alert messages, a content container, and scripts for interactivity. This file also includes several <code class="language-plaintext highlighter-rouge">{% block %}i</code> statements, which are part of the Jinja2 templating language. These allow us to override specific parts of the template in other HTML files, providing flexibility to customize our pages while maintaining a consistent structure.</p>
+
+<p>Here’s how HTML templates are used to create the home page of a website and the result:</p>
+
+<p><img src="./images/Screenshot_HTML_1.png" alt="Screenshot">
+<img src="./images/Screenshot_home_page.png" alt="Screenshot"></p>
+
+<p>The navigation bar on the top uses Bootstrap’s navbar class. It is responsive and will automatically collapse on smaller screens. Inside this bar, we have different links, some of which are only visible if the user is authenticated. This is controlled using the ‘{% if user.is_authenticated %}` statement.
+Flashed messages (like success messages after successful account creation or login) are displayed using Bootstrap’s alert class. The color of the alert depends on the category of the message - either success (green) or error (red).</p>
+
+<p>We then have separate HTML files for signup and login pages. These files extend from our root.html and override the title and content blocks to customize the page title and main content.</p>
+
+<p>For example, in the signup page:</p>
+
+<p><img src="./images/Screenshot_HTML_2.png" alt="Screenshot"></p>
+
+<p>Here, we use Bootstrap’s form and input classes to create a clean, modern form. The form-group class is used to wrap labels and input fields, providing appropriate spacing. The btn btn-primary classes are used to style the submit button.</p>
+
+<p>Overall, the usage of Bootstrap helps us ensure that our application looks good on all screen sizes with minimal effort, while the power of Jinja2 templating lets us write clean, maintainable code by avoiding duplication. By exploring and mastering these technologies, you can create appealing and user-friendly web applications.</p>
+
+<h2 id="conclusion">
+<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>In this blog post, we’ve traversed the journey of creating a social media application using Python’s Flask framework, SQLAlchemy, HTML and Bootstrap. We first dove into the backend side of things, exploring how routes can handle various functionalities such as login, logout, sign up, profile updating, and account deletion. We then delved into more complex operations like creating, editing, and deleting posts. The key takeaway here is how Flask, along with its plug-ins, allows us to handle all these different aspects in a straightforward and organized manner.</p>
+
+<p>Subsequently, we stepped into the frontend realm where HTML, empowered by Bootstrap, breathed life into our application, making it visually appealing and responsive. We saw how Jinja2 templates help in creating reusable HTML structures while allowing for specific customizations.</p>
+
+<p>Through this journey, we hope you’ve gained a comprehensive understanding of the components and processes involved in building a web application. While the journey of learning web development may seem daunting, remember that every line of code you write is a step forward. Continue practicing, building, and exploring. Happy coding!</p>
+
+<h2 id="appendix">
+<a class="anchor" href="#appendix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Appendix</h2>
+<p>SQLAlchemy is an ORM (Object-Relational Mapping) library that provides an intuitive and Pythonic way to interact with databases. It allows developers to define database models as Python classes and perform database operations using Python code.</p>
+
+<p>One of the key benefits of SQLAlchemy is its ability to abstract away the underlying database system, such as SQLite, and provide a consistent API for different database engines. This means that the same code can be used with different databases without major modifications.</p>
+
+<p>By leveraging SQLAlchemy in our Flask Social Media project, we can focus more on the application logic and less on the intricacies of database management. SQLAlchemy handles tasks such as database connections, query generation, and object mapping, making database operations more efficient and maintainable.</p>
+
+<p>To secure user passwords, we store them as hashes on the server rather than in plain text. Additionally, we can use techniques like salting, where a random string is added to the password before hashing, making it more difficult to crack the hashes in case they are compromised.</p>
+
+<p>Regarding the transfer of passwords from the browser to the server, if HTTPS is not used, the passwords can be sent in plain text, which poses a security risk. To add HTTPS to our application, we need to configure SSL/TLS certificates and enable secure communication between the client and the server. This ensures that the data transmitted, including passwords, is encrypted and protected from interception.</p>
+
+
+  </div><a class="u-url" href="/RexCoding/flask/sqlalchemy/2023/06/24/Hemit.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
