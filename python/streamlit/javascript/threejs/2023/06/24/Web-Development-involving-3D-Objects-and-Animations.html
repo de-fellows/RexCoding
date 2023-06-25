@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CodeCraft: Immersive Web Development with Python and JavaScript involving 3D Objects and Animations | RexCoding</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="CodeCraft: Immersive Web Development with Python and JavaScript involving 3D Objects and Animations" />
+<meta name="author" content="Pawan Nihure" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A guide to creating a web application combining Streamlit and Three.js for visualizing 3D objects and animations" />
+<meta property="og:description" content="A guide to creating a web application combining Streamlit and Three.js for visualizing 3D objects and animations" />
+<link rel="canonical" href="https://de-fellows.github.io/RexCoding/python/streamlit/javascript/threejs/2023/06/24/Web-Development-involving-3D-Objects-and-Animations.html" />
+<meta property="og:url" content="https://de-fellows.github.io/RexCoding/python/streamlit/javascript/threejs/2023/06/24/Web-Development-involving-3D-Objects-and-Animations.html" />
+<meta property="og:site_name" content="RexCoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-24T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CodeCraft: Immersive Web Development with Python and JavaScript involving 3D Objects and Animations" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Pawan Nihure"},"dateModified":"2023-06-24T00:00:00-05:00","datePublished":"2023-06-24T00:00:00-05:00","description":"A guide to creating a web application combining Streamlit and Three.js for visualizing 3D objects and animations","headline":"CodeCraft: Immersive Web Development with Python and JavaScript involving 3D Objects and Animations","mainEntityOfPage":{"@type":"WebPage","@id":"https://de-fellows.github.io/RexCoding/python/streamlit/javascript/threejs/2023/06/24/Web-Development-involving-3D-Objects-and-Animations.html"},"url":"https://de-fellows.github.io/RexCoding/python/streamlit/javascript/threejs/2023/06/24/Web-Development-involving-3D-Objects-and-Animations.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/RexCoding/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://de-fellows.github.io/RexCoding/feed.xml" title="RexCoding" /><link rel="shortcut icon" type="image/x-icon" href="/RexCoding/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/RexCoding/">RexCoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/RexCoding/about/">About Us</a><a class="page-link" href="/RexCoding/search/">Search</a><a class="page-link" href="/RexCoding/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">CodeCraft: Immersive Web Development with Python and JavaScript involving 3D Objects and Animations</h1><p class="page-description">A guide to creating a web application combining Streamlit and Three.js for visualizing 3D objects and animations</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2023-06-24T00:00:00-05:00" itemprop="datePublished">
+        Jun 24, 2023
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Pawan Nihure</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      15 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#Streamlit">Streamlit</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#JavaScript">JavaScript</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/RexCoding/categories/#threejs">threejs</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/de-fellows/RexCoding/tree/master/_notebooks/2023-06-24-Web-Development-involving-3D-Objects-and-Animations.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/RexCoding/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/de-fellows/RexCoding/master?filepath=_notebooks%2F2023-06-24-Web-Development-involving-3D-Objects-and-Animations.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/de-fellows/RexCoding/blob/master/_notebooks/2023-06-24-Web-Development-involving-3D-Objects-and-Animations.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/RexCoding/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fde-fellows%2FRexCoding%2Fblob%2Fmaster%2F_notebooks%2F2023-06-24-Web-Development-involving-3D-Objects-and-Animations.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/RexCoding/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Objective:">Objective: </a></li>
+<li class="toc-entry toc-h2"><a href="#Brief-Introduction">Brief Introduction </a></li>
+<li class="toc-entry toc-h1"><a href="#Getting-Started-with-Streamlit">Getting Started with Streamlit </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#What-is-Streamlit?">What is Streamlit? </a></li>
+<li class="toc-entry toc-h2"><a href="#Setting-up-Streamlit-:">Setting up Streamlit : </a></li>
+<li class="toc-entry toc-h2"><a href="#Creating-a-Basic-Layout-of-a-Website-Using-Streamlit">Creating a Basic Layout of a Website Using Streamlit </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Getting-Started-with-Three.js:-Creating-Interactive-3D-Web-Experiences">Getting Started with Three.js: Creating Interactive 3D Web Experiences </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#What-is-Three.js?">What is Three.js? </a></li>
+<li class="toc-entry toc-h2"><a href="#Setting-up-Three.js:">Setting up Three.js: </a></li>
+<li class="toc-entry toc-h2"><a href="#Creating-3D-Animated-Objects-for-a-Web-page">Creating 3D Animated Objects for a Web-page </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#1.-Scene,-Camera,-and-Renderer">1. Scene, Camera, and Renderer </a></li>
+<li class="toc-entry toc-h3"><a href="#2.-Objects-and-Models">2. Objects and Models </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Rotating-Torus-knot">Rotating Torus-knot </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#Moving-Bee">Moving Bee </a></li>
+<li class="toc-entry toc-h3"><a href="#3.-Lights">3. Lights </a></li>
+<li class="toc-entry toc-h3"><a href="#4.-Animation">4. Animation </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Rotating-Torus-knot">Rotating Torus-knot </a></li>
+<li class="toc-entry toc-h4"><a href="#Moving-Bee">Moving Bee </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Integration-of-Streamlit-With-HTML">Integration of Streamlit With HTML </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Streamlit.Components.V1">Streamlit.Components.V1 </a></li>
+<li class="toc-entry toc-h2"><a href="#Setting-up-Streamlit.Components.V1">Setting up Streamlit.Components.V1 </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Conclusion">Conclusion </a></li>
+<li class="toc-entry toc-h1"><a href="#Resources">Resources </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2023-06-24-Web-Development-involving-3D-Objects-and-Animations.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Objective:">
+<a class="anchor" href="#Objective:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objective:<a class="anchor-link" href="#Objective:"> </a>
+</h2>
+<p>The objective of this document is to provide comprehensive knowledge and essential methodologies for creating an interactive web platform that allows users to actively engage with 3D objexts and animations within a web page. The discussion will focus on the utilization and manipulation of front-end web development Python library Streamlit and its components. Additionally, for 3D objects and animation integration, the basics of the cross-browser JavaScript library Three.js and HTML will also be explored and explained.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Brief-Introduction">
+<a class="anchor" href="#Brief-Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Brief Introduction<a class="anchor-link" href="#Brief-Introduction"> </a>
+</h2>
+<p>How often do you use a website? Probably, regularly or very often. Secondly, Have you ever thought about the programming and the algorithms that make them work? Behind every well-functioning website, there is a team of developers who write code in languages like HTML, Python,JavaScript and more. These languages define the structure, appearance, and interactivity of web pages.</p>
+<p><img src="/RexCoding/images/copied_from_nb/3D_WebDev_Images/appleexample.png" alt="appleexample.png"></p>
+<p>In this blog we will learn the ways to design an interactive website using Python Library such as Streamlit and for 3D objects integrarion, we will explore the basics of the cross-browser JavaScript library Three.js and HTML.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Getting-Started-with-Streamlit">
+<a class="anchor" href="#Getting-Started-with-Streamlit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started with Streamlit<a class="anchor-link" href="#Getting-Started-with-Streamlit"> </a>
+</h1>
+<h2 id="What-is-Streamlit?">
+<a class="anchor" href="#What-is-Streamlit?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Streamlit?<a class="anchor-link" href="#What-is-Streamlit?"> </a>
+</h2>
+<p>Streamlit is a open-source Python library that makes it easy to create web applications for machine learning and data science projects. Streamlit takes care of all the web development backend, allowing you to focus on building your application's functionality and visualizations.The backend refers to the server-side components of a web application. It involves the programming and implementation of the server logic, database operations, and other server side functionalities.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-up-Streamlit-:">
+<a class="anchor" href="#Setting-up-Streamlit-:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up Streamlit :<a class="anchor-link" href="#Setting-up-Streamlit-:"> </a>
+</h2>
+<p>To install Steamlit,in the cmd terminal that appears, type: <em>pip install streamlit</em> .
+To test if the installation worked, type: <em>streamlit hello</em>
+Streamlit Hello app should open in your web broswer.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-a-Basic-Layout-of-a-Website-Using-Streamlit">
+<a class="anchor" href="#Creating-a-Basic-Layout-of-a-Website-Using-Streamlit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a Basic Layout of a Website Using Streamlit<a class="anchor-link" href="#Creating-a-Basic-Layout-of-a-Website-Using-Streamlit"> </a>
+</h2>
+<p><img src="/RexCoding/images/copied_from_nb/3D_WebDev_Images/webpage_layout.png" alt="webpage layout.png">
+The code demonstrates the creation of a basic layout for a web page as in the image above using Streamlit. Let's break down the code and explain its functionality:
+First of all, we import the necessary libraries for the code. streamlit is the main library for building the web page, and streamlit_option_menu is an additional library that provides enhanced menu options.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">from</span> <span class="nn">streamlit_option_menu</span> <span class="kn">import</span> <span class="n">option_menu</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With st.set_page_config(), we set the title of the web page to "MY WEBSITE" and specify the layout as 'wide'. Using layout='wide' expands the content area to utilize more horizontal space, resulting in a wider layout.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span><span class="n">page_title</span><span class="o">=</span><span class="s1">'MY WEBSITE'</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">'wide'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We use st.sidebar to create a sidebar for user interaction. Within the sidebar, we utilize the option_menu function from the streamlit_option_menu library. This function allows us to create a menu with multiple options. In this example, the menu options are "Home", "About Us", and "Data". We can also specify icons for each option, such as 'house', 'person', and 'gear'. The menu_icon parameter sets the icon for the entire menu, and default_index determines the initial selection. The orientation parameter is set to 'vertical' to arrange the menu options vertically.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="p">:</span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="n">option_menu</span><span class="p">(</span><span class="s2">"Menu"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Home"</span><span class="p">,</span> <span class="s2">"About Us"</span><span class="p">,</span> <span class="s1">'Data'</span><span class="p">],</span> 
+                           <span class="n">icons</span><span class="o">=</span><span class="p">[</span><span class="s1">'house'</span><span class="p">,</span> <span class="s1">'person'</span><span class="p">,</span> <span class="s1">'gear'</span><span class="p">],</span> <span class="n">menu_icon</span><span class="o">=</span><span class="s2">"cast"</span><span class="p">,</span> <span class="n">default_index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">'vertical'</span><span class="p">)</span>
+    <span class="n">selected</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>2023-06-22 13:24:20.188 
+  <span class="ansi-yellow-intense-fg ansi-bold">Warning:</span> to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run c:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\ipykernel_launcher.py [ARGUMENTS]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the main content area, we check the value of the variable 'selected' to determine which content to display. If the selected option is "Home", we use st.title() to display the title "3D Object and Animation".</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">selected</span> <span class="o">==</span> <span class="s2">"Home"</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'3D Objects and Animation'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Getting-Started-with-Three.js:-Creating-Interactive-3D-Web-Experiences">
+<a class="anchor" href="#Getting-Started-with-Three.js:-Creating-Interactive-3D-Web-Experiences" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started with Three.js: Creating Interactive 3D Web Experiences<a class="anchor-link" href="#Getting-Started-with-Three.js:-Creating-Interactive-3D-Web-Experiences"> </a>
+</h1>
+<h2 id="What-is-Three.js?">
+<a class="anchor" href="#What-is-Three.js?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Three.js?<a class="anchor-link" href="#What-is-Three.js?"> </a>
+</h2>
+<p>Three.js is a JavaScript Library that provides a high-level interface for creating and manipulating 3D objects. It simplifies the process of rendering 3D graphics in web browsers and makes it accessible to developers with varying levels of experience.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-up-Three.js:">
+<a class="anchor" href="#Setting-up-Three.js:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up Three.js:<a class="anchor-link" href="#Setting-up-Three.js:"> </a>
+</h2>
+<p>To begin using Three.js, you can include the library in your project by either downloading the script or using a content delivery network (CDN). Simply add the &lt; script &gt; tag to your HTML file, and you are ready to go. Three.js is designed to work well with other programming languages and frameworks, allowing you to integrate it seamlessly into your existing projects.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-intense-fg ansi-bold">  Cell </span><span class="ansi-green-intense-fg ansi-bold">In[5], line 1</span>
+<span class="ansi-yellow-intense-fg ansi-bold">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;</span>
+<span class="ansi-white-intense-fg ansi-bold">    ^</span>
+<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> invalid syntax
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-3D-Animated-Objects-for-a-Web-page">
+<a class="anchor" href="#Creating-3D-Animated-Objects-for-a-Web-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating 3D Animated Objects for a Web-page<a class="anchor-link" href="#Creating-3D-Animated-Objects-for-a-Web-page"> </a>
+</h2>
+<p>Example Web-page with 3D Objects:
+<img src="/RexCoding/images/copied_from_nb/3D_WebDev_Images/example2_recording.gif" alt="example1_recording.gif">
+<img src="/RexCoding/images/copied_from_nb/3D_WebDev_Images/example1_recording.gif" alt="example2_recording.gif"></p>
+<p>The first example involves the use of in-built Three.js geometric primitive model: Torus knot. The second example depicts the use of external 3D graphic resource for complex structural design. We begin with the HTML code and set the title of the web page to "3D Objects and Animation".</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">&lt;!</span>DOCTYPE html&gt;
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="mi">3</span><span class="n">D</span> <span class="n">Objects</span> <span class="ow">and</span> <span class="n">Animation</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-intense-fg ansi-bold">  Cell </span><span class="ansi-green-intense-fg ansi-bold">In[20], line 4</span>
+<span class="ansi-yellow-intense-fg ansi-bold">    &lt;title&gt;3D Animation and Prototypes&lt;/title&gt;</span>
+<span class="ansi-white-intense-fg ansi-bold">           ^</span>
+<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> invalid decimal literal
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, for the main 3D design and animation component of the code we add <em>&lt; script&gt;</em> tag with the URL - "<a href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js</a>" to download/connect with the Three.js library online. Similarly, we also add the URL - "<a href="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js">https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js</a>" to allow Glb file (3D models) to be used as our first-hand static 3D graphic resource for our webpage. GLB (GLTF Binary) and GLTF (GL Transmission Format) are file formats used for 3D asset delivery and rendering in real-time applications. Common uses for glTF/Glb files include VR, AR, games, native web apps, and 3D ads. Other file extension such as FBX can also be used, but the URL inserted should be changed accordingly. However, GLTFLoader are most widely used as it is easy to work with.</p>
+<p>Let's dive into some of the key methods and concepts in Three.js in more detail. The library offers a wide range of features and capabilities for creating complex and interactive 3D scenes. As of now, we will only discuss some of the fundamental methods and concepts in Three.js.</p>
+<h3 id="1.-Scene,-Camera,-and-Renderer">
+<a class="anchor" href="#1.-Scene,-Camera,-and-Renderer" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Scene, Camera, and Renderer<a class="anchor-link" href="#1.-Scene,-Camera,-and-Renderer"> </a>
+</h3>
+<p>In Three.js, the scene, camera, and renderer form the core components for creating and rendering a 3D scene.</p>
+<p><strong>Scene</strong>: The THREE.Scene class represents the 3D scene or environment where all objects, lights, and cameras are placed. You can add objects to the scene using the scene.add(object) method. <br>
+<strong>Camera</strong>: The camera determines the perspective and view of the scene. Three.js provides various camera types, such as THREE.PerspectiveCamera and THREE.OrthographicCamera. The camera's position and orientation define what is visible in the scene. <br>
+<strong>Renderer</strong>: The renderer, typically THREE.WebGLRenderer, is responsible for drawing the 3D scene on the web page. It takes the scene and camera as inputs and renders them using WebGL, a graphics API that provides hardware-accelerated rendering capabilities in modern web browsers. The renderer also handles aspects like anti-aliasing, sizing, and background color. <br></p>
+<p>In the code scene, Camera and Renderer as set up as follows:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Set</span> <span class="n">up</span> <span class="n">the</span> <span class="n">scene</span><span class="p">,</span> <span class="n">camera</span><span class="p">,</span> <span class="ow">and</span> <span class="n">renderer</span>
+<span class="n">var</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">Scene</span><span class="p">();</span>
+<span class="n">var</span> <span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">PerspectiveCamera</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="n">window</span><span class="o">.</span><span class="n">innerWidth</span> <span class="o">/</span> <span class="n">window</span><span class="o">.</span><span class="n">innerHeight</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">renderer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">WebGLRenderer</span><span class="p">({</span> <span class="n">antialias</span><span class="p">:</span> <span class="n">true</span> <span class="p">});</span>
+<span class="n">renderer</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">innerWidth</span><span class="p">,</span> <span class="n">window</span><span class="o">.</span><span class="n">innerHeight</span><span class="p">);</span>
+<span class="n">renderer</span><span class="o">.</span><span class="n">setClearColor</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">);</span> <span class="o">//</span> <span class="n">Set</span> <span class="n">background</span> <span class="n">color</span> <span class="n">to</span> <span class="n">white</span>
+<span class="n">document</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">renderer</span><span class="o">.</span><span class="n">domElement</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The THREE.Scene() class is used to create a new scene where all objects, lights, and cameras will be placed. <br>
+The THREE.PerspectiveCamera() class is used to create a camera with a perspective projection. The parameters are the field of view, aspect ratio, near and far clipping planes.<br>
+The THREE.WebGLRenderer() class is used to create a renderer that will draw the scene using WebGL. The antialias option is set to true to enable antialiasing.<br>
+The setSize() method sets the size of the renderer to match the window's inner width and height. <br>
+The setClearColor() method sets the background color of the scene to white.<br>
+Finally, the renderer's DOM element is appended to the document body.<br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Objects-and-Models">
+<a class="anchor" href="#2.-Objects-and-Models" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Objects and Models<a class="anchor-link" href="#2.-Objects-and-Models"> </a>
+</h3>
+<p>In Three.js, objects represent the entities rendered in the scene. There are various object types available, such as geometric primitives (THREE.BoxGeometry, THREE.SphereGeometry), meshes (THREE.Mesh), and more complex models loaded from external files.</p>
+<p><strong>Geometric Primitives</strong>: Three.js provides several built-in geometric primitives, which are defined by their geometry and material. You can create objects like boxes, spheres, cones, and cylinders using these primitives. Geometric primitives are created with a THREE.Geometry class or using the shortcut THREE.BoxGeometry, THREE.SphereGeometry, etc. <br>
+<strong>Mesh</strong>: A mesh combines geometry (shape) and material (appearance) to create a renderable object. The THREE.Mesh class is used to create a mesh. You can assign different materials to a mesh, apply textures, and manipulate its position, rotation, and scale.<br>
+<strong>Loading External Models</strong>: Three.js supports loading 3D models from external files, such as .obj, .gltf, or .fbx formats. The library provides loaders like THREE.OBJLoader, THREE.GLTFLoader, and THREE.FBXLoader to load models. These loaders asynchronously load the model files and provide access to the loaded object. <br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Rotating-Torus-knot">
+<a class="anchor" href="#Rotating-Torus-knot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rotating Torus-knot<a class="anchor-link" href="#Rotating-Torus-knot"> </a>
+</h4>
+<p>In our first example, 3D animation of a rotating torus knot is generated:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">torus</span> <span class="n">knot</span>
+<span class="n">const</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">TorusKnotGeometry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+<span class="n">const</span> <span class="n">material</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">MeshBasicMaterial</span><span class="p">({</span> <span class="n">color</span><span class="p">:</span> <span class="mh">0x20124D</span><span class="p">,</span> <span class="n">transparent</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">opacity</span><span class="p">:</span> <span class="mi">1</span> <span class="p">});</span> <span class="o">//</span> <span class="n">Set</span> <span class="n">material</span> <span class="n">to</span> <span class="n">be</span> <span class="n">transparent</span>
+<span class="n">const</span> <span class="n">torusKnot</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">material</span><span class="p">);</span>
+<span class="n">scene</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">torusKnot</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A torus knot geometry is created using THREE.TorusKnotGeometry(), specifying parameters for the radius, tube diameter, tubular segments, and radial segments. The resulting geometry is assigned to the geometry variable. <br></p>
+<p>A material is created using THREE.MeshBasicMaterial() with a specified color (0x20124D) and transparency settings (transparent: true, opacity: 1). The material is assigned to the material variable.<br></p>
+<p>A mesh is created by combining the torus knot geometry with the material using THREE.Mesh(). The resulting mesh is assigned to the torusKnot variable and added to the scene using scene.add().<br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Moving-Bee">
+<a class="anchor" href="#Moving-Bee" aria-hidden="true"><span class="octicon octicon-link"></span></a>Moving Bee<a class="anchor-link" href="#Moving-Bee"> </a>
+</h3>
+<p>In our second example, a bee model 'bee.glb' is loaded and added to the scene. The material in the bee model is also modified:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Load</span> <span class="n">the</span> <span class="n">bee</span> <span class="n">model</span>
+<span class="n">var</span> <span class="n">loader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">GLTFLoader</span><span class="p">();</span>
+<span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'Bee.glb'</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">gltf</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">bee</span> <span class="o">=</span> <span class="n">gltf</span><span class="o">.</span><span class="n">scene</span><span class="p">;</span>
+    <span class="n">scene</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bee</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">Set</span> <span class="n">initial</span> <span class="n">position</span> <span class="ow">and</span> <span class="n">scale</span> <span class="n">of</span> <span class="n">the</span> <span class="n">bee</span>
+    <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">bee</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Traverse</span> <span class="n">the</span> <span class="n">model</span> <span class="n">hierarchy</span> <span class="n">to</span> <span class="n">modify</span> <span class="n">materials</span>
+    <span class="n">bee</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">function</span> <span class="p">(</span><span class="n">child</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">isMesh</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">Apply</span> <span class="n">color</span> <span class="n">to</span> <span class="n">the</span> <span class="n">materials</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">material</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mh">0xffff00</span><span class="p">);</span> <span class="o">//</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">color</span> <span class="n">to</span> <span class="n">yellow</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The THREE.GLTFLoader() class is used to load a glTF file containing the bee model. <br></p>
+<p>The load() method is called with the path to the glTF file and a callback function that receives the loaded model (gltf). <br></p>
+<p>The bee model is accessed from gltf.scene and added to the scene using scene.add(). <br></p>
+<p>The position and scale of the bee model are set using bee.position.set() and bee.scale.set(). <br></p>
+<p>The traverse() method is used to traverse the hierarchy of the model and modify its materials. The callback function is called for each child object, and if it is a mesh (child.isMesh), its material color is set to yellow.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Lights">
+<a class="anchor" href="#3.-Lights" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Lights<a class="anchor-link" href="#3.-Lights"> </a>
+</h3>
+<p>Lighting is crucial for creating realistic 3D scenes in Three.js. Different types of lights can be added to the scene to illuminate the objects.</p>
+<p><strong>Ambient Light</strong>: The THREE.AmbientLight class represents a light source that illuminates all objects equally. It simulates global illumination and provides overall ambient lighting to the scene. <br>
+<strong>Directional Light</strong>: The THREE.DirectionalLight class simulates a distant light source, like the sun. It has a position but emits light in a specific direction, casting shadows and providing directional illumination. <br>
+<strong>Point Light</strong>: The THREE.PointLight class represents a light source that emits light in all directions from a single point in space. It is used to simulate localized light sources, such as lamps or bulbs.<br>
+Ambient Light and point light are added in our second example of an animated bee to provide realistic texture to it.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Add</span> <span class="n">ambient</span> <span class="n">light</span>
+<span class="n">var</span> <span class="n">ambientLight</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">AmbientLight</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+<span class="n">scene</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ambientLight</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Add</span> <span class="n">a</span> <span class="n">point</span> <span class="n">light</span>
+<span class="n">var</span> <span class="n">pointLight</span> <span class="o">=</span> <span class="n">new</span> <span class="n">THREE</span><span class="o">.</span><span class="n">PointLight</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">pointLight</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">scene</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pointLight</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The THREE.AmbientLight() class is used to create an ambient light with white color (0xffffff) and intensity of 0.5. The ambient light provides overall lighting to the scene. <br>
+The THREE.PointLight() class is used to create a point light with white color and intensity of 1. The position of the point light is set using pointLight.position.set(). <br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Animation">
+<a class="anchor" href="#4.-Animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Animation<a class="anchor-link" href="#4.-Animation"> </a>
+</h3>
+<p>Animation brings life and interactivity to the 3D scene. Three.js provides a built-in animation loop and several methods to animate objects in the scene.</p>
+<p><strong>Animation Loop</strong>: The requestAnimationFrame() function is used to create an animation loop in Three.js. It repeatedly calls a function to update and render the scene, ensuring a smooth animation effect.<br>
+<strong>Object Transformations</strong>: Three.js provides methods to manipulate an object's position, rotation, and scale over time. By modifying these properties inside the animation loop, you can create dynamic movements, rotations, and scaling effects.<br>
+<strong>Keyframe Animation</strong>: Three.js also supports keyframe animation, where you define specific positions, rotations, or other properties at different points in time (keyframes). The THREE.AnimationMixer class manages keyframe animations for objects.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Rotating-Torus-knot">
+<a class="anchor" href="#Rotating-Torus-knot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rotating Torus-knot<a class="anchor-link" href="#Rotating-Torus-knot"> </a>
+</h4>
+<p>In our first example an animated loop is created to rotate the torus-knot in x-axis and y-axis.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Animate</span> <span class="n">the</span> <span class="n">torus</span> <span class="n">knot</span>
+<span class="n">function</span> <span class="n">animate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">requestAnimationFrame</span><span class="p">(</span><span class="n">animate</span><span class="p">);</span>
+    <span class="n">torusKnot</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>
+    <span class="n">torusKnot</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">camera</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A function named animate() is defined to handle the animation loop. It uses requestAnimationFrame() to schedule the next frame and increments the rotation of the torus knot in the x and y axes. Finally, it renders the scene with the updated rotation using renderer.render().</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Moving-Bee">
+<a class="anchor" href="#Moving-Bee" aria-hidden="true"><span class="octicon octicon-link"></span></a>Moving Bee<a class="anchor-link" href="#Moving-Bee"> </a>
+</h4>
+<p>In our second example an animation loop is created to rotate and translate the bee model.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">Set</span> <span class="n">initial</span> <span class="n">camera</span> <span class="n">position</span>
+<span class="n">camera</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="o">//</span> <span class="n">Animation</span> <span class="n">loop</span>
+<span class="n">function</span> <span class="n">animate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">requestAnimationFrame</span><span class="p">(</span><span class="n">animate</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">Rotate</span> <span class="n">the</span> <span class="n">bee</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">scene</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">var</span> <span class="n">bee</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+        <span class="n">bee</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="n">Oscillate</span> <span class="n">the</span> <span class="n">bee</span><span class="s1">'s position vertically</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bee</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Date</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.001</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">;</span> <span class="o">//</span> <span class="n">Adjust</span> <span class="n">the</span> <span class="n">amplitude</span> <span class="ow">and</span> <span class="n">speed</span> <span class="k">as</span> <span class="n">desired</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="n">Transalte</span> <span class="n">the</span> <span class="n">bee</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bee</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mf">0.01</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bee</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">camera</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">animate</span><span class="p">();</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The requestAnimationFrame() function is used to create an animation loop by recursively calling the animate() function. <br></p>
+<p>Inside the animation loop: <br>
+The bee model's rotation is incremented to create a rotating effect. <br></p>
+<p>The bee's position is modified to oscillate vertically based on the current time (Date.now()) and a scaling factor. <br></p>
+<p>The bee's position is also translated horizontally, and if it goes beyond a certain limit, it wraps around to the other side. <br></p>
+<p>Finally, the scene is rendered using renderer.render(). <br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Integration-of-Streamlit-With-HTML">
+<a class="anchor" href="#Integration-of-Streamlit-With-HTML" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integration of Streamlit With HTML<a class="anchor-link" href="#Integration-of-Streamlit-With-HTML"> </a>
+</h1>
+<h2 id="Streamlit.Components.V1">
+<a class="anchor" href="#Streamlit.Components.V1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Streamlit.Components.V1<a class="anchor-link" href="#Streamlit.Components.V1"> </a>
+</h2>
+<p>Streamlit.Components.V1 is a  module within the Streamlit library that allows us to create custom components for your Streamlit applications. It basically, provides a way to extend the functionality of Streamlit beyond the built-in features by leveraging JavaScript, HTML and CSS. <br>
+By using 'streamlit.components.v1' we can write custom code in JavaScript and HTML to create interactive and dynamic elements that integrate seamlessly with the Streamlit application. This feature opens up a wide range of possiblities of creating specialized visualizations, custom input widgets integrating external JavaScript libraries into our Streamlit applications.</p>
+<p>Above, we learnt the methods and created webpage layout and 3D web-content as two different code snippet. We will be creating a function to integrate these two codes to generate a single web-page.
+<img src="/RexCoding/images/copied_from_nb/3D_WebDev_Images/3DWeb_animation.gif" alt="3DWeb_animation.gif"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-up-Streamlit.Components.V1">
+<a class="anchor" href="#Setting-up-Streamlit.Components.V1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up Streamlit.Components.V1<a class="anchor-link" href="#Setting-up-Streamlit.Components.V1"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We start with importing necessary code dependencies : html from streamlit.components.v1, and codecs.
+The design_3d function is then defined, which takes the path to an HTML file (design_html) as input and renders the HTML content using the html function from Streamlit's components.v1 module.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">streamlit.components.v1</span> <span class="kn">import</span> <span class="n">html</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">design_3d</span><span class="p">(</span><span class="n">design_html</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span> <span class="mi">400</span><span class="p">):</span>
+    <span class="n">d_file</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">design_html</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">d_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">html</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">scrolling</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The function begins by opening the HTML file specified by the design_html parameter using the codecs.open method. It reads the content of the file and assigns it to the page variable. <br></p>
+<p>The function uses the stc.html function from the streamlit.components.v1 module to embed the HTML content into the Streamlit app. The stc.html function takes the following parameters: <br></p>
+<p>page (string): The HTML content to be embedded. <br></p>
+<p>width (int): The width of the embedded HTML content in pixels. <br></p>
+<p>height (int): The height of the embedded HTML content in pixels. <br></p>
+<p>scrolling (boolean, optional): Specifies whether to enable scrolling within the embedded HTML content. Defaults to False, disabling scrolling.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The full operational code is also provided below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">from</span> <span class="nn">streamlit_option_menu</span> <span class="kn">import</span> <span class="n">option_menu</span>
+<span class="kn">from</span> <span class="nn">streamlit.components.v1</span> <span class="kn">import</span> <span class="n">html</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+
+<span class="k">def</span> <span class="nf">design_3d</span><span class="p">(</span><span class="n">design_html</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span> <span class="mi">400</span><span class="p">):</span>
+    <span class="n">d_file</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">design_html</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">d_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">html</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">scrolling</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span><span class="n">page_title</span><span class="o">=</span><span class="s1">'MY WEBSITE'</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">'wide'</span><span class="p">)</span>
+
+<span class="c1"># Create a sidebar</span>
+<span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="p">:</span>    <span class="c1">#Creates a sidebar for User-Interaction </span>
+    <span class="n">selected</span> <span class="o">=</span> <span class="n">option_menu</span><span class="p">(</span><span class="s2">"Menu"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Home"</span><span class="p">,</span><span class="s2">"About Us"</span><span class="p">,</span> <span class="s1">'Data'</span><span class="p">],</span> <span class="c1">#set options and add icons to the menu bar</span>
+    <span class="n">icons</span><span class="o">=</span><span class="p">[</span><span class="s1">'house'</span><span class="p">,</span><span class="s1">'person'</span><span class="p">,</span> <span class="s1">'gear'</span><span class="p">],</span> <span class="n">menu_icon</span><span class="o">=</span><span class="s2">"cast"</span><span class="p">,</span> <span class="n">default_index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">orientation</span><span class="o">=</span> <span class="s1">'vertical'</span><span class="p">)</span>
+    <span class="n">selected</span>
+
+<span class="c1"># Create the main content area</span>
+<span class="k">if</span> <span class="n">selected</span> <span class="o">==</span> <span class="s2">"Home"</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'3D Objects and Animation'</span><span class="p">)</span>
+    <span class="n">design_3d</span><span class="p">(</span><span class="s1">'index2.html'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion">
+<a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
+</h1>
+<p>The blog-post, introduced the exciting world of immersive web development with Python, Streamlit, HTML and Three.js. Readers are encouraged to explore various 3D designs from the internet and experiment with the concepts and techniques discussed here. Embracing this approach fosters a deeper understanding of immersive web development and empowers students to deliver captivating and visually stunning web experiences.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Resources">
+<a class="anchor" href="#Resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources<a class="anchor-link" href="#Resources"> </a>
+</h1>
+<p><a href="discoverthreejs.com/#:~:text=js%20is%20the%20world's%20most,to%20display%20photorealistic%203D%20graphics">Discover three.js</a>, 1 Oct. 2018, .</p>
+<p>Streamlit. <a href="github.com/streamlit/streamlit.git">GitHub - Streamlit/Streamlit: Streamlit — a Faster Way to Build and Share Data Apps.</a></p>
+<p>Components API. <a href="docs.streamlit.io/library/components/components-api">Streamlit Docs</a>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/RexCoding/python/streamlit/javascript/threejs/2023/06/24/Web-Development-involving-3D-Objects-and-Animations.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/RexCoding/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/RexCoding/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/RexCoding/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/de-fellows" target="_blank" title="de-fellows"><svg class="svg-icon grey"><use xlink:href="/RexCoding/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
