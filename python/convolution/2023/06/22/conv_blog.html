@@ -150,7 +150,6 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#A-Note-on-Filter-Banks">A Note on Filter Banks </a></li>
 <li class="toc-entry toc-h3"><a href="#Convolutional-Neural-Networks-vs.-Traditional-Convolutional-Algorithms">Convolutional Neural Networks vs. Traditional Convolutional Algorithms </a></li>
 <li class="toc-entry toc-h3"><a href="#Using-the-Gabor-Filter-to-Create-an-Image-Classifier-Manually">Using the Gabor Filter to Create an Image Classifier Manually </a></li>
-<li class="toc-entry toc-h3"><a href="#Wrap-up">Wrap-up </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#Sources">Sources </a></li>
@@ -232,8 +231,8 @@ window.onload = wrap_img;
 <h3 id="Notation-and-Properties-of-Convolution">
 <a class="anchor" href="#Notation-and-Properties-of-Convolution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notation and Properties of Convolution<a class="anchor-link" href="#Notation-and-Properties-of-Convolution"> </a>
 </h3>
-<p>A convolution operation uses the star (*) operator in a similar fashion to an addition or multiplication symbol. x(t) * y(t) is the convolution of x(t) and y(t).</p>
-<p>Convolution is a commutative operation, so x(t) <em> y(t) = y(t) </em> x(t). This means that the result of a convolution doesn't depend on which function is sliding overtop of the other, the result will be the same.</p>
+<p>A convolution operation uses the star (*) operator in a similar fashion to an addition or multiplication symbol. $x(t) * y(t)$ is the convolution of x(t) and y(t).</p>
+<p>Convolution is a commutative operation, so $x(t) * y(t) = y(t) * x(t)$. This means that the result of a convolution doesn't depend on which function is sliding overtop of the other, the result will be the same.</p>
 <p>Another incredibly powerful and important property of convolution has to do with spectral (Fourier) analysis of functions. Simply put, a convolution of two functions in the time domain is equivalent to a multiplication of functions in the frequency domain, and vice versa. This property is incredibly important in signal processing, image processing, and other areas.</p>
 
 </div>
@@ -247,9 +246,11 @@ window.onload = wrap_img;
 </h2>
 <p>Signal processing is a great intro for convolutions because they are easier to analyze and visualize, as the functions involved generally only require convolution in one dimension, and the function-based nature of convolutions is more apparent.</p>
 <p>Let's start with the integral definition of convolution.</p>
+$$
 \begin{equation*}
     f(t) * g(t) = \int_{-\infty}^{\infty}f(\tau)\cdot g(t-\tau) d\tau
-\end{equation*}<p>Here, the same idea of one function sliding over another and being multiplied at every point of overlap can still be seen. The main difference between the example shown above and convolutions in signal processing is that signals are usually continuous, so we need to integrate the multiplied functions to collect the overlapping quantities. The functions being convolved are expressed in terms of a dummy variable tau, which is done to differentiate between the variable t, which is now being used to describe the offset that the sliding function has with respect to tau. The preservation of time-causality is seen here again, with g(tau) being flipped across the y-axis.</p>
+\end{equation*}
+$$<p>Here, the same idea of one function sliding over another and being multiplied at every point of overlap can still be seen. The main difference between the example shown above and convolutions in signal processing is that signals are usually continuous, so we need to integrate the multiplied functions to collect the overlapping quantities. The functions being convolved are expressed in terms of a dummy variable tau, which is done to differentiate between the variable t, which is now being used to describe the offset that the sliding function has with respect to tau. The preservation of time-causality is seen here again, with g(tau) being flipped across the y-axis.</p>
 <p>The links below show an animation of the signal convolution process with different functions. The red and blue shapes are the functions being convolved, and the black shape is the result of their convolution.</p>
 <p><img src="/RexCoding/images/copied_from_nb/./conv_blog_imgs/box_slide_gif.gif" alt="box_slide_gif.gif"></p>
 <p><img src="/RexCoding/images/copied_from_nb/./conv_blog_imgs/spiky_slide_gif.gif" alt="spiky_slide_gif.gif"></p>
@@ -282,8 +283,7 @@ window.onload = wrap_img;
 <a class="anchor" href="#Edge-Detector-Kernels" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edge Detector Kernels<a class="anchor-link" href="#Edge-Detector-Kernels"> </a>
 </h3>
 <p>Sharp edges and lines are incredibly important aspects of an image, as they define broad shapes and forms of the objects within the image. Edge detector kernels, when convolved with an image, highlight and extract these edges. Prewitt edge detectors are an iteration of this type of kernel, shown below.</p>
-<p></p>
-<center>Horizontal Prewitt Kernel</center>
+<center>Horizontal Prewitt Kernel</center>$$
 \begin{equation*}
     \begin{bmatrix}
         1/3 &amp; 1/3 &amp; 1/3 \\
@@ -291,9 +291,8 @@ window.onload = wrap_img;
         -1/3 &amp; -1/3 &amp; -1/3 \\
     \end{bmatrix}
 \end{equation*}
- 
-<p></p>
-<center>Vertical Prewitt Kernel</center>
+$$<p> </p>
+<center>Vertical Prewitt Kernel</center>$$
 \begin{equation*}
     \begin{bmatrix}
         1/3 &amp; 0 &amp; -1/3 \\
@@ -301,7 +300,7 @@ window.onload = wrap_img;
         1/3 &amp; 0 &amp; -1/3 \\
     \end{bmatrix}
 \end{equation*}
- 
+$$<p> </p>
 <p>From the values of the kernels alone, the way the kernels work can begin to be understood. If whatever portion of the image being overlapped by the kernel has no sharp changes in intensity (no edges), the multiplication of the negative row/coloumn added to the positive row/column will result in a very small number, as the negative and positive values cancel each other out. However, if there is an edge present, the multiplication and addition process will result in a large (positive or negative) number at that pixel, denoting that an edge is present.</p>
 <p>Below, the process of convolving images with prewitt kernels using Python is shown.</p>
 
@@ -433,25 +432,15 @@ window.onload = wrap_img;
 <p></p>
 <center>Gabor Filter Function (Real Part Only)</center>
  
+$$
 \begin{equation*}
     g(x,y,\lambda,\theta,\psi,\sigma,\gamma) = exp\left(-\frac{(xcos(\theta)+ysin(\theta))^2+\gamma^2(-xsin(\theta)+ycos(\theta))^2}{2\sigma^2}\right)cos\left(2\pi\frac{xcos(\theta)+ysin(\theta)}{\lambda}+\psi\right)
 \end{equation*}
- 
+$$<p> </p>
 <p>Each parameter of the function controls some aspect of the filter (orientation, phase, frequency, etc.) and a collection of instances of these filters can be very powerful.</p>
-<p>Using a collection of Gabor filters, it becomes possible to create a simple image classifier that can be used for simple tasks. In the linked example below, the Gabor filter method is tested on the MNIST hand-written digit dataset.</p>
-<p><a href="https://github.com/de-fellows/IanW-draft/blob/main/gabor_MNIST.ipynb">https://github.com/de-fellows/IanW-draft/blob/main/gabor_MNIST.ipynb</a></p>
-<p>The gabor kernel classifier was able to classify hand written digits with 92% accuracy. This is compared to <strong> obtained using a neural network on the same dataset. _</strong>Implications of the results___</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Wrap-up">
-<a class="anchor" href="#Wrap-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wrap-up<a class="anchor-link" href="#Wrap-up"> </a>
-</h3>
-<p>Convolution is an incredibly important and powerful mathematical tool that has many applications in engineering and science. Signal processing and image processing are core concepts of digital and electrical engineering, and continue to play a role in the most quickly-advancing areas of engineering.</p>
+<p>Using a collection of Gabor filters, it becomes possible to create a simple image classifier that can be used for simple tasks. In the linked example below, the Gabor filter method is tested on the MNIST hand-written digit dataset. The same datset is used with a convolutional neural network.</p>
+<p><a href="https://github.com/de-fellows/CNN-Gabor-on-MNIST-dataset">https://github.com/de-fellows/CNN-Gabor-on-MNIST-dataset</a></p>
+<p>The gabor kernel classifier was able to classify hand written digits with 92% accuracy. This is compared to 93% obtained using a neural network on the same dataset. Both algorithms could be altered to improve accuracy somewhat, but in any case it is clear that both methods are powerful and useful for complex imaging tasks, all thanks to the power of convolution.</p>
 
 </div>
 </div>
