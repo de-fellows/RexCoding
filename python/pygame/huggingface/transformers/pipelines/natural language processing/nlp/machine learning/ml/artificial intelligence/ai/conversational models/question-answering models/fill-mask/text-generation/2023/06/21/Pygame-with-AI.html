@@ -82,7 +82,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      26 min read
+      28 min read
     
 </span></p>
 
@@ -313,7 +313,7 @@ window.onload = wrap_img;
 <li>Load the models into a pygame-based video game</li>
 <li>Use the models to generate text for non-player characters (NPCs) that a player can interact with</li>
 </ul>
-<p>Natural Language Processing (NLP) is when a machine learning model is trained and used on linguistic data to achieve a task. Tasks may include text classification (assigning a label to text), question answering, text generation. HuggingFace is a great source for all kinds of models and datasets, including those for NLP.</p>
+<p>Natural Language Processing (NLP) is when a machine learning model is trained and used on linguistic data to achieve a task. Tasks may include text classification (assigning a label to text), question answering, text generation, and more. HuggingFace is a great source for all kinds of models and datasets, including those for NLP.</p>
 
 </div>
 </div>
@@ -327,7 +327,7 @@ window.onload = wrap_img;
 <p>There are two main ways to use a publicly-available model:</p>
 <ol>
 <li>
-<strong>The Slow Way - Manually loading a model and tokenizer into variables.</strong> This requires encoding (converting to numeric values) text data before it can be inputted into the model, and decoding the model's output.</li>
+<strong>The Slow Way - Manually loading a model and tokenizer into variables.</strong> This requires encoding text data (converting it to numeric values) before it can be inputted into the model, and decoding the model's output.</li>
 <li>
 <strong>The Fast Way - Pipelines.</strong> The HuggingFace <code>pipeline()</code> function is a wrapper for models that automatically encodes and decodes data. It also allows a <code>task</code> to be specified, a.k.a. what you want the model to do. Each task has an out-of-the-box default model and tokenizer, or a model can be specified. See the <a href="https://huggingface.co/docs/transformers/main_classes/pipelines">pipeline API reference</a> for more information.</li>
 </ol>
@@ -382,7 +382,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># code to initalize model found at: https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up a chatbot with the model facebook/blenderbot-400M-distill</span>
+<span class="c1"># code to initalize model found at: https://huggingface.co/facebook/blenderbot-400M-distill?text=Hi.</span>
 
 <span class="c1"># import libraries</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
@@ -423,7 +424,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">utterance</span> <span class="o">=</span> <span class="s2">"What is your favourite colour?"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a sentence for our model to respond to</span>
+<span class="n">utterance</span> <span class="o">=</span> <span class="s2">"What is your favourite colour?"</span>
 <span class="n">utterance</span>
 </pre></div>
 
@@ -465,7 +467,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># otherwise, the tokenizer will return lists</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># return_rensors='pt' makes the inputs into pytorch tensors</span>
+<span class="c1"># otherwise, the tokenizer will return lists</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">utterance</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">'pt'</span><span class="p">)</span>
 <span class="n">inputs</span>
 </pre></div>
@@ -496,7 +499,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The tokenizer has encoded the sentence into <code>input_ids</code>. Note that the end of the sequence, &lt;\/s&gt;, is its own character. Ignore <code>attention_mask</code> for now.</p>
+<p>The tokenizer has encoded the sentence into <code>input_ids</code>. Note that the end of the sequence, <code>&lt;/s&gt;</code>, is its own character. Ignore <code>attention_mask</code> for now.</p>
 <table>
 <thead>
 <tr>
@@ -530,7 +533,7 @@ window.onload = wrap_img;
 <td>38</td>
 </tr>
 <tr>
-<td>'&lt;\/s&gt;'</td>
+<td>'<code>&lt;/s&gt;</code>'</td>
 <td>2</td>
 </tr>
 </tbody>
@@ -554,7 +557,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># decode the sentence we just encoded</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -595,7 +599,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># unpack (**) the inputs variable into the model</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
 <span class="n">response</span>
 </pre></div>
 
@@ -647,7 +652,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Since the data is in double braces, we need to use [0] to access the encoded data</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -679,12 +685,12 @@ window.onload = wrap_img;
 <h4 id="Padding-and-Attention-Masks">
 <a class="anchor" href="#Padding-and-Attention-Masks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Padding and Attention Masks<a class="anchor-link" href="#Padding-and-Attention-Masks"> </a>
 </h4>
-<p>Above, we gave the model one sentence to respond to. What if we want to give it a batch of a few sentences? Then, we need to do things:</p>
+<p>Above, we gave the model one sentence to respond to. What if we want to give it a batch of a few sentences? Then, we need to do two things:</p>
 <ol>
 <li>Make all of the encoded tensors the same length by <strong>padding</strong> them (adding a token to make all of the encoded sentences the same length).</li>
 <li>Give the model an <strong>attention mask</strong> - a tensor that tells the model which tokens are important and which tokens are padding.</li>
 </ol>
-<p>For more information on padding and attention masks, see: <a href="https://lukesalamone.github.io/posts/what-are-attention-masks/">https://lukesalamone.github.io/posts/what-are-attention-masks/</a></p>
+<p>For more information on padding and attention masks, see <a href="https://lukesalamone.github.io/posts/what-are-attention-masks/">https://lukesalamone.github.io/posts/what-are-attention-masks/</a>.</p>
 
 </div>
 </div>
@@ -704,7 +710,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">utterance_batch</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"What is your favourite colour?"</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a batch of sentences for our model to respond to</span>
+<span class="n">utterance_batch</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"What is your favourite colour?"</span><span class="p">,</span>
                    <span class="s2">"I like coding. What do you like to do?"</span><span class="p">,</span>
                    <span class="s2">"What time is dinner?"</span><span class="p">]</span>
 </pre></div>
@@ -731,7 +738,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tell the tokenizer to pad from the left</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
 </pre></div>
 
     </div>
@@ -781,7 +789,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_batch</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">utterance_batch</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">'pt'</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># encode the batch</span>
+<span class="n">input_batch</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">utterance_batch</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">'pt'</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">input_batch</span>
 </pre></div>
 
@@ -835,7 +844,9 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># encoded ids</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Show the data for only the first sentence in the batch</span>
+
+<span class="c1"># encoded ids</span>
 <span class="n">first_sentence_ids</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="c1"># attention mask</span>
 <span class="n">first_sentence_mask</span> <span class="o">=</span> <span class="n">input_batch</span><span class="o">.</span><span class="n">attention_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -880,7 +891,8 @@ attention_mask = tensor([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response_batch</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">input_batch</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Unpacking (**) is important here because it gives the model the attention_mask</span>
+<span class="n">response_batch</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">input_batch</span><span class="p">)</span>
 <span class="n">response_batch</span>
 </pre></div>
 
@@ -983,7 +995,8 @@ attention_mask = tensor([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up the model and tokenizer (same as before)</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span>
 
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"facebook/blenderbot-400M-distill"</span><span class="p">)</span>
@@ -1003,7 +1016,8 @@ attention_mask = tensor([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set the tokenizer to left padding using the eos token (same as before)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s1">'left'</span>
 <span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
 </pre></div>
 
@@ -1105,7 +1119,8 @@ user &gt;&gt; Hi. How are you? </pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the bot's response</span>
+<span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1148,7 +1163,8 @@ bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any pla
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># show the updated conversation (chat history)</span>
+<span class="n">conversation</span>
 </pre></div>
 
     </div>
@@ -1261,7 +1277,12 @@ bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any pla
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>add_user_input()</code> method allows us to add new user input to the conversation. Note that the chatbot can only respond to conversations that have unprocessed user input:</p>
+<p>The <code>add_user_input()</code> method allows us to add new user input to the conversation:
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>
+    <strong>Note: </strong>The chatbot can only respond to conversations that have unprocessed user input.
+</div>
 
 </div>
 </div>
@@ -1273,7 +1294,8 @@ bot &gt;&gt;  I'm doing well, thank you. How about yourself? Do you have any pla
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation</span><span class="o">.</span><span class="n">add_user_input</span><span class="p">(</span><span class="s2">"What do you want to do this weekend?"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add user input</span>
+<span class="n">conversation</span><span class="o">.</span><span class="n">add_user_input</span><span class="p">(</span><span class="s2">"What do you want to do this weekend?"</span><span class="p">)</span>
 <span class="n">conversation</span>
 </pre></div>
 
@@ -1310,7 +1332,8 @@ user &gt;&gt; What do you want to do this weekend? </pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># chatbot responds to the new input</span>
+<span class="n">blenderbot</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1358,7 +1381,8 @@ bot &gt;&gt;  I'm going to a concert with some friends. I've never been to one b
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># define trimming function</span>
+<span class="k">def</span> <span class="nf">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="p">):</span>
     <span class="sd">"""Trim the earliest user and bot lines from a Conversation.</span>
 
 <span class="sd">    Parameters:</span>
@@ -1390,7 +1414,8 @@ bot &gt;&gt;  I'm going to a concert with some friends. I've never been to one b
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="o">=</span><span class="n">conversation</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test out the function</span>
+<span class="n">trim_convo</span><span class="p">(</span><span class="n">conversation</span><span class="o">=</span><span class="n">conversation</span><span class="p">)</span>
 
 <span class="c1"># see results</span>
 <span class="n">conversation</span>
@@ -1474,7 +1499,8 @@ bot &gt;&gt;  I'm going to a concert with some friends. I've never been to one b
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># imports</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 
 <span class="c1"># set up model</span>
 <span class="n">qa_model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">)</span>
@@ -1519,7 +1545,8 @@ Using a pipeline without specifying a model name and revision in production is n
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">"Where is the key?"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up question and context</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">"Where is the key?"</span>
 <span class="n">context</span> <span class="o">=</span> <span class="s2">"The key is at the top of the tree."</span>
 
 <span class="c1"># get model's response</span>
@@ -1699,7 +1726,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I move around?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># extractive model</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I move around?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1732,7 +1760,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I move around? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># text-to-text model</span>
+<span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I move around? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1773,7 +1802,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I get to the key?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># extractive model</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How do I get to the key?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1809,7 +1839,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I get to the key? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># text-to-text model</span>
+<span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How do I get to the key? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1850,7 +1881,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How many bears are there?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># extractive model</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"How many bears are there?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1886,7 +1918,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How many bears are there? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># text-to-text model</span>
+<span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: How many bears are there? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1927,7 +1960,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"Who is the Polar Bear?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># extractive model</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">"Who is the Polar Bear?"</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1963,7 +1997,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: Who is the Polar Bear? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># text-to-text model</span>
+<span class="n">t2t_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"question: Who is the Polar Bear? context: </span><span class="si">{</span><span class="n">context_large</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -2018,7 +2053,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># like the Conversation object, past_user_inputs will store the user's input and generated_responses will store the chatbot's responses</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a conversation dictionary to hold the chat history</span>
+<span class="c1"># like the Conversation object, past_user_inputs will store the user's input and generated_responses will store the chatbot's responses</span>
 <span class="n">conversation2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"past_user_inputs"</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">"generated_responses"</span><span class="p">:</span> <span class="p">[]}</span>
 </pre></div>
 
@@ -2044,7 +2080,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Hi, I'm a question-answering bot. Ask me a question!"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add a line to the list of chatbot's responses</span>
+<span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Hi, I'm a question-answering bot. Ask me a question!"</span><span class="p">)</span>
 
 <span class="c1"># add a line to the user input</span>
 <span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"How do I get the key?"</span><span class="p">)</span>
@@ -2092,7 +2129,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get the question from the conversation history</span>
+<span class="n">question</span> <span class="o">=</span> <span class="n">conversation2</span><span class="p">[</span><span class="s2">"past_user_inputs"</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">question</span>
 </pre></div>
 
@@ -2126,7 +2164,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get chatbot's response to the question given the context</span>
+<span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -2162,7 +2201,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)[</span><span class="s2">"answer"</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># we only want the 'answer'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">qa_model</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context_large</span><span class="p">)[</span><span class="s2">"answer"</span><span class="p">]</span>
 <span class="n">response</span>
 </pre></div>
 
@@ -2196,7 +2236,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"."</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># format the answer so the text looks ike a sentence - capitalize the first word and add a period at the end</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"."</span>
 <span class="n">response</span>
 </pre></div>
 
@@ -2238,7 +2279,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add response to conversation history</span>
+<span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 
 <span class="c1"># show results</span>
 <span class="n">conversation2</span>
@@ -2284,7 +2326,8 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set counters - used into index into lists</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">conversation2</span><span class="p">[</span><span class="s2">"generated_responses"</span><span class="p">]):</span>
@@ -2356,7 +2399,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForMaskedLM</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import libraries</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForMaskedLM</span>
 
 <span class="c1"># set up model and tokenizer</span>
 <span class="n">fm_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"distilroberta-base"</span><span class="p">)</span>
@@ -2400,7 +2444,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sentence</span> <span class="o">=</span> <span class="s2">"Paris is the &lt;mask&gt; of France."</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># input sentence with missing word</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"Paris is the &lt;mask&gt; of France."</span>
 
 <span class="c1"># get the model's output</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">fm_chatbot</span><span class="p">(</span><span class="s2">"Paris is the &lt;mask&gt; of France."</span><span class="p">)</span>
@@ -2472,7 +2517,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># show all model results from the sentence "Paris is the &lt;mask&gt; of France."</span>
+<span class="n">result</span>
 </pre></div>
 
     </div>
@@ -2524,7 +2570,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'sequence'</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># show only the most likely sentence - the one with the highest score</span>
+<span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'sequence'</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -2565,7 +2612,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># counter for indexing into the model's output</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="c1"># string to hold the most likely words</span>
 <span class="n">print_string</span> <span class="o">=</span> <span class="s2">""</span>
 
@@ -2683,7 +2731,8 @@ Bot: Open or unlock the lock.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">set_seed</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set the seed for reproducibility</span>
+<span class="n">set_seed</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1"># have the model fill in the story</span>
 <span class="n">story</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="s2">"Once upon a time,"</span><span class="p">)</span>
 <span class="c1"># show results</span>
@@ -2738,7 +2787,8 @@ c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story_text</span> <span class="o">=</span> <span class="n">story</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get only the string of generated text</span>
+<span class="n">story_text</span> <span class="o">=</span> <span class="n">story</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
 <span class="c1"># show results</span>
 <span class="n">story_text</span>
 </pre></div>
@@ -2781,7 +2831,8 @@ c:\Users\Christina\Desktop\Python\Digital Engineering Fellowship 2023\Christina-
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use the previous output as the new input for the model</span>
+<span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">)</span>
 <span class="c1"># get only the string of generated text</span>
 <span class="n">story2_text</span> <span class="o">=</span> <span class="n">story2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
 <span class="c1"># show results</span>
@@ -2840,7 +2891,8 @@ Input length of input_ids is 50, but `max_length` is set to 50. This can lead to
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Try again, but this time using max_new_tokens</span>
+<span class="n">story2</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="n">story_text</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="c1"># get only the string of generated text</span>
 <span class="n">story2_text</span> <span class="o">=</span> <span class="n">story2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'generated_text'</span><span class="p">]</span>
 <span class="c1"># show results</span>
@@ -2887,11 +2939,11 @@ Input length of input_ids is 50, but `max_length` is set to 50. This can lead to
 <p>In production, using gpt2 to continously expand on the same block of text can result in the model giving the same output after a certain number of iterations. This may look like:</p>
 
 <pre><code>Iteration 1:
-&gt; &gt;&gt; Input:"Once upon a time,"&gt; &gt;&gt; Output:"Once upon a time, there was a snake"
+&gt; Input:"Once upon a time,"&gt; Output:"Once upon a time, there was a snake"
 Iteration 2:
-&gt; &gt;&gt; Input:"Once upon a time, there was a snake"&gt; &gt;&gt; Output:"Once upon a time, there was a snake in the garden"
+&gt; Input:"Once upon a time, there was a snake"&gt; Output:"Once upon a time, there was a snake in the garden"
 Iteration 3:
-&gt; &gt;&gt; Input:"Once upon a time, there was a snake in the garden"&gt; &gt;&gt; Output:"Once upon a time, there was a snake in the garden in the garden"</code></pre>
+&gt; Input:"Once upon a time, there was a snake in the garden"&gt; Output:"Once upon a time, there was a snake in the garden in the garden"</code></pre>
 <p>As a result, we may need to have the option to reset the story when using this model in production.</p>
 
 </div>
@@ -2905,8 +2957,8 @@ Iteration 3:
 </h3>
 <p>To reset the story while using the same loaded model, we need to:</p>
 <ol>
-<li>Change the input text back to "Once upon a time,"</li>
-<li>Change the seed</li>
+<li>Change the input text back to "Once upon a time,".</li>
+<li>Change the seed.</li>
 </ol>
 <p>If the seed remains the same, the model will generate the same results as before.</p>
 <p>Here's proof:</p>
@@ -2921,7 +2973,9 @@ Iteration 3:
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set the seed for reproducibility</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Restarting the story with the same model, same seed, and original input will generate the same result as before</span>
+
+<span class="c1"># set the seed for reproducibility</span>
 <span class="n">set_seed</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1"># have the model fill in the story</span>
 <span class="n">story</span> <span class="o">=</span> <span class="n">tg_chatbot</span><span class="p">(</span><span class="s2">"Once upon a time,"</span><span class="p">)</span>
