@@ -133,6 +133,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#creating-transactions">Creating Transactions</a></li>
 <li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
 <li class="toc-entry toc-h2"><a href="#references">References</a></li>
+<li class="toc-entry toc-h2"><a href="#public-github-repository">Public Github Repository</a></li>
 </ul><h2 id="overview">
 <a class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
@@ -181,9 +182,17 @@ window.onload = wrap_img;
     i.e DROP TABLE table-name
 </code></pre></div></div>
 
-<p>NOTE: These keywords are not case sensitive, rather are capitalized to emphasize that they are keywords. For the entirety of this blog post, I will be capitalizing any and all keywords used in my queries to emphasize this, as I haven’t included all keywords above.</p>
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg></span>
+   <span class="Toast-content">These keywords are not case sensitive, rather are capitalized to emphasize that they are keywords. For the entirety of this blog post, I will be capitalizing any and all keywords used in my queries to emphasize this, as I haven't included all keywords above.</span>
+</div>
 
-<p>Much like Python, SQLite also has certain <a href="https://www.sqlite.org/datatype3.html">data types</a> that can be specified in queries when creating tables. Most commonly in this post I will be dealing with the data types INTEGER (much like that of integers in Python), REAL (much like that of floats in Python), TEXT (much like that of strings in Python), and lastly NULL values (much like the None keyword in Python). Note there are no Boolean values in SQLite however by using the integers 0 and 1 in tables we can keep track of Boolean values when we use python to interpret the data.</p>
+<p>Much like Python, SQLite also has certain <a href="https://www.sqlite.org/datatype3.html">data types</a> that can be specified in queries when creating tables. Most commonly in this post I will be dealing with the data types INTEGER (much like that of integers in Python), REAL (much like that of floats in Python), TEXT (much like that of strings in Python), and lastly NULL values (much like the None keyword in Python).</p>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg></span>
+   <span class="Toast-content">There are no Boolean values in SQLite however by using the integers 0 and 1 in tables we can keep track of Boolean values when we use python to interpret the data.</span>
+</div>
 
 <h2 id="using-sqlite">
 <a class="anchor" href="#using-sqlite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using SQLite</h2>
@@ -272,8 +281,7 @@ window.onload = wrap_img;
 
 <p>With all of these tables created and some small connections created, it is now time to generate a table which links all these tables together, a table of transactions. With every transaction a business has it is good to track who makes the sale, who purchases the item, as well as recording what tender was used. To create this table as seen in the file transactions.py, I have created the table using the following query:</p>
 
-<p>’'’python
-        cursor.execute(“"”CREATE TABLE IF NOT EXISTS Transactions
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"""CREATE TABLE IF NOT EXISTS Transactions
                     (Transaction_Number INT NOT NULL,
                     customer_id INTEGER NOT NULL,
                     Item TEXT NOT NULL,
@@ -285,8 +293,8 @@ window.onload = wrap_img;
                     Date TEXT,
                     FOREIGN KEY (customer_id) REFERENCES Customers (customer_id),
                     FOREIGN KEY (UPC) REFERENCES Products (UPC)
-                    )”””)
-‘’’</p>
+                    )"""</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>First and foremost notice this table doesn’t have a primary key. This is intended as it serves to compile foreign keys from other tables. In the creation of this table, I have outlined numerous foreign keys. Through this we get the link between all of our separate tables, as these constraints are what ensure the values under each of these columns must align with those already in the database.</p>
 
@@ -342,8 +350,9 @@ window.onload = wrap_img;
 </li>
 </ul>
 
-<p>## Public Github Repository
- Below is where all associated code for this blog post is located:</p>
+<h2 id="public-github-repository">
+<a class="anchor" href="#public-github-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public Github Repository</h2>
+<p>Below is where all associated code for this blog post is located:</p>
 
 <p><a href="https://github.com/de-fellows/Why-SQL">https://github.com/de-fellows/Why-SQL</a></p>
 
